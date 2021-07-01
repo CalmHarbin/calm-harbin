@@ -1,0 +1,17 @@
+dist/
+
+node_modules/
+
+public/
+
+test/
+
+.gitignore
+
+.npmignore
+
+babel.config.js
+
+tsconfig.json
+
+vue.config.js
