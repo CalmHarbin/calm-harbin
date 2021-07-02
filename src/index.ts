@@ -1,11 +1,13 @@
 import Button from '../packages/button/index'
+import FileInput from '../packages/FileInput/index'
 
-const components = [Button]
+const components = [Button, FileInput]
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const install = function (Vue: any): void {
     components.forEach((component) => {
-        Vue.component(component.name, component)
+        console.log(9, component.name, component)
+        // Vue.component(component.name, component)
+        Vue.use(component)
     })
 
     Vue.prototype.$hello = () => {
@@ -17,8 +19,11 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
     install((window as any).Vue)
 }
 
+export { Button, FileInput }
+
 export default {
     version: '0.0.1',
     install,
-    Button
+    Button,
+    FileInput
 }

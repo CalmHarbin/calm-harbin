@@ -8,7 +8,7 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx,.vue src test packages types",
-        "lib": "vue-cli-service build --dest lib --target lib --name calmHarbin src/index.ts"
+        "lib": "vue-cli-service build --dest lib --inline-vue --target lib --name calmHarbin src/index.ts"
     },
     "keywords": [
         "常用组件",

@@ -53,6 +53,7 @@ module.exports = {
         'prefer-object-spread': 'error', // Object.assign的使用规范
         'prefer-template': 'error', // 字符串拼接使用字符串模板
         'array-callback-return': 'error', // 检查函数的返回值
-        'no-shadow': 'error' // 不允许重复声明变量
+        'no-shadow': 'error', // 不允许重复声明变量
+        '@typescript-eslint/explicit-module-boundary-types': 0
     }
 }

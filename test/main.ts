@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import CalmButton from '../src'
+import CalmHarbin, { Button } from '../src'
 
 Vue.config.productionTip = false
 
-Vue.use(CalmButton)
+console.log(7, CalmHarbin, Button)
+
+Vue.use(CalmHarbin)
 
 new Vue({
     render: (h) => h(App)
