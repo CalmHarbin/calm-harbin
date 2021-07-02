@@ -1,14 +1,11 @@
-import { createApp } from 'vue'
+import Vue from 'vue'
 import App from './App.vue'
-// import calmHarbin from '../src/index'
-import CalmButton from '../packages/button/src/button.vue'
+import CalmButton from '../src'
 
-console.log(CalmButton)
+Vue.config.productionTip = false
 
-const app = createApp(App)
+Vue.use(CalmButton)
 
-// app.use(calmHarbin)
-
-app.component(CalmButton.name, CalmButton)
-
-app.mount('#app')
+new Vue({
+    render: (h) => h(App)
+}).$mount('#app')

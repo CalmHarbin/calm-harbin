@@ -2,15 +2,13 @@ import Button from '../packages/button/index'
 
 const components = [Button]
 
-const install = function(Vue: any, opts = {}) {
-    console.log(6, Vue)
-    components.forEach(component => {
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+const install = function (Vue: any): void {
+    components.forEach((component) => {
         Vue.component(component.name, component)
     })
 
-    console.log(Vue)
-
-    Vue.config.globalProperties.$hello = () => {
+    Vue.prototype.$hello = () => {
         alert('hello')
     }
 }
@@ -22,5 +20,5 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
 export default {
     version: '0.0.1',
     install,
-    Button,
+    Button
 }

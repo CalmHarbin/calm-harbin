@@ -1,28 +1,29 @@
 <template>
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
-
-    <calm-button />
+    <div id="app">
+        <img alt="Vue logo" src="./assets/logo.png" />
+        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+        <calm-button />
+    </div>
 </template>
 
 <script lang="ts">
-import { getCurrentInstance } from 'vue'
-import { Options, Vue } from 'vue-class-component'
+import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from './components/HelloWorld.vue'
 
-@Options({
+@Component({
     components: {
-        HelloWorld,
-    },
+        HelloWorld
+    }
 })
 export default class App extends Vue {
-    created() {
-        console.log(getCurrentInstance())
+    $hello: any
+    created(): void {
+        this.$hello()
     }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;

@@ -1,8 +1,7 @@
-import type { DefineComponent } from 'vue'
-declare const component: DefineComponent<{}, {}, any>
+import Vue from 'vue'
 
 /** ElementUI component common definition */
-export declare class ElementUIComponent extends component {
+export declare class CalmComponent extends Vue {
     /** Install component into Vue */
-    static install(vue: typeof component): void
+    static install(vue: typeof Vue): void
 }

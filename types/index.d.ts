@@ -1,21 +1,13 @@
 import Vue from 'vue'
 
-import type { DefineComponent } from 'vue'
-
-export const component: DefineComponent<{}, {}, any> & { install: any }
-
 import { ClButton } from './button'
+import { CalmComponent } from './component'
 
 export interface InstallationOptions {
     locale: any
     i18n: any
     size: string
 }
-
-declare global {
-    interface Window {Vue: typeof Vue }
-}
-
 
 /**
  * Install all element-ui components into Vue.
@@ -24,6 +16,12 @@ declare global {
  */
 export function install(vue: typeof Vue, options: InstallationOptions): void
 
-export class Button extends ClButton {}
+export type Component = CalmComponent
+
+// export class Button extends ClButton {}
+
+declare module 'packages/button/src/*.vue' {
+    export class Button extends ClButton {}
+}
 
 declare module 'lib/*.js'

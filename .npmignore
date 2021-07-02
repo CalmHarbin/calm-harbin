@@ -6,11 +6,19 @@ public/
 
 test/
 
+.browserslistrc
+
+.eslintrc.js
+
 .gitignore
 
 .npmignore
 
+.prettierrc
+
 babel.config.js
+
+tsconfig.json
 
 tsconfig.json
 

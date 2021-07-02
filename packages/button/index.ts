@@ -1,6 +1,6 @@
+import { PluginObject } from 'vue'
 import CalmButton from './src/button.vue'
-
-CalmButton.install = function(Vue: any) {
+;(CalmButton as any).install = function (Vue: PluginObject<any>) {
     Vue.component(CalmButton.name, CalmButton)
 }
 
