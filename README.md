@@ -1,24 +1,17 @@
-# vue2
+# calm-harbin
 
-## Project setup
+### 命令
 ```
-npm install
-```
+npm run serve # 运行测试代码
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+npm run build # 测试代码打包
 
-### Compiles and minifies for production
-```
-npm run build
+npm run lib # 生成npm包,不包含vue
+
+npm run lib:inline # 生成npm包,包含vue
 ```
 
-### Lints and fixes files
+### 发布npm
 ```
-npm run lint
+npm publish
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
