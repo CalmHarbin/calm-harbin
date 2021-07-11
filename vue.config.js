@@ -15,7 +15,6 @@ module.exports = {
     },
     configureWebpack: {
         output: {
-            library: 'calmHarbin', // umd的全局访问变量，打包lib的时候最好通过--name 设置，确保和文件的一致性
             libraryExport: 'default',
             libraryTarget: 'umd'
         }

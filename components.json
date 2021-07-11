@@ -1,0 +1,4 @@
+{
+    "button": "./packages/button/index.ts",
+    "FileInput": "./packages/FileInput/index.ts"
+}

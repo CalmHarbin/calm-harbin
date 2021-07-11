@@ -8,8 +8,10 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx,.vue src test packages types",
-        "lib": "vue-cli-service build --dest lib --target lib --name calmHarbin src/index.ts",
-        "lib:inline": "vue-cli-service build --dest lib --inline-vue --target lib --name calmHarbin src/index.ts"
+        "lib": "npm run lib:calmHarbin & npm run lib:BiuDialog & npm run lib:FileInput",
+        "lib:calmHarbin": "vue-cli-service build --dest lib --target lib --name calmHarbin src/index.ts",
+        "lib:BiuDialog": "vue-cli-service build --no-clean --dest lib --target lib --name BiuDialog ./packages/BiuDialog/index.ts",
+        "lib:FileInput": "vue-cli-service build --no-clean --dest lib --target lib --name FileInput ./packages/FileInput/index.ts"
     },
     "keywords": [
         "常用组件",
@@ -19,8 +21,7 @@
         "lib",
         "src",
         "packages",
-        "types",
-        "README.md"
+        "types"
     ],
     "author": "zhanghuan",
     "license": "ISC",
@@ -43,6 +44,7 @@
         "@vue/cli-service": "~4.5.0",
         "@vue/eslint-config-prettier": "^6.0.0",
         "@vue/eslint-config-typescript": "^7.0.0",
+        "cross-env": "^7.0.3",
         "eslint": "^6.7.2",
         "eslint-plugin-prettier": "^3.3.1",
         "eslint-plugin-vue": "^6.2.2",

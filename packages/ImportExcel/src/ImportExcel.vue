@@ -1,0 +1,142 @@
+<template>
+    <BiuDrawer
+        ref="biuDrawer"
+        :visible.sync="visibleSync"
+        :title="`批量导入${title}`"
+    >
+        <Operation :loading="loading" :operationOptions="footer" />
+        <BiuCard title="待保存信息">
+            <BiuTable
+                :columns="columns"
+                :tableData="tableData"
+                :tbHeight="height"
+            />
+        </BiuCard>
+    </BiuDrawer>
+</template>
+
+<script lang="tsx">
+import { Vue, Component, PropSync, Prop } from 'vue-property-decorator'
+import BiuDrawer from '@/components/BiuDrawer/index.vue'
+import BiuCard from '@/components/BiuCard/index.vue'
+import BiuTable, { tableColumnType } from '@/components/BiuTable/index.vue'
+import Operation, {
+    OperationOptionType
+} from '@/components/BiuTable/operation.vue'
+import FileInput from '@/components/FileInput/index'
+import { exportExcelTemp, importExcel } from '@/utils'
+
+@Component({
+    components: { BiuDrawer, Operation, BiuCard, BiuTable, FileInput }
+})
+export default class ImportExcel extends Vue {
+    @PropSync('visible') visibleSync?: boolean
+    @Prop({ type: Array, required: true }) columns!: tableColumnType[]
+    @Prop({ type: Array, required: true }) tableData!: any[]
+    @Prop({ type: String, required: true }) title!: string
+    @Prop(Boolean) loading?: boolean
+    @Prop(Function) downloadFile?: () => void
+
+    // 总高度 - title - 上下padding - 按钮 - 小标题
+    height = window.innerHeight - 46 - 20 - 48 - 27
+
+    get footer(): OperationOptionType[] {
+        return [
+            {
+                render: () => (
+                    <FileInput
+                        divStyle={{
+                            display: 'inline',
+                            marginRight: '10px'
+                        }}
+                        loading={this.loading}
+                        accept=".xls,.xlsx"
+                        importFile={this.onImportFile}
+                    >
+                        <el-button
+                            loading={this.loading}
+                            type="primary"
+                            size="mini"
+                        >
+                            选择文件
+                            <i class="el-icon-upload el-icon--right"></i>
+                        </el-button>
+                    </FileInput>
+                )
+            },
+            {
+                title: '保存',
+                callback: () => {
+                    this.$emit('submit')
+                },
+                btnProps: {
+                    disabled: this.tableData.length === 0
+                }
+            },
+            {
+                title: '清空数据',
+                callback: () => {
+                    this.$emit('clear')
+                },
+                btnProps: {
+                    disabled: this.tableData.length === 0
+                }
+            },
+            {
+                title: '下载模板',
+                callback: () => {
+                    if (this.downloadFile) {
+                        this.downloadFile()
+                    } else {
+                        exportExcelTemp(
+                            this.columns.filter(item => item.id !== 'errorMsg'),
+                            this.title
+                        )
+                    }
+                }
+            },
+            {
+                title: '返回',
+                type: 'default',
+                btnProps: {
+                    plain: true
+                },
+                callback: () => {
+                    this.visibleSync = false
+                }
+            }
+        ]
+    }
+
+    /**
+     * 导入
+     */
+    async onImportFile(files: File[]) {
+        if (files === null) return
+
+        const file = files[0]
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const dataSource = await importExcel(
+            file,
+            this.columns.reduce((obj, item) => {
+                return {
+                    ...obj,
+                    [item.label]: item.id
+                }
+            }, {})
+        )
+        this.$emit('importFile', dataSource)
+    }
+}
+</script>
+
+<style lang="scss" scoped>
+.el-drawer__wrapper /deep/ {
+    .el-drawer__body {
+        padding: 10px 0;
+    }
+    .BiuCard .title {
+        margin-bottom: 10px;
+    }
+}
+</style>
