@@ -24,5 +24,8 @@ module.exports = {
             '@packages',
             path.resolve(__dirname, './packages')
         )
+        config.resolve.alias.set('@test', path.resolve(__dirname, './test'))
+        config.resolve.alias.set('@types', path.resolve(__dirname, './types'))
+        config.resolve.alias.set('@src', path.resolve(__dirname, './src'))
     }
 }

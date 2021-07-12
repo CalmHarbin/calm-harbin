@@ -353,7 +353,7 @@ export default class Upload extends Vue {
     height: 110px;
     object-fit: cover;
 }
-/deep/ {
+::v-deep {
     .el-upload-list--picture-card .el-upload-list__item {
         width: 110px;
         height: 110px;
@@ -364,7 +364,7 @@ export default class Upload extends Vue {
         line-height: 110px;
     }
 }
-.hidden /deep/ .el-upload {
+.hidden ::v-deep .el-upload {
     display: none;
 }
 </style>

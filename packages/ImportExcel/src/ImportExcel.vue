@@ -17,14 +17,14 @@
 
 <script lang="tsx">
 import { Vue, Component, PropSync, Prop } from 'vue-property-decorator'
-import BiuDrawer from '@/components/BiuDrawer/index.vue'
-import BiuCard from '@/components/BiuCard/index.vue'
-import BiuTable, { tableColumnType } from '@/components/BiuTable/index.vue'
+import BiuDrawer from '@packages/BiuDrawer/src/BiuDrawer.vue'
+import BiuCard from '@packages/BiuCard/src/BiuCard.vue'
+import BiuTable, { tableColumnType } from '@packages/BiuTable/src/BiuTable.vue'
 import Operation, {
     OperationOptionType
-} from '@/components/BiuTable/operation.vue'
-import FileInput from '@/components/FileInput/index'
-import { exportExcelTemp, importExcel } from '@/utils'
+} from '@packages/BiuTable/src/operation.vue'
+import FileInput from '@packages/FileInput/src/FileInput'
+import { exportExcelTemp, importExcel } from './utils'
 
 @Component({
     components: { BiuDrawer, Operation, BiuCard, BiuTable, FileInput }
@@ -89,7 +89,9 @@ export default class ImportExcel extends Vue {
                         this.downloadFile()
                     } else {
                         exportExcelTemp(
-                            this.columns.filter(item => item.id !== 'errorMsg'),
+                            this.columns.filter(
+                                (item) => item.id !== 'errorMsg'
+                            ),
                             this.title
                         )
                     }
@@ -131,7 +133,7 @@ export default class ImportExcel extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.el-drawer__wrapper /deep/ {
+.el-drawer__wrapper ::v-deep {
     .el-drawer__body {
         padding: 10px 0;
     }

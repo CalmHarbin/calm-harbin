@@ -41,6 +41,7 @@ export type OperationOptionType = {
      * 按钮权限控制,id为数据库中id字段,不传则控制权限
      */
     id?: string
+    // eslint-disable-next-line no-undef
     render?: () => JSX.Element
     /**
      * 隐藏按钮

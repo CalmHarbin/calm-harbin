@@ -122,9 +122,8 @@ export default class Select extends Vue {
             const disabledIds = options
                 .filter((item: any) => item.disabled)
                 .map((item: any) => item.value)
-            this.customValue = (this
-                .customValue as string[]).filter((item: any) =>
-                disabledIds.includes(item)
+            this.customValue = (this.customValue as string[]).filter(
+                (item: any) => disabledIds.includes(item)
             )
         }
     }

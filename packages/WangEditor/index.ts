@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue'
-import CalmFileInput from './src/FileInput.vue'
-;(CalmFileInput as any).install = function (Vue: PluginObject<any>) {
-    Vue.component('FileInput', CalmFileInput)
+import WangEditor from './src/WangEditor.vue'
+;(WangEditor as any).install = function (Vue: PluginObject<any>) {
+    Vue.component('WangEditor', WangEditor)
 }
 
-export default CalmFileInput
+export default WangEditor

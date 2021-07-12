@@ -7,7 +7,7 @@
         :data="customTableData"
         :height="height"
         :class="attrs['show-summary'] ? 'el-table-footer' : ''"
-        style="width: 100%;"
+        style="width: 100%"
         border
         fit
         :highlight-current-row="
@@ -36,7 +36,7 @@
                     @change="checkedAll"
                 ></el-checkbox>
             </template>
-            <template #default="{row,$index}">
+            <template #default="{ row, $index }">
                 <el-checkbox
                     :value="isChecked(row)"
                     v-if="!showSummary || $index !== customTableData.length - 1"
@@ -147,9 +147,14 @@
             shadow="never"
             class="notdatacss"
             slot="empty"
-            style="color:rgba(0,0,0,.25);line-height: 1em;text-align:center;border:none;"
+            style="
+                color: rgba(0, 0, 0, 0.25);
+                line-height: 1em;
+                text-align: center;
+                border: none;
+            "
         >
-            <img style="width: 78px;" src="@/assets/imgs/notdata.png" />
+            <img style="width: 78px" src="@/assets/imgs/notdata.png" />
             <div>当前没有内容/列表</div>
         </el-card>
     </u-table>
@@ -158,7 +163,6 @@
 <script lang="tsx">
 import moment from 'moment'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
-import { mapGetters } from 'vuex'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
 
 @Component({
@@ -179,9 +183,6 @@ import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
                 )
             }
         }
-    },
-    computed: {
-        ...mapGetters(['btnAuth'])
     }
 })
 export default class CustomUTable extends Vue {
@@ -197,7 +198,7 @@ export default class CustomUTable extends Vue {
     tablePostfixOptions?: tablePostfixOptionsType[]
 
     isMounted = false // 用来表示dom已加载完成，计算表格宽度是否超过列总宽
-    btnAuth: any
+
     customTableData: any[] = []
     multipleSelection: any[] = [] // 自定义实现多选
     /**
@@ -208,6 +209,7 @@ export default class CustomUTable extends Vue {
      */
     private attrs = {}
     private listeners = {}
+    $store: any
     // 计算属性
     get height() {
         return this.tbHeight
@@ -215,7 +217,7 @@ export default class CustomUTable extends Vue {
 
     get tableColumns() {
         if (this.isMounted) {
-            const columns = this.columns.map(item => {
+            const columns = this.columns.map((item) => {
                 const cur = {
                     ...item
                 }
@@ -238,7 +240,7 @@ export default class CustomUTable extends Vue {
             })
 
             // 如果有至少一个没有设置宽度,返回原数据,可以自适应宽度
-            if (columns.some(item => item.width === undefined)) return columns
+            if (columns.some((item) => item.width === undefined)) return columns
             // 全部设置了宽度则计算设置的总宽度是否超过了表格的宽度
             const widthSum = columns.reduce(
                 (sum: number, item) => sum + item.width,
@@ -249,7 +251,7 @@ export default class CustomUTable extends Vue {
                 this.$refs.table &&
                 (this.$refs.table as any).$el.offsetWidth > widthSum
             )
-                return columns.map(item => ({ ...item, width: undefined }))
+                return columns.map((item) => ({ ...item, width: undefined }))
             return columns
         }
         return []
@@ -261,7 +263,8 @@ export default class CustomUTable extends Vue {
         if (this.tablePostfixOptions) {
             const list = this.tablePostfixOptions.filter(
                 (item: tablePostfixOptionsType) => {
-                    if (item.id && !this.btnAuth.includes(item.id)) return false
+                    if (item.id && !this.$store?.btnAuth.includes(item.id))
+                        return false
                     return true
                 }
             )
@@ -305,7 +308,7 @@ export default class CustomUTable extends Vue {
     @Watch('tableData')
     tableDataChange(newVal: any[]) {
         if (JSON.stringify(newVal) !== JSON.stringify(this.customTableData)) {
-            this.customTableData = newVal.map(item => ({
+            this.customTableData = newVal.map((item) => ({
                 ...item,
                 _XID: Math.random()
             }))

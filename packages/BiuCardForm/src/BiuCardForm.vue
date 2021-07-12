@@ -1,7 +1,11 @@
 <template>
-    <div>
-        <template v-for="group in source">
-            <BiuCard :title="group.title" :key="group.title">
+    <el-row :gutter="10">
+        <el-col
+            :span="group.span || 24"
+            v-for="group in customSource"
+            :key="group.title"
+        >
+            <BiuCard :border="group.showBorder" :title="group.title">
                 <BiuForm
                     ref="BiuForm"
                     :source="group.list"
@@ -9,11 +13,13 @@
                     v-bind="formAttr"
                 />
             </BiuCard>
-        </template>
-    </div>
+        </el-col>
+    </el-row>
 </template>
 
 <script lang="ts">
+/* eslint-disable no-shadow */
+
 import {
     Vue,
     Component,
@@ -22,8 +28,8 @@ import {
     Watch,
     Emit
 } from 'vue-property-decorator'
-import BiuCard from '@/components/BiuCard/index.vue'
-import BiuForm, { BiuformType } from '@/components/BiuForm/index.vue'
+import BiuCard from '@packages/BiuCard/src/BiuCard.vue'
+import BiuForm, { BiuformType } from '@packages/BiuForm/src/BiuForm.vue'
 
 type objType = {
     [x: string]: any
@@ -42,6 +48,13 @@ export default class BiuCardForm extends Vue {
     @Model('setForm') form!: objType
 
     customForm: objType = {}
+
+    customSource: any[] = []
+
+    @Watch('source', { immediate: true, deep: true })
+    sourceChange(newVal: any[]) {
+        this.customSource = newVal.filter((item) => !item.hidden)
+    }
 
     @Watch('form', { immediate: true, deep: true })
     formChange(newVal: objType) {
@@ -89,7 +102,7 @@ export default class BiuCardForm extends Vue {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .gutter {
+::v-deep .gutter {
     margin-top: 15px;
 }
 </style>

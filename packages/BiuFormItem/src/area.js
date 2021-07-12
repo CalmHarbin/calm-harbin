@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/camelcase */
-
 const province_list = {
     110000: '北京市',
     120000: '天津市',
@@ -4080,7 +4078,7 @@ const county_list = {
 
 // 存储特殊处理后的所有市编码
 let city = [] // 记录将特殊的市拿过来的数据
-Object.keys(city_list).forEach(item => {
+Object.keys(city_list).forEach((item) => {
     if (item === '419000') {
         // 将河南省的 省直辖县 对应的区拿过来
         city = city.concat(['419001'])
@@ -4128,13 +4126,13 @@ Object.keys(city_list).forEach(item => {
  * 查询省下面对应的所有市，返回汉字
  * @param {String} provinceCode 省编码
  */
-const getProvinceChildren = provinceCode => {
+const getProvinceChildren = (provinceCode) => {
     // 根据省编码找对应的市
-    const subCityList = city.filter(cityCode => {
+    const subCityList = city.filter((cityCode) => {
         return cityCode > provinceCode && cityCode < +provinceCode + 10000
     })
     // 将编码转为汉字
-    const children = subCityList.map(code => {
+    const children = subCityList.map((code) => {
         const name = city_list[code]
         return {
             label: name,
@@ -4148,13 +4146,13 @@ const getProvinceChildren = provinceCode => {
  * 查询市下面对应的所有区，返回汉字
  * @param {String} cityCode 省编码
  */
-const getCityChildren = cityCode => {
+const getCityChildren = (cityCode) => {
     // 根据市编码找对应的区
-    const subAreaList = Object.keys(county_list).filter(areaCode => {
+    const subAreaList = Object.keys(county_list).filter((areaCode) => {
         return areaCode >= cityCode && areaCode < +cityCode + 100
     })
     // 将区编码转为汉字
-    const areaChildren = subAreaList.map(areaCode => ({
+    const areaChildren = subAreaList.map((areaCode) => ({
         label: county_list[areaCode],
         value: areaCode
     }))
@@ -4165,8 +4163,8 @@ const getCityChildren = cityCode => {
  * 将改变后的市编码转回去
  * @param {*} cityCode 市编码
  */
-const conversionCode = codeData => {
-    const result = codeData.filter(item => item)
+const conversionCode = (codeData) => {
+    const result = codeData.filter((item) => item)
     if (result.length > 1) {
         if (result[1] === '419100') {
             // 河南省-省直辖县
@@ -4342,7 +4340,7 @@ const conversionCode = codeData => {
 /**
  * elementui选择省数据
  */
-export const provinceOptions = Object.values(province_list).map(item => ({
+export const provinceOptions = Object.values(province_list).map((item) => ({
     label: item,
     value: item
 }))
@@ -4350,7 +4348,7 @@ export const provinceOptions = Object.values(province_list).map(item => ({
 /**
  * elementui选择市数据
  */
-export const cityOptions = city.map(item => {
+export const cityOptions = city.map((item) => {
     const name = city_list[item] || county_list[item]
     return {
         label: name,
@@ -4361,7 +4359,7 @@ export const cityOptions = city.map(item => {
 /**
  * elementui选择区数据
  */
-export const countyOptions = Object.values(county_list).map(item => ({
+export const countyOptions = Object.values(county_list).map((item) => ({
     label: item,
     value: item
 }))
@@ -4369,13 +4367,13 @@ export const countyOptions = Object.values(county_list).map(item => ({
 /**
  * elementui 省市数据
  */
-export const cityPicker = Object.keys(province_list).map(item => {
+export const cityPicker = Object.keys(province_list).map((item) => {
     // 根据省编码找对应的市
     const children = getProvinceChildren(item)
     return {
         label: province_list[item],
         value: province_list[item],
-        children: children.map(i => ({
+        children: children.map((i) => ({
             label: i.label,
             value: i.label
         }))
@@ -4385,12 +4383,12 @@ export const cityPicker = Object.keys(province_list).map(item => {
 /**
  * elementui 省市区数据
  */
-export const countyPicker = Object.keys(province_list).map(item => {
+export const countyPicker = Object.keys(province_list).map((item) => {
     // 根据省编码找对应的市
-    const subCityList = Object.keys(city_list).filter(cityCode => {
+    const subCityList = Object.keys(city_list).filter((cityCode) => {
         return cityCode > item && cityCode < +item + 10000
     })
-    const children = subCityList.map(code => {
+    const children = subCityList.map((code) => {
         // 根据市编码找对应的区
         const areaChildren = getCityChildren(code)
 
@@ -4398,7 +4396,7 @@ export const countyPicker = Object.keys(province_list).map(item => {
         return {
             label: name,
             value: name,
-            children: areaChildren.map(i => ({
+            children: areaChildren.map((i) => ({
                 label: i.label,
                 value: i.label
             }))
@@ -4415,7 +4413,7 @@ export const countyPicker = Object.keys(province_list).map(item => {
  * 查询省市区对应的编码
  * @param {Array} data 需要查询的省市区
  */
-export const getCode = data => {
+export const getCode = (data) => {
     const province = data[0]
     const selectCity = data[1]
     const county = data[2]

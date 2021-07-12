@@ -36,7 +36,7 @@
 import { Vue, Component, PropSync, Prop, Emit } from 'vue-property-decorator'
 import Operation, {
     OperationOptionType
-} from '@/components/BiuTable/operation.vue'
+} from '@packages/BiuTable/src/operation.vue'
 
 @Component({
     components: { Operation }
@@ -75,7 +75,7 @@ export default class BiuDrawer extends Vue {
 </script>
 
 <style lang="scss" scoped>
-/deep/ {
+::v-deep {
     .el-drawer__header {
         height: 46px;
         margin: 0;

@@ -50,8 +50,8 @@ import {
     Model,
     PropSync
 } from 'vue-property-decorator'
-import BiuTable from '@/components/BiuTable/index.vue'
-import Pagination from '@/components/Pagination/index.vue'
+import BiuTable from '@/packages/BiuTable/src/BiuTable.vue'
+import Pagination from '@/packages/Pagination/src/Pagination.vue'
 
 @Component({
     components: {
@@ -138,7 +138,7 @@ export default class BiuSelectTable extends Vue {
     @Watch('value', { deep: true, immediate: true })
     valueChange(newVal: string | string[]) {
         if (this.multiple && this.checkList.toString() !== newVal.toString()) {
-            this.checkList = [...newVal].map(item =>
+            this.checkList = [...newVal].map((item) =>
                 typeof item === 'number' ? String(item) : item
             )
         } else if (!this.multiple) {

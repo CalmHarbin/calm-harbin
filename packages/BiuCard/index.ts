@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue'
-import CalmFileInput from './src/FileInput.vue'
-;(CalmFileInput as any).install = function (Vue: PluginObject<any>) {
-    Vue.component('FileInput', CalmFileInput)
+import BiuCard from './src/BiuCard.vue'
+;(BiuCard as any).install = function (Vue: PluginObject<any>) {
+    Vue.component('BiuCard', BiuCard)
 }
 
-export default CalmFileInput
+export default BiuCard

@@ -9,6 +9,14 @@ export interface InstallationOptions {
     size: string
 }
 
+export type VueProto = {
+    $_debounce: (
+        fn: (...params: any) => any | void,
+        wait: number,
+        throttle?: boolean
+    ) => (...params: any) => void
+}
+
 /**
  * Install all element-ui components into Vue.
  * Please do not invoke this method directly.

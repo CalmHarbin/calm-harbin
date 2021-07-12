@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue'
-import CalmFileInput from './src/FileInput.vue'
-;(CalmFileInput as any).install = function (Vue: PluginObject<any>) {
-    Vue.component('FileInput', CalmFileInput)
+import Upload from './src/Upload.vue'
+;(Upload as any).install = function (Vue: PluginObject<any>) {
+    Vue.component('Upload', Upload)
 }
 
-export default CalmFileInput
+export default Upload

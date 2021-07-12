@@ -5,7 +5,7 @@
         </template>
         <template v-else-if="formType === 'input'">
             <template v-if="attrs.unit">
-                <div style="display: flex;">
+                <div style="display: flex">
                     <el-input
                         :clearable="true"
                         v-model="formValue"
@@ -16,7 +16,7 @@
                             attrs.type === 'password' ? 'new-password' : 'off'
                         "
                     ></el-input>
-                    <span style="margin-left: 5px; white-space: nowrap;">{{
+                    <span style="margin-left: 5px; white-space: nowrap">{{
                         attrs.unit
                     }}</span>
                 </div>
@@ -36,16 +36,7 @@
         <template v-else-if="formType === 'select'">
             <BiuSelect v-model="formValue" v-bind="attrs" v-on="listeners" />
         </template>
-        <template v-else-if="formType === 'dicSelect'">
-            <DicSelect v-model="formValue" v-bind="attrs" v-on="listeners" />
-        </template>
-        <template v-else-if="formType === 'deptTreeSelect'">
-            <DeptTreeSelect
-                v-model="formValue"
-                v-bind="attrs"
-                v-on="listeners"
-            />
-        </template>
+
         <template v-else-if="formType === 'date'">
             <el-date-picker
                 v-model="formValue"
@@ -64,7 +55,7 @@
         <!-- 固定时间点范围选择 -->
         <div
             class="BiuFormItem-timeSelect"
-            style="display: flex;"
+            style="display: flex"
             v-else-if="formType === 'timeSelect'"
         >
             <el-time-picker
@@ -129,20 +120,6 @@
                 v-on="listeners"
             />
         </template>
-        <template v-else-if="formType === 'customerSelect'">
-            <CustomerSelect
-                v-model="formValue"
-                v-bind="attrs"
-                v-on="listeners"
-            />
-        </template>
-        <template v-else-if="formType === 'carrierSelect'">
-            <CarrierSelect
-                v-model="formValue"
-                v-bind="attrs"
-                v-on="listeners"
-            />
-        </template>
     </div>
 </template>
 
@@ -158,38 +135,23 @@ import {
 } from 'vue-property-decorator'
 
 import Area from './area.vue'
-// 部门树选择
-import DeptTreeSelect from './deptTreeSelect.vue'
-// 字典选择
-import DicSelect from './dicSelect.vue'
+
 // 下拉框
 import BiuSelect from './BiuSelect.vue'
-// 客户选择
-import CustomerSelect from './customerSelect.vue'
-// 承运商选择
-import CarrierSelect from './carrierSelect.vue' // 这里为什么会报错????
 
 export type formTypeType =
     | 'text' // 显示文本
     | 'input'
     | 'select'
-    | 'dicSelect'
-    | 'deptTreeSelect'
     | 'date'
     | 'timeSelect' // 固定时间范围选择
     | 'area'
-    | 'customerSelect' // 客户选择
-    | 'carrierSelect' // 承运商选择
     | 'slot'
 
 @Component({
     components: {
         Area,
-        DeptTreeSelect,
-        DicSelect,
-        BiuSelect,
-        CustomerSelect,
-        CarrierSelect
+        BiuSelect
     }
 })
 export default class BiuFormItem extends Vue {
@@ -296,7 +258,7 @@ export default class BiuFormItem extends Vue {
 </script>
 
 <style lang="scss" scoped>
-/deep/ {
+::v-deep {
     .el-select {
         display: block;
     }

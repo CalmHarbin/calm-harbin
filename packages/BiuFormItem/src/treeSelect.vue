@@ -159,7 +159,7 @@ export default class TreeSelect extends Vue {
                 this.defaultCheckedKeys = [this.value as string]
             }
             // 计算默认展开
-            this.defaultCheckedKeys.forEach(id => {
+            this.defaultCheckedKeys.forEach((id) => {
                 // 找当前节点
                 const node = this.findNode(this.data, id)
                 if (node && (node as treeNodeType).pid)
@@ -171,7 +171,7 @@ export default class TreeSelect extends Vue {
             })
         } else {
             // 没有默认选中时默认展开顶级
-            this.data.forEach(item => {
+            this.data.forEach((item) => {
                 this.defaultExpandedKeys.add(item.id)
             })
         }
@@ -222,7 +222,7 @@ export default class TreeSelect extends Vue {
             this.customMultiple &&
             this.checkList.toString() !== newVal.toString()
         ) {
-            this.checkList = [...newVal].map(item =>
+            this.checkList = [...newVal].map((item) =>
                 typeof item === 'number' ? String(item) : item
             )
         } else if (!this.customMultiple) {
@@ -453,7 +453,7 @@ export default class TreeSelect extends Vue {
 }
 </style>
 <style lang="scss" scoped>
-.treeSelect /deep/ {
+.treeSelect ::v-deep {
     display: flex;
     align-items: center;
     .el-checkbox__label,

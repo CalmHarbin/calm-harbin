@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue'
-import CalmFileInput from './src/FileInput.vue'
-;(CalmFileInput as any).install = function (Vue: PluginObject<any>) {
-    Vue.component('FileInput', CalmFileInput)
+import BiuPage from './src/BiuPage.vue'
+;(BiuPage as any).install = function (Vue: PluginObject<any>) {
+    Vue.component('BiuPage', BiuPage)
 }
 
-export default CalmFileInput
+export default BiuPage

@@ -59,7 +59,7 @@
                             (!isOpentext &&
                                 index === formList.length - 1 &&
                                 !isOpen) ||
-                                (index === row - 1 && !isOpen)
+                            (index === row - 1 && !isOpen)
                         "
                         :class="rightFloat ? 'rightFloat' : ''"
                     >
@@ -129,9 +129,10 @@ import {
     Model,
     Emit
 } from 'vue-property-decorator'
-import BiuFormItem, { formTypeType } from '@/components/BiuFormItem/index.vue'
-import { throttle } from 'lodash'
-import { areaType } from '@/components/BiuFormItem/area.vue'
+import BiuFormItem, {
+    formTypeType
+} from '@packages/BiuFormItem/src/BiuFormItem.vue'
+import { areaType } from '@packages/BiuFormItem/src/area.vue'
 import { DatePickerType } from 'element-ui/types/date-picker'
 
 export type formAttrType = {
@@ -194,6 +195,7 @@ export type formAttrType = {
     /**
      * 自定义渲染，注意该配置必须写在 @Component中，不然会报错
      */
+    // eslint-disable-next-line no-undef
     render?: (h: any, scope: formAttrType) => JSX.Element
     /**
      * 字段
@@ -221,6 +223,7 @@ type directionType = 'vertical' | 'horizontal'
 type objType = {
     [x: string]: any
 }
+
 @Component({
     components: {
         BiuFormItem,
@@ -281,6 +284,7 @@ export default class BiuForm extends Vue {
     customDirection?: directionType = 'horizontal'
 
     throttleFn: any
+    $_debounce: any
 
     @Watch('source', { immediate: true, deep: true })
     sourceChange(newVal: BiuFormItem[]) {
@@ -329,8 +333,8 @@ export default class BiuForm extends Vue {
         const list: any[] = []
         // 先处理隐藏数据
         const source = this.customSource
-            .filter(item => !item.hidden)
-            .map(item => {
+            .filter((item) => !item.hidden)
+            .map((item) => {
                 let placeholder = ''
                 if (
                     item.formType === 'input' &&
@@ -347,7 +351,7 @@ export default class BiuForm extends Vue {
                 }
             })
         if (this.customDirection === 'vertical') {
-            source.forEach(item => {
+            source.forEach((item) => {
                 list.push([
                     {
                         ...item,
@@ -515,9 +519,9 @@ export default class BiuForm extends Vue {
 
         // 去除掉所有事件, 已on开头的均为事件
         const attr = Object.keys(otherAttr).filter(
-            item => item.substr(0, 2) === 'on'
+            (item) => item.substr(0, 2) === 'on'
         )
-        attr.forEach(item => {
+        attr.forEach((item) => {
             delete otherAttr[item]
         })
         return otherAttr
@@ -530,17 +534,18 @@ export default class BiuForm extends Vue {
         const otherEvent: any = {}
         // 选择所有事件, 已on开头的均为事件, 例如onchange
         const attr = Object.keys(otherAttr).filter(
-            item => item.substr(0, 2) === 'on'
+            (item) => item.substr(0, 2) === 'on'
         )
-        attr.forEach(item => {
+        attr.forEach((item) => {
             // 去掉on
             otherEvent[item.substr(2)] = otherAttr[item]
         })
         return otherEvent
     }
     created() {
-        this.throttleFn = throttle(this.resize, 500)
+        this.throttleFn = this.$_debounce(this.resize, 500, true)
     }
+
     mounted() {
         this.resize()
         window.addEventListener('resize', this.throttleFn)
@@ -609,7 +614,7 @@ export default class BiuForm extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.horizontal /deep/ {
+.horizontal ::v-deep {
     .el-form-item--mini.el-form-item,
     .el-form-item--small.el-form-item {
         display: flex;
@@ -624,13 +629,13 @@ export default class BiuForm extends Vue {
         // text-overflow: ellipsis;
     }
 }
-.vertical /deep/ {
+.vertical ::v-deep {
     .el-form-item--mini.el-form-item,
     .el-form-item--small.el-form-item {
         margin-bottom: 8px;
     }
 }
-/deep/ {
+::v-deep {
     .el-form {
         padding: 10px;
     }
@@ -666,7 +671,7 @@ export default class BiuForm extends Vue {
 .gutter {
     margin-top: 10px;
 }
-.el-dialog .vertical /deep/ .el-form {
+.el-dialog .vertical ::v-deep .el-form {
     padding: 18px 0;
 }
 

@@ -10,7 +10,7 @@
             ref="BiuForm"
             showBtn
         />
-        <div style=" flex: 1; padding: 0 10px;" ref="container">
+        <div style="flex: 1; padding: 0 10px" ref="container">
             <Operation
                 v-if="customOperationOptions"
                 :operationOptions="customOperationOptions"
@@ -45,7 +45,7 @@
             :total="paginationSync.total"
             :page.sync="page"
             :limit.sync="size"
-            @pagination="data => $emit('pagination', data)"
+            @pagination="(data) => $emit('pagination', data)"
         />
     </div>
 </template>
@@ -60,12 +60,13 @@ import {
     Emit,
     Model
 } from 'vue-property-decorator'
-import { mapGetters } from 'vuex'
-import BiuForm, { formAttrType } from '../BiuForm/index.vue'
-import BiuTable, { tableColumnType } from '../BiuTable/index.vue'
-import Pagination from '@/components/Pagination/index.vue'
-import Operation, { OperationOptionType } from '../BiuTable/operation.vue'
-import { formTypeType } from '@/components/BiuFormItem/index.vue'
+import BiuForm, { formAttrType } from '@packages/BiuForm/src/BiuForm.vue'
+import BiuTable, { tableColumnType } from '@packages/BiuTable/src/BiuTable.vue'
+import Pagination from '@packages/Pagination/src/Pagination.vue'
+import Operation, {
+    OperationOptionType
+} from '@packages/BiuTable/src/operation.vue'
+import { formTypeType } from '@packages/BiuFormItem/src/BiuFormItem.vue'
 
 type objType = {
     [x: string]: any
@@ -102,7 +103,6 @@ export type pageColumnsType = {
 @Component({
     components: { BiuForm, BiuTable, Operation, Pagination },
     computed: {
-        ...mapGetters(['btnAuth']),
         /**
          * 分页数据同步
          */
@@ -151,7 +151,7 @@ export default class BiuPage extends Vue {
      * 表单的数据
      */
     customValue: objType = {}
-    btnAuth: any
+
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -160,14 +160,15 @@ export default class BiuPage extends Vue {
      */
     private attrs = {}
     private listeners = {}
+    $store: any
     /**
      * 表单项
      */
     get source() {
         return this.columns
-            .filter(item => !item.noSearch) // 筛选出搜索列
+            .filter((item) => !item.noSearch) // 筛选出搜索列
             .sort((a, b) => (a.sort || 0) - (b.sort || 0)) // 排序
-            .map(item => {
+            .map((item) => {
                 // let placeholder: string
                 // if (item.formType === 'area') {
                 //     placeholder =
@@ -193,8 +194,8 @@ export default class BiuPage extends Vue {
     get tableColumns() {
         // 过滤掉不需要显示的列
         return this.columns
-            .filter(item => !item.noShow)
-            .map(item => {
+            .filter((item) => !item.noShow)
+            .map((item) => {
                 // 这里处理外部使用的slot功能，传给BiuTable组件用render方式
                 let render = item.render
                 if (this.$slots[`table-${item.id}`]) {
@@ -222,7 +223,8 @@ export default class BiuPage extends Vue {
         if (this.operationOptions) {
             const list = this.operationOptions.filter(
                 (item: OperationOptionType) => {
-                    if (item.id && !this.btnAuth.includes(item.id)) return false
+                    if (item.id && !this.$store?.btnAuth.includes(item.id))
+                        return false
                     return true
                 }
             )

@@ -1,7 +1,7 @@
 import { PluginObject } from 'vue'
-import CalmFileInput from './src/FileInput.vue'
-;(CalmFileInput as any).install = function (Vue: PluginObject<any>) {
-    Vue.component('FileInput', CalmFileInput)
+import Screenfull from './src/Screenfull.vue'
+;(Screenfull as any).install = function (Vue: PluginObject<any>) {
+    Vue.component('Screenfull', Screenfull)
 }
 
-export default CalmFileInput
+export default Screenfull

@@ -92,7 +92,7 @@ export default class Area extends Vue {
 <style lang="scss" scoped>
 .el-cascader {
     display: block;
-    &.el-cascader--mini /deep/ .el-input--mini .el-input__inner {
+    &.el-cascader--mini ::v-deep .el-input--mini .el-input__inner {
         height: 28px !important;
     }
 }
