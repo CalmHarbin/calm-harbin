@@ -2,12 +2,13 @@ import BiuDialog from '../packages/BiuDialog/index'
 import FileInput from '../packages/FileInput/index'
 import BiuCardForm from '../packages/BiuCardForm/index'
 import BiuCard from '../packages/BiuCard/index'
+import BiuTable from '../packages/BiuTable/index'
 
 import waves from './directive/waves/index'
 
 import { $_debounce } from './utils'
 
-const components = [BiuDialog, FileInput, BiuCardForm, BiuCard]
+const components = [BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable]
 
 const directives = [waves]
 
@@ -37,7 +38,7 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
     install((window as any).Vue)
 }
 
-export { BiuDialog, FileInput, BiuCardForm, BiuCard }
+export { BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable }
 
 export default {
     version: '0.0.1',
@@ -45,5 +46,6 @@ export default {
     BiuDialog,
     FileInput,
     BiuCardForm,
-    BiuCard
+    BiuCard,
+    BiuTable
 }

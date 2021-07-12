@@ -24,7 +24,7 @@ export type tablePostfixOptionsType = customTablePostfixOptionsType
 @Component({
     components: { UTable, UxGrid }
 })
-export default class BiuTableIndex extends Vue {
+export default class BiuTable extends Vue {
     @Prop(Array) private columns!: tableColumnType[]
     @Prop({ type: Boolean, default: true }) private virtual!: boolean // 是不是虚拟表格,默认true
 

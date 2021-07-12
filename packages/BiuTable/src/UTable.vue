@@ -154,7 +154,7 @@
                 border: none;
             "
         >
-            <img style="width: 78px" src="@/assets/imgs/notdata.png" />
+            <img style="width: 78px" src="./notdata.png" />
             <div>当前没有内容/列表</div>
         </el-card>
     </u-table>

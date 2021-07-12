@@ -2,6 +2,8 @@
     <div id="app">
         <biu-card-form :source="source"></biu-card-form>
 
+        <biu-table :tableData="[]" :columns="columns"></biu-table>
+
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
 
@@ -169,6 +171,23 @@ export default class App extends Vue {
                         span: 12
                     }
                 ]
+            }
+        ]
+    }
+
+    get columns() {
+        return [
+            {
+                label: '姓名',
+                id: '姓名'
+            },
+            {
+                label: '电话',
+                id: '电话'
+            },
+            {
+                label: '性别',
+                id: '性别'
             }
         ]
     }

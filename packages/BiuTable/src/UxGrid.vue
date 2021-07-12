@@ -209,7 +209,7 @@
                 border: none;
             "
         >
-            <img style="width: 78px" src="@/assets/imgs/notdata.png" />
+            <img style="width: 78px" src="./notdata.png" />
             <div>当前没有内容/列表</div>
         </el-card>
     </ux-grid>
@@ -631,7 +631,7 @@ export default class CoutomUxGrid extends Vue {
     line-height: 1.5em;
 }
 .operation {
-    color: $theme-primary;
+    color: #409eff;
     font-size: 24px;
     i {
         margin: 0 3px;
