@@ -134,6 +134,8 @@ import {
     Emit
 } from 'vue-property-decorator'
 
+import { Input, DatePicker, TimePicker } from 'element-ui'
+
 import Area from './area.vue'
 
 // 下拉框
@@ -151,7 +153,10 @@ export type formTypeType =
 @Component({
     components: {
         Area,
-        BiuSelect
+        BiuSelect,
+        [Input.name]: Input,
+        [DatePicker.name]: DatePicker,
+        [TimePicker.name]: TimePicker
     }
 })
 export default class BiuFormItem extends Vue {

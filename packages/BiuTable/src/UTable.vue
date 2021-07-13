@@ -111,7 +111,7 @@
         <u-table-column
             :key="'operation' + random"
             v-if="customTablePostfixOptions"
-            :label="$t('table.actions')"
+            label="操作"
             fixed="right"
             :resizable="false"
             :width="customTablePostfixOptions.length * 31 + 22"
@@ -161,9 +161,11 @@
 </template>
 
 <script lang="tsx">
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
+import { Card, Tooltip, Input } from 'element-ui'
+import { UTable, UTableColumn } from 'umy-ui'
 
 @Component({
     components: {
@@ -182,7 +184,12 @@ import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
                     that.renderFunc(createElement, that.scope)
                 )
             }
-        }
+        },
+        [Card.name]: Card,
+        [Tooltip.name]: Tooltip,
+        [Input.name]: Input,
+        [UTable.name]: UTable,
+        [UTableColumn.name]: UTableColumn
     }
 })
 export default class CustomUTable extends Vue {
@@ -228,9 +235,7 @@ export default class CustomUTable extends Vue {
                         return (
                             <div>
                                 {row[col.id]
-                                    ? moment(row[col.id]).format(
-                                          item.timeFormat
-                                      )
+                                    ? dayjs(row[col.id]).format(item.timeFormat)
                                     : ''}
                             </div>
                         )

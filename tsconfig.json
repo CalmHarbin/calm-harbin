@@ -16,7 +16,10 @@
         "typeRoots": ["types/index.d.ts"],
         "paths": {
             "@/*": ["test/*"],
-            "@packages/*": ["packages/*"]
+            "@packages/*": ["packages/*"],
+            "@src/*": ["src/*"],
+            "@test/*": ["test/*"],
+            "@types/*": ["types/*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },

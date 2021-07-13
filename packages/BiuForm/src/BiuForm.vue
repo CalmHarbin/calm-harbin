@@ -5,9 +5,14 @@
             ref="form"
             :model="customValue"
             :validate-on-rule-change="false"
-            size="mini"
-            :label-position="showBtn ? 'right' : 'left'"
-            :label-width="customDirection === 'vertical' ? '100px' : undefined"
+            :size="attrs['size'] || 'mini'"
+            :label-position="
+                attrs['label-position'] || (showBtn ? 'right' : 'left')
+            "
+            :label-width="
+                attrs['label-width'] ||
+                (customDirection === 'vertical' ? '100px' : undefined)
+            "
             v-bind="attrs"
         >
             <el-row
@@ -32,7 +37,7 @@
                         :label-width="
                             formItem.labelWidth
                                 ? formItem.labelWidth + 'px'
-                                : ''
+                                : undefined
                         "
                         :prop="formItem.id"
                     >
@@ -70,7 +75,7 @@
                                 icon="el-icon-search"
                                 size="mini"
                                 @click="() => $emit('search')"
-                                >{{ $t('table.search') }}</el-button
+                                >搜索</el-button
                             >
                             <el-button
                                 v-waves
@@ -99,7 +104,7 @@
                                 icon="el-icon-search"
                                 size="mini"
                                 @click="() => $emit('search')"
-                                >{{ $t('table.search') }}</el-button
+                                >搜索</el-button
                             >
                             <el-button
                                 v-waves
@@ -134,6 +139,7 @@ import BiuFormItem, {
 } from '@packages/BiuFormItem/src/BiuFormItem.vue'
 import { areaType } from '@packages/BiuFormItem/src/area.vue'
 import { DatePickerType } from 'element-ui/types/date-picker'
+import { Row, Col, Form, FormItem, Button } from 'element-ui'
 
 export type formAttrType = {
     /**
@@ -241,15 +247,26 @@ type objType = {
                     that.renderFunc(createElement, that.scope)
                 )
             }
-        }
+        },
+        [Row.name]: Row,
+        [Col.name]: Col,
+        [Form.name]: Form,
+        [FormItem.name]: FormItem,
+        [Button.name]: Button
     }
 })
 export default class BiuForm extends Vue {
     @Prop() private source!: BiuformType[]
+
+    // 是否显示搜索栏
     @Prop(Boolean) private showBtn?: boolean
+
     // 方向 vertical垂直的 horizontal水平的
     @Prop({ type: String, default: 'horizontal' })
     private direction?: directionType
+
+    @Prop(Boolean) private resize?: boolean
+
     // 这里利用引用类型直接改值
     // @Prop(Object) private value?: objType
     @Model('setValue') private value?: objType
@@ -543,21 +560,24 @@ export default class BiuForm extends Vue {
         return otherEvent
     }
     created() {
-        this.throttleFn = this.$_debounce(this.resize, 500, true)
+        this.resize &&
+            (this.throttleFn = this.$_debounce(this.handleResize, 500, true))
     }
 
     mounted() {
-        this.resize()
-        window.addEventListener('resize', this.throttleFn)
+        if (this.resize) {
+            this.handleResize()
+            window.addEventListener('resize', this.throttleFn)
+        }
     }
     destroyed() {
-        window.removeEventListener('resize', this.throttleFn)
+        this.resize && window.removeEventListener('resize', this.throttleFn)
     }
     /**
      * 浏览器窗口改变时计算表单一行的数量
      * @param { number } proportion 上一次应该计算的比例
      */
-    resize() {
+    handleResize() {
         const totalWidth = (this.$refs.formBox as any).offsetWidth // 总宽度
 
         if (
@@ -589,7 +609,7 @@ export default class BiuForm extends Vue {
         // 赋值
         this.setCustomSource(this.source)
         // 递归一遍,避免仍然不符合比例
-        this.resize()
+        this.handleResize()
     }
     /**
      * 给customSource赋值,不能直接赋值,需要把比例计算进去

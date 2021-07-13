@@ -2,17 +2,19 @@
     <el-row :gutter="10">
         <el-col
             :span="group.span || 24"
-            v-for="group in customSource"
+            v-for="(group, index) in customSource"
             :key="group.title"
         >
-            <BiuCard :border="group.showBorder" :title="group.title">
-                <BiuForm
-                    ref="BiuForm"
-                    :source="group.list"
-                    v-model="customForm"
-                    v-bind="formAttr"
-                />
-            </BiuCard>
+            <slot :name="group.id || index">
+                <BiuCard :border="group.showBorder" :title="group.title">
+                    <BiuForm
+                        ref="BiuForm"
+                        :source="group.list"
+                        v-model="customForm"
+                        v-bind="formAttr"
+                    />
+                </BiuCard>
+            </slot>
         </el-col>
     </el-row>
 </template>
@@ -30,6 +32,7 @@ import {
 } from 'vue-property-decorator'
 import BiuCard from '@packages/BiuCard/src/BiuCard.vue'
 import BiuForm, { BiuformType } from '@packages/BiuForm/src/BiuForm.vue'
+import { Row, Col } from 'element-ui'
 
 type objType = {
     [x: string]: any
@@ -40,7 +43,12 @@ export type BiuCardFormSourceType = {
 }[]
 
 @Component({
-    components: { BiuCard, BiuForm }
+    components: {
+        BiuCard,
+        BiuForm,
+        [Row.name]: Row,
+        [Col.name]: Col
+    }
 })
 export default class BiuCardForm extends Vue {
     @Prop(Array) source?: BiuCardFormSourceType

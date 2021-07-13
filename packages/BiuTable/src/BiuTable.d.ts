@@ -27,8 +27,8 @@ export type tableColumnType = {
      *
      * 比如显示 2020-10-16 16:00:00 则 配置 timeFormat: 'YYYY-MM-DD HH:mm:ss'
      *
-     * 详情配置值参考 moment的format方法
-     * @url http://momentjs.cn/docs/#/displaying/format/
+     * // 详情配置值参考 day.js的format方法
+     * @url https://dayjs.fenxianglu.cn/category/display.html#%E6%A0%BC%E5%BC%8F%E5%8C%96
      */
     timeFormat?: string
     /**

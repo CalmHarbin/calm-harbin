@@ -111,6 +111,15 @@
             :field="col.id"
             :edit-render="col.editable"
         >
+            <!-- 表头 -->
+            <template v-slot:header>
+                <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
+                <span
+                    :class="col.required ? 'required' : ''"
+                    :title="col.label"
+                    >{{ col.label }}</span
+                >
+            </template>
             <!-- 可编辑时显示 -->
             <template #edit="{ row, seq }">
                 <slot
@@ -163,7 +172,7 @@
         <ux-table-column
             :key="'operation' + random"
             v-if="customTablePostfixOptions"
-            :title="$t('table.actions')"
+            title="操作"
             fixed="right"
             align="center"
             :resizable="false"
@@ -216,9 +225,11 @@
 </template>
 
 <script lang="tsx">
-import moment from 'moment'
+import dayjs from 'dayjs'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
+import { Card, Tooltip, Input } from 'element-ui'
+import { UxGrid, UxTableColumn } from 'umy-ui'
 
 @Component({
     components: {
@@ -237,7 +248,12 @@ import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
                     that.renderFunc(createElement, that.scope)
                 )
             }
-        }
+        },
+        [Card.name]: Card,
+        [Tooltip.name]: Tooltip,
+        [Input.name]: Input,
+        [UxGrid.name]: UxGrid,
+        [UxTableColumn.name]: UxTableColumn
     }
 })
 export default class CoutomUxGrid extends Vue {
@@ -302,9 +318,7 @@ export default class CoutomUxGrid extends Vue {
                         return (
                             <div>
                                 {row[col.id]
-                                    ? moment(row[col.id]).format(
-                                          item.timeFormat
-                                      )
+                                    ? dayjs(row[col.id]).format(item.timeFormat)
                                     : ''}
                             </div>
                         )
@@ -637,5 +651,16 @@ export default class CoutomUxGrid extends Vue {
         margin: 0 3px;
         cursor: pointer;
     }
+}
+.tableOperate {
+    color: #409eff;
+    font-size: 17px;
+    i {
+        margin: 0 7px;
+        cursor: pointer;
+    }
+}
+.required {
+    color: #f56c6c;
 }
 </style>

@@ -20,10 +20,15 @@ import {
     Prop
 } from 'vue-property-decorator'
 import { cityPicker, countyPicker } from './area.js'
+import { Cascader } from 'element-ui'
 
 export type areaType = 'city' | 'area'
 
-@Component
+@Component({
+    components: {
+        [Cascader.name]: Cascader
+    }
+})
 export default class Area extends Vue {
     @Prop(String) type?: areaType
     @Model('setValue') value!: string[]

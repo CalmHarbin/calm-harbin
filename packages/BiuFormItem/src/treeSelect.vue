@@ -56,6 +56,7 @@ import {
     Emit,
     Prop
 } from 'vue-property-decorator'
+import { Select, Option, Tree, Checkbox } from 'element-ui'
 
 type treeNodeType = {
     label: string
@@ -65,7 +66,14 @@ type treeNodeType = {
 }
 
 export type areaType = 'city' | 'area'
-@Component
+@Component({
+    components: {
+        [Select.name]: Select,
+        [Option.name]: Option,
+        [Tree.name]: Tree,
+        [Checkbox.name]: Checkbox
+    }
+})
 export default class TreeSelect extends Vue {
     @Prop({ type: Boolean, default: false }) disabled?: boolean
     @Prop({ type: Boolean, default: false }) subWith?: boolean

@@ -32,9 +32,15 @@ import {
     Emit,
     Prop
 } from 'vue-property-decorator'
+import { Select, Option } from 'element-ui'
 
-@Component
-export default class Select extends Vue {
+@Component({
+    components: {
+        [Select.name]: Select,
+        [Option.name]: Option
+    }
+})
+export default class BiuSelect extends Vue {
     @Model('setValue') value!: string
     @Prop({ type: Boolean, default: false }) multiple?: boolean
 
