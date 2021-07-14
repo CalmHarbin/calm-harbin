@@ -35,6 +35,9 @@
     "type": "git",
     "url": "git@github.com:CalmHarbin/calm-harbin.git"
   },
+  "peerDependencies": {
+    "vue": "2.x"
+  },
   "dependencies": {
     "core-js": "^3.6.5",
     "dayjs": "^1.10.6",

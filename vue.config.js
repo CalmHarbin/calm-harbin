@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const webpack = require('webpack')
 
 module.exports = {
     publicPath: './',
@@ -20,6 +19,12 @@ module.exports = {
             libraryExport: 'default',
             libraryTarget: 'umd'
         }
+        // externals: {
+        //     xlsx: 'XLSX',
+        //     'element-ui': 'Element',
+        //     'umy-ui': 'UmyUi',
+        //     dayjs: 'dayjs'
+        // }
     },
     chainWebpack: (config) => {
         config.resolve.alias.set(
