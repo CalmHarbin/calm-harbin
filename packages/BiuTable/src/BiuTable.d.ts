@@ -48,13 +48,20 @@ type scopeType = {
 export type tablePostfixOptionsType = {
     title: string | ((scope: scopeType) => string)
     /**
-     * 按钮权限控制,id为数据库中id字段,不传则控制权限
+     * 隐藏按钮
      */
-    id?: string
+    hidden?: boolean
     /**
      * 是否禁用，可用于根据数据来判断该功能是否禁用
      */
     disabled?: (scope: scopeType) => boolean
+    /**
+     * 图标
+     * @url https://element.eleme.io/#/zh-CN/component/icon
+     */
     icon: string | ((scope: scopeType) => string)
+    /**
+     * 点击事件
+     */
     onLinkClick: (scope: scopeType) => void // 值见element table的自定义单元格的slot-scope
 }

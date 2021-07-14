@@ -9,7 +9,6 @@
                 ></Render>
                 <el-button
                     v-else
-                    v-auth="btn.id"
                     :key="index"
                     v-waves
                     :size="size(btn)"
@@ -21,7 +20,6 @@
                     >{{ btn.title }}</el-button
                 >
             </template>
-            <!-- <span :key="index">123{{ btn }}</span> -->
         </template>
     </div>
 </template>
@@ -29,6 +27,7 @@
 <script lang="tsx">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { ButtonType } from 'element-ui/types/button'
+import { Button } from 'element-ui'
 
 export type OperationOptionType = {
     title?: string
@@ -37,10 +36,6 @@ export type OperationOptionType = {
      */
     callback?: (btn: OperationOptionType) => void
     type?: ButtonType | 'default'
-    /**
-     * 按钮权限控制,id为数据库中id字段,不传则控制权限
-     */
-    id?: string
     // eslint-disable-next-line no-undef
     render?: () => JSX.Element
     /**
@@ -64,7 +59,8 @@ export type OperationOptionType = {
                 that = this
                 return that.renderFunc && that.renderFunc(createElement)
             }
-        }
+        },
+        [Button.name]: Button
     }
 })
 export default class Operation extends Vue {

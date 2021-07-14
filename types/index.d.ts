@@ -10,7 +10,7 @@ export interface InstallationOptions {
 }
 
 export type VueProto = {
-    $_debounce: (
+    debounce: (
         fn: (...params: any) => any | void,
         wait: number,
         throttle?: boolean

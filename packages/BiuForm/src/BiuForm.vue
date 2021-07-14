@@ -140,6 +140,7 @@ import BiuFormItem, {
 import { areaType } from '@packages/BiuFormItem/src/area.vue'
 import { DatePickerType } from 'element-ui/types/date-picker'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
+import { debounce } from '@src/utils/index'
 
 export type formAttrType = {
     /**
@@ -301,7 +302,6 @@ export default class BiuForm extends Vue {
     customDirection?: directionType = 'horizontal'
 
     throttleFn: any
-    $_debounce: any
 
     @Watch('source', { immediate: true, deep: true })
     sourceChange(newVal: BiuFormItem[]) {
@@ -561,7 +561,7 @@ export default class BiuForm extends Vue {
     }
     created() {
         this.resize &&
-            (this.throttleFn = this.$_debounce(this.handleResize, 500, true))
+            (this.throttleFn = debounce(this.handleResize, 500, true))
     }
 
     mounted() {

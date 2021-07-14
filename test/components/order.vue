@@ -4,6 +4,8 @@
 
         <!-- <biu-card title="标题"></biu-card> -->
 
+        <BiuTable :columns="columns" :tableData="[]"></BiuTable>
+
         <BiuCardForm
             v-model="form"
             :source="source"

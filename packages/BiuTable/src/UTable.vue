@@ -154,7 +154,7 @@
                 border: none;
             "
         >
-            <img style="width: 78px" src="./notdata.png" />
+            <img style="width: 78px" :src="require('./notdata.js').default" />
             <div>当前没有内容/列表</div>
         </el-card>
     </u-table>
@@ -267,11 +267,7 @@ export default class CustomUTable extends Vue {
     get customTablePostfixOptions() {
         if (this.tablePostfixOptions) {
             const list = this.tablePostfixOptions.filter(
-                (item: tablePostfixOptionsType) => {
-                    if (item.id && !this.$store?.btnAuth.includes(item.id))
-                        return false
-                    return true
-                }
+                (item: tablePostfixOptionsType) => !item.hidden
             )
             return list.length ? list : false
         }

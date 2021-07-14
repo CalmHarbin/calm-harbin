@@ -1,6 +1,8 @@
 <template>
     <div id="app">
-        <Order></Order>
+        <!-- <Order></Order> -->
+
+        <BiuPageTest></BiuPageTest>
 
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
@@ -21,11 +23,13 @@
 import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from './components/HelloWorld.vue'
 import Order from './components/order.vue'
+import BiuPageTest from './components/BiuPageTest.vue'
 
 @Component({
     components: {
         HelloWorld,
-        Order
+        Order,
+        BiuPageTest
     }
 })
 export default class App extends Vue {

@@ -218,7 +218,7 @@
                 border: none;
             "
         >
-            <img style="width: 78px" src="./notdata.png" />
+            <img style="width: 78px" :src="require('./notdata.js').default" />
             <div>当前没有内容/列表</div>
         </el-card>
     </ux-grid>
@@ -380,11 +380,7 @@ export default class CoutomUxGrid extends Vue {
         }
         if (this.tablePostfixOptions) {
             const list = this.tablePostfixOptions.filter(
-                (item: tablePostfixOptionsType) => {
-                    if (item.id && !this.$store?.btnAuth.includes(item.id))
-                        return false
-                    return true
-                }
+                (item: tablePostfixOptionsType) => !item.hidden
             )
             // 可编辑表格操作加载右侧边栏
             if (this.editable && list.length) {

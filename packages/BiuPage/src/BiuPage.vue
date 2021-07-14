@@ -222,11 +222,7 @@ export default class BiuPage extends Vue {
     get customOperationOptions() {
         if (this.operationOptions) {
             const list = this.operationOptions.filter(
-                (item: OperationOptionType) => {
-                    if (item.id && !this.$store?.btnAuth.includes(item.id))
-                        return false
-                    return true
-                }
+                (item: OperationOptionType) => !item.hidden
             )
             return list.length ? list : false
         }
@@ -293,6 +289,8 @@ export default class BiuPage extends Vue {
             height -= (this.$refs.Pagination as any).$refs.pagination
                 .offsetHeight
         }
+
+        console.log(297, height)
 
         this.height = height
     }

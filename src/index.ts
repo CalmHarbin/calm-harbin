@@ -1,24 +1,36 @@
-// import { Row, Col, Input, Select, Button, Form, FormItem } from 'element-ui'
-import 'element-ui/lib/theme-chalk/icon.css'
+import { Loading } from 'element-ui'
 
+// 引入覆盖elementUi的一些自定义样式
+import './styles/elementUi.scss'
+
+// 引入组件
 import BiuDialog from '../packages/BiuDialog/index'
 import FileInput from '../packages/FileInput/index'
 import BiuCardForm from '../packages/BiuCardForm/index'
 import BiuCard from '../packages/BiuCard/index'
 import BiuTable from '../packages/BiuTable/index'
+import BiuPage from '../packages/BiuPage/index'
+import BiuForm from '../packages/BiuForm/index'
+import BiuFormItem from '../packages/BiuFormItem/index'
 
+// 引入指令
 import waves from './directive/waves/index'
 
-import * as prototype from './utils'
-
-console.log(13, prototype)
-
-const components = [BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable]
+const components = {
+    BiuDialog,
+    FileInput,
+    BiuCardForm,
+    BiuCard,
+    BiuTable,
+    BiuPage,
+    BiuForm,
+    BiuFormItem
+}
 
 const directives = [waves]
 
 const install = function (Vue: any): void {
-    components.forEach((component) => {
+    Object.values(components).forEach((component) => {
         console.log(9, component.name, component)
         // 这里不要用Vue.component方式，打包后component.name会变成n
         // Vue.component(component.name, component)
@@ -30,11 +42,13 @@ const install = function (Vue: any): void {
     })
 
     //挂载原型方法及属性
-    Object.keys(prototype).forEach((key: string) => {
-        console.log(29, '原型', key)
-        Vue.prototype[key] = (prototype as any)[key]
-    })
+    // Object.keys(prototype).forEach((key: string) => {
+    //     console.log(29, '原型', key)
 
+    //     Vue.prototype[key] = (prototype as any)[key]
+    // })
+
+    Vue.use(Loading)
     // element-ui组件
     // Vue.use(Row)
     //     .use(Col)
@@ -49,7 +63,9 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
     install((window as any).Vue)
 }
 
-export { BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable }
+// export { BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable }
+
+export { debounce, exportExcel } from './utils'
 
 export default {
     version: '0.0.1',
@@ -58,5 +74,8 @@ export default {
     FileInput,
     BiuCardForm,
     BiuCard,
-    BiuTable
+    BiuTable,
+    BiuPage,
+    BiuForm,
+    BiuFormItem
 }

@@ -22,9 +22,11 @@
 
 <script>
 import { scrollTo } from './scrollTo'
+import { Pagination } from 'element-ui'
 
 export default {
     name: 'Pagination',
+    components: { [Pagination.name]: Pagination },
     props: {
         total: {
             required: true,
