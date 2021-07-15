@@ -26,9 +26,9 @@ import { Vue, Component } from 'vue-property-decorator'
 import { exportExcel } from '@src/index'
 
 @Component({
-    name: 'dict'
+    name: 'BiuPageTest'
 })
-export default class Dict extends Vue {
+export default class BiuPageTest extends Vue {
     form = {}
     columns = [
         {

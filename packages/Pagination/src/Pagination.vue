@@ -114,7 +114,7 @@ export default {
                     JSON.stringify(Object.keys(newVal)) !==
                     JSON.stringify(Object.keys(this.attrs))
                 )
-                    this.attrs = newVal
+                    this.attrs = { ...newVal }
             }
         }
     }

@@ -185,7 +185,7 @@ export default class Upload extends Vue {
                 JSON.stringify(Object.keys(this.attrs)) ||
             JSON.stringify(newVal) !== JSON.stringify(this.attrs)
         )
-            this.attrs = newVal
+            this.attrs = { ...newVal }
     }
 
     @Emit('setValue')

@@ -35,7 +35,7 @@ export default class BiuCard extends Vue {
                 JSON.stringify(Object.keys(this.attrs)) ||
             JSON.stringify(newVal) !== JSON.stringify(this.attrs)
         )
-            this.attrs = newVal
+            this.attrs = { ...newVal }
     }
 }
 </script>

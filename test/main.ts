@@ -8,11 +8,11 @@ import App from './App.vue'
 // import UmyUi from 'umy-ui'
 // import 'umy-ui/lib/theme-chalk/index.css' // 引入样式
 
-import CalmHarbin from '../src'
+import CalmHarbin, { debounce } from '../src'
 
 Vue.config.productionTip = false
 
-// console.log(7, CalmHarbin)
+console.log(7, CalmHarbin, debounce)
 
 // Vue.use(Element, {
 //     size: 'medium' // set element-ui default size

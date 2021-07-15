@@ -141,6 +141,7 @@ import { areaType } from '@packages/BiuFormItem/src/area.vue'
 import { DatePickerType } from 'element-ui/types/date-picker'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
+import waves from '@src/directive/waves/index'
 
 export type formAttrType = {
     /**
@@ -254,7 +255,8 @@ type objType = {
         [Form.name]: Form,
         [FormItem.name]: FormItem,
         [Button.name]: Button
-    }
+    },
+    directives: { waves }
 })
 export default class BiuForm extends Vue {
     @Prop() private source!: BiuformType[]
@@ -335,7 +337,7 @@ export default class BiuForm extends Vue {
                 JSON.stringify(Object.keys(this.attrs)) ||
             JSON.stringify(newVal) !== JSON.stringify(this.attrs)
         )
-            this.attrs = newVal
+            this.attrs = { ...newVal }
     }
 
     @Emit('setValue')

@@ -1,5 +1,6 @@
 import { Loading } from 'element-ui'
 
+console.log(3, Loading)
 // 引入覆盖elementUi的一些自定义样式
 import './styles/elementUi.scss'
 
@@ -30,15 +31,16 @@ const components = {
 const directives = [waves]
 
 const install = function (Vue: any): void {
+    directives.forEach((directive) => {
+        console.log(42, directive)
+        Vue.use(directive)
+    })
+
     Object.values(components).forEach((component) => {
         console.log(9, component.name, component)
         // 这里不要用Vue.component方式，打包后component.name会变成n
         // Vue.component(component.name, component)
         Vue.use(component)
-    })
-
-    directives.forEach((directive) => {
-        Vue.use(directive)
     })
 
     //挂载原型方法及属性
@@ -47,6 +49,8 @@ const install = function (Vue: any): void {
 
     //     Vue.prototype[key] = (prototype as any)[key]
     // })
+
+    console.log(51, Vue)
 
     Vue.use(Loading)
     // element-ui组件
@@ -65,7 +69,7 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
 
 // export { BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable }
 
-export { debounce, exportExcel } from './utils'
+import { debounce, exportExcel } from './utils'
 
 export default {
     version: '0.0.1',
@@ -77,5 +81,7 @@ export default {
     BiuTable,
     BiuPage,
     BiuForm,
-    BiuFormItem
+    BiuFormItem,
+    debounce,
+    exportExcel
 }
