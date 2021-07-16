@@ -228,8 +228,10 @@
 import dayjs from 'dayjs'
 import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
-import { Card, Tooltip, Input } from 'element-ui'
+import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UxGrid, UxTableColumn } from 'umy-ui'
+
+Vue.use(Loading.directive)
 
 @Component({
     components: {
@@ -475,7 +477,7 @@ export default class CoutomUxGrid extends Vue {
                 JSON.stringify(Object.keys(this.attrs)) ||
             JSON.stringify(newVal) !== JSON.stringify(this.attrs)
         )
-            this.attrs = newVal
+            this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
@@ -483,7 +485,7 @@ export default class CoutomUxGrid extends Vue {
             JSON.stringify(Object.keys(newVal)) !==
             JSON.stringify(Object.keys(this.listeners))
         )
-            this.listeners = newVal
+            this.listeners = { ...newVal }
     }
 
     random = 0

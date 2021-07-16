@@ -1,13 +1,9 @@
 import waves from './waves'
 import { PluginObject } from 'vue'
-
-const install = (Vue: PluginObject<any>) => {
+;(waves as any).install = function (Vue: PluginObject<any>) {
+    console.log('注册自定义指令waves')
     Vue.directive('waves', waves)
 }
 
-if (window.Vue) {
-    ;(window as any).Vue.use(install)
-}
-
-;(waves as any).install = install
+console.log(13, waves)
 export default waves

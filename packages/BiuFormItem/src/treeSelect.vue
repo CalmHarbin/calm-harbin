@@ -213,7 +213,7 @@ export default class TreeSelect extends Vue {
             JSON.stringify(Object.keys(newVal)) !==
             JSON.stringify(Object.keys(this.listeners))
         )
-            this.listeners = newVal
+            this.listeners = { ...newVal }
     }
 
     @Emit('setValue')

@@ -37,9 +37,11 @@ import { Vue, Component, PropSync, Prop, Emit } from 'vue-property-decorator'
 import Operation, {
     OperationOptionType
 } from '@packages/BiuTable/src/operation.vue'
+import waves from '@src/directive/waves/index'
 
 @Component({
-    components: { Operation }
+    components: { Operation },
+    directives: { waves }
 })
 export default class BiuDrawer extends Vue {
     @PropSync('visible') visibleSync?: boolean

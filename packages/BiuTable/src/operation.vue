@@ -28,6 +28,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { ButtonType } from 'element-ui/types/button'
 import { Button } from 'element-ui'
+import waves from '@src/directive/waves/index'
 
 export type OperationOptionType = {
     title?: string
@@ -61,7 +62,8 @@ export type OperationOptionType = {
             }
         },
         [Button.name]: Button
-    }
+    },
+    directives: { waves }
 })
 export default class Operation extends Vue {
     @Prop({

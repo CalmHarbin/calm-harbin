@@ -43,8 +43,11 @@ import {
     Prop,
     Watch
 } from 'vue-property-decorator'
+import waves from '@src/directive/waves/index'
 
-@Component
+@Component({
+    directives: { waves }
+})
 export default class BiuDialog extends Vue {
     @PropSync('visible') visibleSync!: boolean
     @Prop() private btnLoading?: boolean
@@ -65,7 +68,7 @@ export default class BiuDialog extends Vue {
                 JSON.stringify(Object.keys(this.attrs)) ||
             JSON.stringify(newVal) !== JSON.stringify(this.attrs)
         )
-            this.attrs = newVal
+            this.attrs = { ...newVal }
     }
 
     @Emit()
