@@ -46,7 +46,8 @@
                             class="ellipsis"
                             slot="label"
                             :title="formItem.label"
-                            >{{ formItem.label }}</span
+                            >{{ formItem.label
+                            }}{{ attrs['label-suffix'] || '' }}</span
                         >
                         <BiuFormItem
                             :formType="formItem.formType"
@@ -266,7 +267,7 @@ export default class BiuForm extends Vue {
     @Prop({ type: String, default: 'horizontal' })
     private direction?: directionType
 
-    @Prop(Boolean) private resize?: boolean
+    @Prop({ type: Boolean, default: true }) private resize?: boolean
 
     // 这里利用引用类型直接改值
     // @Prop(Object) private value?: objType

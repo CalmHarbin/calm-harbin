@@ -240,6 +240,24 @@ export default class CustomUTable extends Vue {
                             </div>
                         )
                     }
+                } else if (
+                    item.formType === 'select' &&
+                    item?.formAttr?.options &&
+                    !item.render
+                ) {
+                    // 下拉框表格显示自动转化
+                    cur.render = (h: any, { col, row }: any) => {
+                        return (
+                            <div>
+                                {col.formAttr.options.find(
+                                    // eslint-disable-next-line no-shadow
+                                    (item: any) =>
+                                        String(item.value) ===
+                                        String(row[col.id])
+                                )?.label || row[col.id]}
+                            </div>
+                        )
+                    }
                 }
                 return cur
             })

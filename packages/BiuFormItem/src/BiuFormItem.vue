@@ -226,9 +226,20 @@ export default class BiuFormItem extends Vue {
                         onClick(picker: any) {
                             const end = new Date()
                             const start = new Date()
-                            start.setTime(
-                                start.getTime() - 3600 * 1000 * 24 * 7
-                            )
+                            if (type === 'daterange') {
+                                end.setHours(23)
+                                end.setMinutes(59)
+                                end.setSeconds(59)
+                                end.setMilliseconds(999)
+                                start.setTime(
+                                    end.getTime() - 3600 * 1000 * 24 * 7 + 1
+                                )
+                            } else {
+                                start.setTime(
+                                    end.getTime() - 3600 * 1000 * 24 * 7
+                                )
+                            }
+
                             picker.$emit('pick', [start, end])
                         }
                     },
@@ -237,9 +248,16 @@ export default class BiuFormItem extends Vue {
                         onClick(picker: any) {
                             const end = new Date()
                             const start = new Date()
-                            start.setTime(
-                                start.getTime() - 3600 * 1000 * 24 * 30
-                            )
+                            if (type === 'daterange') {
+                                end.setHours(23)
+                                end.setMinutes(59)
+                                end.setSeconds(59)
+                                end.setMilliseconds(999)
+                            }
+
+                            start.setTime(end.getTime() + 1)
+                            start.setMonth(start.getMonth() - 1)
+
                             picker.$emit('pick', [start, end])
                         }
                     },
@@ -248,9 +266,16 @@ export default class BiuFormItem extends Vue {
                         onClick(picker: any) {
                             const end = new Date()
                             const start = new Date()
-                            start.setTime(
-                                start.getTime() - 3600 * 1000 * 24 * 90
-                            )
+                            if (type === 'daterange') {
+                                end.setHours(23)
+                                end.setMinutes(59)
+                                end.setSeconds(59)
+                                end.setMilliseconds(999)
+                            }
+
+                            start.setTime(end.getTime() + 1)
+                            start.setMonth(start.getMonth() - 3)
+
                             picker.$emit('pick', [start, end])
                         }
                     }

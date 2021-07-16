@@ -81,6 +81,7 @@ export default class BiuDrawer extends Vue {
         margin: 0;
         padding: 0 10px 0 20px;
         color: #333;
+        font-size: 16px;
         font-weight: bold;
         line-height: 46px;
         border-bottom: 1px solid #eee;
