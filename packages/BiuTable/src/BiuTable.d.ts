@@ -16,6 +16,10 @@ export type tableColumnType = {
      */
     editable?: boolean
     /**
+     * 是否显示表头的筛选功能，若为true，请务必使用v-model绑定数据
+     */
+    showHeaderFilter?: boolean
+    /**
      * 可编辑时的自定义渲染
      */
     editRender?: (h: any, scope: any) => JSX.Element | Element

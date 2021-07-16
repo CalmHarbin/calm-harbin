@@ -143,6 +143,7 @@ import { DatePickerType } from 'element-ui/types/date-picker'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
 import waves from '@src/directive/waves/index'
+import { otherAttr, otherEvent } from './utils'
 
 export type formAttrType = {
     /**
@@ -376,8 +377,8 @@ export default class BiuForm extends Vue {
                     {
                         ...item,
                         span: 24,
-                        otherAttr: this.otherAttr(item),
-                        otherEvent: this.otherEvent(item)
+                        otherAttr: otherAttr(item),
+                        otherEvent: otherEvent(item)
                     }
                 ])
             })
@@ -385,8 +386,8 @@ export default class BiuForm extends Vue {
             source.reduce((prev, cur, idx) => {
                 const item: any = {
                     ...cur,
-                    otherAttr: this.otherAttr(cur),
-                    otherEvent: this.otherEvent(cur)
+                    otherAttr: otherAttr(cur),
+                    otherEvent: otherEvent(cur)
                 }
                 const length = list.length
                 let sum: number
@@ -519,49 +520,7 @@ export default class BiuForm extends Vue {
         this.isOpen = !this.isOpen
         this.$emit('openChange')
     }
-    /**
-     * 返回剔除指定属性后的对象
-     */
-    otherAttr(data: objType) {
-        const otherAttr = { ...data }
-        if (
-            otherAttr.formType === 'area' &&
-            otherAttr.placeholder === undefined
-        ) {
-            otherAttr.placeholder = `请选择${otherAttr.label}`
-        } else if (otherAttr.placeholder === undefined) {
-            otherAttr.placeholder = otherAttr.label
-        }
-        delete otherAttr.id
-        delete otherAttr.label
-        delete otherAttr.formType
-        delete otherAttr.render
 
-        // 去除掉所有事件, 已on开头的均为事件
-        const attr = Object.keys(otherAttr).filter(
-            (item) => item.substr(0, 2) === 'on'
-        )
-        attr.forEach((item) => {
-            delete otherAttr[item]
-        })
-        return otherAttr
-    }
-    /**
-     * 返回所有事件
-     */
-    otherEvent(data: objType) {
-        const otherAttr = { ...data }
-        const otherEvent: any = {}
-        // 选择所有事件, 已on开头的均为事件, 例如onchange
-        const attr = Object.keys(otherAttr).filter(
-            (item) => item.substr(0, 2) === 'on'
-        )
-        attr.forEach((item) => {
-            // 去掉on
-            otherEvent[item.substr(2)] = otherAttr[item]
-        })
-        return otherEvent
-    }
     created() {
         this.resize &&
             (this.throttleFn = debounce(this.handleResize, 500, true))

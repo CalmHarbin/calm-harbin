@@ -99,74 +99,199 @@
             </template>
         </ux-table-column>
 
-        <ux-table-column
-            v-for="col in tableColumns"
-            :key="col.id + refreshId"
-            :title="col.label"
-            v-bind="col"
-            :resizable="true"
-            :align="col.align || 'center'"
-            :width="col.width"
-            :min-width="col.minWidth || col.width || 120"
-            :field="col.id"
-            :edit-render="col.editable"
-        >
-            <!-- 表头 -->
-            <template v-slot:header>
-                <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
-                <span
-                    :class="col.required ? 'required' : ''"
-                    :title="col.label"
-                    >{{ col.label }}</span
+        <template v-if="showHeaderFilter">
+            <ux-table-column
+                v-for="col in tableColumns"
+                :key="col.id + refreshId"
+                :title="col.label"
+                :align="col.align || 'center'"
+                :resizable="true"
+            >
+                <template v-slot:header>
+                    <i
+                        v-if="col.editable"
+                        class="elx-cell--edit-icon el-icon-edit-outline"
+                    ></i>
+                    <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
+                    <span
+                        :class="col.required ? 'required' : ''"
+                        :title="col.label"
+                        >{{ col.label }}</span
+                    >
+                </template>
+                <ux-table-column
+                    v-bind="col"
+                    :resizable="true"
+                    :width="col.width"
+                    :min-width="col.minWidth || col.width || 120"
+                    :field="col.id"
+                    :edit-render="col.editable"
                 >
-            </template>
-            <!-- 可编辑时显示 -->
-            <template #edit="{ row, seq }">
-                <slot
-                    :name="col.id + '-edit'"
-                    :col="col"
-                    :row="row"
-                    :$index="seq - 1"
-                >
-                    <Render
-                        v-if="col.editRender"
-                        :render-func="col.editRender"
-                        :scope="{
-                            col: col,
-                            row: row,
-                            $index: seq - 1
-                        }"
-                    ></Render>
-                    <el-input
-                        v-else
-                        class="editableInput"
-                        type="text"
-                        v-model="row[col.id]"
-                        size="mini"
-                        clearable
-                        @blur="
-                            (e) =>
-                                $emit('blur', e, { row, col, $index: seq - 1 })
-                        "
-                    />
-                </slot>
-            </template>
-            <!-- 默认显示 -->
-            <template #default="{ row, seq }">
-                <slot :name="col.id" :col="col" :row="row" :$index="seq - 1">
-                    <Render
-                        v-if="col.render"
-                        :render-func="col.render"
-                        :scope="{
-                            col: col,
-                            row: row,
-                            $index: seq - 1
-                        }"
-                    ></Render>
-                    <template v-else>{{ row[col.id] }}</template>
-                </slot>
-            </template>
-        </ux-table-column>
+                    <!-- 表头 -->
+                    <template v-slot:header="{ $columnIndex, $rowIndex }">
+                        <slot
+                            :name="col.id + '-header'"
+                            :col="col"
+                            :$columnIndex="$columnIndex"
+                            :$index="$rowIndex"
+                        >
+                            <template v-if="col.formType">
+                                <Render
+                                    v-if="col.formType === 'slot'"
+                                    :render-func="col.formAttr.render"
+                                    :scope="{
+                                        col: col,
+                                        $index: $rowIndex,
+                                        $columnIndex
+                                    }"
+                                ></Render>
+                                <BiuFormItem
+                                    v-else
+                                    :formType="col.formType"
+                                    size="mini"
+                                    v-model="customValue[col.formId || col.id]"
+                                    v-bind="col.formAttr.otherAttr"
+                                    v-on="col.formAttr.otherEvent"
+                                />
+                            </template>
+                        </slot>
+                    </template>
+                    <!-- 可编辑时显示 -->
+                    <template #edit="{ row, seq }">
+                        <slot
+                            :name="col.id + '-edit'"
+                            :col="col"
+                            :row="row"
+                            :$index="seq - 1"
+                        >
+                            <Render
+                                v-if="col.editRender"
+                                :render-func="col.editRender"
+                                :scope="{
+                                    col: col,
+                                    row: row,
+                                    $index: seq - 1
+                                }"
+                            ></Render>
+                            <el-input
+                                v-else
+                                class="editableInput"
+                                type="text"
+                                v-model="row[col.id]"
+                                size="mini"
+                                clearable
+                                @blur="
+                                    (e) =>
+                                        $emit('blur', e, {
+                                            row,
+                                            col,
+                                            $index: seq - 1
+                                        })
+                                "
+                            />
+                        </slot>
+                    </template>
+                    <!-- 默认显示 -->
+                    <template #default="{ row, seq }">
+                        <slot
+                            :name="col.id"
+                            :col="col"
+                            :row="row"
+                            :$index="seq - 1"
+                        >
+                            <Render
+                                v-if="col.render"
+                                :render-func="col.render"
+                                :scope="{
+                                    col: col,
+                                    row: row,
+                                    $index: seq - 1
+                                }"
+                            ></Render>
+                            <template v-else>{{ row[col.id] }}</template>
+                        </slot>
+                    </template>
+                </ux-table-column>
+            </ux-table-column>
+        </template>
+        <template v-else>
+            <ux-table-column
+                v-for="col in tableColumns"
+                :key="col.id + refreshId"
+                :title="col.label"
+                v-bind="col"
+                :resizable="true"
+                :align="col.align || 'center'"
+                :width="col.width"
+                :min-width="col.minWidth || col.width || 120"
+                :field="col.id"
+                :edit-render="col.editable"
+            >
+                <!-- 表头 -->
+                <template v-slot:header>
+                    <span
+                        :class="col.required ? 'required' : ''"
+                        :title="col.label"
+                        >{{ col.label }}</span
+                    >
+                </template>
+                <!-- 可编辑时显示 -->
+                <template #edit="{ row, seq }">
+                    <slot
+                        :name="col.id + '-edit'"
+                        :col="col"
+                        :row="row"
+                        :$index="seq - 1"
+                    >
+                        <Render
+                            v-if="col.editRender"
+                            :render-func="col.editRender"
+                            :scope="{
+                                col: col,
+                                row: row,
+                                $index: seq - 1
+                            }"
+                        ></Render>
+                        <el-input
+                            v-else
+                            class="editableInput"
+                            type="text"
+                            v-model="row[col.id]"
+                            size="mini"
+                            clearable
+                            @blur="
+                                (e) =>
+                                    $emit('blur', e, {
+                                        row,
+                                        col,
+                                        $index: seq - 1
+                                    })
+                            "
+                        />
+                    </slot>
+                </template>
+                <!-- 默认显示 -->
+                <template #default="{ row, seq }">
+                    <slot
+                        :name="col.id"
+                        :col="col"
+                        :row="row"
+                        :$index="seq - 1"
+                    >
+                        <Render
+                            v-if="col.render"
+                            :render-func="col.render"
+                            :scope="{
+                                col: col,
+                                row: row,
+                                $index: seq - 1
+                            }"
+                        ></Render>
+                        <template v-else>{{ row[col.id] }}</template>
+                    </slot>
+                </template>
+            </ux-table-column>
+        </template>
 
         <!-- 操作 -->
         <ux-table-column
@@ -226,8 +351,17 @@
 
 <script lang="tsx">
 import dayjs from 'dayjs'
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import {
+    Component,
+    Prop,
+    Vue,
+    Watch,
+    Model,
+    Emit
+} from 'vue-property-decorator'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
+import BiuFormItem from '@packages/BiuFormItem/src/BiuFormItem.vue'
+import { otherAttr, otherEvent } from '@packages/BiuForm/src/utils'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UxGrid, UxTableColumn } from 'umy-ui'
 
@@ -251,6 +385,7 @@ Vue.use(Loading.directive)
                 )
             }
         },
+        BiuFormItem,
         [Card.name]: Card,
         [Tooltip.name]: Tooltip,
         [Input.name]: Input,
@@ -280,6 +415,12 @@ export default class CoutomUxGrid extends Vue {
 
     // 可编辑表格
     @Prop(Boolean) editable?: boolean // true表示可编辑表格
+
+    @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
+
+    // 这里利用引用类型直接改值
+    @Model('setValue') value: any
+
     /**
      * 点添加按钮时的回调,然后结果会当做插入的数据
      * @param data 默认要插入的数据
@@ -292,6 +433,7 @@ export default class CoutomUxGrid extends Vue {
     customTableData: any[] = []
     multipleSelection: any[] = [] // 自定义实现多选
     refreshId = 1 // 强制刷新组件
+    customValue = {} // 表单的数据
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -311,7 +453,13 @@ export default class CoutomUxGrid extends Vue {
         if (this.isMounted) {
             const columns = this.columns.map((item) => {
                 const cur = {
-                    ...item
+                    ...item,
+                    // 处理表单的其余属性和事件
+                    formAttr: {
+                        ...item.formAttr,
+                        otherAttr: otherAttr(item.formAttr),
+                        otherEvent: otherEvent(item.formAttr)
+                    }
                 }
                 if (item.timeFormat && !cur.render) {
                     // 时间格式化
@@ -466,6 +614,25 @@ export default class CoutomUxGrid extends Vue {
         this.$nextTick(() => {
             ;(this.$refs.table as any).reloadData(this.customTableData)
         })
+    }
+    @Watch('value', { immediate: true, deep: true })
+    valueChange(newVal: any) {
+        if (JSON.stringify(newVal) !== JSON.stringify(this.customValue)) {
+            console.log(466, newVal)
+            this.customValue = { ...newVal }
+        }
+    }
+
+    @Watch('customValue', { immediate: true, deep: true })
+    customValueChange(newVal: any) {
+        if (JSON.stringify(newVal) !== JSON.stringify(this.value)) {
+            this.setValue()
+        }
+    }
+
+    @Emit('setValue')
+    setValue() {
+        return { ...this.customValue }
     }
     /**
      * 监听$attrs是否改变

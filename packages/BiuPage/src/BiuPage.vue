@@ -18,8 +18,10 @@
             />
             <BiuTable
                 ref="BiuTable"
+                v-model="customValue"
                 :tbHeight="tbHeight || height"
                 :columns="tableColumns"
+                showHeaderFilter
                 v-bind="attrs"
                 v-on="listeners"
             >
