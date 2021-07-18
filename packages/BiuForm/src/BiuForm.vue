@@ -143,7 +143,8 @@ import { DatePickerType } from 'element-ui/types/date-picker'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
 import waves from '@src/directive/waves/index'
-import { otherAttr, otherEvent } from './utils'
+import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
+import { cloneDeep } from 'lodash'
 
 export type formAttrType = {
     /**
@@ -319,7 +320,7 @@ export default class BiuForm extends Vue {
     @Watch('value', { immediate: true, deep: true })
     valueChange(newVal: objType) {
         if (JSON.stringify(newVal) !== JSON.stringify(this.customValue)) {
-            this.customValue = { ...newVal }
+            this.customValue = cloneDeep(newVal)
         }
     }
     @Watch('customValue', { immediate: true, deep: true })
@@ -334,17 +335,12 @@ export default class BiuForm extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
 
     @Emit('setValue')
     setValue() {
-        return { ...this.customValue }
+        return this.customValue
     }
 
     /**
@@ -518,7 +514,7 @@ export default class BiuForm extends Vue {
      */
     change() {
         this.isOpen = !this.isOpen
-        this.$emit('openChange')
+        // this.$emit('openChange')
     }
 
     created() {

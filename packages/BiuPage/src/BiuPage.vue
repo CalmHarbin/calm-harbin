@@ -69,6 +69,8 @@ import Operation, {
     OperationOptionType
 } from '@packages/BiuTable/src/operation.vue'
 import { formTypeType } from '@packages/BiuFormItem/src/BiuFormItem.vue'
+import { isEqualWith } from '@src/utils/util'
+import { cloneDeep } from 'lodash'
 
 type objType = {
     [x: string]: any
@@ -238,7 +240,7 @@ export default class BiuPage extends Vue {
     @Watch('value', { immediate: true, deep: true })
     valueChange(newVal: objType) {
         if (JSON.stringify(newVal) !== JSON.stringify(this.customValue)) {
-            this.customValue = { ...newVal }
+            this.customValue = cloneDeep(newVal)
         }
     }
     @Watch('customValue', { immediate: true, deep: true })
@@ -252,21 +254,11 @@ export default class BiuPage extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        ) {
-            this.listeners = { ...newVal }
-        }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 
     @Emit('setValue')

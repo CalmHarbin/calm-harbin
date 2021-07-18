@@ -10,6 +10,7 @@
 </template>
 
 <script lang="tsx">
+import { isEqualWith } from '@src/utils/util'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import {
     tableColumnType as customtableColumnType,
@@ -81,22 +82,16 @@ export default class BiuTable extends Vue {
     /**
      * 监听$attrs是否改变
      */
+    /**
+     * 监听$attrs是否改变
+     */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        )
-            this.listeners = { ...newVal }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 }
 </script>

@@ -44,6 +44,7 @@ import {
     Watch
 } from 'vue-property-decorator'
 import waves from '@src/directive/waves/index'
+import { isEqualWith } from '@src/utils/util'
 
 @Component({
     directives: { waves }
@@ -63,12 +64,7 @@ export default class BiuDialog extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
 
     @Emit()

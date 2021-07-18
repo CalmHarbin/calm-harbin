@@ -21,6 +21,7 @@ import {
 } from 'vue-property-decorator'
 import { cityPicker, countyPicker } from './area.js'
 import { Cascader } from 'element-ui'
+import { isEqualWith } from '@src/utils/util'
 
 export type areaType = 'city' | 'area'
 
@@ -66,20 +67,11 @@ export default class Area extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        )
-            this.listeners = { ...newVal }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 
     @Emit('setValue')

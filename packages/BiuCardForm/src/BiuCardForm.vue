@@ -33,6 +33,7 @@ import {
 import BiuCard from '@packages/BiuCard/src/BiuCard.vue'
 import BiuForm, { BiuformType } from '@packages/BiuForm/src/BiuForm.vue'
 import { Row, Col } from 'element-ui'
+import { cloneDeep } from 'lodash'
 
 type objType = {
     [x: string]: any
@@ -67,7 +68,7 @@ export default class BiuCardForm extends Vue {
     @Watch('form', { immediate: true, deep: true })
     formChange(newVal: objType) {
         if (JSON.stringify(newVal) !== JSON.stringify(this.customForm)) {
-            this.customForm = { ...newVal }
+            this.customForm = cloneDeep(newVal)
         }
     }
 

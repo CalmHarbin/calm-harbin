@@ -140,6 +140,7 @@ import Area from './area.vue'
 
 // 下拉框
 import BiuSelect from './BiuSelect.vue'
+import { isEqualWith } from '@src/utils/util'
 
 export type formTypeType =
     | 'text' // 显示文本
@@ -189,20 +190,11 @@ export default class BiuFormItem extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        )
-            this.listeners = { ...newVal }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 
     @Emit('setValue')

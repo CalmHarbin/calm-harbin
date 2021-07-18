@@ -52,6 +52,7 @@ import {
 } from 'vue-property-decorator'
 import BiuTable from '@/packages/BiuTable/src/BiuTable.vue'
 import Pagination from '@/packages/Pagination/src/Pagination.vue'
+import { isEqualWith } from '@src/utils/util'
 
 @Component({
     components: {
@@ -152,22 +153,16 @@ export default class BiuSelectTable extends Vue {
     /**
      * 监听$attrs是否改变
      */
+    /**
+     * 监听$attrs是否改变
+     */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        )
-            this.listeners = { ...newVal }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 
     @Emit('setValue')

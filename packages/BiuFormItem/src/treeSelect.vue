@@ -57,6 +57,7 @@ import {
     Prop
 } from 'vue-property-decorator'
 import { Select, Option, Tree, Checkbox } from 'element-ui'
+import { isEqualWith } from '@src/utils/util'
 
 type treeNodeType = {
     label: string
@@ -209,11 +210,7 @@ export default class TreeSelect extends Vue {
      */
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        )
-            this.listeners = { ...newVal }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 
     @Emit('setValue')

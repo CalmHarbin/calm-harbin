@@ -166,6 +166,7 @@ import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UTable, UTableColumn } from 'umy-ui'
+import { isEqualWith } from '@src/utils/util'
 
 Vue.use(Loading.directive)
 
@@ -345,22 +346,16 @@ export default class CustomUTable extends Vue {
     /**
      * 监听$attrs是否改变
      */
+    /**
+     * 监听$attrs是否改变
+     */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
     @Watch('$listeners', { immediate: true })
     $listenersChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-            JSON.stringify(Object.keys(this.listeners))
-        )
-            this.listeners = { ...newVal }
+        if (!isEqualWith(newVal, this.listeners)) this.listeners = { ...newVal }
     }
 
     random = 0

@@ -1,10 +1,11 @@
 <template>
     <div>
-        <!-- <BiuForm :source="source[0].list"></BiuForm> -->
+        {{ Date.now() }}
+        <BiuForm :source="source[0].list"></BiuForm>
 
         <!-- <biu-card title="标题"></biu-card> -->
 
-        <BiuTable :columns="columns" :tableData="[]"></BiuTable>
+        <!-- <BiuTable :columns="columns" :tableData="[]"></BiuTable>
 
         <BiuCardForm
             v-model="form"
@@ -23,7 +24,7 @@
                     :tableData="[{}]"
                 ></BiuTable>
             </template>
-        </BiuCardForm>
+        </BiuCardForm> -->
     </div>
 </template>
 

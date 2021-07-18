@@ -32,12 +32,12 @@ const directives = [waves]
 
 const install = function (Vue: any): void {
     directives.forEach((directive) => {
-        console.log(42, directive)
+        // console.log(42, directive)
         Vue.use(directive)
     })
 
     Object.values(components).forEach((component) => {
-        console.log(9, component.name, component)
+        // console.log(9, component.name, component)
         // 这里不要用Vue.component方式，打包后component.name会变成n
         // Vue.component(component.name, component)
         Vue.use(component)
@@ -50,7 +50,7 @@ const install = function (Vue: any): void {
     //     Vue.prototype[key] = (prototype as any)[key]
     // })
 
-    console.log(51, Vue)
+    // console.log(51, Vue)
 
     Vue.use(Loading)
     // element-ui组件

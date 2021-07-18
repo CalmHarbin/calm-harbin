@@ -23,6 +23,7 @@
 <script>
 import { scrollTo } from './scrollTo'
 import { Pagination } from 'element-ui'
+import { isEqualWith } from '@src/utils/util'
 
 export default {
     name: 'Pagination',
@@ -110,11 +111,7 @@ export default {
         ['$attrs']: {
             immediate: true,
             handler(newVal) {
-                if (
-                    JSON.stringify(Object.keys(newVal)) !==
-                    JSON.stringify(Object.keys(this.attrs))
-                )
-                    this.attrs = { ...newVal }
+                if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
             }
         }
     }

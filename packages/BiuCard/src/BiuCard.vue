@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts">
+import { isEqualWith } from '@src/utils/util'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 
 @Component
@@ -30,12 +31,7 @@ export default class BiuCard extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
 }
 </script>

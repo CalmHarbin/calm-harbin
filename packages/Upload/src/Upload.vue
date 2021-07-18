@@ -92,6 +92,7 @@ import { mapGetters } from 'vuex'
 import { post } from '@/utils/http.js'
 import { downLoadFile } from '@/api/publicselect.js'
 import { downloadBlob } from '@/utils/index'
+import { isEqualWith } from '@src/utils/util'
 
 type fileType = {
     name: string
@@ -178,14 +179,12 @@ export default class Upload extends Vue {
     /**
      * 监听$attrs是否改变
      */
+    /**
+     * 监听$attrs是否改变
+     */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        if (
-            JSON.stringify(Object.keys(newVal)) !==
-                JSON.stringify(Object.keys(this.attrs)) ||
-            JSON.stringify(newVal) !== JSON.stringify(this.attrs)
-        )
-            this.attrs = { ...newVal }
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
 
     @Emit('setValue')

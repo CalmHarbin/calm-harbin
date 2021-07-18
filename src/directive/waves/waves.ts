@@ -2,7 +2,6 @@ import './waves.css'
 
 export default {
     bind(el: any, binding: any) {
-        console.log('我没有执行???', el)
         el.addEventListener(
             'click',
             (e: any) => {

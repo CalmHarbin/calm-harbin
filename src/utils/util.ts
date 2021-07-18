@@ -1,6 +1,20 @@
+import { isEqualWith as eq } from 'lodash'
+
 type objType = {
     [x: string]: any
 }
+
+export const isEqualWith = (object: any, other: any) =>
+    eq(object, other, (objValue: any, othValue: any) => {
+        // 如果是函数默认相等
+        if (
+            typeof objValue === 'function' &&
+            typeof othValue === 'function' &&
+            objValue.name === othValue.name
+        )
+            return true
+    })
+
 /**
  * 返回剔除指定属性后的对象
  */
