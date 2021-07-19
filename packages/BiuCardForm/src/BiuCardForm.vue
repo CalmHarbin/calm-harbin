@@ -33,7 +33,7 @@ import {
 import BiuCard from '@packages/BiuCard/src/BiuCard.vue'
 import BiuForm, { BiuformType } from '@packages/BiuForm/src/BiuForm.vue'
 import { Row, Col } from 'element-ui'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 
 type objType = {
     [x: string]: any

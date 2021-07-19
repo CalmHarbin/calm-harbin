@@ -1,4 +1,4 @@
-import { isEqualWith as eq } from 'lodash'
+import eq from 'lodash/isEqualWith'
 
 type objType = {
     [x: string]: any

@@ -72,7 +72,7 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
 import { debounce, exportExcel } from './utils'
 
 export default {
-    version: '0.0.1',
+    version: '0.0.5',
     install,
     BiuDialog,
     FileInput,

@@ -1,3 +1,5 @@
 declare module 'umy-ui'
 declare module '*.js'
-declare module 'lodash'
+declare module 'lodash/cloneDeep'
+declare module 'lodash/merge'
+declare module 'lodash/isEqualWith'

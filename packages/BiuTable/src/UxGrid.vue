@@ -364,7 +364,7 @@ import BiuFormItem from '@packages/BiuFormItem/src/BiuFormItem.vue'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UxGrid, UxTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 
 Vue.use(Loading.directive)
 

@@ -70,7 +70,7 @@ import Operation, {
 } from '@packages/BiuTable/src/operation.vue'
 import { formTypeType } from '@packages/BiuFormItem/src/BiuFormItem.vue'
 import { isEqualWith } from '@src/utils/util'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 
 type objType = {
     [x: string]: any

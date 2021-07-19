@@ -1,85 +1,85 @@
 {
-  "name": "calm-harbin",
-  "version": "0.1.4-pre",
-  "description": "常用组件及方法",
-  "main": "lib/calmHarbin.umd.min.js",
-  "typings": "types/index.d.ts",
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx,.vue src test packages types",
-    "lib": "npm run lib:calmHarbin & npm run lib:BiuDialog & npm run lib:FileInput & npm run lib:BiuCardForm & npm run lib:BiuCard & npm run lib:BiuTable & npm run lib:BiuPage & npm run lib:BiuForm & npm run lib:BiuFormItem",
-    "lib:calmHarbin": "vue-cli-service build --report --dest lib --target lib --name calmHarbin src/index.ts",
-    "lib:BiuDialog": "vue-cli-service build --no-clean --dest lib --target lib --name BiuDialog ./packages/BiuDialog/index.ts",
-    "lib:FileInput": "vue-cli-service build --no-clean --dest lib --target lib --name FileInput ./packages/FileInput/index.ts",
-    "lib:BiuCardForm": "vue-cli-service build --no-clean --dest lib --target lib --name BiuCardForm ./packages/BiuCardForm/index.ts",
-    "lib:BiuCard": "vue-cli-service build --no-clean --dest lib --target lib --name BiuCard ./packages/BiuCard/index.ts",
-    "lib:BiuTable": "vue-cli-service build --no-clean --dest lib --target lib --name BiuTable ./packages/BiuTable/index.ts",
-    "lib:BiuPage": "vue-cli-service build --no-clean --dest lib --target lib --name BiuPage ./packages/BiuPage/index.ts",
-    "lib:BiuForm": "vue-cli-service build --no-clean --dest lib --target lib --name BiuForm ./packages/BiuForm/index.ts",
-    "lib:BiuFormItem": "vue-cli-service build --no-clean --dest lib --target lib --name BiuFormItem ./packages/BiuFormItem/index.ts"
-  },
-  "keywords": [
-    "常用组件",
-    "vue"
-  ],
-  "files": [
-    "lib",
-    "src",
-    "packages",
-    "types"
-  ],
-  "author": "zhanghuan",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:CalmHarbin/calm-harbin.git"
-  },
-  "peerDependencies": {
-    "vue": "2.x"
-  },
-  "dependencies": {
-    "core-js": "^3.6.5",
-    "dayjs": "^1.10.6",
-    "element-ui": "^2.15.3",
-    "lodash": "^4.17.21",
-    "screenfull": "^5.1.0",
-    "umy-ui": "^1.1.6",
-    "vue": "^2.6.11",
-    "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^9.1.2",
-    "xlsx": "^0.17.0"
-  },
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-typescript": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/eslint-config-typescript": "^7.0.0",
-    "babel-plugin-component": "^1.1.1",
-    "babel-plugin-lodash": "^3.3.4",
-    "cross-env": "^7.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-vue": "^6.2.2",
-    "lint-staged": "^9.5.0",
-    "lodash-webpack-plugin": "^0.11.6",
-    "prettier": "^2.2.1",
-    "sass": "^1.26.5",
-    "sass-loader": "^8.0.2",
-    "typescript": "~4.1.5",
-    "vue-template-compiler": "^2.6.11"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,vue,ts,tsx}": [
-      "vue-cli-service lint",
-      "git add"
-    ]
-  }
+    "name": "calm-harbin",
+    "version": "0.1.5-pre",
+    "description": "常用组件及方法",
+    "main": "lib/calmHarbin.umd.min.js",
+    "typings": "types/index.d.ts",
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "eslint --fix --ext .js,.jsx,.ts,.tsx,.vue src test packages types",
+        "lib": "npm run lib:calmHarbin & npm run lib:BiuDialog & npm run lib:FileInput & npm run lib:BiuCardForm & npm run lib:BiuCard & npm run lib:BiuTable & npm run lib:BiuPage & npm run lib:BiuForm & npm run lib:BiuFormItem",
+        "lib:calmHarbin": "vue-cli-service build --report --dest lib --target lib --name calmHarbin src/index.ts",
+        "lib:BiuDialog": "vue-cli-service build --no-clean --dest lib --target lib --name BiuDialog ./packages/BiuDialog/index.ts",
+        "lib:FileInput": "vue-cli-service build --no-clean --dest lib --target lib --name FileInput ./packages/FileInput/index.ts",
+        "lib:BiuCardForm": "vue-cli-service build --no-clean --dest lib --target lib --name BiuCardForm ./packages/BiuCardForm/index.ts",
+        "lib:BiuCard": "vue-cli-service build --no-clean --dest lib --target lib --name BiuCard ./packages/BiuCard/index.ts",
+        "lib:BiuTable": "vue-cli-service build --no-clean --dest lib --target lib --name BiuTable ./packages/BiuTable/index.ts",
+        "lib:BiuPage": "vue-cli-service build --no-clean --dest lib --target lib --name BiuPage ./packages/BiuPage/index.ts",
+        "lib:BiuForm": "vue-cli-service build --no-clean --dest lib --target lib --name BiuForm ./packages/BiuForm/index.ts",
+        "lib:BiuFormItem": "vue-cli-service build --no-clean --dest lib --target lib --name BiuFormItem ./packages/BiuFormItem/index.ts"
+    },
+    "keywords": [
+        "常用组件",
+        "vue"
+    ],
+    "files": [
+        "lib",
+        "src",
+        "packages",
+        "types"
+    ],
+    "author": "zhanghuan",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "git@github.com:CalmHarbin/calm-harbin.git"
+    },
+    "peerDependencies": {
+        "vue": "2.x"
+    },
+    "dependencies": {
+        "core-js": "^3.6.5",
+        "dayjs": "^1.10.6",
+        "element-ui": "^2.15.3",
+        "lodash": "^4.17.21",
+        "screenfull": "^5.1.0",
+        "umy-ui": "^1.1.6",
+        "vue": "^2.6.11",
+        "vue-class-component": "^7.2.3",
+        "vue-property-decorator": "^9.1.2",
+        "xlsx": "^0.17.0"
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.18.0",
+        "@typescript-eslint/parser": "^4.18.0",
+        "@vue/cli-plugin-babel": "~4.5.0",
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-plugin-typescript": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/eslint-config-prettier": "^6.0.0",
+        "@vue/eslint-config-typescript": "^7.0.0",
+        "babel-plugin-component": "^1.1.1",
+        "babel-plugin-lodash": "^3.3.4",
+        "cross-env": "^7.0.3",
+        "eslint": "^6.7.2",
+        "eslint-plugin-prettier": "^3.3.1",
+        "eslint-plugin-vue": "^6.2.2",
+        "lint-staged": "^9.5.0",
+        "lodash-webpack-plugin": "^0.11.6",
+        "prettier": "^2.2.1",
+        "sass": "^1.26.5",
+        "sass-loader": "^8.0.2",
+        "typescript": "~4.1.5",
+        "vue-template-compiler": "^2.6.11"
+    },
+    "gitHooks": {
+        "pre-commit": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{js,jsx,vue,ts,tsx}": [
+            "vue-cli-service lint",
+            "git add"
+        ]
+    }
 }

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
+// const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 module.exports = {
     publicPath: './',
@@ -18,13 +18,16 @@ module.exports = {
         output: {
             libraryExport: 'default',
             libraryTarget: 'umd'
-        }
-        // externals: {
-        //     xlsx: 'XLSX',
-        //     'element-ui': 'Element',
-        //     'umy-ui': 'UmyUi',
-        //     dayjs: 'dayjs'
-        // }
+        },
+        externals:
+            process.env.NODE_ENV === 'production'
+                ? {
+                      xlsx: 'xlsx',
+                      'element-ui': 'element-ui',
+                      'umy-ui': 'umy-ui',
+                      dayjs: 'dayjs'
+                  }
+                : undefined
     },
     chainWebpack: (config) => {
         config.resolve.alias.set(
@@ -35,25 +38,25 @@ module.exports = {
         config.resolve.alias.set('@types', path.resolve(__dirname, './types'))
         config.resolve.alias.set('@src', path.resolve(__dirname, './src'))
 
-        /** lodash按需加载 */
+        /** lodash按需加载, 有问题,不用了 */
         // 依赖包 lodash-webpack-plugin babel-plugin-lodash
-        config.plugin('lodash').use(LodashModuleReplacementPlugin)
+        // config.plugin('loadshReplace').use(new LodashModuleReplacementPlugin())
 
-        config.module
-            .rule('ts')
-            .use('babel-loader')
-            .tap((options) => ({
-                ...options,
-                plugins: ['lodash']
-            }))
+        // config.module
+        //     .rule('ts')
+        //     .use('babel-loader')
+        //     .tap((options) => ({
+        //         ...options,
+        //         plugins: ['lodash']
+        //     }))
 
-        config.module
-            .rule('js')
-            .use('babel-loader')
-            .tap((options) => ({
-                ...options,
-                plugins: ['lodash']
-            }))
+        // config.module
+        //     .rule('js')
+        //     .use('babel-loader')
+        //     .tap((options) => ({
+        //         ...options,
+        //         plugins: ['lodash']
+        //     }))
         /** lodash按需加载 */
     }
 }

@@ -144,7 +144,7 @@ import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
 import waves from '@src/directive/waves/index'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
-import { cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
 
 export type formAttrType = {
     /**

@@ -1,4 +1,5 @@
-import { merge, cloneDeep } from 'lodash'
+import cloneDeep from 'lodash/cloneDeep'
+import merge from 'lodash/merge'
 
 export default {
     // 针对表格控件,修改列
