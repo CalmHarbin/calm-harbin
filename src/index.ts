@@ -1,6 +1,8 @@
 import { Loading } from 'element-ui'
 
-console.log(3, Loading)
+// 将elementui和umyUi的样式打包进来，使用该包的时候就不用再引入了
+import 'element-ui/lib/theme-chalk/index.css'
+import 'umy-ui/lib/theme-chalk/index.css'
 // 引入覆盖elementUi的一些自定义样式
 import './styles/elementUi.scss'
 
