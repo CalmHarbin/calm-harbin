@@ -291,6 +291,6 @@ export default class BiuPage extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import './index.scss';
 </style>

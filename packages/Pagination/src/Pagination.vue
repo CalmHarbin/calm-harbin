@@ -118,6 +118,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import './index.scss';
 </style>

@@ -133,6 +133,6 @@ export default class ImportExcel extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import './index.scss';
 </style>

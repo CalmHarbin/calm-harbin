@@ -36,6 +36,6 @@ export default class BiuCard extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import './index.scss';
 </style>

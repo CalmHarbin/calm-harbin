@@ -279,6 +279,6 @@ export default class BiuFormItem extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import './index.scss';
 </style>

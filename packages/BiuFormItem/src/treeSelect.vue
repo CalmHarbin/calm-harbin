@@ -436,6 +436,6 @@ export default class TreeSelect extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
 @import './index.scss';
 </style>
