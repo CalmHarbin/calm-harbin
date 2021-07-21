@@ -95,7 +95,7 @@
                     <!-- 可编辑的单元格 -->
                     <template v-else-if="col.editable">
                         <el-input
-                            class="editableInput"
+                            class="calm-editableInput"
                             type="text"
                             v-model="scope.row[col.id]"
                             size="mini"
@@ -437,9 +437,6 @@ export default class CustomUTable extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.editableInput {
-    width: 100%;
-    line-height: 1.5em;
-}
+<style>
+@import './index.scss';
 </style>

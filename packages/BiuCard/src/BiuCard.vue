@@ -1,6 +1,6 @@
 <template>
-    <div :class="border ? 'BiuCard border' : 'BiuCard'" v-bind="attrs">
-        <div class="title" v-if="title">
+    <div :class="['calm-BiuCard', border ? 'border' : '']" v-bind="attrs">
+        <div class="calm-BiuCard-title" v-if="title">
             <slot name="title">
                 {{ title }}
             </slot>
@@ -36,12 +36,6 @@ export default class BiuCard extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.title {
-    font-weight: bold;
-    font-size: 15px;
-}
-.BiuCard.border {
-    border-bottom: 1px solid #eee;
-}
+<style>
+@import './index.scss';
 </style>

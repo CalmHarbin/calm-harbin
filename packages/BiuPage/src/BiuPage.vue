@@ -1,5 +1,5 @@
 <template>
-    <div class="BiuPageContainer">
+    <div class="calm-BiuPageContainer">
         <BiuForm
             v-if="source.length"
             v-model="customValue"
@@ -291,10 +291,6 @@ export default class BiuPage extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.BiuPageContainer {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
+<style>
+@import './index.scss';
 </style>

@@ -1,0 +1,31 @@
+.calm-opear-container {
+    padding-bottom: 10px;
+    line-height: 0;
+}
+
+.calm-editableInput {
+    width: 100%;
+    line-height: 1.5em;
+}
+
+.calm-BiuTable-operation {
+    color: #409eff;
+    font-size: 24px;
+    i {
+        margin: 0 3px;
+        cursor: pointer;
+    }
+}
+
+.calm-BiuTable-tableOperate {
+    color: #409eff;
+    font-size: 17px;
+    i {
+        margin: 0 7px;
+        cursor: pointer;
+    }
+}
+
+.calm-BiuTable-required {
+    color: #f56c6c;
+}

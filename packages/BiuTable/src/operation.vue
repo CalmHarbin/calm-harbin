@@ -1,5 +1,5 @@
 <template>
-    <div ref="opearContainer" class="opear-container">
+    <div ref="opearContainer" class="calm-opear-container">
         <template v-for="(btn, index) in operationOptions">
             <template v-if="!btn.hidden">
                 <Render
@@ -87,9 +87,6 @@ export default class Operation extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.opear-container {
-    padding-bottom: 10px;
-    line-height: 0;
-}
+<style>
+@import './index.scss';
 </style>

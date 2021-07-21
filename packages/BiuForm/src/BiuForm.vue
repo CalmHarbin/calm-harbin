@@ -1,5 +1,5 @@
 <template>
-    <div ref="formBox" class="BiuForm">
+    <div ref="formBox" class="calm-BiuForm">
         <el-form
             :class="customDirection"
             ref="form"
@@ -19,7 +19,7 @@
                 :gutter="10"
                 v-for="(sourceGroup, index) in formList"
                 :key="index"
-                :class="index !== 0 ? 'gutter' : ''"
+                :class="index !== 0 ? 'calm-gutter' : ''"
             >
                 <el-col
                     :span="formItem.span || 6"
@@ -67,9 +67,9 @@
                                 !isOpen) ||
                             (index === row - 1 && !isOpen)
                         "
-                        :class="rightFloat ? 'rightFloat' : ''"
+                        :class="rightFloat ? 'calm-rightFloat' : ''"
                     >
-                        <div class="operation">
+                        <div class="calm-operation">
                             <el-button
                                 v-waves
                                 type="primary"
@@ -94,11 +94,11 @@
                     <!-- 展开后的 -->
                     <el-col
                         style="float: right"
-                        :class="buttonIndependent ? 'gutter' : ''"
+                        :class="buttonIndependent ? 'calm-gutter' : ''"
                         :span="6 * proportion"
                         v-if="index === sourceList.length - 1 && isOpen"
                     >
-                        <div class="operation">
+                        <div class="calm-operation">
                             <el-button
                                 v-waves
                                 type="primary"
@@ -591,79 +591,6 @@ export default class BiuForm extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.horizontal ::v-deep {
-    .el-form-item--mini.el-form-item,
-    .el-form-item--small.el-form-item {
-        display: flex;
-        margin-bottom: 0;
-    }
-    .el-form-item__content {
-        flex: 1;
-        width: 1px;
-        margin-left: 0 !important;
-        // overflow: hidden;
-        // white-space: nowrap;
-        // text-overflow: ellipsis;
-    }
-}
-.vertical ::v-deep {
-    .el-form-item--mini.el-form-item,
-    .el-form-item--small.el-form-item {
-        margin-bottom: 8px;
-    }
-}
-::v-deep {
-    .el-form {
-        padding: 10px;
-    }
-    .el-form-item__label {
-        min-width: 68px;
-
-        /** 固定label宽度则改这里 */
-        // width: 100px;
-        max-width: 124px; // 最多6个字
-        overflow: hidden;
-        font-weight: 400;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-    .rightFloat {
-        float: right;
-        margin-top: 10px;
-    }
-}
-
-.operation {
-    display: flex;
-    align-items: center;
-    color: #1890ff;
-    font-size: 14px;
-}
-.operation > div {
-    flex: 1;
-    padding-left: 10px;
-    text-align: left;
-    cursor: pointer;
-}
-.gutter {
-    margin-top: 10px;
-}
-.el-dialog .vertical ::v-deep .el-form {
-    padding: 18px 0;
-}
-
-/** 栅格 */
-.el-col.el-col-4\.8 {
-    width: 20%;
-}
-.el-col.el-col-9\.6 {
-    width: 40%;
-}
-.el-col.el-col-14\.4 {
-    width: 60%;
-}
-.el-col.el-col-19\.2 {
-    width: 80%;
-}
+<style>
+@import './index.scss';
 </style>

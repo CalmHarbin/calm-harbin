@@ -1,13 +1,15 @@
 <template>
-    <el-cascader
-        v-model="customValue"
-        :options="options"
-        clearable
-        filterable
-        @change="handleChange"
-        v-bind="attrs"
-        v-on="listeners"
-    ></el-cascader>
+    <div class="calm-area">
+        <el-cascader
+            v-model="customValue"
+            :options="options"
+            clearable
+            filterable
+            @change="handleChange"
+            v-bind="attrs"
+            v-on="listeners"
+        ></el-cascader>
+    </div>
 </template>
 
 <script lang="ts">
@@ -86,11 +88,6 @@ export default class Area extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.el-cascader {
-    display: block;
-    &.el-cascader--mini ::v-deep .el-input--mini .el-input__inner {
-        height: 28px !important;
-    }
-}
+<style>
+@import './index.scss';
 </style>

@@ -9,7 +9,7 @@
         :disabled="disabled"
         :filter-method="search"
         :automatic-dropdown="true"
-        popper-class="biuSelectContainer"
+        popper-class="calm-biuSelectContainer"
         @blur="close"
         @clear="clear"
         @visible-change="visibleChange"
@@ -245,26 +245,6 @@ export default class BiuSelectTable extends Vue {
 }
 </script>
 
-<style lang="scss">
-.biuSelectContainer {
-    width: 600px !important;
-    .el-select-dropdown__item {
-        height: auto;
-        padding: 0;
-    }
-    .el-select-dropdown__item.hover,
-    .el-select-dropdown__item:hover {
-        background-color: #fff;
-    }
-    .el-scrollbar {
-        height: 300px;
-    }
-    .el-scrollbar__wrap {
-        height: auto;
-        max-height: none;
-        margin-right: 0 !important;
-        margin-bottom: 0 !important;
-        overflow: auto;
-    }
-}
+<style>
+@import './index.scss';
 </style>

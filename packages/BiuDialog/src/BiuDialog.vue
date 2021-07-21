@@ -6,7 +6,7 @@
         top="10vh"
         :close-on-click-modal="false"
         width="500px"
-        custom-class="dialog"
+        custom-class="calm-BiuDialog"
         v-bind="attrs"
     >
         <slot></slot>
@@ -74,16 +74,6 @@ export default class BiuDialog extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-::v-deep .dialog {
-    .el-dialog__header {
-        padding: 15px 20px 10px;
-    }
-    .el-dialog__body {
-        padding: 0 20px;
-    }
-    .el-dialog__footer {
-        padding: 10px 20px 15px;
-    }
-}
+<style>
+@import './index.scss';
 </style>

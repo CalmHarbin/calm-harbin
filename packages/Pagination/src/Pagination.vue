@@ -2,7 +2,7 @@
     <div
         ref="pagination"
         :class="{ hidden: hidden }"
-        class="pagination-container"
+        class="calm-pagination-container"
     >
         <el-pagination
             :background="background"
@@ -118,13 +118,6 @@ export default {
 }
 </script>
 
-<style scoped>
-.pagination-container {
-    padding: 3px;
-    text-align: right;
-    background: #fff;
-}
-.pagination-container.hidden {
-    display: none;
-}
+<style>
+@import './index.scss';
 </style>

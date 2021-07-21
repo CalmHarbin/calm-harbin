@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="calm-BiuFormItem">
         <template v-if="formType === 'text'">
             {{ formValue }}
         </template>
@@ -279,27 +279,6 @@ export default class BiuFormItem extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-::v-deep {
-    .el-select {
-        display: block;
-    }
-    .el-input {
-        /** 解决 input相对于div实际有点向下偏移，
-         * 导致.el-form-item__content设置了ovefflow后输入框的下边框看不到了
-         */
-        display: flex;
-        width: 100%;
-    }
-    .el-date-editor--daterange.el-input,
-    .el-date-editor--daterange.el-input__inner,
-    .el-date-editor--timerange.el-input,
-    .el-date-editor--timerange.el-input__inner,
-    .el-range-editor.el-input__inner,
-    .el-date-editor.el-input,
-    .el-date-editor.el-input__inner .el-input .el-input__inner,
-    .el-textarea .el-textarea__inner {
-        width: 100%;
-    }
-}
+<style>
+@import './index.scss';
 </style>

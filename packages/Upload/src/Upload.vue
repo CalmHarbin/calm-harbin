@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="calm-Upload">
         <el-upload
             :action="uploadUrl"
             :list-type="ListType"
@@ -69,10 +69,10 @@
                 v-img="fileList[index].url"
                 alt=""
             />
-            <div class="Prevbtn" @click="prev">
+            <div class="calm-Prevbtn" @click="prev">
                 <i class="el-icon-arrow-left"></i>
             </div>
-            <div class="Nextbtn" @click="next">
+            <div class="calm-Nextbtn" @click="next">
                 <i class="el-icon-arrow-right"></i>
             </div>
         </el-dialog>
@@ -322,48 +322,6 @@ export default class Upload extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.btn {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    color: #ffffff7d;
-    font-size: 30px;
-    cursor: pointer;
-}
-.Prevbtn {
-    @extend .btn;
-
-    left: 0;
-    background-image: linear-gradient(90deg, #00000059 0%, #00000038 100%);
-}
-.Nextbtn {
-    @extend .btn;
-
-    right: 0;
-    background-image: linear-gradient(90deg, #00000059 100%, #00000038 0%);
-}
-.el-upload-list__item-thumbnail {
-    width: 110px;
-    height: 110px;
-    object-fit: cover;
-}
-::v-deep {
-    .el-upload-list--picture-card .el-upload-list__item {
-        width: 110px;
-        height: 110px;
-    }
-    .el-upload--picture-card {
-        width: 110px;
-        height: 110px;
-        line-height: 110px;
-    }
-}
-.hidden ::v-deep .el-upload {
-    display: none;
-}
+<style>
+@import './index.scss';
 </style>

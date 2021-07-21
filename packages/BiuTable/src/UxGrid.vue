@@ -76,7 +76,7 @@
                 <div
                     v-if="!$refs.table.isActiveByRow(row)"
                     style="display: inline"
-                    class="operation"
+                    class="calm-BiuTable-operation"
                 >
                     <i
                         class="el-icon-circle-plus"
@@ -114,7 +114,7 @@
                     ></i>
                     <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
                     <span
-                        :class="col.required ? 'required' : ''"
+                        :class="col.required ? 'calm-BiuTable-required' : ''"
                         :title="col.label"
                         >{{ col.label }}</span
                     >
@@ -175,7 +175,7 @@
                             ></Render>
                             <el-input
                                 v-else
-                                class="editableInput"
+                                class="calm-editableInput"
                                 type="text"
                                 v-model="row[col.id]"
                                 size="mini"
@@ -230,7 +230,7 @@
                 <!-- 表头 -->
                 <template v-slot:header>
                     <span
-                        :class="col.required ? 'required' : ''"
+                        :class="col.required ? 'calm-BiuTable-required' : ''"
                         :title="col.label"
                         >{{ col.label }}</span
                     >
@@ -254,7 +254,7 @@
                         ></Render>
                         <el-input
                             v-else
-                            class="editableInput"
+                            class="calm-editableInput"
                             type="text"
                             v-model="row[col.id]"
                             size="mini"
@@ -305,7 +305,7 @@
         >
             <div
                 slot-scope="scope"
-                class="tableOperate"
+                class="calm-BiuTable-tableOperate"
                 v-if="
                     !showSummary || scope.seq - 1 !== customTableData.length - 1
                 "
@@ -591,6 +591,7 @@ export default class CoutomUxGrid extends Vue {
     // 数据改变时表格重绘，避免表格错乱
     @Watch('tableData')
     tableDataChange(newVal: any[]) {
+        console.log('tableData改变', newVal)
         if (JSON.stringify(newVal) !== JSON.stringify(this.customTableData)) {
             // 表格填充数据
             ;(this.$refs.table as any).reloadData(newVal)
@@ -794,28 +795,6 @@ export default class CoutomUxGrid extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.editableInput {
-    width: 100%;
-    line-height: 1.5em;
-}
-.operation {
-    color: #409eff;
-    font-size: 24px;
-    i {
-        margin: 0 3px;
-        cursor: pointer;
-    }
-}
-.tableOperate {
-    color: #409eff;
-    font-size: 17px;
-    i {
-        margin: 0 7px;
-        cursor: pointer;
-    }
-}
-.required {
-    color: #f56c6c;
-}
+<style>
+@import './index.scss';
 </style>

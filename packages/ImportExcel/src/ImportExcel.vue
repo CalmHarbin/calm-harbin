@@ -3,6 +3,7 @@
         ref="biuDrawer"
         :visible.sync="visibleSync"
         :title="`批量导入${title}`"
+        class="calm-ImportExcel"
     >
         <Operation :loading="loading" :operationOptions="footer" />
         <BiuCard title="待保存信息">
@@ -132,13 +133,6 @@ export default class ImportExcel extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.el-drawer__wrapper ::v-deep {
-    .el-drawer__body {
-        padding: 10px 0;
-    }
-    .BiuCard .title {
-        margin-bottom: 10px;
-    }
-}
+<style>
+@import './index.scss';
 </style>

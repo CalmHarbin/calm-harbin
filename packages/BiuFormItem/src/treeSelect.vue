@@ -1,5 +1,5 @@
 <template>
-    <div class="treeSelect" :class="subWith ? 'subWith' : ''">
+    <div class="calm-treeSelect" :class="subWith ? 'subWith' : ''">
         <!-- 这里多选用单选去显示，不然选多了会换行 -->
         <el-select
             ref="select"
@@ -12,7 +12,7 @@
             :multiple="false"
             :disabled="disabled"
             :filter-method="search"
-            popper-class="treeSelectContainer"
+            popper-class="calm-treeSelectContainer"
             @blur="close"
             @clear="clear"
             @remove-tag="removeTag"
@@ -436,61 +436,6 @@ export default class TreeSelect extends Vue {
 }
 </script>
 
-<style lang="scss">
-.treeSelectContainer {
-    min-width: 250px !important;
-    height: 270px;
-    overflow: hidden;
-    .el-select-dropdown__item {
-        height: auto;
-    }
-    .el-select-dropdown__item.hover,
-    .el-select-dropdown__item:hover {
-        background-color: #fff;
-    }
-    .el-scrollbar {
-        height: 100%;
-    }
-    .el-scrollbar__wrap {
-        height: 100%;
-        overflow: auto;
-    }
-}
-</style>
-<style lang="scss" scoped>
-.treeSelect ::v-deep {
-    display: flex;
-    align-items: center;
-    .el-checkbox__label,
-    .el-checkbox {
-        padding-left: 5px;
-    }
-    .el-select {
-        flex: 1;
-    }
-    .el-select__input {
-        display: none;
-    }
-    // .el-select .el-select__tags > span {
-    //     display: flex;
-    //     overflow: auto;
-
-    //     /* 滚动条样式 */
-    //     &::-webkit-scrollbar {
-    //         // width: 4px;
-
-    //         height: 4px;
-    //     }
-    //     &::-webkit-scrollbar-thumb {
-    //         background: rgba(0, 0, 0, 0.2);
-    //         border-radius: 10px;
-    //         box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    //     }
-    //     &::-webkit-scrollbar-track {
-    //         background: rgba(0, 0, 0, 0.1);
-    //         border-radius: 0;
-    //         box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
-    //     }
-    // }
-}
+<style>
+@import './index.scss';
 </style>

@@ -1,5 +1,6 @@
 <template>
     <el-drawer
+        class="calm-BiuDrawer"
         :title="title"
         :visible.sync="visibleSync"
         direction="rtl"
@@ -9,10 +10,10 @@
         @opened="opened"
         @closed="closed"
     >
-        <div class="body" v-if="customVisible">
+        <div class="calm-BiuDrawer-body" v-if="customVisible">
             <slot></slot>
         </div>
-        <div class="footer" v-if="footer">
+        <div class="calm-BiuDrawer-footer" v-if="footer">
             <slot name="footer">
                 <Operation
                     v-if="operationShow"
@@ -76,44 +77,6 @@ export default class BiuDrawer extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-::v-deep {
-    .el-drawer__header {
-        height: 46px;
-        margin: 0;
-        padding: 0 10px 0 20px;
-        color: #333;
-        font-size: 16px;
-        font-weight: bold;
-        line-height: 46px;
-        border-bottom: 1px solid #eee;
-        * {
-            outline: none;
-        }
-    }
-    .el-drawer__body {
-        display: flex;
-        flex: initial;
-        flex-direction: column;
-        height: calc(100vh - 46px);
-    }
-}
-.body {
-    flex: 1;
-    padding: 0 20px;
-    overflow: auto;
-}
-.footer {
-    display: flex;
-    align-items: center;
-    height: 44px;
-    padding: 0 20px;
-    border-top: 1px solid #eee;
-    .opear-container {
-        padding-bottom: 0;
-    }
-    .opear-container + .el-button {
-        margin-left: 10px;
-    }
-}
+<style>
+@import './index.scss';
 </style>

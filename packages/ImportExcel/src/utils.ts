@@ -1,4 +1,5 @@
 import XLSX from 'xlsx'
+import trim from 'lodash/trim'
 
 /**
  * 导出Excel模板(只有头部，没有数据)

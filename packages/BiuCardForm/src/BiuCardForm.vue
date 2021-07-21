@@ -1,5 +1,5 @@
 <template>
-    <el-row :gutter="10">
+    <el-row class="calm-BiuCardForm" :gutter="10">
         <el-col
             :span="group.span || 24"
             v-for="(group, index) in customSource"
@@ -110,8 +110,6 @@ export default class BiuCardForm extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-::v-deep .gutter {
-    margin-top: 15px;
-}
+<style>
+@import './index.scss';
 </style>
