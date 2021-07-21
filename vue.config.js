@@ -19,12 +19,29 @@ module.exports = {
             libraryExport: 'default',
             libraryTarget: 'umd'
         },
+        // 外部扩展不打包
         externals:
             process.env.NODE_ENV === 'production'
                 ? {
-                      xlsx: 'xlsx',
-                      'element-ui': 'element-ui',
-                      'umy-ui': 'umy-ui',
+                      xlsx: {
+                          commonjs: 'xlsx',
+                          amd: 'xlsx',
+                          commonjs2: 'xlsx',
+                          // 这里当使用script模式引入是，该模块指向的全局变量
+                          root: 'XLSX'
+                      },
+                      'element-ui': {
+                          commonjs: 'element-ui',
+                          amd: 'element-ui',
+                          commonjs2: 'element-ui',
+                          root: 'ELEMENT'
+                      },
+                      'umy-ui': {
+                          commonjs: 'umy-ui',
+                          amd: 'umy-ui',
+                          commonjs2: 'umy-ui',
+                          root: 'UMYUI'
+                      },
                       dayjs: 'dayjs'
                   }
                 : undefined
