@@ -21,7 +21,6 @@
                 v-model="customValue"
                 :tbHeight="tbHeight || height"
                 :columns="tableColumns"
-                showHeaderFilter
                 v-bind="attrs"
                 v-on="listeners"
             >
@@ -164,7 +163,7 @@ export default class BiuPage extends Vue {
      */
     private attrs = {}
     private listeners = {}
-    $store: any
+
     /**
      * 表单项
      */
@@ -239,15 +238,12 @@ export default class BiuPage extends Vue {
 
     @Watch('value', { immediate: true, deep: true })
     valueChange(newVal: objType) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.customValue)) {
+        if (!isEqualWith(newVal, this.customValue))
             this.customValue = cloneDeep(newVal)
-        }
     }
     @Watch('customValue', { immediate: true, deep: true })
     customValueChange(newVal: objType) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.value)) {
-            this.setValue()
-        }
+        if (!isEqualWith(newVal, this.value)) this.setValue()
     }
     /**
      * 监听$attrs是否改变
@@ -283,8 +279,6 @@ export default class BiuPage extends Vue {
             height -= (this.$refs.Pagination as any).$refs.pagination
                 .offsetHeight
         }
-
-        console.log(297, height)
 
         this.height = height
     }

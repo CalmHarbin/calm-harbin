@@ -8,6 +8,7 @@ import './styles/elementUi.scss'
 
 // 引入组件
 import BiuDialog from '../packages/BiuDialog/index'
+import BiuDrawer from '../packages/BiuDrawer/index'
 import FileInput from '../packages/FileInput/index'
 import BiuCardForm from '../packages/BiuCardForm/index'
 import BiuCard from '../packages/BiuCard/index'
@@ -19,8 +20,12 @@ import BiuFormItem from '../packages/BiuFormItem/index'
 // 引入指令
 import waves from './directive/waves/index'
 
+// 引入工具方法
+import { debounce, exportExcel } from './utils'
+
 const components = {
     BiuDialog,
+    BiuDrawer,
     FileInput,
     BiuCardForm,
     BiuCard,
@@ -69,14 +74,11 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
     install((window as any).Vue)
 }
 
-// export { BiuDialog, FileInput, BiuCardForm, BiuCard, BiuTable }
-
-import { debounce, exportExcel } from './utils'
-
 export default {
     version: '0.0.5',
     install,
     BiuDialog,
+    BiuDrawer,
     FileInput,
     BiuCardForm,
     BiuCard,

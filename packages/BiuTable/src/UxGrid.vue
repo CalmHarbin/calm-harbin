@@ -443,7 +443,7 @@ export default class CoutomUxGrid extends Vue {
      */
     private attrs: any = {}
     private listeners = {}
-    $store: any
+
     // 计算属性
     get height() {
         return this.tbHeight
@@ -462,6 +462,43 @@ export default class CoutomUxGrid extends Vue {
                         otherEvent: otherEvent(item.formAttr)
                     }
                 }
+
+                // 添加事件，文本框回车搜索，其他类型改变搜索
+                if (item.formType === 'input') {
+                    cur.formAttr.otherEvent.clear = (e: any) => {
+                        // 先执行传入的事件
+                        item?.formAttr?.clear && item.formAttr.clear(e)
+
+                        setTimeout(() => {
+                            // 触发搜索
+                            this.$emit('search')
+                        }, 0)
+                    }
+                    cur.formAttr.otherEvent.enter = () => {
+                        setTimeout(() => {
+                            // 触发搜索
+                            this.$emit('search')
+                        }, 0)
+                    }
+                } else if (
+                    item.formType === 'select' ||
+                    item.formType === 'dicSelect' ||
+                    item.formType === 'date' ||
+                    item.formType === 'timeSelect' ||
+                    item.formType === 'area'
+                ) {
+                    cur.formAttr.otherEvent.change = (e: any) => {
+                        // 先执行传入的事件
+                        item?.formAttr?.onchange && item.formAttr.onchange(e)
+
+                        setTimeout(() => {
+                            // 触发搜索
+                            this.$emit('search')
+                        }, 0)
+                    }
+                }
+
+                // 显示格式化
                 if (item.timeFormat && !cur.render) {
                     // 时间格式化
                     cur.width = cur.width || 140 // 时间增加默认宽度
@@ -475,7 +512,8 @@ export default class CoutomUxGrid extends Vue {
                         )
                     }
                 } else if (
-                    item.formType === 'select' &&
+                    (item.formType === 'select' ||
+                        item.formType === 'dicSelect') &&
                     item?.formAttr?.options &&
                     !item.render
                 ) {
@@ -591,8 +629,7 @@ export default class CoutomUxGrid extends Vue {
     // 数据改变时表格重绘，避免表格错乱
     @Watch('tableData')
     tableDataChange(newVal: any[]) {
-        console.log('tableData改变', newVal)
-        if (JSON.stringify(newVal) !== JSON.stringify(this.customTableData)) {
+        if (!isEqualWith(newVal, this.customTableData)) {
             // 表格填充数据
             ;(this.$refs.table as any).reloadData(newVal)
             this.customTableData = [...newVal]
@@ -619,15 +656,14 @@ export default class CoutomUxGrid extends Vue {
     }
     @Watch('value', { immediate: true, deep: true })
     valueChange(newVal: any) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.customValue)) {
-            console.log(466, newVal)
+        if (!isEqualWith(newVal, this.customValue)) {
             this.customValue = cloneDeep(newVal)
         }
     }
 
     @Watch('customValue', { immediate: true, deep: true })
     customValueChange(newVal: any) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.value)) {
+        if (!isEqualWith(newVal, this.value)) {
             this.setValue()
         }
     }

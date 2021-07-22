@@ -12,6 +12,7 @@
                         v-bind="attrs"
                         v-on="listeners"
                         class="elInput"
+                        @keypress.native.enter="() => $emit('enter')"
                         :autocomplete="
                             attrs.type === 'password' ? 'new-password' : 'off'
                         "
@@ -28,12 +29,13 @@
                 v-bind="attrs"
                 v-on="listeners"
                 class="elInput"
+                @keypress.native.enter="() => $emit('enter')"
                 :autocomplete="
                     attrs.type === 'password' ? 'new-password' : 'off'
                 "
             ></el-input>
         </template>
-        <template v-else-if="formType === 'select'">
+        <template v-else-if="formType === 'select' || formType === 'dicSelect'">
             <BiuSelect v-model="formValue" v-bind="attrs" v-on="listeners" />
         </template>
 

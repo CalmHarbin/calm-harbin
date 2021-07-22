@@ -25,7 +25,7 @@
             v-if="selection"
             width="50"
             fixed="left"
-            :resizable="false"
+            :resizable="true"
             :key="'selection' + random"
             align="center"
         >
@@ -52,60 +52,130 @@
             :key="'index' + random"
             :index="indexValue"
             width="50"
-            :resizable="false"
+            :resizable="true"
             align="center"
         ></u-table-column>
 
-        <u-table-column
-            v-for="col in tableColumns"
-            :key="col.id"
-            v-bind="col"
-            :resizable="false"
-            :align="col.align || 'center'"
-            :width="col.width"
-            :min-width="col.minWidth || col.width || 120"
-            :prop="col.id"
-        >
-            <template slot-scope="scope">
-                <!-- 数据传递出去 -->
-                <slot
-                    :name="col.id"
-                    :col="col"
-                    :row="scope.row"
-                    :$index="scope.$index"
+        <template v-if="showHeaderFilter">
+            <u-table-column
+                v-for="col in tableColumns"
+                :key="col.id + refreshId"
+                :title="col.label"
+                :resizable="true"
+                :align="col.align || 'center'"
+            >
+                <u-table-column
+                    v-bind="col"
+                    :resizable="true"
+                    :width="col.width"
+                    :min-width="col.minWidth || col.width || 120"
+                    :prop="col.id"
                 >
-                    <!-- {{
-                        col.fomatter
-                            ? col.fomatter(
-                                  scope.row[col.id],
-                                  scope.row,
-                                  scope.$index
-                              )
-                            : scope.row[col.id]
-                    }} -->
-                    <Render
-                        v-if="col.render"
-                        :render-func="col.render"
-                        :scope="{
-                            col: col,
-                            row: scope.row,
-                            $index: scope.$index
-                        }"
-                    ></Render>
-                    <!-- 可编辑的单元格 -->
-                    <template v-else-if="col.editable">
-                        <el-input
-                            class="calm-editableInput"
-                            type="text"
-                            v-model="scope.row[col.id]"
-                            size="mini"
-                            clearable
-                        />
+                    <!-- 表头 -->
+                    <template v-slot:header="{ $index }">
+                        <slot
+                            :name="col.id + '-header'"
+                            :col="col"
+                            :$columnIndex="$index"
+                            :$index="$index"
+                        >
+                            <template v-if="col.formType">
+                                <Render
+                                    v-if="col.formType === 'slot'"
+                                    :render-func="col.formAttr.render"
+                                    :scope="{
+                                        col: col,
+                                        $index: $index,
+                                        $columnIndex: $index
+                                    }"
+                                ></Render>
+                                <BiuFormItem
+                                    v-else
+                                    :formType="col.formType"
+                                    size="mini"
+                                    v-model="customValue[col.formId || col.id]"
+                                    v-bind="col.formAttr.otherAttr"
+                                    v-on="col.formAttr.otherEvent"
+                                />
+                            </template>
+                        </slot>
                     </template>
-                    <template v-else>{{ scope.row[col.id] }}</template>
-                </slot>
-            </template>
-        </u-table-column>
+                    <template slot-scope="scope">
+                        <!-- 数据传递出去 -->
+                        <slot
+                            :name="col.id"
+                            :col="col"
+                            :row="scope.row"
+                            :$index="scope.$index"
+                        >
+                            <Render
+                                v-if="col.render"
+                                :render-func="col.render"
+                                :scope="{
+                                    col: col,
+                                    row: scope.row,
+                                    $index: scope.$index
+                                }"
+                            ></Render>
+                            <!-- 可编辑的单元格 -->
+                            <template v-else-if="col.editable">
+                                <el-input
+                                    class="calm-editableInput"
+                                    type="text"
+                                    v-model="scope.row[col.id]"
+                                    size="mini"
+                                    clearable
+                                />
+                            </template>
+                            <template v-else>{{ scope.row[col.id] }}</template>
+                        </slot>
+                    </template>
+                </u-table-column>
+            </u-table-column>
+        </template>
+        <template v-else>
+            <u-table-column
+                v-for="col in tableColumns"
+                :key="col.id + refreshId"
+                v-bind="col"
+                :resizable="true"
+                :align="col.align || 'center'"
+                :width="col.width"
+                :min-width="col.minWidth || col.width || 120"
+                :prop="col.id"
+            >
+                <template slot-scope="scope">
+                    <!-- 数据传递出去 -->
+                    <slot
+                        :name="col.id"
+                        :col="col"
+                        :row="scope.row"
+                        :$index="scope.$index"
+                    >
+                        <Render
+                            v-if="col.render"
+                            :render-func="col.render"
+                            :scope="{
+                                col: col,
+                                row: scope.row,
+                                $index: scope.$index
+                            }"
+                        ></Render>
+                        <!-- 可编辑的单元格 -->
+                        <template v-else-if="col.editable">
+                            <el-input
+                                class="calm-editableInput"
+                                type="text"
+                                v-model="scope.row[col.id]"
+                                size="mini"
+                                clearable
+                            />
+                        </template>
+                        <template v-else>{{ scope.row[col.id] }}</template>
+                    </slot>
+                </template>
+            </u-table-column>
+        </template>
 
         <!-- 操作 -->
         <u-table-column
@@ -113,7 +183,7 @@
             v-if="customTablePostfixOptions"
             label="操作"
             fixed="right"
-            :resizable="false"
+            :resizable="true"
             :width="customTablePostfixOptions.length * 31 + 22"
         >
             <div
@@ -162,11 +232,19 @@
 
 <script lang="tsx">
 import dayjs from 'dayjs'
-import { Component, Prop, Vue, Watch } from 'vue-property-decorator'
+import {
+    Component,
+    Prop,
+    Vue,
+    Watch,
+    Emit,
+    Model
+} from 'vue-property-decorator'
 import { tableColumnType, scopeType, tablePostfixOptionsType } from './BiuTable'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UTable, UTableColumn } from 'umy-ui'
-import { isEqualWith } from '@src/utils/util'
+import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
+import cloneDeep from 'lodash/cloneDeep'
 
 Vue.use(Loading.directive)
 
@@ -207,10 +285,17 @@ export default class CustomUTable extends Vue {
     @Prop(Array)
     tablePostfixOptions?: tablePostfixOptionsType[]
 
+    @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
+
+    // 这里利用引用类型直接改值
+    @Model('setValue') value: any
+
     isMounted = false // 用来表示dom已加载完成，计算表格宽度是否超过列总宽
 
     customTableData: any[] = []
     multipleSelection: any[] = [] // 自定义实现多选
+    refreshId = 1 // 强制刷新组件
+    customValue = {} // 表单的数据
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -219,18 +304,61 @@ export default class CustomUTable extends Vue {
      */
     private attrs = {}
     private listeners = {}
-    $store: any
+
     // 计算属性
     get height() {
         return this.tbHeight
     }
 
     get tableColumns() {
+        this.refreshId++
         if (this.isMounted) {
             const columns = this.columns.map((item) => {
                 const cur = {
-                    ...item
+                    ...item,
+                    // 处理表单的其余属性和事件
+                    formAttr: {
+                        ...item.formAttr,
+                        otherAttr: otherAttr(item.formAttr),
+                        otherEvent: otherEvent(item.formAttr)
+                    }
                 }
+                // 添加事件，文本框回车搜索，其他类型改变搜索
+                if (item.formType === 'input') {
+                    cur.formAttr.otherEvent.clear = (e: any) => {
+                        // 先执行传入的事件
+                        item?.formAttr?.clear && item.formAttr.clear(e)
+
+                        setTimeout(() => {
+                            // 触发搜索
+                            this.$emit('search')
+                        }, 0)
+                    }
+                    cur.formAttr.otherEvent.enter = () => {
+                        setTimeout(() => {
+                            // 触发搜索
+                            this.$emit('search')
+                        }, 0)
+                    }
+                } else if (
+                    item.formType === 'select' ||
+                    item.formType === 'dicSelect' ||
+                    item.formType === 'date' ||
+                    item.formType === 'timeSelect' ||
+                    item.formType === 'area'
+                ) {
+                    cur.formAttr.otherEvent.change = (e: any) => {
+                        // 先执行传入的事件
+                        item?.formAttr?.onchange && item.formAttr.onchange(e)
+
+                        setTimeout(() => {
+                            // 触发搜索
+                            this.$emit('search')
+                        }, 0)
+                    }
+                }
+
+                // 显示格式化
                 if (item.timeFormat && !cur.render) {
                     // 时间格式化
                     cur.width = cur.width || 140 // 时间增加默认宽度
@@ -244,7 +372,8 @@ export default class CustomUTable extends Vue {
                         )
                     }
                 } else if (
-                    item.formType === 'select' &&
+                    (item.formType === 'select' ||
+                        item.formType === 'dicSelect') &&
                     item?.formAttr?.options &&
                     !item.render
                 ) {
@@ -329,7 +458,7 @@ export default class CustomUTable extends Vue {
     // 数据改变时表格重绘，避免表格错乱
     @Watch('tableData')
     tableDataChange(newVal: any[]) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.customTableData)) {
+        if (!isEqualWith(newVal, this.customTableData)) {
             this.customTableData = newVal.map((item) => ({
                 ...item,
                 _XID: Math.random()
@@ -342,6 +471,25 @@ export default class CustomUTable extends Vue {
         // this.$nextTick(() => {
         //     this.headerDragend()
         // })
+    }
+
+    @Watch('value', { immediate: true, deep: true })
+    valueChange(newVal: any) {
+        if (!isEqualWith(newVal, this.customValue)) {
+            this.customValue = cloneDeep(newVal)
+        }
+    }
+
+    @Watch('customValue', { immediate: true, deep: true })
+    customValueChange(newVal: any) {
+        if (!isEqualWith(newVal, this.value)) {
+            this.setValue()
+        }
+    }
+
+    @Emit('setValue')
+    setValue() {
+        return this.customValue
     }
     /**
      * 监听$attrs是否改变

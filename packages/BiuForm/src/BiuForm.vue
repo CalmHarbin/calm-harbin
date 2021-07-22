@@ -273,14 +273,19 @@ export default class BiuForm extends Vue {
 
     @Prop({ type: Boolean, default: true }) private resize?: boolean
 
+    /**
+     * 默认span=6时的最小值
+     */
+    @Prop({ type: Number, default: 280 }) private min = 280
+
     // 这里利用引用类型直接改值
     // @Prop(Object) private value?: objType
     @Model('setValue') private value?: objType
 
     // private min = 220 // 默认span=6时的最小值
     // private max = 330 // 默认span=6时的最大值
-    private min = 280 // 默认span=6时的最小值
-    private max = 420 // 默认span=6时的最大值 计算方式 280 * 3 / 2 = 420
+
+    private max = (this.min * 3) / 2 // 默认span=6时的最大值 计算方式 280 * 3 / 2 = 420
     private lineNumber = 4 // 默认一行放四项
     private maxLineNumber = 6 // 一行最多放6项
     private minLineNumber = 1 // 一行最少放1项
@@ -319,13 +324,13 @@ export default class BiuForm extends Vue {
     }
     @Watch('value', { immediate: true, deep: true })
     valueChange(newVal: objType) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.customValue)) {
+        if (!isEqualWith(newVal, this.customValue)) {
             this.customValue = cloneDeep(newVal)
         }
     }
     @Watch('customValue', { immediate: true, deep: true })
     customValueChange(newVal: objType) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this.value)) {
+        if (!isEqualWith(newVal, this.value)) {
             this.setValue()
         }
     }

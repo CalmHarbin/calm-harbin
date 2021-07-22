@@ -66,9 +66,7 @@ export default class BiuSelect extends Vue {
             } else {
                 this.customValue = ''
             }
-        } else if (
-            JSON.stringify(newVal) !== JSON.stringify(this.customValue)
-        ) {
+        } else if (!isEqualWith(newVal, this.customValue)) {
             if (this.multiple) {
                 this.customValue = (newVal as string[]).map((item: any) =>
                     String(item)
