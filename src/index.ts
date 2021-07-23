@@ -16,6 +16,7 @@ import BiuTable from '../packages/BiuTable/index'
 import BiuPage from '../packages/BiuPage/index'
 import BiuForm from '../packages/BiuForm/index'
 import BiuFormItem from '../packages/BiuFormItem/index'
+import BiuSelectTable from '../packages/BiuSelectTable/index'
 
 // 引入指令
 import waves from './directive/waves/index'
@@ -32,7 +33,8 @@ const components = {
     BiuTable,
     BiuPage,
     BiuForm,
-    BiuFormItem
+    BiuFormItem,
+    BiuSelectTable
 }
 
 const directives = [waves]
@@ -86,6 +88,7 @@ export default {
     BiuPage,
     BiuForm,
     BiuFormItem,
+    BiuSelectTable,
     debounce,
     exportExcel
 }

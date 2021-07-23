@@ -2,7 +2,11 @@
     <div id="app">
         <!-- <Order></Order> -->
 
-        <BiuPageTest></BiuPageTest>
+        <!-- <BiuPageTest></BiuPageTest> -->
+
+        <BiuTableSelectTest
+            v-model="biuTableSelectTestValue"
+        ></BiuTableSelectTest>
 
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
@@ -24,16 +28,19 @@ import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from './components/HelloWorld.vue'
 import Order from './components/order.vue'
 import BiuPageTest from './components/BiuPageTest.vue'
+import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
 
 @Component({
     components: {
         HelloWorld,
         Order,
-        BiuPageTest
+        BiuPageTest,
+        BiuTableSelectTest
     }
 })
 export default class App extends Vue {
-    $hello: any
+    biuTableSelectTestValue = ''
+
     created(): void {
         // this.$hello()
     }

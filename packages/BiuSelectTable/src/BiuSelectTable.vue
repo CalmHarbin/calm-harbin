@@ -50,14 +50,17 @@ import {
     Model,
     PropSync
 } from 'vue-property-decorator'
-import BiuTable from '@/packages/BiuTable/src/BiuTable.vue'
-import Pagination from '@/packages/Pagination/src/Pagination.vue'
+import BiuTable from '@packages/BiuTable/src/BiuTable.vue'
+import Pagination from '@packages/Pagination/src/Pagination.vue'
 import { isEqualWith } from '@src/utils/util'
+import { Select, Option } from 'element-ui'
 
 @Component({
     components: {
         BiuTable,
-        Pagination
+        Pagination,
+        [Select.name]: Select,
+        [Option.name]: Option
     },
     computed: {
         /**
@@ -94,8 +97,11 @@ import { isEqualWith } from '@src/utils/util'
 export default class BiuSelectTable extends Vue {
     @Prop({ type: Boolean, default: false }) multiple?: boolean
     @Prop({ type: Boolean, default: false }) disabled?: boolean
+    // 是不是可输入的，true表示输入框中可任意输入值，匹配不到时也不会清空
+    @Prop({ type: Boolean, default: false }) inputable?: boolean
     @Prop(Array) tableData!: any[]
     @PropSync('pagination') private paginationSync?: any
+    // id为双向绑定的值，label为输入框中显示的值，会自动从数据源中取
     @Prop(Object) prop!: { id: string; label: string }
     @Model('setValue') value!: string | string[]
 
@@ -116,7 +122,7 @@ export default class BiuSelectTable extends Vue {
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
     private attrs = {}
-    private listeners = {}
+    private listeners: any = {}
 
     @Watch('tableData', { deep: true, immediate: true })
     dataChange() {
@@ -143,10 +149,14 @@ export default class BiuSelectTable extends Vue {
                 typeof item === 'number' ? String(item) : item
             )
         } else if (!this.multiple) {
-            this.checkList =
-                typeof newVal === 'number'
-                    ? [String(newVal)]
-                    : [newVal as string]
+            // 单选时
+            if (typeof newVal === 'number') {
+                this.checkList = [String(newVal)]
+            } else if (typeof newVal === 'string' && newVal) {
+                this.checkList = [newVal]
+            } else {
+                this.checkList = []
+            }
         }
     }
 
@@ -171,23 +181,41 @@ export default class BiuSelectTable extends Vue {
     }
 
     /**
-     * 搜索
+     * 搜索，上面修改为当输入内容为真时才搜索
      */
     @Emit('search')
     search(value: string) {
+        this.checkList = []
+        // 如果是可以输入的，记录输入的数据
+        if (this.inputable) {
+            this.checkListValue = [value]
+        }
         return value
     }
     /**
      * 关闭下拉菜单时
      */
-    close() {
-        this.search('')
+    close(e: any) {
+        this.listeners.blur && this.listeners.blur(e)
+        // 当不能输入时，失去焦点自动清除输入的数据
+        if (!this.inputable && this.checkList.length === 0) {
+            this.search('')
+        }
     }
     /**
      * 点击清空按钮时
      */
     clear() {
-        this.checkList = []
+        if (this.checkList.length === 0) {
+            // 主动触发搜索
+            this.search('')
+        } else {
+            // checkList改变也会触发搜索
+            this.checkList = []
+        }
+        // 清空显示的内容
+        this.checkListValue = []
+        this.focus()
     }
     /**
      * 显示时触发
@@ -209,16 +237,33 @@ export default class BiuSelectTable extends Vue {
      * 更新显示的值
      */
     updateCheckListValue(checkList: string[]) {
-        this.checkListValue = []
+        // 当不可输入时，或者可以输入但是有选中项时，清空掉手动输入的东西，从tableData中去匹配
+        if (!this.inputable || (this.inputable && checkList.length)) {
+            this.checkListValue = []
+        }
+
         for (const item of this.tableData) {
-            if (checkList.includes(item[this.prop.id]))
+            if (checkList.includes(String(item[this.prop.id])))
                 this.checkListValue.push(item[this.prop.label])
         }
+
         // 触发回调
         if (this.multiple) {
-            this.$emit('change', this.checkListValue, checkList)
+            this.$emit(
+                'change',
+                this.checkListValue,
+                checkList,
+                this.tableData,
+                this.prop
+            )
         } else {
-            this.$emit('change', this.checkListValue[0], checkList[0])
+            this.$emit(
+                'change',
+                this.checkListValue[0],
+                checkList[0],
+                this.tableData,
+                this.prop
+            )
         }
     }
     /**

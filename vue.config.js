@@ -75,5 +75,24 @@ module.exports = {
         //         plugins: ['lodash']
         //     }))
         /** lodash按需加载 */
+    },
+    devServer: {
+        //请求代理
+        proxy: {
+            '/dev': {
+                target: 'https://nhgw-test.czdtd.com/edi/nhfd/in',
+                ws: true,
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/dev': ''
+                }
+            }
+        },
+        disableHostCheck: true
+        // open: true, //自动打开浏览器
+        // host: 'localhost', //主机
+        // port: 8080 //端口
+        // https: false,
+        // hotOnly: false,
     }
 }
