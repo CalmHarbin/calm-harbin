@@ -29,6 +29,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import Order from './components/order.vue'
 import BiuPageTest from './components/BiuPageTest.vue'
 import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
+import calmHarbin from '@src/index.ts'
 
 @Component({
     components: {
@@ -43,6 +44,29 @@ export default class App extends Vue {
 
     created(): void {
         // this.$hello()
+        const res = [
+            { a: 2 },
+            { a: 162 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 10 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 5 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 2 },
+            { a: 4 },
+            { a: 2 },
+            { a: 2 }
+        ]
+        console.log(calmHarbin.summary(res, { a: 0 }))
     }
 }
 </script>

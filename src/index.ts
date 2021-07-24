@@ -22,7 +22,8 @@ import BiuSelectTable from '../packages/BiuSelectTable/index'
 import waves from './directive/waves/index'
 
 // 引入工具方法
-import { debounce, exportExcel } from './utils'
+import { debounce, exportExcel, summary } from './utils'
+import { startandends } from './utils/date'
 
 const components = {
     BiuDialog,
@@ -90,5 +91,7 @@ export default {
     BiuFormItem,
     BiuSelectTable,
     debounce,
-    exportExcel
+    exportExcel,
+    summary,
+    startandends
 }

@@ -1,4 +1,5 @@
 import eq from 'lodash/isEqualWith'
+import { decimals } from './index'
 
 type objType = {
     [x: string]: any
@@ -57,4 +58,14 @@ export function otherEvent(data: objType) {
         otherEvent[item.substr(2)] = otherAttr[item]
     })
     return otherEvent
+}
+
+/**
+ * 两数字相加
+ */
+export function decimalAdd(val1: number, val2: number) {
+    const len = Math.max(decimals(val1), decimals(val2))
+    const multiple = Math.pow(10, len)
+
+    return (val1 * multiple + val2 * multiple) / multiple
 }

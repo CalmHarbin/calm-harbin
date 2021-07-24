@@ -2,6 +2,7 @@ import XLSX from 'xlsx'
 import { Message } from 'element-ui'
 import dayjs from 'dayjs'
 import GLOBAL from './global'
+import { decimalAdd } from './util'
 /*
  * 函数节流:当连续触发函数时,函数在n秒内只会执行一次
  * 函数防抖:函数频繁触发的情况下，只有函数触发的间隔超过指定间隔的时候，函数才会执行
@@ -103,4 +104,44 @@ export const exportExcel = (
             type: 'base64' // 编码方式
         }
     )
+}
+
+/**
+ * 计算小数位数
+ */
+export const decimals = (value: number) => {
+    if (typeof value !== 'number') {
+        new Error('decimals方法: 请传入一位数字')
+        return -1
+    }
+
+    if (isNaN(value)) {
+        new Error('decimals方法: 请务传入NaN')
+        return -1
+    }
+
+    const val = String(value)
+    const index = val.indexOf('.')
+
+    if (index === -1) return 0
+
+    return val.slice(index + 1).length
+}
+
+/**
+ * 表格合计行计算功能
+ * @param list 待计算的数据
+ * @param obj 需要计算的列
+ */
+export const summary = (list: any[] = [], obj = {}) => {
+    const total = list.reduce((prev: any, cur: any) => {
+        for (const key in obj) {
+            if (cur[key]) {
+                // 相加时防止精度问题
+                prev[key] = decimalAdd(prev[key], cur[key])
+            }
+        }
+        return prev
+    }, obj)
+    return total
 }

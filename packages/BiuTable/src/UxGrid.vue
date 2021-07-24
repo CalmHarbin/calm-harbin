@@ -632,7 +632,7 @@ export default class CoutomUxGrid extends Vue {
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
             // 表格填充数据
-            ;(this.$refs.table as any).reloadData(newVal)
+            ;(this.$refs.table as any).loadData(newVal)
             this.customTableData = [...newVal]
             // TODO
             // 清空复选框，暂时为了解决外部点击搜索时，外部清空了multipleSelection，而内部没有同步，
@@ -652,7 +652,7 @@ export default class CoutomUxGrid extends Vue {
     @Watch('tbHeight')
     tbHeightChange() {
         this.$nextTick(() => {
-            ;(this.$refs.table as any).reloadData(this.customTableData)
+            ;(this.$refs.table as any).loadData(this.customTableData)
         })
     }
     @Watch('value', { immediate: true, deep: true })
