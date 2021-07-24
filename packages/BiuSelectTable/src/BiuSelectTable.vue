@@ -186,6 +186,13 @@ export default class BiuSelectTable extends Vue {
     @Emit('search')
     search(value: string) {
         this.checkList = []
+        this.$emit(
+            'change',
+            this.checkListValue,
+            this.multiple ? [] : undefined,
+            this.tableData,
+            this.prop
+        )
         // 如果是可以输入的，记录输入的数据
         if (this.inputable) {
             this.checkListValue = [value]
@@ -213,6 +220,13 @@ export default class BiuSelectTable extends Vue {
             // checkList改变也会触发搜索
             this.checkList = []
         }
+        this.$emit(
+            'change',
+            this.checkListValue,
+            this.multiple ? [] : undefined,
+            this.tableData,
+            this.prop
+        )
         // 清空显示的内容
         this.checkListValue = []
         this.focus()
@@ -231,6 +245,13 @@ export default class BiuSelectTable extends Vue {
         if (this.multiple) return
         // 当单选时选中
         this.checkList = [row[this.prop.id]]
+        this.$emit(
+            'change',
+            this.checkListValue,
+            this.checkList[0],
+            this.tableData,
+            this.prop
+        )
         ;(this.$refs.select as any).blur()
     }
     /**
@@ -246,31 +267,19 @@ export default class BiuSelectTable extends Vue {
             if (checkList.includes(String(item[this.prop.id])))
                 this.checkListValue.push(item[this.prop.label])
         }
-
-        // 触发回调
-        if (this.multiple) {
-            this.$emit(
-                'change',
-                this.checkListValue,
-                checkList,
-                this.tableData,
-                this.prop
-            )
-        } else {
-            this.$emit(
-                'change',
-                this.checkListValue[0],
-                checkList[0],
-                this.tableData,
-                this.prop
-            )
-        }
     }
     /**
      * 多选改变
      */
     handleSelectionChange(val: any[]) {
         this.checkList = val.map((item: any) => item[this.prop.id])
+        this.$emit(
+            'change',
+            this.checkListValue,
+            this.checkList,
+            this.tableData,
+            this.prop
+        )
     }
     /**
      * 点击分页时聚焦

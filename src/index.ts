@@ -25,6 +25,9 @@ import waves from './directive/waves/index'
 import { debounce, exportExcel, summary } from './utils'
 import { startandends } from './utils/date'
 
+// 正则
+import reg from './utils/regExp.js'
+
 const components = {
     BiuDialog,
     BiuDrawer,
@@ -90,6 +93,7 @@ export default {
     BiuForm,
     BiuFormItem,
     BiuSelectTable,
+    reg,
     debounce,
     exportExcel,
     summary,
