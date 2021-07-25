@@ -20,6 +20,8 @@
         :scrollY="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
         show-overflow="tooltip"
         @header-dragend="headerDragend"
+        @edit-actived="editActived"
+        @edit-closed="editClosed"
         :tree-config="treeConfig"
         :edit-config="editable ? { trigger: 'manual', mode: 'row' } : undefined"
         v-bind="attrs"
@@ -436,6 +438,7 @@ export default class CoutomUxGrid extends Vue {
     multipleSelection: any[] = [] // 自定义实现多选
     refreshId = 1 // 强制刷新组件
     customValue = {} // 表单的数据
+    activeRow?: string // 记录当前激活的行_XID
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -623,17 +626,39 @@ export default class CoutomUxGrid extends Vue {
 
     mounted() {
         this.isMounted = true
-        this.customTableData = [...(this.tableData || [])]
+        this.customTableData = this.tableData
         ;(this.$refs.table as any).reloadData(this.customTableData)
     }
 
     // 数据改变时表格重绘，避免表格错乱
-    @Watch('tableData')
+    @Watch('tableData', { deep: true })
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
+            // 因为执行loadData后XID会改变,先找到之前的数据位置
+            let activeIndex = -1
+            if (this.activeRow && this.editable) {
+                for (
+                    let i = 0, len = this.customTableData.length;
+                    i < len;
+                    i++
+                ) {
+                    if (this.customTableData[i]._XID === this.activeRow) {
+                        activeIndex = i
+                        break
+                    }
+                }
+            }
             // 表格填充数据
             ;(this.$refs.table as any).loadData(newVal)
-            this.customTableData = [...newVal]
+            this.customTableData = newVal
+
+            // loadData会丢失激活状态，编辑状态下,有激活的行,则激活
+            if (activeIndex !== -1) {
+                ;(this.$refs.table as any).setActiveRow(
+                    this.customTableData[activeIndex]
+                )
+            }
+
             // TODO
             // 清空复选框，暂时为了解决外部点击搜索时，外部清空了multipleSelection，而内部没有同步，
             // 理应不应该这样实现，会导致数据一变就清空，待后续更改
@@ -828,6 +853,18 @@ export default class CoutomUxGrid extends Vue {
      */
     reloadData(data: any[]) {
         this.tableDataChange(data)
+    }
+    /**
+     * 编辑状态下
+     */
+    editActived({ row }: any) {
+        this.activeRow = row._XID
+    }
+    /**
+     * 失去激活状态
+     */
+    editClosed() {
+        this.activeRow = undefined
     }
 }
 </script>

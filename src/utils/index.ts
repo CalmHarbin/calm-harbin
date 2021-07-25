@@ -74,11 +74,16 @@ export const exportExcel = (
             const column = columns[GLOBAL.indexOfColumn(columns, key)]
             let val: any =
                 cur[key] === undefined || cur[key] === null ? '' : cur[key]
-            if (column.formType === 'select' && val !== '') {
+            if (
+                (column.formType === 'select' ||
+                    column.formType === 'dicSelect') &&
+                val !== ''
+            ) {
                 // 下拉菜单数据转化
-                val = column.formAttr.options.find(
-                    (item: any) => item.value === val.toString()
-                ).label
+                val =
+                    column?.formAttr?.options?.find(
+                        (item: any) => item.value.toString() === val.toString()
+                    )?.label || val
             } else if (column.timeFormat && val) {
                 // 时间转化
                 val = dayjs(val).format(column.timeFormat)
