@@ -14,7 +14,7 @@ import { decimalAdd } from './util'
  */
 export const debounce = function (
     fn: (...params: any) => any | void,
-    wait: number,
+    wait = 500,
     throttle = false
 ) {
     let timeout: number | null

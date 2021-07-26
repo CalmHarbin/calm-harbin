@@ -4,11 +4,11 @@
 
         <!-- <BiuPageTest></BiuPageTest> -->
 
-        <BiuTableTest></BiuTableTest>
+        <!-- <BiuTableTest></BiuTableTest> -->
 
-        <!-- <BiuTableSelectTest
+        <BiuTableSelectTest
             v-model="biuTableSelectTestValue"
-        ></BiuTableSelectTest> -->
+        ></BiuTableSelectTest>
 
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />

@@ -10,6 +10,7 @@
         :pagination.sync="pagination"
         @search="(text) => getList(text, true)"
         @pagination="() => getList('', false)"
+        @change="change"
     />
 </template>
 
@@ -134,6 +135,10 @@ export default class CarrierSelect extends Vue {
             .finally(() => {
                 this.loading = false
             })
+    }
+
+    change(label, value, tableData, prop) {
+        console.log(label, value, tableData, prop)
     }
 }
 </script>

@@ -7,16 +7,17 @@
         filterable
         :multiple="multiple"
         :disabled="disabled"
-        :filter-method="search"
+        :filter-method="filterMethod"
         :automatic-dropdown="true"
         popper-class="calm-biuSelectContainer"
         @blur="close"
         @clear="clear"
         @visible-change="visibleChange"
-        v-on="listeners"
+        @remove-tag="removeTag"
     >
         <el-option value="1111111111">
             <BiuTable
+                ref="BiuTable"
                 v-if="isMounted"
                 :tbHeight="paginationSync ? 256 : 300"
                 :tableData="tableData"
@@ -53,6 +54,7 @@ import {
 import BiuTable from '@packages/BiuTable/src/BiuTable.vue'
 import Pagination from '@packages/Pagination/src/Pagination.vue'
 import { isEqualWith } from '@src/utils/util'
+import { debounce } from '@src/utils/index'
 import { Select, Option } from 'element-ui'
 
 @Component({
@@ -97,7 +99,7 @@ import { Select, Option } from 'element-ui'
 export default class BiuSelectTable extends Vue {
     @Prop({ type: Boolean, default: false }) multiple?: boolean
     @Prop({ type: Boolean, default: false }) disabled?: boolean
-    // 是不是可输入的，true表示输入框中可任意输入值，匹配不到时也不会清空
+    // 是不是可输入的，true表示输入框中可任意输入值，匹配不到时也不会清空,仅当multiple=false时生效
     @Prop({ type: Boolean, default: false }) inputable?: boolean
     @Prop(Array) tableData!: any[]
     @PropSync('pagination') private paginationSync?: any
@@ -116,6 +118,10 @@ export default class BiuSelectTable extends Vue {
      */
     checkListValue: string[] = []
     /**
+     * 搜索
+     */
+    filterMethod: (val: string) => void = () => {}
+    /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
      * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
@@ -124,22 +130,27 @@ export default class BiuSelectTable extends Vue {
     private attrs = {}
     private listeners: any = {}
 
+    created() {
+        this.filterMethod = debounce(this.search)
+    }
+
     @Watch('tableData', { deep: true, immediate: true })
     dataChange() {
         // 同步显示值,会有初始命中项,但是数据接口是异步查询,所以需要同步一遍
-        this.updateCheckListValue(this.checkList)
+        this.checkListValue = this.getCheckListValue(this.checkList)
     }
 
     @Watch('checkList', { deep: true })
     checkListChange(newVal: string[]) {
         if (this.multiple && this.value.toString() !== newVal.toString()) {
-            this.setValue(newVal)
+            this.setValue([...newVal])
         } else {
             // 单选时直接同步的是id
             this.setValue(newVal[0])
         }
+        console.log(142)
         // 同步显示值
-        this.updateCheckListValue(newVal)
+        this.checkListValue = this.getCheckListValue(newVal)
     }
 
     @Watch('value', { deep: true, immediate: true })
@@ -186,17 +197,20 @@ export default class BiuSelectTable extends Vue {
     @Emit('search')
     search(value: string) {
         this.checkList = []
-        this.$emit(
-            'change',
-            this.checkListValue,
-            this.multiple ? [] : undefined,
-            this.tableData,
-            this.prop
-        )
-        // 如果是可以输入的，记录输入的数据
-        if (this.inputable) {
+        // 如果是可以输入的，把输入的数据当做选中的
+        if (this.inputable && !this.multiple) {
+            this.checkList = [value]
             this.checkListValue = [value]
+
+            this.$emit(
+                'change',
+                this.checkListValue,
+                this.multiple ? this.checkList : this.checkList[0],
+                this.tableData,
+                this.prop
+            )
         }
+
         return value
     }
     /**
@@ -205,6 +219,7 @@ export default class BiuSelectTable extends Vue {
     close(e: any) {
         this.listeners.blur && this.listeners.blur(e)
         // 当不能输入时，失去焦点自动清除输入的数据
+        // 判断this.checkList.length === 0是防止选中时去查询，导致数据回显失败
         if (!this.inputable && this.checkList.length === 0) {
             this.search('')
         }
@@ -222,14 +237,32 @@ export default class BiuSelectTable extends Vue {
         }
         this.$emit(
             'change',
-            this.checkListValue,
+            [],
             this.multiple ? [] : undefined,
             this.tableData,
             this.prop
         )
         // 清空显示的内容
         this.checkListValue = []
+        if (this.$refs.BiuTable) {
+            ;(this.$refs.BiuTable as any).$refs.BiuTable.setMultipleSelection(
+                []
+            )
+        }
         this.focus()
+    }
+    /**
+     * 多选时删除单个
+     */
+    removeTag(val: string) {
+        const index = this.checkListValue.indexOf(val)
+        this.checkList.splice(index, 1)
+        ;(this.$refs.BiuTable as any).$refs.BiuTable.multipleSelection.splice(
+            index,
+            1
+        )
+
+        console.log(index, this.checkList)
     }
     /**
      * 显示时触发
@@ -247,7 +280,7 @@ export default class BiuSelectTable extends Vue {
         this.checkList = [row[this.prop.id]]
         this.$emit(
             'change',
-            this.checkListValue,
+            this.getCheckListValue(this.checkList),
             this.checkList[0],
             this.tableData,
             this.prop
@@ -255,18 +288,21 @@ export default class BiuSelectTable extends Vue {
         ;(this.$refs.select as any).blur()
     }
     /**
-     * 更新显示的值
+     * 获取选中对应的值显示的值，inputable时为输入的值
      */
-    updateCheckListValue(checkList: string[]) {
+    getCheckListValue(checkList: string[]) {
         // 当不可输入时，或者可以输入但是有选中项时，清空掉手动输入的东西，从tableData中去匹配
-        if (!this.inputable || (this.inputable && checkList.length)) {
-            this.checkListValue = []
+        let checkListValue = []
+        if (this.inputable && !this.multiple) {
+            checkListValue = checkList
+        } else {
+            for (const item of this.tableData) {
+                if (checkList.includes(String(item[this.prop.id])))
+                    checkListValue.push(item[this.prop.label])
+            }
         }
-
-        for (const item of this.tableData) {
-            if (checkList.includes(String(item[this.prop.id])))
-                this.checkListValue.push(item[this.prop.label])
-        }
+        console.log(288, checkList)
+        return checkListValue
     }
     /**
      * 多选改变
@@ -275,7 +311,7 @@ export default class BiuSelectTable extends Vue {
         this.checkList = val.map((item: any) => item[this.prop.id])
         this.$emit(
             'change',
-            this.checkListValue,
+            this.getCheckListValue(this.checkList),
             this.checkList,
             this.tableData,
             this.prop
