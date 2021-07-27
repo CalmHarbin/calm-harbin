@@ -11,7 +11,8 @@
     .el-select {
         display: block;
     }
-    .el-input {
+    .el-input,
+    .el-select > .el-input {
         /** 解决 input相对于div实际有点向下偏移，
          * 导致.el-form-item__content设置了ovefflow后输入框的下边框看不到了
          */

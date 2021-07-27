@@ -14,7 +14,7 @@
                     :size="size(btn)"
                     :type="type(btn)"
                     :plain="plain(btn)"
-                    :loading="loading"
+                    :loading="btn.loading === undefined ? loading : btn.loading"
                     v-bind="btn.btnProps"
                     @click="btn.callback && btn.callback(btn)"
                     >{{ btn.title }}</el-button
