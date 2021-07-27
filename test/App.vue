@@ -7,6 +7,7 @@
         <!-- <BiuTableTest></BiuTableTest> -->
 
         <BiuTableSelectTest
+            multiple
             v-model="biuTableSelectTestValue"
         ></BiuTableSelectTest>
 
@@ -32,7 +33,7 @@ import Order from './components/order.vue'
 import BiuPageTest from './components/BiuPageTest.vue'
 import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
 import BiuTableTest from './components/BiuTableTest.vue'
-import calmHarbin from '@src/index.ts'
+import calmHarbin from '@src/index'
 
 @Component({
     components: {
@@ -44,7 +45,12 @@ import calmHarbin from '@src/index.ts'
     }
 })
 export default class App extends Vue {
-    biuTableSelectTestValue = ''
+    // biuTableSelectTestValue = []
+
+    biuTableSelectTestValue = [
+        '561cd82623e54e9882470b69bb74ce73',
+        'd92f6a3c49664b31beb30bec257f6ee2'
+    ]
 
     created(): void {
         // this.$hello()

@@ -18,7 +18,6 @@
         <el-option value="1111111111">
             <BiuTable
                 ref="BiuTable"
-                v-if="isMounted"
                 :tbHeight="paginationSync ? 256 : 300"
                 :tableData="tableData"
                 :selection="multiple"
@@ -56,6 +55,7 @@ import Pagination from '@packages/Pagination/src/Pagination.vue'
 import { isEqualWith } from '@src/utils/util'
 import { debounce } from '@src/utils/index'
 import { Select, Option } from 'element-ui'
+import cloneDeep from 'lodash/cloneDeep'
 
 @Component({
     components: {
@@ -102,7 +102,11 @@ export default class BiuSelectTable extends Vue {
     // 是不是可输入的，true表示输入框中可任意输入值，匹配不到时也不会清空,仅当multiple=false时生效
     @Prop({ type: Boolean, default: false }) inputable?: boolean
     @Prop(Array) tableData!: any[]
-    @PropSync('pagination') private paginationSync?: any
+    @PropSync('pagination') private paginationSync?: {
+        page: number
+        size: number
+        total: number
+    }
     // id为双向绑定的值，label为输入框中显示的值，会自动从数据源中取
     @Prop(Object) prop!: { id: string; label: string }
     @Model('setValue') value!: string | string[]
@@ -142,24 +146,34 @@ export default class BiuSelectTable extends Vue {
 
     @Watch('checkList', { deep: true })
     checkListChange(newVal: string[]) {
-        if (this.multiple && this.value.toString() !== newVal.toString()) {
-            this.setValue([...newVal])
+        if (this.multiple) {
+            if (!isEqualWith(this.value, newVal)) {
+                this.setValue(newVal)
+            }
         } else {
-            // 单选时直接同步的是id
-            this.setValue(newVal[0])
+            if (!isEqualWith(this.value, newVal[0])) {
+                this.setValue(newVal[0])
+            }
         }
-        console.log(142)
+
         // 同步显示值
         this.checkListValue = this.getCheckListValue(newVal)
+
+        if (this.multiple) {
+            // 同步勾选状态
+            this.setMultipleSelection(newVal)
+        }
     }
 
     @Watch('value', { deep: true, immediate: true })
     valueChange(newVal: string | string[]) {
-        if (this.multiple && this.checkList.toString() !== newVal.toString()) {
-            this.checkList = [...newVal].map((item) =>
-                typeof item === 'number' ? String(item) : item
-            )
-        } else if (!this.multiple) {
+        if (this.multiple) {
+            if (!isEqualWith(this.checkList, newVal)) {
+                this.checkList = [...newVal].map((item) =>
+                    typeof item === 'number' ? String(item) : item
+                )
+            }
+        } else {
             // 单选时
             if (typeof newVal === 'number') {
                 this.checkList = [String(newVal)]
@@ -188,7 +202,7 @@ export default class BiuSelectTable extends Vue {
 
     @Emit('setValue')
     setValue(val: string | string[]) {
-        return val
+        return cloneDeep(val)
     }
 
     /**
@@ -196,6 +210,7 @@ export default class BiuSelectTable extends Vue {
      */
     @Emit('search')
     search(value: string) {
+        console.log('search')
         this.checkList = []
         // 如果是可以输入的，把输入的数据当做选中的
         if (this.inputable && !this.multiple) {
@@ -228,13 +243,8 @@ export default class BiuSelectTable extends Vue {
      * 点击清空按钮时
      */
     clear() {
-        if (this.checkList.length === 0) {
-            // 主动触发搜索
-            this.search('')
-        } else {
-            // checkList改变也会触发搜索
-            this.checkList = []
-        }
+        this.checkList = []
+
         this.$emit(
             'change',
             [],
@@ -244,11 +254,10 @@ export default class BiuSelectTable extends Vue {
         )
         // 清空显示的内容
         this.checkListValue = []
-        if (this.$refs.BiuTable) {
-            ;(this.$refs.BiuTable as any).$refs.BiuTable.setMultipleSelection(
-                []
-            )
-        }
+
+        // 重新查询数据
+        this.updateTableData()
+
         this.focus()
     }
     /**
@@ -257,18 +266,26 @@ export default class BiuSelectTable extends Vue {
     removeTag(val: string) {
         const index = this.checkListValue.indexOf(val)
         this.checkList.splice(index, 1)
-        ;(this.$refs.BiuTable as any).$refs.BiuTable.multipleSelection.splice(
-            index,
-            1
+        this.$emit(
+            'change',
+            this.getCheckListValue(this.checkList),
+            this.checkList,
+            this.tableData,
+            this.prop
         )
-
-        console.log(index, this.checkList)
+        // 重新查询数据
+        this.updateTableData()
     }
     /**
      * 显示时触发
      */
     visibleChange(state: boolean) {
-        if (state) this.isMounted = true
+        if (state) {
+            this.isMounted = true
+            if (this.tableData.length === 0) {
+                this.search('')
+            }
+        }
     }
     /**
      * 单选时
@@ -301,7 +318,6 @@ export default class BiuSelectTable extends Vue {
                     checkListValue.push(item[this.prop.label])
             }
         }
-        console.log(288, checkList)
         return checkListValue
     }
     /**
@@ -316,6 +332,8 @@ export default class BiuSelectTable extends Vue {
             this.tableData,
             this.prop
         )
+        // 重新查询数据
+        this.updateTableData()
     }
     /**
      * 点击分页时聚焦
@@ -328,9 +346,41 @@ export default class BiuSelectTable extends Vue {
     /**
      * 分页改变
      */
-    paginationCallback(data: any) {
+    paginationCallback(data: { page: number; limit: number }) {
+        console.log(data)
         this.$emit('pagination', data)
         this.focus()
+    }
+    /**
+     * 同步复选框的勾选状态
+     */
+    setMultipleSelection(checkList: string[]) {
+        let multipleSelection = this.tableData.filter((item: any) =>
+            checkList.includes(item[this.prop.id])
+        )
+        console.log(358, multipleSelection)
+        if (this.$refs.BiuTable) {
+            ;(this.$refs.BiuTable as any).$refs.BiuTable.setMultipleSelection(
+                multipleSelection
+            )
+        }
+    }
+    /**
+     * 重新查询tableData
+     */
+    updateTableData() {
+        if (this.checkList.length === 0) {
+            // 重新查询当页数据
+            if (this.paginationSync) {
+                // 重新查询当页数据
+                this.paginationCallback({
+                    page: this.paginationSync.page,
+                    limit: this.paginationSync.size
+                })
+            } else {
+                this.search('')
+            }
+        }
     }
 }
 </script>

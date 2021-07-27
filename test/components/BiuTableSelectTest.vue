@@ -5,8 +5,9 @@
         :multiple="multiple"
         :disabled="disabled"
         :tableData="tableData"
+        :loading="loading"
         inputable
-        :prop="{ id: 'clientName', label: 'clientName' }"
+        :prop="{ id: 'id', label: 'clientName' }"
         :pagination.sync="pagination"
         @search="(text) => getList(text, true)"
         @pagination="() => getList('', false)"
@@ -59,32 +60,48 @@ export default class CarrierSelect extends Vue {
         total: 0
     }
     created() {
-        // 获取客户列表
-        this.getPageList(
-            '',
-            true,
-            this.multiple && this.value ? this.value.join(',') : this.value
-        )
+        // 当value为真时，按id去查询
+        if (
+            (this.multiple && this.value.length) ||
+            (!this.multiple && this.value)
+        ) {
+            this.getPageList(
+                '',
+                true,
+                this.multiple ? this.value.join(',') : this.value
+            ).then(() => {
+                this.customValue = this.multiple ? [...this.value] : this.value
+            })
+        } else {
+            this.getPageList('', true).then(() => {
+                this.customValue = this.multiple ? [...this.value] : this.value
+            })
+        }
+
+        console.log(this.multiple, this.value)
+
         this.getList = debounce(this.getPageList, 500)
     }
 
     @Watch('customValue', { deep: true })
     customValueChange(newVal) {
+        console.log(87, newVal, this.value)
         if (this.multiple) {
             if (!newVal) return this.setValue([])
             if (this.value?.toString() !== newVal?.toString())
                 return this.setValue(newVal)
-        }
-
-        if (!newVal) {
-            this.setValue('')
         } else {
-            this.setValue(newVal)
+            if (!newVal) {
+                this.setValue('')
+            } else {
+                this.setValue(newVal)
+            }
         }
     }
 
-    @Watch('value', { deep: true, immediate: true })
+    @Watch('value', { deep: true })
     valueChange(newVal) {
+        console.log(89, newVal, this.customValue)
         if (
             this.multiple &&
             this.customValue.toString() !== newVal.toString()
@@ -106,7 +123,7 @@ export default class CarrierSelect extends Vue {
             this.pagination.page = 1
         }
         this.loading = true
-        axios
+        return axios
             .post(
                 '/dev?api=nhfd.service.customer.getTenantCustomerPager',
                 {
