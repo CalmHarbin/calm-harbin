@@ -154,6 +154,7 @@ export type formTypeType =
     | 'slot'
 
 @Component({
+    inheritAttrs: false,
     components: {
         Area,
         BiuSelect,

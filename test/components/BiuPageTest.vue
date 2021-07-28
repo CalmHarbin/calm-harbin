@@ -22,6 +22,7 @@
                 ></i>
             </template>
         </BiuPage>
+        <BiuDialogTest :visible.sync="show"></BiuDialogTest>
     </div>
 </template>
 
@@ -29,12 +30,16 @@
 import dayjs from 'dayjs'
 import { Vue, Component } from 'vue-property-decorator'
 // import { exportExcel } from '@src/index';
+import BiuDialogTest from './BiuDialogTest.vue'
 
 @Component({
-    name: 'Order'
+    name: 'BiuPageTest',
+    components: { BiuDialogTest }
 })
 export default class Order extends Vue {
     form = {}
+
+    show = false
 
     get columns() {
         return [
@@ -323,9 +328,9 @@ export default class Order extends Vue {
                 title: '添加',
                 hidden: false,
                 callback: () => {
-                    this.add.show = true
-                    this.add.payload = null
+                    this.show = true
                 },
+                message: '1321',
                 btnProps: {
                     loading: this.loading
                 }
@@ -340,7 +345,19 @@ export default class Order extends Vue {
             // },
             {
                 title: '导出',
-                hidden: true,
+                hidden: false,
+                message: () => {
+                    return '我是函数式配置'
+                },
+                btnProps: {
+                    // 优先级高
+                    disabled: () => {
+                        return true
+                    }
+                },
+                disabled: () => {
+                    return true
+                },
                 callback: () => {}
             },
             {
@@ -359,6 +376,13 @@ export default class Order extends Vue {
             title: '编辑',
             hidden: false,
             icon: 'el-icon-edit-outline',
+            disabled: ({ $index }) => {
+                if ($index % 2 === 0) return true
+                return false
+            },
+            message: ({ $index }) => {
+                if ($index % 2 === 0) return '奇数行不可编辑哦'
+            },
             onLinkClick: (scope) => {
                 this.add.show = true
                 this.add.payload = { ...scope.row }

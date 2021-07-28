@@ -1,11 +1,27 @@
 .calm-BiuDialog {
     .el-dialog__header {
         padding: 15px 20px 10px;
+        border-bottom: 1px solid #f5f5f5;
     }
     .el-dialog__body {
         padding: 0 20px;
+        max-height: 65vh;
+        overflow: auto;
     }
     .el-dialog__footer {
         padding: 10px 20px 15px;
+        border-top: 1px solid #f5f5f5;
+    }
+    .calm-BiuDialog-footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        // padding: 0 20px;
+        .calm-opear-container {
+            padding-bottom: 0;
+        }
+        .calm-opear-container + .el-button {
+            margin-left: 10px;
+        }
     }
 }

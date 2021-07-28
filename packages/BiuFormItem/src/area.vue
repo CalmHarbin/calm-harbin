@@ -28,6 +28,7 @@ import { isEqualWith } from '@src/utils/util'
 export type areaType = 'city' | 'area'
 
 @Component({
+    inheritAttrs: false,
     components: {
         [Cascader.name]: Cascader
     }

@@ -1,6 +1,10 @@
 .calm-opear-container {
     padding-bottom: 10px;
     line-height: 0;
+    display: flex;
+    .calm-operation-btnBox + .calm-operation-btnBox {
+        margin-left: 10px;
+    }
 }
 
 .calm-editableInput {
@@ -23,6 +27,10 @@
     i {
         margin: 0 7px;
         cursor: pointer;
+    }
+    .disabled {
+        color: #c0c4cc;
+        cursor: not-allowed;
     }
 }
 

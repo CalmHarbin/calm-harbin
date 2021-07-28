@@ -20,7 +20,9 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
-@Component
+@Component({
+    inheritAttrs: false
+})
 export default class FileInput extends Vue {
     @Prop(Object) divStyle: any
 

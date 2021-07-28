@@ -46,6 +46,7 @@ export type tableColumnType = {
 
 type scopeType = {
     row: any
+    col?: any
     $index: number
 }
 

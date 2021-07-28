@@ -10,7 +10,25 @@
         v-bind="attrs"
     >
         <slot></slot>
+
         <slot name="footer" slot="footer">
+            <div class="calm-BiuDialog-footer" v-if="footer">
+                <Operation
+                    v-if="operationShow"
+                    :operationOptions="footer"
+                    :loading="btnLoading"
+                />
+                <el-button
+                    v-waves
+                    size="mini"
+                    :plain="true"
+                    :loading="btnLoading"
+                    @click="cancel"
+                    >关闭</el-button
+                >
+            </div>
+        </slot>
+        <!-- <slot name="footer" slot="footer">
             <div class="center" slot="footer">
                 <el-button
                     v-waves
@@ -30,7 +48,7 @@
                     >取消</el-button
                 >
             </div>
-        </slot>
+        </slot> -->
     </el-dialog>
 </template>
 
@@ -44,14 +62,26 @@ import {
     Watch
 } from 'vue-property-decorator'
 import waves from '@src/directive/waves/index'
+import Operation, {
+    OperationOptionType
+} from '@packages/BiuTable/src/operation.vue'
 import { isEqualWith } from '@src/utils/util'
 
 @Component({
-    directives: { waves }
+    directives: { waves },
+    components: { Operation }
 })
 export default class BiuDialog extends Vue {
     @PropSync('visible') visibleSync!: boolean
-    @Prop() private btnLoading?: boolean
+    @Prop({ type: Boolean, default: false }) btnLoading?: boolean
+
+    @Prop([Boolean, Array]) footer?: OperationOptionType[] | boolean
+
+    get operationShow() {
+        if (typeof this.footer === 'boolean' || !this.footer) return false
+        return true
+    }
+
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -59,6 +89,7 @@ export default class BiuDialog extends Vue {
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
     private attrs = {}
+
     /**
      * 监听$attrs是否改变
      */

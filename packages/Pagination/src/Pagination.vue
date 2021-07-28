@@ -27,6 +27,7 @@ import { isEqualWith } from '@src/utils/util'
 
 export default {
     name: 'Pagination',
+    inheritAttrs: false,
     components: { [Pagination.name]: Pagination },
     props: {
         total: {

@@ -63,8 +63,8 @@
             :resizable="false"
             align="center"
         >
-            <template slot-scope="scope">
-                {{ indexValue(scope.seq - 1) }}
+            <template #default="{ seq }">
+                {{ indexValue(seq - 1) }}
             </template>
         </ux-table-column>
 
@@ -90,13 +90,10 @@
         </ux-table-column>
         <!-- 展开行功能 -->
         <ux-table-column v-if="expandRender" type="expand" title="" width="50">
-            <template v-slot:content="{ row, rowIndex }">
+            <template v-slot:content="{ row, rowIndex: $index }">
                 <Render
                     :render-func="expandRender"
-                    :scope="{
-                        row: row,
-                        rowIndex: rowIndex
-                    }"
+                    :scope="{ row, $index }"
                 ></Render>
             </template>
         </ux-table-column>
@@ -305,33 +302,49 @@
             :resizable="false"
             :width="customTablePostfixOptions.length * 31 + 22"
         >
-            <div
-                slot-scope="scope"
-                class="calm-BiuTable-tableOperate"
-                v-if="
-                    !showSummary || scope.seq - 1 !== customTableData.length - 1
-                "
-            >
-                <el-tooltip
-                    v-for="(item, index) in customTablePostfixOptions"
-                    :key="index"
-                    effect="light"
-                    :content="format(item.title, scope)"
-                    placement="top"
-                    :enterable="false"
+            <template #default="{ row, seq, rowIndex: $index }">
+                <div
+                    class="calm-BiuTable-tableOperate"
+                    v-if="
+                        !showSummary || seq - 1 !== customTableData.length - 1
+                    "
                 >
-                    <i
-                        size="24"
-                        :class="[
-                            format(item.icon, scope),
-                            item.disabled && item.disabled(scope)
-                                ? 'disabled'
-                                : ''
-                        ]"
-                        @click="clickRightbtn(item, scope)"
-                    ></i>
-                </el-tooltip>
-            </div>
+                    <el-tooltip
+                        v-for="(item, index) in customTablePostfixOptions"
+                        :key="index"
+                        effect="light"
+                        :content="
+                            format(item.disabled, { row, col: item, $index })
+                                ? format(item.message, {
+                                      row,
+                                      col: item,
+                                      $index
+                                  }) ||
+                                  format(item.title, { row, col: item, $index })
+                                : format(item.title, { row, col: item, $index })
+                        "
+                        placement="top"
+                        :enterable="false"
+                    >
+                        <i
+                            size="24"
+                            :class="[
+                                format(item.icon, { row, col: item, $index }),
+                                format(item.disabled, {
+                                    row,
+                                    col: item,
+                                    $index
+                                })
+                                    ? 'disabled'
+                                    : ''
+                            ]"
+                            @click="
+                                clickRightbtn(item, { row, col: item, $index })
+                            "
+                        ></i>
+                    </el-tooltip>
+                </div>
+            </template>
         </ux-table-column>
         <!-- 空提示 -->
         <el-card
@@ -371,6 +384,7 @@ import cloneDeep from 'lodash/cloneDeep'
 Vue.use(Loading.directive)
 
 @Component({
+    inheritAttrs: false,
     components: {
         Render: {
             props: {
@@ -716,10 +730,11 @@ export default class CoutomUxGrid extends Vue {
         this.random = Math.random()
     }
 
-    format(value: string | ((scope: any) => string), scope: any) {
-        if (typeof value === 'string') return value
-        return value(scope)
+    format(value: any | ((scope: scopeType) => any), scope: scopeType) {
+        if (typeof value === 'function') return value(scope)
+        return value
     }
+
     /**
      * 拖动表格的列宽
      */

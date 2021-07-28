@@ -2,14 +2,14 @@
     <div id="app">
         <!-- <Order></Order> -->
 
-        <!-- <BiuPageTest></BiuPageTest> -->
+        <BiuPageTest></BiuPageTest>
 
         <!-- <BiuTableTest></BiuTableTest> -->
 
-        <BiuTableSelectTest
+        <!-- <BiuTableSelectTest
             multiple
             v-model="biuTableSelectTestValue"
-        ></BiuTableSelectTest>
+        ></BiuTableSelectTest> -->
 
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />

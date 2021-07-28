@@ -45,6 +45,7 @@ export type BiuCardFormSourceType = {
 }[]
 
 @Component({
+    inheritAttrs: false,
     components: {
         BiuCard,
         BiuForm,

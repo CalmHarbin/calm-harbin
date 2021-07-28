@@ -58,6 +58,7 @@ import { Select, Option } from 'element-ui'
 import cloneDeep from 'lodash/cloneDeep'
 
 @Component({
+    inheritAttrs: false,
     components: {
         BiuTable,
         Pagination,

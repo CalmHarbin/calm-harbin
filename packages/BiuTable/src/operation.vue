@@ -1,24 +1,38 @@
 <template>
     <div ref="opearContainer" class="calm-opear-container">
-        <template v-for="(btn, index) in operationOptions">
+        <template v-for="(btn, index) in customOperationOptions">
             <template v-if="!btn.hidden">
                 <Render
                     :key="index"
                     v-if="btn.render"
                     :render-func="btn.render"
                 ></Render>
-                <el-button
+                <el-tooltip
                     v-else
                     :key="index"
-                    v-waves
-                    :size="size(btn)"
-                    :type="type(btn)"
-                    :plain="plain(btn)"
-                    :loading="btn.loading === undefined ? loading : btn.loading"
-                    v-bind="btn.btnProps"
-                    @click="btn.callback && btn.callback(btn)"
-                    >{{ btn.title }}</el-button
+                    effect="light"
+                    :disabled="btn.tooltipDisabled"
+                    :content="btn.content"
+                    placement="top"
                 >
+                    <div class="calm-operation-btnBox">
+                        <el-button
+                            v-waves
+                            :size="size(btn)"
+                            :type="type(btn)"
+                            :plain="plain(btn)"
+                            :loading="
+                                btn.loading === undefined
+                                    ? loading
+                                    : btn.loading
+                            "
+                            :disabled="btn.disabled"
+                            v-bind="btn.btnProps"
+                            @click="btn.callback && btn.callback(btn)"
+                            >{{ btn.title }}</el-button
+                        >
+                    </div>
+                </el-tooltip>
             </template>
         </template>
     </div>
@@ -27,7 +41,7 @@
 <script lang="tsx">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { ButtonType } from 'element-ui/types/button'
-import { Button } from 'element-ui'
+import { Button, Tooltip } from 'element-ui'
 import waves from '@src/directive/waves/index'
 
 export type OperationOptionType = {
@@ -43,6 +57,14 @@ export type OperationOptionType = {
      * 隐藏按钮
      */
     hidden?: boolean
+    /**
+     * 禁用按钮
+     */
+    disabled?: boolean | (() => boolean)
+    /**
+     * 禁用时提示语
+     */
+    message?: string | (() => string | undefined)
     /**
      * 传入给按钮的额外属性,参考
      */
@@ -61,7 +83,8 @@ export type OperationOptionType = {
                 return that.renderFunc && that.renderFunc(createElement)
             }
         },
-        [Button.name]: Button
+        [Button.name]: Button,
+        [Tooltip.name]: Tooltip
     },
     directives: { waves }
 })
@@ -70,8 +93,37 @@ export default class Operation extends Vue {
         type: Array,
         default: () => []
     })
-    private operationOptions?: OperationOptionType[]
+    operationOptions!: OperationOptionType[]
+
     @Prop(Boolean) loading?: boolean
+
+    get customOperationOptions() {
+        return this.operationOptions.map((btn) => {
+            let tooltipDisabled = true
+            let content = btn.message && this.format(btn.message, btn)
+            let disabled = btn.disabled
+            // 如果按钮禁用，并且message为真，则显示tooltip
+            if (btn?.btnProps?.disabled) {
+                if (content && this.format(btn.btnProps.disabled, btn))
+                    tooltipDisabled = false
+
+                disabled = btn.btnProps.disabled
+                delete btn.btnProps.disabled
+            } else if (btn?.disabled) {
+                if (content && this.format(btn.disabled, btn))
+                    tooltipDisabled = false
+
+                disabled = btn.disabled
+            }
+
+            return {
+                ...btn,
+                tooltipDisabled,
+                content,
+                disabled: this.format(disabled, btn)
+            }
+        })
+    }
 
     size(btn: OperationOptionType) {
         return btn?.btnProps?.size || 'mini'
@@ -83,6 +135,11 @@ export default class Operation extends Vue {
 
     plain(btn: OperationOptionType) {
         return btn?.btnProps?.plain === undefined ? true : false
+    }
+
+    format(value: any | ((btn: any) => any), btn: any) {
+        if (typeof value === 'function') return value(btn)
+        return value
     }
 }
 </script>

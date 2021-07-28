@@ -203,9 +203,7 @@
                         size="24"
                         :class="[
                             format(item.icon, scope),
-                            item.disabled && item.disabled(scope)
-                                ? 'disabled'
-                                : ''
+                            format(item.disabled, scope) ? 'disabled' : ''
                         ]"
                         @click="clickRightbtn(item, scope)"
                     ></i>
@@ -512,9 +510,9 @@ export default class CustomUTable extends Vue {
         this.random = Math.random()
     }
 
-    format(value: string | ((scope: any) => string), scope: any) {
-        if (typeof value === 'string') return value
-        return value(scope)
+    format(value: any | ((scope: any) => any), scope: any) {
+        if (typeof value === 'function') return value(scope)
+        return value
     }
     /**
      * 拖动表格的列宽

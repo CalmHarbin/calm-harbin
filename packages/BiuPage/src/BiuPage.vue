@@ -104,6 +104,7 @@ export type pageColumnsType = {
 } & tableColumnType
 
 @Component({
+    inheritAttrs: false,
     components: { BiuForm, BiuTable, Operation, Pagination },
     computed: {
         /**

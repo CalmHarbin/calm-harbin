@@ -1,6 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component({
+    inheritAttrs: false,
     props: {
         divStyle: Object,
         loading: Boolean,

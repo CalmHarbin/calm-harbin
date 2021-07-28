@@ -68,6 +68,7 @@ type treeNodeType = {
 
 export type areaType = 'city' | 'area'
 @Component({
+    inheritAttrs: false,
     components: {
         [Select.name]: Select,
         [Option.name]: Option,

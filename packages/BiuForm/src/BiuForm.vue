@@ -236,6 +236,7 @@ type objType = {
 }
 
 @Component({
+    inheritAttrs: false,
     components: {
         BiuFormItem,
         Render: {
