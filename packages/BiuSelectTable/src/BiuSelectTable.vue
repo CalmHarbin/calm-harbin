@@ -1,5 +1,6 @@
 <template>
     <el-select
+        class="calm-BiuSelectTable"
         ref="select"
         :value="multiple ? checkListValue : checkListValue[0]"
         size="mini"
@@ -9,6 +10,7 @@
         :disabled="disabled"
         :filter-method="filterMethod"
         :automatic-dropdown="true"
+        :placeholder="placeholder"
         popper-class="calm-biuSelectContainer"
         @blur="close"
         @clear="clear"
@@ -98,6 +100,7 @@ import cloneDeep from 'lodash/cloneDeep'
     }
 })
 export default class BiuSelectTable extends Vue {
+    @Prop({ type: String, default: '请选择' }) placeholder?: boolean
     @Prop({ type: Boolean, default: false }) multiple?: boolean
     @Prop({ type: Boolean, default: false }) disabled?: boolean
     // 是不是可输入的，true表示输入框中可任意输入值，匹配不到时也不会清空,仅当multiple=false时生效
@@ -168,6 +171,7 @@ export default class BiuSelectTable extends Vue {
 
     @Watch('value', { deep: true, immediate: true })
     valueChange(newVal: string | string[]) {
+        console.log(171, newVal)
         if (this.multiple) {
             if (!isEqualWith(this.checkList, newVal)) {
                 this.checkList = [...newVal].map((item) =>
@@ -180,7 +184,7 @@ export default class BiuSelectTable extends Vue {
                 this.checkList = [String(newVal)]
             } else if (typeof newVal === 'string' && newVal) {
                 this.checkList = [newVal]
-            } else {
+            } else if (this.checkList.length !== 0) {
                 this.checkList = []
             }
         }
@@ -283,8 +287,31 @@ export default class BiuSelectTable extends Vue {
     visibleChange(state: boolean) {
         if (state) {
             this.isMounted = true
-            if (this.tableData.length === 0) {
-                this.search('')
+            // 表格是空的，主动去查询还是空的，没必要
+            // // 如果显示时表格是空的,主动去查询一次数据
+            // if (this.tableData.length === 0) {
+            //     // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
+            //     if (this.inputable && this.checkList.length) {
+            //         this.search(this.checkList[0])
+            //     } else {
+            //         this.search('')
+            //     }
+            // }
+
+            /**
+             * 当可输入的时候，显示表格时不要清空输入框中已存在的
+             * el-select内部会自动赋值给placeholder，这里特殊处理下
+             */
+            if (this.inputable) {
+                // 显示的时候
+                const elSelect: any = this.$refs.select
+                if (
+                    elSelect.currentPlaceholder &&
+                    elSelect.currentPlaceholder !== this.placeholder
+                ) {
+                    elSelect.selectedLabel = elSelect.currentPlaceholder
+                    elSelect.currentPlaceholder = ''
+                }
             }
         }
     }

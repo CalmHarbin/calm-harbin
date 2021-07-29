@@ -6,12 +6,13 @@
         <BiuTable
             editable
             :columns="columns"
-            :tableData.sync="form.tableData"
+            :tableData.sync="tableData"
         ></BiuTable>
     </div>
 </template>
 
 <script>
+import BiuTableSelectTest from './BiuTableSelectTest'
 export default {
     data() {
         return {
@@ -96,22 +97,12 @@ export default {
                     id: 'packing',
                     editable: true,
                     required: true,
-                    editRender: (h, { $index }) => {
+                    editRender: (h, { row, col }) => {
+                        console.log(101, row[col.id])
                         return (
-                            <button
-                                onClick={() => {
-                                    this.clickNumber++
-                                    let tableData = [...this.form.tableData]
-                                    tableData[
-                                        $index
-                                    ].goodsName = `商品名称${this.clickNumber}`
-                                    this.form.tableData = tableData
-
-                                    console.log(74, this.form.tableData)
-                                }}
-                            >
-                                赋值
-                            </button>
+                            <BiuTableSelectTest
+                                v-model={row[col.id]}
+                            ></BiuTableSelectTest>
                         )
                     }
                 },
@@ -131,91 +122,91 @@ export default {
                     label: '总数量',
                     id: 'number',
                     editable: true,
-                    required: true,
-                    editRender: (h, { row, col, $index }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            min={0}
-                            precision={3}
-                            controls={false}
-                            size="mini"
-                            onchange={() => this.setVolume($index)}
-                        ></el-input-number>
-                    )
+                    required: true
+                    // editRender: (h, { row, col, $index }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         min={0}
+                    //         precision={3}
+                    //         controls={false}
+                    //         size="mini"
+                    //         onchange={() => this.setVolume($index)}
+                    //     ></el-input-number>
+                    // )
                 },
                 {
                     label: '总重量(KG)',
                     id: 'weight',
                     editable: true,
-                    required: true,
-                    editRender: (h, { row, col }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            min={0}
-                            precision={3}
-                            controls={false}
-                            size="mini"
-                        ></el-input-number>
-                    )
+                    required: true
+                    // editRender: (h, { row, col }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         min={0}
+                    //         precision={3}
+                    //         controls={false}
+                    //         size="mini"
+                    //     ></el-input-number>
+                    // )
                 },
                 {
                     label: '总体积(m³)',
                     id: 'volume',
-                    editable: true,
-                    editRender: (h, { row, col }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            min={0}
-                            precision={3}
-                            controls={false}
-                            size="mini"
-                        ></el-input-number>
-                    )
+                    editable: true
+                    // editRender: (h, { row, col }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         min={0}
+                    //         precision={3}
+                    //         controls={false}
+                    //         size="mini"
+                    //     ></el-input-number>
+                    // )
                 },
                 {
                     label: '长(m)',
                     id: 'length',
-                    editable: true,
-                    editRender: (h, { row, col, $index }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            controls={false}
-                            size="mini"
-                            onchange={() => this.setVolume($index)}
-                        ></el-input-number>
-                    )
+                    editable: true
+                    // editRender: (h, { row, col, $index }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         controls={false}
+                    //         size="mini"
+                    //         onchange={() => this.setVolume($index)}
+                    //     ></el-input-number>
+                    // )
                 },
                 {
                     label: '宽(m)',
                     id: 'width',
-                    editable: true,
-                    editRender: (h, { row, col, $index }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            controls={false}
-                            size="mini"
-                            onchange={() => this.setVolume($index)}
-                        ></el-input-number>
-                    )
+                    editable: true
+                    // editRender: (h, { row, col, $index }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         controls={false}
+                    //         size="mini"
+                    //         onchange={() => this.setVolume($index)}
+                    //     ></el-input-number>
+                    // )
                 },
                 {
                     label: '高(m)',
                     id: 'height',
-                    editable: true,
-                    editRender: (h, { row, col, $index }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            controls={false}
-                            size="mini"
-                            onchange={() => this.setVolume($index)}
-                        ></el-input-number>
-                    )
+                    editable: true
+                    // editRender: (h, { row, col, $index }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         controls={false}
+                    //         size="mini"
+                    //         onchange={() => this.setVolume($index)}
+                    //     ></el-input-number>
+                    // )
                 },
                 // {
                 //     label: '箱号',
@@ -225,17 +216,17 @@ export default {
                 {
                     label: '净重',
                     id: 'netWeight',
-                    editable: true,
-                    editRender: (h, { row, col }) => (
-                        <el-input-number
-                            style="width: 100%"
-                            v-model={row[col.id]}
-                            min={0}
-                            precision={3}
-                            controls={false}
-                            size="mini"
-                        ></el-input-number>
-                    )
+                    editable: true
+                    // editRender: (h, { row, col }) => (
+                    //     <el-input-number
+                    //         style="width: 100%"
+                    //         v-model={row[col.id]}
+                    //         min={0}
+                    //         precision={3}
+                    //         controls={false}
+                    //         size="mini"
+                    //     ></el-input-number>
+                    // )
                 }
             ]
         }

@@ -70,15 +70,17 @@ export default class CarrierSelect extends Vue {
                 true,
                 this.multiple ? this.value.join(',') : this.value
             ).then(() => {
+                console.log(73, this.value)
                 this.customValue = this.multiple ? [...this.value] : this.value
             })
         } else {
             this.getPageList('', true).then(() => {
+                console.log(77, this.value)
                 this.customValue = this.multiple ? [...this.value] : this.value
             })
         }
 
-        console.log(this.multiple, this.value)
+        console.log(82, this.multiple, this.value)
 
         this.getList = debounce(this.getPageList, 500)
     }

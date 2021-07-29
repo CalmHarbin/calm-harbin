@@ -2,9 +2,9 @@
     <div id="app">
         <!-- <Order></Order> -->
 
-        <BiuPageTest></BiuPageTest>
+        <!-- <BiuPageTest></BiuPageTest> -->
 
-        <!-- <BiuTableTest></BiuTableTest> -->
+        <BiuTableTest></BiuTableTest>
 
         <!-- <BiuTableSelectTest
             multiple

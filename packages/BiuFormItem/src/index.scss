@@ -42,6 +42,9 @@
     .el-select {
         flex: 1;
     }
+    .el-select > .el-input {
+        display: flex;
+    }
     .el-select__input {
         display: none;
     }

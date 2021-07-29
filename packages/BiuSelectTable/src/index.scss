@@ -19,3 +19,8 @@
         overflow: auto;
     }
 }
+.calm-BiuSelectTable {
+    &.el-select > .el-input {
+        display: flex;
+    }
+}
