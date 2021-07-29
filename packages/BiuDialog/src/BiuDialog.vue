@@ -5,7 +5,7 @@
         modal-append-to-body
         top="10vh"
         :close-on-click-modal="false"
-        width="500px"
+        :width="attrs.width || '500px'"
         custom-class="calm-BiuDialog"
         v-bind="attrs"
     >
@@ -28,27 +28,6 @@
                 >
             </div>
         </slot>
-        <!-- <slot name="footer" slot="footer">
-            <div class="center" slot="footer">
-                <el-button
-                    v-waves
-                    :loading="btnLoading"
-                    type="primary"
-                    size="small"
-                    @click="$emit('submit')"
-                    >提交</el-button
-                >
-                <el-button
-                    v-waves
-                    type="primary"
-                    :loading="btnLoading"
-                    plain
-                    size="small"
-                    @click="cancel"
-                    >取消</el-button
-                >
-            </div>
-        </slot> -->
     </el-dialog>
 </template>
 
