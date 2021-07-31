@@ -6,7 +6,6 @@
         :disabled="disabled"
         :tableData="tableData"
         :loading="loading"
-        inputable
         :prop="{ id: 'id', label: 'clientName' }"
         :pagination.sync="pagination"
         @search="(text) => getList(text, true)"

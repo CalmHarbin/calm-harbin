@@ -171,7 +171,6 @@ export default class BiuSelectTable extends Vue {
 
     @Watch('value', { deep: true, immediate: true })
     valueChange(newVal: string | string[]) {
-        console.log(171, newVal)
         if (this.multiple) {
             if (!isEqualWith(this.checkList, newVal)) {
                 this.checkList = [...newVal].map((item) =>
@@ -215,7 +214,6 @@ export default class BiuSelectTable extends Vue {
      */
     @Emit('search')
     search(value: string) {
-        console.log('search')
         this.checkList = []
         // 如果是可以输入的，把输入的数据当做选中的
         if (this.inputable && !this.multiple) {
@@ -241,7 +239,7 @@ export default class BiuSelectTable extends Vue {
         // 当不能输入时，失去焦点自动清除输入的数据
         // 判断this.checkList.length === 0是防止选中时去查询，导致数据回显失败
         if (!this.inputable && this.checkList.length === 0) {
-            this.search('')
+            this.checkList = []
         }
     }
     /**
@@ -330,7 +328,6 @@ export default class BiuSelectTable extends Vue {
             this.tableData,
             this.prop
         )
-        ;(this.$refs.select as any).blur()
     }
     /**
      * 获取选中对应的值显示的值，inputable时为输入的值
@@ -375,7 +372,6 @@ export default class BiuSelectTable extends Vue {
      * 分页改变
      */
     paginationCallback(data: { page: number; limit: number }) {
-        console.log(data)
         this.$emit('pagination', data)
         this.focus()
     }
@@ -386,7 +382,6 @@ export default class BiuSelectTable extends Vue {
         let multipleSelection = this.tableData.filter((item: any) =>
             checkList.includes(item[this.prop.id])
         )
-        console.log(358, multipleSelection)
         if (this.$refs.BiuTable) {
             ;(this.$refs.BiuTable as any).$refs.BiuTable.setMultipleSelection(
                 multipleSelection

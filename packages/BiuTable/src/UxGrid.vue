@@ -23,7 +23,11 @@
         @edit-actived="editActived"
         @edit-closed="editClosed"
         :tree-config="treeConfig"
-        :edit-config="editable ? { trigger: 'manual', mode: 'row' } : undefined"
+        :edit-config="
+            editable
+                ? attrs['edit-config'] || { trigger: 'manual', mode: 'row' }
+                : undefined
+        "
         v-bind="attrs"
         v-on="listeners"
     >
@@ -69,7 +73,7 @@
         </ux-table-column>
 
         <ux-table-column
-            v-if="editable"
+            v-if="editable && editAction"
             title="操作"
             align="center"
             :width="120"
@@ -349,7 +353,7 @@
         <!-- 空提示 -->
         <el-card
             shadow="never"
-            class="notdatacss"
+            class="calm-notdatacss"
             slot="empty"
             style="
                 color: rgba(0, 0, 0, 0.25);
@@ -433,6 +437,8 @@ export default class CoutomUxGrid extends Vue {
 
     // 可编辑表格
     @Prop(Boolean) editable?: boolean // true表示可编辑表格
+
+    @Prop({ type: Boolean, default: true }) editAction?: boolean // 是否显示新增/删除一行操作列
 
     @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
 
@@ -583,19 +589,21 @@ export default class CoutomUxGrid extends Vue {
                 ;(this.$refs.table as any).setActiveRow(row)
             }
         }
+        const trigger = this.attrs['edit-config']?.trigger || 'manual'
         if (this.tablePostfixOptions) {
             const list = this.tablePostfixOptions.filter(
                 (item: tablePostfixOptionsType) => !item.hidden
             )
+
             // 可编辑表格操作加载右侧边栏
-            if (this.editable && list.length) {
+            if (this.editable && trigger === 'manual' && list.length) {
                 return [editOptions, ...list]
             } else if (list.length) {
                 return list
-            } else if (this.editable) {
+            } else if (this.editable && trigger === 'manual') {
                 return [editOptions]
             }
-        } else if (this.editable) {
+        } else if (this.editable && trigger === 'manual') {
             return [editOptions]
         }
         return false
@@ -757,7 +765,7 @@ export default class CoutomUxGrid extends Vue {
         if (index + 1 < this.customTableData.length) {
             return index + 1
         } else {
-            if (this.showSummary) return '汇总'
+            if (this.showSummary) return this.attrs['sum-text'] || '汇总'
             else return index + 1
         }
     }

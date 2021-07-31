@@ -7,6 +7,7 @@
             editable
             :columns="columns"
             :tableData.sync="tableData"
+            :edit-config="{ trigger: 'click', mode: 'cell' }"
         ></BiuTable>
     </div>
 </template>

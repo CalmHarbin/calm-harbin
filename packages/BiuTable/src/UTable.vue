@@ -213,7 +213,7 @@
         <!-- 空提示 -->
         <el-card
             shadow="never"
-            class="notdatacss"
+            class="calm-notdatacss"
             slot="empty"
             style="
                 color: rgba(0, 0, 0, 0.25);
@@ -300,8 +300,8 @@ export default class CustomUTable extends Vue {
      * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
-    private attrs = {}
-    private listeners = {}
+    private attrs: any = {}
+    private listeners: any = {}
 
     // 计算属性
     get height() {
@@ -535,7 +535,7 @@ export default class CustomUTable extends Vue {
         if (index + 1 < this.customTableData.length) {
             return index + 1
         } else {
-            if (this.showSummary) return '汇总'
+            if (this.showSummary) return this.attrs['sum-text'] || '汇总'
             else return index + 1
         }
     }

@@ -2,7 +2,6 @@ import XLSX from 'xlsx'
 import { Message } from 'element-ui'
 import dayjs from 'dayjs'
 import GLOBAL from './global'
-import { decimalAdd } from './util'
 /*
  * 函数节流:当连续触发函数时,函数在n秒内只会执行一次
  * 函数防抖:函数频繁触发的情况下，只有函数触发的间隔超过指定间隔的时候，函数才会执行
@@ -112,26 +111,9 @@ export const exportExcel = (
 }
 
 /**
- * 计算小数位数
+ * 处理js精度丢失问题
  */
-export const decimals = (value: number) => {
-    if (typeof value !== 'number') {
-        new Error('decimals方法: 请传入一位数字')
-        return -1
-    }
-
-    if (isNaN(value)) {
-        new Error('decimals方法: 请务传入NaN')
-        return -1
-    }
-
-    const val = String(value)
-    const index = val.indexOf('.')
-
-    if (index === -1) return 0
-
-    return val.slice(index + 1).length
-}
+export const handleDecimals = (value: number) => parseFloat(value.toFixed(12))
 
 /**
  * 表格合计行计算功能
@@ -143,7 +125,7 @@ export const summary = (list: any[] = [], obj = {}) => {
         for (const key in obj) {
             if (cur[key]) {
                 // 相加时防止精度问题
-                prev[key] = decimalAdd(prev[key], cur[key])
+                prev[key] = handleDecimals(prev[key] + cur[key])
             }
         }
         return prev

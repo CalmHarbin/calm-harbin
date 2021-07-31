@@ -3,12 +3,13 @@
         class="calm-BiuDrawer"
         :title="title"
         :visible.sync="visibleSync"
-        direction="rtl"
+        :direction="attrs.direction || 'rtl'"
         append-to-body
-        size="80%"
+        :size="attrs.size || '80%'"
         :wrapperClosable="false"
         @opened="opened"
         @closed="closed"
+        v-bind="attrs"
     >
         <div class="calm-BiuDrawer-body" v-if="customVisible">
             <slot></slot>
@@ -34,11 +35,19 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, PropSync, Prop, Emit } from 'vue-property-decorator'
+import {
+    Vue,
+    Component,
+    PropSync,
+    Prop,
+    Emit,
+    Watch
+} from 'vue-property-decorator'
 import Operation, {
     OperationOptionType
 } from '@packages/BiuTable/src/operation.vue'
 import waves from '@src/directive/waves/index'
+import { isEqualWith } from '@src/utils/util'
 
 @Component({
     components: { Operation },
@@ -46,8 +55,8 @@ import waves from '@src/directive/waves/index'
 })
 export default class BiuDrawer extends Vue {
     @PropSync('visible') visibleSync?: boolean
-    @Prop(Boolean) private btnLoading?: boolean
-    @Prop() private title?: boolean
+    @Prop(Boolean) btnLoading?: boolean
+    @Prop() title?: boolean
     @Prop([Boolean, Array]) footer?: OperationOptionType[] | boolean
 
     customVisible = false
@@ -61,6 +70,22 @@ export default class BiuDrawer extends Vue {
         if (typeof this.footer === 'boolean' || !this.footer) return false
         return true
     }
+    /**
+     * attrs用来表示this.$attrs
+     * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
+     * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
+     * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
+     */
+    private attrs = {}
+
+    /**
+     * 监听$attrs是否改变
+     */
+    @Watch('$attrs', { immediate: true })
+    $attrsChange(newVal: any) {
+        if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
+    }
+
     /**
      * 打开动画完成后
      */
