@@ -22,7 +22,7 @@ import BiuSelectTable from '../packages/BiuSelectTable/index'
 import waves from './directive/waves/index'
 
 // 引入工具方法
-import { debounce, exportExcel, handleDecimals, summary } from './utils'
+import { debounce, exportExcel, summary } from './utils'
 import { startandends } from './utils/date'
 
 // 正则
@@ -96,7 +96,6 @@ export default {
     reg,
     debounce,
     exportExcel,
-    handleDecimals,
     summary,
     startandends
 }

@@ -57,28 +57,7 @@ export default class App extends Vue {
 
     created(): void {
         // this.$hello()
-        const res = [
-            { a: 2 },
-            { a: 162 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 10 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 5 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 2 },
-            { a: 4 },
-            { a: 2 },
-            { a: 2 }
-        ]
+        const res = [{ a: 2589.34 }, { a: 1598.36 }, { a: 1569.36 }]
         console.log(calmHarbin.summary(res, { a: 0 }))
     }
 }

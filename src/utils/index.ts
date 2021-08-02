@@ -1,5 +1,6 @@
 import XLSX from 'xlsx'
 import { Message } from 'element-ui'
+import { Decimal } from 'decimal.js'
 import dayjs from 'dayjs'
 import GLOBAL from './global'
 /*
@@ -111,11 +112,6 @@ export const exportExcel = (
 }
 
 /**
- * 处理js精度丢失问题
- */
-export const handleDecimals = (value: number) => parseFloat(value.toFixed(12))
-
-/**
  * 表格合计行计算功能
  * @param list 待计算的数据
  * @param obj 需要计算的列
@@ -125,7 +121,7 @@ export const summary = (list: any[] = [], obj = {}) => {
         for (const key in obj) {
             if (cur[key]) {
                 // 相加时防止精度问题
-                prev[key] = handleDecimals(prev[key] + cur[key])
+                prev[key] = new Decimal(prev[key]).plus(cur[key]).toNumber()
             }
         }
         return prev

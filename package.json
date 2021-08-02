@@ -1,6 +1,6 @@
 {
     "name": "calm-harbin",
-    "version": "0.2.1-pre",
+    "version": "0.2.2-pre",
     "description": "常用组件及方法",
     "main": "lib/calmHarbin.umd.min.js",
     "typings": "types/index.d.ts",
@@ -44,6 +44,7 @@
     "dependencies": {
         "core-js": "^3.6.5",
         "dayjs": "^1.10.6",
+        "decimal.js": "^10.3.1",
         "element-ui": "^2.15.3",
         "lodash": "^4.17.21",
         "screenfull": "^5.1.0",

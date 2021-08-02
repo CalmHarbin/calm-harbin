@@ -42,6 +42,12 @@ module.exports = {
                           commonjs2: 'umy-ui',
                           root: 'UMYUI'
                       },
+                      'decimal.js': {
+                          commonjs: 'decimal.js',
+                          amd: 'decimal.js',
+                          commonjs2: 'decimal.js',
+                          root: 'Decimal'
+                      },
                       dayjs: 'dayjs'
                   }
                 : undefined
