@@ -100,15 +100,11 @@ export const exportExcel = (
     const worksheet = XLSX.utils.json_to_sheet(newData)
     const workbook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(workbook, worksheet)
-    XLSX.writeFile(
-        workbook,
-        `${fileName || '导出文件'}_${dayjs().format('x')}.xls`,
-        {
-            bookType: 'xls', // 生成的文件格式
-            bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
-            type: 'base64' // 编码方式
-        }
-    )
+    XLSX.writeFile(workbook, `${fileName || '导出文件'}_${Date.now()}.xls`, {
+        bookType: 'xls', // 生成的文件格式
+        bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+        type: 'base64' // 编码方式
+    })
 }
 
 /**
