@@ -10,7 +10,9 @@
             :style="{
                 width: 0,
                 height: 0,
-                visibility: 'hidden'
+                visibility: 'hidden',
+                disabled: 'block',
+                fontSize: '0px'
             }"
             @change="change"
         />
