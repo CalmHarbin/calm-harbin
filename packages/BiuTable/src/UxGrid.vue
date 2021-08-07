@@ -79,11 +79,8 @@
             :width="120"
         >
             <template #default="{ row, seq }">
-                <div
-                    v-if="!$refs.table.isActiveByRow(row)"
-                    style="display: inline"
-                    class="calm-BiuTable-operation"
-                >
+                <!-- <div v-if="!$refs.table.isActiveByRow(row)" style="display: inline" class="calm-BiuTable-operation"> -->
+                <div style="display: inline" class="calm-BiuTable-operation">
                     <i
                         class="el-icon-circle-plus"
                         @click="customPlus(seq - 1)"
