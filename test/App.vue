@@ -4,13 +4,14 @@
 
         <!-- <BiuPageTest></BiuPageTest> -->
 
-        <BiuTableTest></BiuTableTest>
+        <!-- <BiuTableTest></BiuTableTest> -->
 
         <!-- <BiuTableSelectTest
             v-model="biuTableSelectTestValue"
         ></BiuTableSelectTest> -->
 
         <!-- <BiuSelectTest></BiuSelectTest> -->
+        <Sheet></Sheet>
 
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
@@ -35,6 +36,7 @@ import BiuPageTest from './components/BiuPageTest.vue'
 import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
 import BiuTableTest from './components/BiuTableTest.vue'
 import BiuSelectTest from './components/BiuSelectTest.vue'
+import Sheet from './components/Sheet.vue'
 import calmHarbin from '@src/index'
 
 @Component({
@@ -44,7 +46,8 @@ import calmHarbin from '@src/index'
         BiuPageTest,
         BiuTableSelectTest,
         BiuTableTest,
-        BiuSelectTest
+        BiuSelectTest,
+        Sheet
     }
 })
 export default class App extends Vue {
