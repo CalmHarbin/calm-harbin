@@ -12,11 +12,11 @@ export const exportExcelTemp = (
     fileName: string,
     ...omit: string[]
 ) => {
-    const header = columns.reduce((obj: any, cur: any) => {
-        if (cur.noShow || (omit && omit.includes(cur.id))) return obj
-        return { ...obj, [cur.label]: '' }
-    }, {})
-    const worksheet = XLSX.utils.json_to_sheet([header])
+    const header = columns.reduce((cols, cur) => {
+        if (cur.noShow || (omit && omit.includes(cur.id))) return cols
+        return [...cols, cur.label]
+    }, [])
+    const worksheet = XLSX.utils.aoa_to_sheet([header])
     const workbook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(workbook, worksheet)
     XLSX.writeFile(workbook, `${fileName || '导出文件'}模板.xls`, {
