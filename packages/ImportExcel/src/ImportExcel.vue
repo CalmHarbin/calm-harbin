@@ -38,8 +38,8 @@ export default class ImportExcel extends Vue {
     @Prop(Boolean) loading?: boolean
     @Prop(Function) downloadFile?: () => void
 
-    // 总高度 - title - 上下padding - 按钮 - 小标题
-    height = window.innerHeight - 46 - 20 - 48 - 27
+    // 总高度 - title - 上下padding - 按钮 - 小标题 - 横向滚动条高度
+    height = window.innerHeight - 46 - 20 - 48 - 23 - 17
 
     get footer(): OperationOptionType[] {
         return [
