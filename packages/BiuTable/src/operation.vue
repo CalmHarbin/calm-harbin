@@ -23,7 +23,9 @@
                             :plain="plain(btn)"
                             :loading="
                                 btn.loading === undefined
-                                    ? loading
+                                    ? loading === undefined
+                                        ? btn.btnProps.loading
+                                        : loading
                                     : btn.loading
                             "
                             :disabled="btn.disabled"
@@ -65,6 +67,10 @@ export type OperationOptionType = {
      * 禁用时提示语
      */
     message?: string | (() => string | undefined)
+    /**
+     * 按钮loading
+     */
+    loading?: boolean
     /**
      * 传入给按钮的额外属性,参考
      */
