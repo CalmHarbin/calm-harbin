@@ -18,7 +18,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 @Component
 export default class BiuCard extends Vue {
     @Prop(String) title?: string
-    @Prop(Boolean) border?: boolean
+    @Prop({ type: Boolean, default: false }) border?: boolean
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
