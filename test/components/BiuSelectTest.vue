@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BiuSelect from '@packages/BiuFormItem/src/BiuSelect.vue'
+import BiuSelect from '@packages/biu-form-item/src/biu-select.vue'
 export default {
     components: { BiuSelect },
     data() {
