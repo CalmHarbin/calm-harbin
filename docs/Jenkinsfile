@@ -25,6 +25,14 @@ node {
 
             sh 'npm run docs:build'
         }
+        stage('部署') {
+            // 生成镜像
+            sh 'docker build -f /var/jenkins_mount/workspace/calmharbin文档/docs/Dockerfile -t calmharbin .'
+            // 创建容器
+            // sh 'docker run --name calmharbin -d -p 8888:80 -v'
+        }
+
+
         // stage('删除镜像') {
         //     sh 'docker stop nhfd-container || true'
         //     sh 'docker rm -f nhfd-container || true'
