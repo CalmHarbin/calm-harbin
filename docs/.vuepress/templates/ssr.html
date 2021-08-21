@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>{{ title }}</title>
+        <meta name="generator" content="VuePress {{ version }}" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/calm-harbin@0.2.3-pre/lib/calmHarbin.css"
+        />
+        {{{ userHeadTags }}} {{{ pageMeta }}} {{{ canonicalLink }}} {{{
+        renderResourceHints() }}} {{{ renderStyles() }}}
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.min.js"></script>
+        <script src="https://lib.baomitu.com/element-ui/2.13.2/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/umy-ui@1.1.6/lib/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.2.0/decimal.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/calm-harbin@0.2.3-pre/lib/calmHarbin.umd.min.js"></script>
+        <!--vue-ssr-outlet-->
+        {{{ renderScripts() }}}
+    </body>
+</html>

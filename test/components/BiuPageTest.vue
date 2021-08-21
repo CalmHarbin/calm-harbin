@@ -58,7 +58,8 @@ export default class Order extends Vue {
                 formAttr: {
                     dicType: '订单状态',
                     options: []
-                }
+                },
+                render: (h) => <div>23123</div>
             },
             {
                 formType: 'input',

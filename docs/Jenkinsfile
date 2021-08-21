@@ -1,0 +1,41 @@
+#!/usr/bin/env groovy
+
+// 工作目录在 $WORKSPACE
+
+node {
+    nodejs('node') {
+        // def a
+        // stage('jenkins环境变量') {
+        //     // a = $(sh "git rev-parse --short HEAD")
+        //     // a= sh(script: "git rev-parse --short HEAD", returnStdout:true).trim()
+        //     a= $(sh "git rev-parse --short HEAD")
+        //     println a
+        // }
+        stage('拉取代码') {
+            git branch: "${branch}", // 分支
+                credentialsId: 'github', // 凭证
+                url: 'https://github.com/CalmHarbin/calm-harbin.git' //仓库
+        }
+        stage('构建') {
+            sh 'ls'
+            
+            if (install == 'true') {
+                sh 'npm install'
+            }
+
+            sh 'npm run docs:build'
+        }
+        // stage('删除镜像') {
+        //     sh 'docker stop nhfd-container || true'
+        //     sh 'docker rm -f nhfd-container || true'
+        //     sh 'rm -rf ./nginx/ || true'
+        // }
+        // stage('部署') {
+        //     sh 'cp -rf dist/ nginx'
+        //     sh "docker run --name nhfd-container -d -p 8080:80 -v /var/jenkins_mount/workspace/${JOB_NAME}/nginx:/usr/share/nginx/html nginx"
+        // }
+    }
+}
+
+
+
