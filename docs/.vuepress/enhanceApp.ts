@@ -1,12 +1,15 @@
 // import Vue from 'vue'
-// import ElementUI from 'element-ui' // 全局引入element-ui
+import ElementUI from 'element-ui' // 全局引入element-ui
 // import 'element-ui/lib/theme-chalk/index.css'
 
 import BiuPageTest from '@test/components/BiuPageTest.vue'
 
+import aa from '@test/components/aa.vue'
+
 console.log(BiuPageTest)
 
-// import BiuPageTest from '../../test/components/BiuPageTest'
+// import calmHarbin from '@src/index.ts'
+// import BiuCard from '@packages/'
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -27,10 +30,13 @@ export default ({
     siteData, // 站点元数据
     isServer // 当前应用配置是处于 服务端渲染 或 客户端
 }) => {
-    Vue.component('BiuPageTest', BiuPageTest)
-    // Vue.use(ElementUI)
+    Vue.use(ElementUI)
     // console.log(calmHarbin)
     // Vue.use(calmHarbin)
+
+    Vue.component('BiuPageTest', BiuPageTest)
+
+    Vue.component('aa', aa)
     // ...做一些其他的应用级别的优化
     console.log(Vue, options, router, siteData, isServer)
 }

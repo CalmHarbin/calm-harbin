@@ -6,8 +6,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-@Component
+@Component({
+    name: 'aa'
+})
 export default class Test extends Vue {
-    message: string = 'Test Component'
+    message = 'Test Component'
 }
 </script>

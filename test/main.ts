@@ -10,6 +10,8 @@ import Element from 'element-ui'
 
 import CalmHarbin from '../src'
 
+// import CalmHarbin from '../lib/calmHarbin.umd.min.js'
+
 Vue.config.productionTip = false
 
 console.log(7, CalmHarbin)

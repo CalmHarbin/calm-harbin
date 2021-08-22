@@ -52,10 +52,21 @@ module.exports = {
         lastUpdated: 'Last Updated', // 文件最后更新时间
         smoothScroll: true // 页面滚动
     },
+    plugins: [
+        [
+            'vuepress-plugin-typescript',
+            {
+                tsLoaderOptions: {
+                    // ts-loader 的所有配置项
+                    appendTsSuffixTo: [/\.vue$/, /\.tsx$/]
+                }
+            }
+        ]
+    ],
     configureWebpack: {
-        externals: {
-            vue: 'Vue'
-        }
+        // externals: {
+        //     vue: 'Vue'
+        // }
     },
     chainWebpack: (config) => {
         config.resolve.alias.set(
