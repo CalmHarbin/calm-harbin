@@ -1,6 +1,6 @@
 import { CalmComponent } from './component'
 
-/** Alert Component */
+/** BiuCard组件 */
 export declare class BiuCard extends CalmComponent {
     /** 标题 */
     title?: string
