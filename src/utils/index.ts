@@ -2,7 +2,6 @@ import XLSX from 'xlsx'
 import { Message } from 'element-ui'
 import { Decimal } from 'decimal.js'
 import dayjs from 'dayjs'
-import GLOBAL from './global'
 /*
  * 函数节流:当连续触发函数时,函数在n秒内只会执行一次
  * 函数防抖:函数频繁触发的情况下，只有函数触发的间隔超过指定间隔的时候，函数才会执行
@@ -45,14 +44,8 @@ export const debounce = function (
  * @param columns antd columns
  * @param data antd table dataSource
  * @param fileName 文件名称
- * @param omit 要过滤的field
  */
-export const exportExcel = (
-    columns: any[],
-    data: any[],
-    fileName: string,
-    ...omit: string[]
-) => {
+export const exportExcel = (columns: any[], data: any[], fileName: string) => {
     if (!data?.length) {
         Message({
             message: '没有要导出的数据',
@@ -61,19 +54,13 @@ export const exportExcel = (
         return
     }
 
-    const keys: string[] = [] // id数组
-    // id: label
-    const keyMap = columns.reduce((obj: any, cur: any) => {
-        if (cur.noShow || (omit && omit.includes(cur.id))) return obj
-        keys.push(cur.id)
-        return { ...obj, [cur.id]: cur.label }
-    }, {})
+    const header = columns.filter((item) => !item.noShow)
 
-    const newData = data.reduce((arr: any[], cur: any) => {
-        const newObj = keys.reduce((newCur: any, key: string) => {
-            const column = columns[GLOBAL.indexOfColumn(columns, key)]
-            let val: any =
-                cur[key] === undefined || cur[key] === null ? '' : cur[key]
+    const aoaData = [header.map((item) => item.label)]
+
+    data.forEach((item) => {
+        const rowData = header.reduce((row, column) => {
+            let val = item[column.id] ?? ''
             if (
                 (column.formType === 'select' ||
                     column.formType === 'dicSelect') &&
@@ -81,23 +68,19 @@ export const exportExcel = (
             ) {
                 // 下拉菜单数据转化
                 val =
-                    column?.formAttr?.options?.find(
-                        (item: any) => item.value.toString() === val.toString()
+                    column?.formAttr?.options?.(
+                        (i: any) => i.value === val.toString()
                     )?.label || val
             } else if (column.timeFormat && val) {
                 // 时间转化
                 val = dayjs(val).format(column.timeFormat)
             }
-            return {
-                ...newCur,
-                [keyMap[key]]: val
-            }
-        }, {})
-        arr.push(newObj)
-        return arr
-    }, [])
+            return [...row, val]
+        }, [])
+        aoaData.push(rowData)
+    })
 
-    const worksheet = XLSX.utils.json_to_sheet(newData)
+    const worksheet = XLSX.utils.aoa_to_sheet(aoaData)
     const workbook = XLSX.utils.book_new()
     XLSX.utils.book_append_sheet(workbook, worksheet)
     XLSX.writeFile(workbook, `${fileName || '导出文件'}_${Date.now()}.xls`, {
