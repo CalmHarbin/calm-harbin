@@ -9,7 +9,8 @@ import aa from '@test/components/aa.vue'
 console.log(BiuPageTest)
 
 // import calmHarbin from '@src/index.ts'
-// import BiuCard from '@packages/'
+import BiuCard from '@packages/biu-card/index'
+import BiuPage from '@packages/biu-page/index'
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -33,6 +34,9 @@ export default ({
     Vue.use(ElementUI)
     // console.log(calmHarbin)
     // Vue.use(calmHarbin)
+
+    Vue.use(BiuCard)
+    Vue.use(BiuPage)
 
     Vue.component('BiuPageTest', BiuPageTest)
 

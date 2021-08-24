@@ -71,6 +71,31 @@ module.exports = {
         //     vue: 'Vue'
         // },
         // extensions: ['.tsx', '.ts', '.js', '.jsx', '.vue', '.json']
+        module: {
+            rules: [
+                {
+                    test: /\.tsx?$/,
+                    exclude: /node_modules/,
+                    use: [
+                        {
+                            loader: 'babel-loader',
+                            options: {
+                                babelrc: false,
+                                configFile: false,
+                                presets: ['@vue/babel-preset-jsx']
+                            }
+                        },
+                        {
+                            loader: 'ts-loader',
+                            options: {
+                                transpileOnly: true,
+                                appendTsxSuffixTo: [/\.vue$/]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
     },
     chainWebpack: (config) => {
         config.resolve.alias.set(

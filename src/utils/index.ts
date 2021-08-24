@@ -68,7 +68,7 @@ export const exportExcel = (columns: any[], data: any[], fileName: string) => {
             ) {
                 // 下拉菜单数据转化
                 val =
-                    column?.formAttr?.options?.(
+                    column?.formAttr?.options?.find(
                         (i: any) => i.value === val.toString()
                     )?.label || val
             } else if (column.timeFormat && val) {
