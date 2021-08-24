@@ -6,6 +6,9 @@ module.exports = {
     title: 'Hello VuePress',
     description: '快速搭建后台页面',
     port: '8888',
+    markdown: {
+        lineNumbers: true // 代码块显示行号
+    },
     themeConfig: {
         //主题配置
         nav: [
@@ -66,7 +69,8 @@ module.exports = {
     configureWebpack: {
         // externals: {
         //     vue: 'Vue'
-        // }
+        // },
+        // extensions: ['.tsx', '.ts', '.js', '.jsx', '.vue', '.json']
     },
     chainWebpack: (config) => {
         config.resolve.alias.set(
@@ -79,5 +83,16 @@ module.exports = {
             path.resolve(__dirname, '../../types')
         )
         config.resolve.alias.set('@src', path.resolve(__dirname, '../../src'))
+
+        config.resolve.extensions.merge(['.ts', 'tsx'])
+
+        // config.module
+        //     .rule('tsx')
+        //     .use('babel-loader')
+        //     .loader('babel-loader')
+        //     .options({
+        //         // presets: ['@babel/preset-env', { targets: 'defaults' }]
+        //         plugins: ['transform-vue-jsx', 'transform-runtime']
+        //     })
     }
 }
