@@ -31,28 +31,32 @@ module.exports = {
         ],
         displayAllHeaders: true, // 默认值：false
         // 为以下路由添加侧边栏
-        sidebar: {
-            '/components/': [
-                {
-                    title: '开发指南', // 必要的
-                    // path: '/foo/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
-                    collapsable: false, // 是否可折叠， 默认true,
-                    sidebarDepth: 1, // 可选的, 默认值是 1
-                    children: ['/']
-                },
-                {
-                    title: '组件',
-                    collapsable: false,
-                    children: [
-                        'button',
-                        'biu-card'
-                        //...
-                        // 每加一个菜单需要在这里也新增一下
-                    ]
-                }
-            ]
-        },
-        lastUpdated: 'Last Updated', // 文件最后更新时间
+        sidebar: [
+            {
+                title: '快速上手', // 必要的
+                // path: '/foo/', // 可选的, 标题的跳转链接，应为绝对路径且必须存在
+                collapsable: false, // 是否可折叠， 默认true,
+                children: ['/components/installation', '/components/changelog']
+            },
+            {
+                title: '组件',
+                collapsable: false,
+                children: [
+                    '/components/biu-form',
+                    '/components/biu-form-item',
+                    '/components/biu-table',
+                    '/components/biu-select-table',
+                    '/components/biu-card',
+                    '/components/biu-card-form',
+                    '/components/biu-page',
+                    '/components/biu-dialog',
+                    '/components/biu-drawer',
+                    '/components/file-input'
+                    //...
+                    // 每加一个菜单需要在这里也新增一下
+                ]
+            }
+        ],
         smoothScroll: true // 页面滚动
     },
     plugins: [
