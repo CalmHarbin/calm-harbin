@@ -12,7 +12,7 @@
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "types": ["webpack-env"],
+        // "types": ["webpack-env"],
         "typeRoots": ["types/index.d.ts"],
         "paths": {
             "@/*": ["test/*"],
@@ -32,7 +32,10 @@
         "src/**/*.vue",
         "packages/**/*.ts",
         "packages/**/*.tsx",
-        "packages/**/*.vue"
+        "packages/**/*.vue",
+        "docs/.vuepress/**/*.ts",
+        "docs/.vuepress/**/*.tsx",
+        "docs/.vuepress/**/*.vue"
     ],
     "exclude": ["node_modules"]
 }

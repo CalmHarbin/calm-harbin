@@ -1,7 +1,7 @@
 ---
 home: true
 heroImage: /hero.png
-heroText: Hero 标题
+heroText: CalmHarbin
 tagline: null
 actionText: 快速上手 →
 actionLink: /components/button

@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
     base: '/',
     dest: 'docs/dist',
-    title: 'Hello VuePress',
+    title: 'CalmHarbin',
     description: '快速搭建后台页面',
     port: '8888',
     markdown: {
@@ -26,7 +26,7 @@ module.exports = {
             },
             {
                 text: 'github',
-                link: 'https://www.baidu.com'
+                link: 'https://github.com/CalmHarbin/calm-harbin'
             }
         ],
         displayAllHeaders: true, // 默认值：false
@@ -61,35 +61,35 @@ module.exports = {
             {
                 tsLoaderOptions: {
                     // ts-loader 的所有配置项
-                    appendTsSuffixTo: [/\.vue$/, /\.tsx$/]
+                    appendTsSuffixTo: [/\.vue$/, /\.md$/]
                 }
             }
         ]
     ],
     configureWebpack: {
-        // externals: {
-        //     vue: 'Vue'
-        // },
-        // extensions: ['.tsx', '.ts', '.js', '.jsx', '.vue', '.json']
         module: {
             rules: [
                 {
-                    test: /\.tsx?$/,
+                    test: /\.tsx$/,
                     exclude: /node_modules/,
                     use: [
+                        'cache-loader',
                         {
                             loader: 'babel-loader',
                             options: {
                                 babelrc: false,
                                 configFile: false,
-                                presets: ['@vue/babel-preset-jsx']
+                                presets: [
+                                    '@babel/preset-env',
+                                    '@vue/babel-preset-jsx'
+                                ]
                             }
                         },
                         {
                             loader: 'ts-loader',
                             options: {
                                 transpileOnly: true,
-                                appendTsxSuffixTo: [/\.vue$/]
+                                appendTsxSuffixTo: [/\.vue$/, /\.md$/]
                             }
                         }
                     ]
@@ -111,13 +111,25 @@ module.exports = {
 
         config.resolve.extensions.merge(['.ts', 'tsx'])
 
+        config.module
+            .rule('ts')
+            .use('babel-loader')
+            .loader('babel-loader')
+            .options({
+                presets: ['@babel/preset-env']
+            })
+
+        config.module
+            .rule('js')
+            .exclude.add(path.resolve(__dirname, '../../lib'))
+
         // config.module
-        //     .rule('tsx')
+        //     .rule('vue')
+        //     // .include([path.resolve(__dirname, '../')])
         //     .use('babel-loader')
         //     .loader('babel-loader')
         //     .options({
-        //         // presets: ['@babel/preset-env', { targets: 'defaults' }]
-        //         plugins: ['transform-vue-jsx', 'transform-runtime']
+        //         presets: ['@babel/preset-env']
         //     })
     }
 }
