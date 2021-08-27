@@ -68,11 +68,11 @@ export default class App extends Vue {
 
 <style lang="scss">
 #app {
+    margin-top: 60px;
+    color: #2c3e50;
     font-family: Avenir, Helvetica, Arial, sans-serif;
+    text-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    margin-top: 60px;
 }
 </style>
