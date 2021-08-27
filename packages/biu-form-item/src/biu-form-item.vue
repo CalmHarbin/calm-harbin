@@ -137,18 +137,10 @@ import {
 } from 'vue-property-decorator'
 import { Input, DatePicker, TimePicker } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
+import { formTypeType } from '@types/biu-form-item.d.ts'
 import Area from './area.vue'
 // 下拉框
 import BiuSelect from './biu-select.vue'
-
-export type formTypeType =
-    | 'text' // 显示文本
-    | 'input'
-    | 'select'
-    | 'date'
-    | 'timeSelect' // 固定时间范围选择
-    | 'area'
-    | 'slot'
 
 @Component({
     inheritAttrs: false,

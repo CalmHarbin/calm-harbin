@@ -1,4 +1,4 @@
-import XLSX from 'xlsx'
+// import XLSX from 'xlsx'
 import { Message } from 'element-ui'
 import { Decimal } from 'decimal.js'
 import dayjs from 'dayjs'
@@ -17,7 +17,7 @@ export const debounce = function (
     throttle = false
 ) {
     let timeout: number | null
-    return function () {
+    return function (this: any) {
         const context = this
         // eslint-disable-next-line prefer-rest-params
         const args: any = arguments

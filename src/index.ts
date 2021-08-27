@@ -22,11 +22,11 @@ import BiuSelectTable from '@packages/biu-select-table/index'
 import waves from './directive/waves/index'
 
 // 引入工具方法
-import { debounce, exportExcel, summary } from './utils'
-import { startandends } from './utils/date'
+export { debounce, exportExcel, summary } from './utils'
+export { startandends } from './utils/date'
 
 // 正则
-import reg from './utils/regExp.js'
+export { default as reg } from './utils/regExp.js'
 
 const components = {
     BiuDialog,
@@ -92,10 +92,5 @@ export default {
     BiuPage,
     BiuForm,
     BiuFormItem,
-    BiuSelectTable,
-    reg,
-    debounce,
-    exportExcel,
-    summary,
-    startandends
+    BiuSelectTable
 }

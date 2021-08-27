@@ -112,6 +112,11 @@ module.exports = {
             path.resolve(__dirname, '../../types')
         )
         config.resolve.alias.set('@src', path.resolve(__dirname, '../../src'))
+        // 配置calm-harin别名,使文档展示用法能和真实用户保持一致。
+        config.resolve.alias.set(
+            'calm-harbin',
+            path.resolve(__dirname, '../../src/index.ts')
+        )
 
         config.resolve.extensions.merge(['.ts', 'tsx'])
 
@@ -126,14 +131,5 @@ module.exports = {
         config.module
             .rule('js')
             .exclude.add(path.resolve(__dirname, '../../lib'))
-
-        // config.module
-        //     .rule('vue')
-        //     // .include([path.resolve(__dirname, '../')])
-        //     .use('babel-loader')
-        //     .loader('babel-loader')
-        //     .options({
-        //         presets: ['@babel/preset-env']
-        //     })
     }
 }

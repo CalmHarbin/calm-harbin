@@ -1,9 +1,13 @@
 // import Vue from 'vue'
 import ElementUI from 'element-ui' // 全局引入element-ui
 
-import calmHarbin from '../../lib/calmHarbin.umd.min.js'
+// import calmHarbin from '../../lib/calmHarbin.umd.min.js'
+import calmHarbin from '@src/index'
 
 import BiuCardDemo from '@test/components/biu-card/biu-card-demo.vue'
+import BiuCardFormDemo from '@test/components/biu-card-form/biu-card-form-demo.vue'
+import BiuFormItemInput from '@test/components/biu-form-item/biu-form-item-input.vue'
+import BiuFormDemo from '@test/components/biu-form/biu-form-demo.vue'
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -29,6 +33,9 @@ export default ({
     Vue.use(calmHarbin)
 
     Vue.component(BiuCardDemo.name, BiuCardDemo)
+    Vue.component(BiuCardFormDemo.name, BiuCardFormDemo)
+    Vue.component(BiuFormItemInput.name, BiuFormItemInput)
+    Vue.component(BiuFormDemo.name, BiuFormDemo)
 
     // Vue.component('BiuPageTest', BiuPageTest)
     // ...做一些其他的应用级别的优化

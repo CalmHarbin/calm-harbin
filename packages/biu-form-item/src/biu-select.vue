@@ -1,7 +1,6 @@
 <template>
     <el-select
         :value="multiple ? [...customValue] : customValue"
-        size="mini"
         :clearable="attrs.clearable !== undefined ? attrs.clearable : true"
         :multiple="multiple"
         filterable

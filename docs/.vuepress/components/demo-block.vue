@@ -184,24 +184,24 @@ export default {
     }
 
     .meta {
+        height: 0;
+        overflow: hidden;
         background-color: #fafafa;
         border-top: solid 1px #eaeefb;
-        overflow: hidden;
-        height: 0;
         transition: height 0.2s;
     }
 
     .description {
-        padding: 20px;
         box-sizing: border-box;
-        border: solid 1px #ebebeb;
-        border-radius: 3px;
+        margin: 10px;
+        padding: 20px;
+        color: #666;
         font-size: 14px;
         line-height: 22px;
-        color: #666;
         word-break: break-word;
-        margin: 10px;
         background-color: #fff;
+        border: solid 1px #ebebeb;
+        border-radius: 3px;
 
         p {
             margin: 0;
@@ -209,15 +209,15 @@ export default {
         }
 
         code {
-            color: #5e6d82;
-            background-color: #e6effb;
-            margin: 0 4px;
             display: inline-block;
-            padding: 1px 5px;
-            font-size: 12px;
-            border-radius: 3px;
             height: 18px;
+            margin: 0 4px;
+            padding: 1px 5px;
+            color: #5e6d82;
+            font-size: 12px;
             line-height: 18px;
+            background-color: #e6effb;
+            border-radius: 3px;
         }
     }
 
@@ -227,12 +227,12 @@ export default {
         }
 
         code.hljs {
-            margin: 0;
-            border: none;
             max-height: none;
-            border-radius: 0;
-            line-height: 1.8;
+            margin: 0;
             color: black;
+            line-height: 1.8;
+            border: none;
+            border-radius: 0;
             &::before {
                 content: none;
             }
@@ -240,17 +240,17 @@ export default {
     }
 
     .demo-block-control {
-        border-top: solid 1px #eaeefb;
-        height: 44px;
+        position: relative;
         box-sizing: border-box;
-        background-color: #fff;
-        border-bottom-left-radius: 4px;
-        border-bottom-right-radius: 4px;
-        text-align: center;
+        height: 44px;
         margin-top: -1px;
         color: #d3dce6;
+        text-align: center;
+        background-color: #fff;
+        border-top: solid 1px #eaeefb;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 4px;
         cursor: pointer;
-        position: relative;
 
         &.is-fixed {
             position: fixed;
@@ -269,11 +269,11 @@ export default {
 
         > span {
             position: absolute;
-            transform: translateX(-30px);
+            display: inline-block;
             font-size: 14px;
             line-height: 44px;
+            transform: translateX(-30px);
             transition: 0.3s;
-            display: inline-block;
         }
 
         &:hover {
@@ -283,18 +283,18 @@ export default {
 
         & .text-slide-enter,
         & .text-slide-leave-active {
-            opacity: 0;
             transform: translateX(10px);
+            opacity: 0;
         }
 
         .control-button {
-            line-height: 26px;
             position: absolute;
             top: 0;
             right: 0;
-            font-size: 14px;
-            padding-left: 5px;
             padding-right: 25px;
+            padding-left: 5px;
+            font-size: 14px;
+            line-height: 26px;
         }
     }
 }
