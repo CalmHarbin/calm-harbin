@@ -67,6 +67,7 @@ type treeNodeType = {
 }
 
 export type areaType = 'city' | 'area'
+
 @Component({
     inheritAttrs: false,
     components: {

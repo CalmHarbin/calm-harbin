@@ -18,8 +18,7 @@
             "@/*": ["test/*"],
             "@packages/*": ["packages/*"],
             "@src/*": ["src/*"],
-            "@test/*": ["test/*"],
-            "@types/*": ["types/*"]
+            "@test/*": ["test/*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },

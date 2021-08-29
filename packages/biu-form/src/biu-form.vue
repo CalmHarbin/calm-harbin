@@ -507,8 +507,20 @@ export default class BiuForm extends Vue {
         this.proportion = proportion / 1000 // 需要缩放的比列
     }
 
-    validate(...props: any) {
+    public validate(...props: any) {
         ;(this.$refs.form as any).validate(...props)
+    }
+
+    public validateField(...props: any) {
+        ;(this.$refs.form as any).validateField(...props)
+    }
+
+    public resetFields(...props: any) {
+        ;(this.$refs.form as any).resetFields(...props)
+    }
+
+    public clearValidate(...props: any) {
+        ;(this.$refs.form as any).clearValidate(...props)
     }
 }
 </script>

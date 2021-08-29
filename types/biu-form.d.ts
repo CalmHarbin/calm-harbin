@@ -1,7 +1,12 @@
 import { VNode } from 'vue'
 import { DatePickerType } from 'element-ui/types/date-picker'
+import { ValidateCallback, ValidateFieldCallback } from 'element-ui/types/form'
 import { CalmComponent } from './component'
 import { areaType, formTypeType } from './biu-form-item'
+
+type objType = {
+    [x: string]: any
+}
 
 export type formAttrType = {
     /**
@@ -87,11 +92,44 @@ export type BiuformType = {
     label?: string
 } & formAttrType
 
-/** BiuForm组件 */
-export declare class BiuForm extends CalmComponent {
-    /** 标题 */
-    source: BiuformType[]
-}
-
 /** 表单展示方式：vertical垂直展示，horizontal水平展示 */
 export type directionType = 'vertical' | 'horizontal'
+
+/** BiuForm组件 */
+export declare class BiuForm extends CalmComponent {
+    /** 绑定值 */
+    value: objType
+
+    /** 标题 */
+    source: BiuformType[]
+
+    /** 是否显示搜索按钮 */
+    showBtn?: boolean
+
+    /** 表单项排列方向 */
+    direction?: directionType
+
+    /**
+     * 是否自适应表单项的宽度，默认true，
+     * 表单一行可放置数量为1~6个。默认4个，可以配置min来控制最小宽度。
+     */
+    resize?: boolean
+
+    /** 表单项的最小宽度，默认280，最大宽度=(min * 3) / 2 */
+    min?: number
+
+    /** 对表单进行校验 */
+    validate: ((callback: ValidateCallback) => void) | (() => Promise<boolean>)
+
+    /** 对部分表单字段进行校验的方法 */
+    validateField: (
+        props: string | string[],
+        callback?: ValidateFieldCallback
+    ) => void
+
+    /** 对整个表单进行重置到初始值，并移除校验结果 */
+    resetFields: () => void
+
+    /** 移除表单项的校验结果 */
+    clearValidate: (props?: string | string[]) => void
+}

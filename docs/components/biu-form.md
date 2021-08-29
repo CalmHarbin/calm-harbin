@@ -28,9 +28,22 @@
 
 #### 垂直排列
 
-#### BiuCard Attributes
+#### 属性
 
-| 参数     | 说明         | 必填                                | 类型    | 默认值  |
-| -------- | :----------- | :---------------------------------- | :------ | :------ |
-| `title`  | 标题         | <el-checkbox></el-checkbox>         | string  | —       |
-| `border` | 是否显示边框 | <el-checkbox checked></el-checkbox> | boolean | `false` |
+| 参数              | 说明                                      | <div style="white-space: nowrap;">必填</div> | 类型                  | 默认值       |
+| ----------------- | :---------------------------------------- | :------------------------------------------- | :-------------------- | :----------- |
+| `source`          | 表单数据源                                | <el-checkbox checked></el-checkbox>          | BiuformType[]         | —            |
+| `value / v-model` | 绑定值                                    | <el-checkbox checked></el-checkbox>          | objType               | —            |
+| `showBtn`         | 是否显示搜索按钮                          | <el-checkbox></el-checkbox>                  | boolean               | `false`      |
+| `direction`       | 表单项排列方向                            | <el-checkbox></el-checkbox>                  | vertical， horizontal | `horizontal` |
+| `resize`          | 是否自适应表单项的宽度                    | <el-checkbox></el-checkbox>                  | boolean               | `false`      |
+| `min`             | 表单项的最小宽度，仅当 resize=true 时生效 | <el-checkbox></el-checkbox>                  | number                | `280`        |
+
+#### 方法
+
+| 方法名          | 说明                                                                  | 类型                                                      |
+| --------------- | --------------------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- |
+| `validate`      | 对整个表单进行校验，同 element 的 validate                            | `(callback: ValidateCallback) => void`或者`() => Promise` |
+| `validateField` | 对部分表单字段进行校验，同 element 的 validateField                   | `(props:string                                            | string[], callback?: ValidateFieldCallback) => void` |
+| `resetFields`   | 对整个表单进行重置到初始值，并移除校验结果，同 element 的 resetFields | `() => void`                                              |
+| `clearValidate` | 移除表单项的校验结果，同 element 的 clearValidate                     | `(props?: string                                          | string[]) => void`                                   |

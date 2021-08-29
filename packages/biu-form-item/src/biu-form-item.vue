@@ -137,7 +137,7 @@ import {
 } from 'vue-property-decorator'
 import { Input, DatePicker, TimePicker } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
-import { formTypeType } from '@types/biu-form-item.d.ts'
+import { formTypeType } from '../../../types/biu-form-item'
 import Area from './area.vue'
 // 下拉框
 import BiuSelect from './biu-select.vue'
