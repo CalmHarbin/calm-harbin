@@ -3,7 +3,7 @@
         <el-cascader
             v-model="customValue"
             :options="options"
-            clearable
+            :clearable="attrs.clearable !== undefined ? attrs.clearable : true"
             filterable
             @change="handleChange"
             v-bind="attrs"

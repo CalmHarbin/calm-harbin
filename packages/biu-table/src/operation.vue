@@ -42,40 +42,10 @@
 
 <script lang="tsx">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import { ButtonType } from 'element-ui/types/button'
 import { Button, Tooltip } from 'element-ui'
 import waves from '@src/directive/waves/index'
+import { OperationOptionType } from 'calm-harin/types/operation'
 
-export type OperationOptionType = {
-    title?: string
-    /**
-     * 这里有两个参数,第一个为发送请求的参数, 第二个为格式化后接口返回的数据
-     */
-    callback?: (btn: OperationOptionType) => void
-    type?: ButtonType | 'default'
-    // eslint-disable-next-line no-undef
-    render?: () => JSX.Element
-    /**
-     * 隐藏按钮
-     */
-    hidden?: boolean
-    /**
-     * 禁用按钮
-     */
-    disabled?: boolean | (() => boolean)
-    /**
-     * 禁用时提示语
-     */
-    message?: string | (() => string | undefined)
-    /**
-     * 按钮loading
-     */
-    loading?: boolean
-    /**
-     * 传入给按钮的额外属性,参考
-     */
-    btnProps?: any
-}
 @Component({
     components: {
         Render: {

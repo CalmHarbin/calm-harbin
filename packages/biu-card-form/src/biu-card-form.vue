@@ -32,7 +32,7 @@ import {
 } from 'vue-property-decorator'
 import BiuCard from '@packages/biu-card/src/biu-card.vue'
 import BiuForm from '@packages/biu-form/src/biu-form.vue'
-import { BiuformType } from '../../../types/biu-form'
+import { BiuformType } from 'calm-harin/types/biu-form'
 import { Row, Col } from 'element-ui'
 import cloneDeep from 'lodash/cloneDeep'
 import { isEqualWith } from '@src/utils/util'

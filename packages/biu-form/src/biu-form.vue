@@ -26,36 +26,38 @@
                     v-for="formItem in sourceGroup"
                     :key="formItem.id"
                 >
-                    <Render
-                        v-if="formItem.formType === 'slot'"
-                        :render-func="formItem.render"
-                        :scope="formItem"
-                    ></Render>
-                    <el-form-item
-                        v-else
-                        :label="formItem.label"
-                        :label-width="
-                            formItem.labelWidth
-                                ? formItem.labelWidth + 'px'
-                                : undefined
-                        "
-                        :prop="formItem.id"
-                    >
-                        <span
-                            v-if="formItem.label"
-                            class="ellipsis"
-                            slot="label"
-                            :title="formItem.label"
-                            >{{ formItem.label
-                            }}{{ attrs['label-suffix'] || '' }}</span
+                    <slot :name="formItem.id" :col="formItem">
+                        <Render
+                            v-if="formItem.formType === 'slot'"
+                            :render-func="formItem.render"
+                            :scope="formItem"
+                        ></Render>
+                        <el-form-item
+                            v-else
+                            :label="formItem.label"
+                            :label-width="
+                                formItem.labelWidth
+                                    ? formItem.labelWidth + 'px'
+                                    : undefined
+                            "
+                            :prop="formItem.id"
                         >
-                        <BiuFormItem
-                            :formType="formItem.formType"
-                            v-model="customValue[formItem.id]"
-                            v-bind="formItem.otherAttr"
-                            v-on="formItem.otherEvent"
-                        />
-                    </el-form-item>
+                            <span
+                                v-if="formItem.label"
+                                class="ellipsis"
+                                slot="label"
+                                :title="formItem.label"
+                                >{{ formItem.label
+                                }}{{ attrs['label-suffix'] || '' }}</span
+                            >
+                            <BiuFormItem
+                                :formType="formItem.formType"
+                                v-model="customValue[formItem.id]"
+                                v-bind="formItem.otherAttr"
+                                v-on="formItem.otherEvent"
+                            />
+                        </el-form-item>
+                    </slot>
                 </el-col>
                 <template v-if="showBtn">
                     <!-- 首行的 -->
@@ -135,7 +137,7 @@ import {
     Model,
     Emit
 } from 'vue-property-decorator'
-import { directionType, BiuformType } from '../../../types/biu-form'
+import { directionType, BiuformType } from 'calm-harin/types/biu-form'
 import BiuFormItem from '@packages/biu-form-item/src/biu-form-item.vue'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
