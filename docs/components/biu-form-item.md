@@ -18,9 +18,43 @@
 :::
 </demo-block>
 
-#### BiuCard Attributes
+::: tip 提示
+每一种类型的表单项，均是由`Element`的相应组件二次封装而成，可直接配置相应属性或调用其方法。
+:::
 
-| 参数     | 说明         | 必填                                | 类型    | 默认值  |
-| -------- | :----------- | :---------------------------------- | :------ | :------ |
-| `title`  | 标题         | <el-checkbox></el-checkbox>         | string  | —       |
-| `border` | 是否显示边框 | <el-checkbox checked></el-checkbox> | boolean | `false` |
+#### 属性
+
+| 参数              | 说明   | 必填                                | 类型                                                                     | 默认值 |
+| ----------------- | :----- | :---------------------------------- | :----------------------------------------------------------------------- | :----- |
+| `formType`        | 标题   | <el-checkbox checked></el-checkbox> | text，input，select，date，timeSelect，timerange，area，treeSelect，slot | —      |
+| `value / v-model` | 绑定值 | <el-checkbox checked></el-checkbox> | objType                                                                  | —      |
+
+#### formType='input'
+
+| 参数   | 说明       | 必填                        | 类型                                        | 默认值 |
+| ------ | :--------- | :-------------------------- | :------------------------------------------ | :----- |
+| `type` | 输入框类型 | <el-checkbox></el-checkbox> | text，textarea 和其他 原生 input 的 type 值 | —      |
+
+#### formType='date'
+
+| 参数       | 说明         | 必填                        | 类型                                                                           | 默认值 |
+| ---------- | :----------- | :-------------------------- | :----------------------------------------------------------------------------- | :----- |
+| `dateType` | 日期选择类型 | <el-checkbox></el-checkbox> | year，month，date，dates，week，datetime，datetimerange，daterange，monthrange | —      |
+
+#### formType='select'
+
+| 参数      | 说明 | 必填                                | 类型                                 | 默认值 |
+| --------- | :--- | :---------------------------------- | :----------------------------------- | :----- |
+| `options` | 选项 | <el-checkbox checked></el-checkbox> | `{ label: string, value: string }[]` | —      |
+
+#### formType='area'
+
+| 参数       | 说明 | 必填                        | 类型                 | 默认值 |
+| ---------- | :--- | :-------------------------- | :------------------- | :----- |
+| `areaType` | 类型 | <el-checkbox></el-checkbox> | province，city，area | —      |
+
+#### formType='treeSelect'
+
+| 参数   | 说明       | 必填                                | 类型           | 默认值 |
+| ------ | :--------- | :---------------------------------- | :------------- | :----- |
+| `data` | 树的数据源 | <el-checkbox checked></el-checkbox> | treeNodeType[] | —      |

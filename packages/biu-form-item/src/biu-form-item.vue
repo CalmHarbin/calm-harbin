@@ -36,7 +36,11 @@
             ></el-input>
         </template>
         <template v-else-if="formType === 'select' || formType === 'dicSelect'">
-            <BiuSelect v-model="formValue" v-bind="attrs" v-on="listeners" />
+            <biu-select
+                v-model="formValue"
+                v-bind="attrs"
+                v-on="listeners"
+            ></biu-select>
         </template>
 
         <template v-else-if="formType === 'date'">
@@ -54,11 +58,19 @@
             >
             </el-date-picker>
         </template>
+        <!-- 时间选择 -->
+        <template v-else-if="formType === 'timeSelect'">
+            <el-time-picker
+                v-model="formValue"
+                :placeholder="attrs.placeholder || '选择时间'"
+            >
+            </el-time-picker>
+        </template>
         <!-- 固定时间点范围选择 -->
         <div
-            class="BiuFormItem-timeSelect"
+            class="BiuFormItem-timerange"
             style="display: flex"
-            v-else-if="formType === 'timeSelect'"
+            v-else-if="formType === 'timerange'"
         >
             <el-time-picker
                 is-range
@@ -69,50 +81,6 @@
                 placeholder="选择时间范围"
             >
             </el-time-picker>
-            <!-- <el-time-select
-                placeholder="起始时间"
-                v-model="formValue[0]"
-                :picker-options="
-                    attrs['picker-options'] || {
-                        start: '08:30',
-                        step: '00:15',
-                        end: '18:30'
-                    }
-                "
-                @change="
-                    val =>
-                        listeners.change &&
-                        listeners.change([val, formValue[1]])
-                "
-                v-bind="attrs"
-                v-on="listeners"
-            >
-            </el-time-select>
-            <el-time-select
-                placeholder="结束时间"
-                v-model="formValue[1]"
-                :picker-options="
-                    attrs['picker-options']
-                        ? {
-                              ...attrs['picker-options'],
-                              minTime: formValue[0]
-                          }
-                        : {
-                              start: '08:30',
-                              step: '00:15',
-                              end: '18:30',
-                              minTime: formValue[0]
-                          }
-                "
-                @change="
-                    val =>
-                        listeners.change &&
-                        listeners.change([formValue[0], val])
-                "
-                v-bind="attrs"
-                v-on="listeners"
-            >
-            </el-time-select> -->
         </div>
         <template v-else-if="formType === 'area'">
             <Area
@@ -121,6 +89,13 @@
                 v-bind="attrs"
                 v-on="listeners"
             />
+        </template>
+        <template v-else-if="formType === 'treeSelect'">
+            <tree-select
+                v-model="formValue"
+                v-bind="attrs"
+                v-on="listeners"
+            ></tree-select>
         </template>
     </div>
 </template>
@@ -141,12 +116,14 @@ import { formTypeType } from 'calm-harin/types/biu-form-item'
 import Area from './area.vue'
 // 下拉框
 import BiuSelect from './biu-select.vue'
+import TreeSelect from './tree-select.vue'
 
 @Component({
     inheritAttrs: false,
     components: {
         Area,
         BiuSelect,
+        TreeSelect,
         [Input.name]: Input,
         [DatePicker.name]: DatePicker,
         [TimePicker.name]: TimePicker

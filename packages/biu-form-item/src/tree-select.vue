@@ -6,7 +6,6 @@
             :value="
                 customMultiple ? checkListValue.join(',') : checkListValue[0]
             "
-            size="mini"
             clearable
             filterable
             :multiple="false"
@@ -58,22 +57,14 @@ import {
 } from 'vue-property-decorator'
 import { Select, Option, Tree, Checkbox } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
-
-type treeNodeType = {
-    label: string
-    id: string
-    pid?: string
-    children?: treeNodeType[]
-}
-
-export type areaType = 'city' | 'area'
+import { treeNodeType } from 'calm-harin/types/biu-form-item'
 
 @Component({
     inheritAttrs: false,
     components: {
         [Select.name]: Select,
         [Option.name]: Option,
-        [Tree.name]: Tree,
+        [Tree.name]: Tree as any,
         [Checkbox.name]: Checkbox
     }
 })

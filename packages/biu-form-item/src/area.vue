@@ -1,14 +1,29 @@
 <template>
     <div class="calm-area">
-        <el-cascader
-            v-model="customValue"
-            :options="options"
-            :clearable="attrs.clearable !== undefined ? attrs.clearable : true"
-            filterable
-            @change="handleChange"
-            v-bind="attrs"
-            v-on="listeners"
-        ></el-cascader>
+        <template v-if="type === 'province'">
+            <biu-select
+                v-model="customValue"
+                :options="options"
+                :clearable="
+                    attrs.clearable !== undefined ? attrs.clearable : true
+                "
+                v-bind="attrs"
+                v-on="listeners"
+            ></biu-select>
+        </template>
+        <template v-else>
+            <el-cascader
+                v-model="customValue"
+                :options="options"
+                :clearable="
+                    attrs.clearable !== undefined ? attrs.clearable : true
+                "
+                filterable
+                @change="handleChange"
+                v-bind="attrs"
+                v-on="listeners"
+            ></el-cascader>
+        </template>
     </div>
 </template>
 
@@ -21,20 +36,21 @@ import {
     Emit,
     Prop
 } from 'vue-property-decorator'
-import { cityPicker, countyPicker } from './area.js'
+import { provinceOptions, cityPicker, countyPicker } from './area.js'
 import { Cascader } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
-
-export type areaType = 'city' | 'area'
+import { areaType } from 'calm-harin/types/biu-form-item'
+import BiuSelect from './biu-select.vue'
 
 @Component({
     inheritAttrs: false,
     components: {
+        BiuSelect,
         [Cascader.name]: Cascader
     }
 })
 export default class Area extends Vue {
-    @Prop(String) type?: areaType
+    @Prop({ type: String, default: 'area' }) type?: areaType
     @Model('setValue') value!: string[]
 
     customValue: string[] = []
@@ -50,8 +66,10 @@ export default class Area extends Vue {
     private listeners = {}
 
     get options() {
-        if (this.type === 'area') return countyPicker
+        if (this.type === 'province') return provinceOptions
         else if (this.type === 'city') return cityPicker
+        else if (this.type === 'area') return countyPicker
+
         return countyPicker
     }
 

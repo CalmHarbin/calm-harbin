@@ -6,9 +6,19 @@ export type formTypeType =
     | 'input'
     | 'select'
     | 'date'
-    | 'timeSelect' // 固定时间范围选择
+    | 'timeSelect'
+    | 'timerange' // 时间范围选择
     | 'area'
+    | 'treeSelect'
     | 'slot'
 
 /* 省市区组件可选类型 */
-export type areaType = 'city' | 'area'
+export type areaType = 'province' | 'city' | 'area'
+
+/** 树组件数据源 */
+export type treeNodeType = {
+    label: string
+    id: string
+    pid?: string
+    children?: treeNodeType[]
+}
