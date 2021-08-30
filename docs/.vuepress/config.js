@@ -117,6 +117,10 @@ module.exports = {
             'calm-harbin',
             path.resolve(__dirname, '../../src/index.ts')
         )
+        config.resolve.alias.set(
+            'calm-harbin/types',
+            path.resolve(__dirname, '../../types')
+        )
 
         config.resolve.extensions.merge(['.ts', 'tsx'])
 

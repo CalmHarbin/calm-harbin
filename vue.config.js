@@ -82,6 +82,10 @@ module.exports = {
         )
         config.resolve.alias.set('@test', path.resolve(__dirname, './test'))
         config.resolve.alias.set('@src', path.resolve(__dirname, './src'))
+        config.resolve.alias.set(
+            'calm-harin/types',
+            path.resolve(__dirname, './types')
+        )
 
         // app模式使用cdn
         if (

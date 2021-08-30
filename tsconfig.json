@@ -15,10 +15,11 @@
         // "types": ["webpack-env"],
         "typeRoots": ["types/index.d.ts"],
         "paths": {
-            "@/*": ["test/*"],
+            "@/*": ["./*"],
             "@packages/*": ["packages/*"],
             "@src/*": ["src/*"],
-            "@test/*": ["test/*"]
+            "@test/*": ["test/*"],
+            "calm-harin/*": ["./*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },
