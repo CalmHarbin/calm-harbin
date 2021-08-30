@@ -71,6 +71,11 @@ module.exports = {
         ]
     ],
     configureWebpack: {
+        externals: {
+            xlsx: 'XLSX',
+            'decimal.js': 'Decimal',
+            dayjs: 'dayjs'
+        },
         module: {
             rules: [
                 {

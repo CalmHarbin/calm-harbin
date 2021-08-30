@@ -43,9 +43,8 @@ import {
     Emit,
     Watch
 } from 'vue-property-decorator'
-import Operation, {
-    OperationOptionType
-} from '@packages/biu-table/src/operation.vue'
+import { OperationOptionType } from 'calm-harin/types/operation'
+import Operation from '@packages/biu-table/src/operation.vue'
 import waves from '@src/directive/waves/index'
 import { isEqualWith } from '@src/utils/util'
 

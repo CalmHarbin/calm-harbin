@@ -1,4 +1,4 @@
-// import XLSX from 'xlsx'
+import XLSX from 'xlsx'
 import { Message } from 'element-ui'
 import { Decimal } from 'decimal.js'
 import dayjs from 'dayjs'

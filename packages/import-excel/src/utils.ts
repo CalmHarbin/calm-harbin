@@ -1,4 +1,4 @@
-// import XLSX from 'xlsx'
+import XLSX from 'xlsx'
 import trim from 'lodash/trim'
 
 /**

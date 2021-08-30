@@ -8,6 +8,12 @@ import BiuCardDemo from '@test/components/biu-card/biu-card-demo.vue'
 import BiuCardFormDemo from '@test/components/biu-card-form/biu-card-form-demo.vue'
 import BiuFormItemInput from '@test/components/biu-form-item/biu-form-item-input.vue'
 import BiuFormDemo from '@test/components/biu-form/biu-form-demo.vue'
+import BiuFormSpan from '@test/components/biu-form/biu-form-span.vue'
+import BiuFormBr from '@test/components/biu-form/biu-form-br.vue'
+import BiuFormSlot from '@test/components/biu-form/biu-form-slot.vue'
+import BiuFormResize from '@test/components/biu-form/biu-form-resize.vue'
+import BiuFormDirection from '@test/components/biu-form/biu-form-direction.vue'
+import BiuFormElement from '@test/components/biu-form/biu-form-element.vue'
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -36,6 +42,12 @@ export default ({
     Vue.component(BiuCardFormDemo.name, BiuCardFormDemo)
     Vue.component(BiuFormItemInput.name, BiuFormItemInput)
     Vue.component(BiuFormDemo.name, BiuFormDemo)
+    Vue.component(BiuFormSpan.name, BiuFormSpan)
+    Vue.component(BiuFormBr.name, BiuFormBr)
+    Vue.component(BiuFormSlot.name, BiuFormSlot)
+    Vue.component(BiuFormResize.name, BiuFormResize)
+    Vue.component(BiuFormDirection.name, BiuFormDirection)
+    Vue.component(BiuFormElement.name, BiuFormElement)
 
     // Vue.component('BiuPageTest', BiuPageTest)
     // ...做一些其他的应用级别的优化

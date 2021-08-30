@@ -13,7 +13,7 @@ import { Component, Vue } from 'vue-property-decorator'
     }
 })
 export default class FileInput extends Vue {
-    id = 1
+    private key = 1
     selectFile = (): void => {
         ;(this.$refs.file as any).vaule = null
         ;(this.$refs.file as any).click()
@@ -31,7 +31,7 @@ export default class FileInput extends Vue {
             <div style={divStyle} onClick={this.selectFile}>
                 {this.$slots.default}
                 <input
-                    key={this.id}
+                    key={this.key}
                     ref="file"
                     type="file"
                     accept={accept}
@@ -51,7 +51,7 @@ export default class FileInput extends Vue {
                             importFile(e.target.files)
                         }
                         // 更新input,防止选择同一个文件不能
-                        this.id += 1
+                        this.key += 1
                     }}
                 ></input>
             </div>

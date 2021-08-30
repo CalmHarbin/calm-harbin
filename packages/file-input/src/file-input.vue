@@ -2,7 +2,7 @@
     <div :style="divStyle" @click="selectFile">
         <slot></slot>
         <input
-            :key="id"
+            :key="key"
             ref="file"
             type="file"
             :accept="accept"
@@ -20,11 +20,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
-@Component({
-    inheritAttrs: false
-})
+@Component
 export default class FileInput extends Vue {
     @Prop(Object) divStyle: any
 
@@ -38,7 +36,7 @@ export default class FileInput extends Vue {
 
     @Prop(Function) importFile: ((e: any) => void) | undefined
 
-    id = 1
+    private key = 1
 
     selectFile(): void {
         ;(this.$refs.file as any).vaule = null
@@ -52,7 +50,7 @@ export default class FileInput extends Vue {
             this.importFile(e.target.files)
         }
         // 更新input,防止选择同一个文件不能
-        this.id += 1
+        this.key += 1
     }
 }
 </script>
