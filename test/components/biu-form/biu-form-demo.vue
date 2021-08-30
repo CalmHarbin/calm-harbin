@@ -15,6 +15,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { reg } from 'calm-harbin'
+import { BiuformType } from 'calm-harin/types/biu-form'
+import { OperationOptionType } from 'calm-harin/types/operation'
 
 @Component
 export default class BiuFormDemo extends Vue {
@@ -22,7 +24,7 @@ export default class BiuFormDemo extends Vue {
 
     loading = false
 
-    get source() {
+    get source(): BiuformType[] {
         return [
             {
                 formType: 'input',
@@ -132,7 +134,7 @@ export default class BiuFormDemo extends Vue {
         }
     }
 
-    get operationOptions() {
+    get operationOptions(): OperationOptionType[] {
         return [
             {
                 title: '重置',

@@ -20,13 +20,104 @@
 
 #### 自定义列宽
 
+<demo-block>
+::: slot source
+<BiuFormSpan></BiuFormSpan>
+:::
+
+你可以利用`span`自由配置宽度，目前仅支持 6，12，18，24 四种值，默认 6。
+
+::: slot highlight
+
+<<< @/test/components/biu-form/biu-form-span.vue
+
+:::
+</demo-block>
+
 #### 自定义换行
 
-#### 使用插槽
+<demo-block>
+::: slot source
+<BiuFormBr></BiuFormBr>
+:::
 
-#### 不自动适应
+你可以配置`br`来控制换行。
+
+::: slot highlight
+
+<<< @/test/components/biu-form/biu-form-br.vue
+
+:::
+</demo-block>
+
+#### 自定义渲染
+
+<demo-block>
+::: slot source
+<BiuFormSlot></BiuFormSlot>
+:::
+
+我们为自定义渲染提供了两种方式，分为为`render`和`slot`，请注意示例中 **发货人** 和 **发货地区** 的配置。
+
+::: warning 注意
+使用`render`来自定义渲染，注意：formType 必须为 slot 时生效。
+:::
+
+::: slot highlight
+
+<<< @/test/components/biu-form/biu-form-slot.vue
+
+:::
+</demo-block>
+
+#### 不自动适应宽度
+
+<demo-block>
+::: slot source
+<BiuFormResize></BiuFormResize>
+:::
+
+配置`resize`为`false`可以取消自动适应宽度，强制使用配置的`span`值。
+
+::: slot highlight
+
+<<< @/test/components/biu-form/biu-form-resize.vue
+
+:::
+</demo-block>
 
 #### 垂直排列
+
+<demo-block>
+::: slot source
+<BiuFormDirection></BiuFormDirection>
+:::
+
+配置`direction`为`vertical`可以让表单垂直排列。
+
+::: slot highlight
+
+<<< @/test/components/biu-form/biu-form-direction.vue
+
+:::
+</demo-block>
+
+#### 使用 elementUI 的相关配置
+
+<demo-block>
+::: slot source
+<BiuFormElement></BiuFormElement>
+:::
+
+对于`el-form`组件的属性你可以直接配置在`biu-form`组件上。
+如果你想对某个表单项设置其他属性，请尽管配置在`source`的相应控件上吧。
+
+::: slot highlight
+
+<<< @/test/components/biu-form/biu-form-element.vue
+
+:::
+</demo-block>
 
 #### 属性
 

@@ -69,7 +69,7 @@ export type formAttrType = {
      * 自定义渲染，注意该配置必须写在 @Component中，不然会报错
      */
     // eslint-disable-next-line no-undef
-    render?: (h: any, scope: formAttrType) => VNode
+    render?: (h: any, scope: BiuformType) => VNode
     /**
      * 字段
      */
