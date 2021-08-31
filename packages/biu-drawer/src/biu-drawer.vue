@@ -1,7 +1,6 @@
 <template>
     <el-drawer
         class="calm-BiuDrawer"
-        :title="title"
         :visible.sync="visibleSync"
         :direction="attrs.direction || 'rtl'"
         append-to-body
@@ -55,7 +54,6 @@ import { isEqualWith } from '@src/utils/util'
 export default class BiuDrawer extends Vue {
     @PropSync('visible') visibleSync?: boolean
     @Prop(Boolean) btnLoading?: boolean
-    @Prop() title?: boolean
     @Prop([Boolean, Array]) footer?: OperationOptionType[] | boolean
 
     customVisible = false

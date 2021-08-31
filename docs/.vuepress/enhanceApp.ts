@@ -15,6 +15,7 @@ import BiuFormResize from '@test/components/biu-form/biu-form-resize.vue'
 import BiuFormDirection from '@test/components/biu-form/biu-form-direction.vue'
 import BiuFormElement from '@test/components/biu-form/biu-form-element.vue'
 import BiuDialogDemo from '@test/components/biu-dialog/biu-dialog-demo.vue'
+import BiuDrawerDemo from '@test/components/biu-drawer/biu-drawer-demo.vue'
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -50,6 +51,7 @@ export default ({
     Vue.component(BiuFormDirection.name, BiuFormDirection)
     Vue.component(BiuFormElement.name, BiuFormElement)
     Vue.component(BiuDialogDemo.name, BiuDialogDemo)
+    Vue.component(BiuDrawerDemo.name, BiuDrawerDemo)
 
     // Vue.component('BiuPageTest', BiuPageTest)
     // ...做一些其他的应用级别的优化
