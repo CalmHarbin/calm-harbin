@@ -31,39 +31,38 @@
 </template>
 
 <script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
 import { OperationOptionType } from 'calm-harin/types/operation'
-export default {
-    name: 'BiuDrawerDemo',
-    data() {
-        return {
-            show: false,
-            add: {
-                show: false
-            },
-            loading: false
-        }
-    },
-    computed: {
-        footer(): OperationOptionType[] {
-            return [
-                {
-                    title: '确认',
-                    loading: this.loading,
-                    callback: () => {
-                        this.loading = true
-                        setTimeout(() => {
-                            this.$notify({
-                                title: '提交成功',
-                                message: '成功添加一条运单',
-                                type: 'success'
-                            })
-                            this.loading = false
-                            this.add.show = false
-                        }, 1000)
-                    }
+
+@Component
+export default class BiuDiaBiuDrawerDemologDemo extends Vue {
+    show = false
+
+    add = {
+        show: false
+    }
+
+    loading = false
+
+    get footer(): OperationOptionType[] {
+        return [
+            {
+                title: '确认',
+                loading: this.loading,
+                callback: () => {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.$notify({
+                            title: '提交成功',
+                            message: '成功添加一条运单',
+                            type: 'success'
+                        })
+                        this.loading = false
+                        this.add.show = false
+                    }, 1000)
                 }
-            ]
-        }
+            }
+        ]
     }
 }
 </script>
