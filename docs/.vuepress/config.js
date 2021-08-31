@@ -55,6 +55,11 @@ module.exports = {
                     //...
                     // 每加一个菜单需要在这里也新增一下
                 ]
+            },
+            {
+                title: '属性/方法',
+                collapsable: false,
+                children: ['/components/attribute', '/components/methods']
             }
         ],
         smoothScroll: true // 页面滚动

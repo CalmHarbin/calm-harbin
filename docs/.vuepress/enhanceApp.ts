@@ -17,6 +17,8 @@ import BiuFormElement from '@test/components/biu-form/biu-form-element.vue'
 import BiuDialogDemo from '@test/components/biu-dialog/biu-dialog-demo.vue'
 import BiuDrawerDemo from '@test/components/biu-drawer/biu-drawer-demo.vue'
 import FileUploadDemo from '@test/components/file-upload/file-upload-demo.vue'
+import exportExcel from '@test/components/methods/export-excel.vue'
+import summary from '@test/components/methods/summary.vue'
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -54,6 +56,8 @@ export default ({
     Vue.component(BiuDialogDemo.name, BiuDialogDemo)
     Vue.component(BiuDrawerDemo.name, BiuDrawerDemo)
     Vue.component(FileUploadDemo.name, FileUploadDemo)
+    Vue.component(exportExcel.name, exportExcel)
+    Vue.component(summary.name, summary)
 
     // Vue.component('BiuPageTest', BiuPageTest)
     // ...做一些其他的应用级别的优化
