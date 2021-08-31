@@ -27,7 +27,7 @@
 | 参数              | 说明   | 必填                                | 类型                                                                     | 默认值 |
 | ----------------- | :----- | :---------------------------------- | :----------------------------------------------------------------------- | :----- |
 | `formType`        | 标题   | <el-checkbox checked></el-checkbox> | text，input，select，date，timeSelect，timerange，area，treeSelect，slot | —      |
-| `value / v-model` | 绑定值 | <el-checkbox checked></el-checkbox> | objType                                                                  | —      |
+| `value / v-model` | 绑定值 | <el-checkbox checked></el-checkbox> | `objType`                                                                | —      |
 
 #### formType='input'
 
@@ -55,6 +55,6 @@
 
 #### formType='treeSelect'
 
-| 参数   | 说明       | 必填                                | 类型           | 默认值 |
-| ------ | :--------- | :---------------------------------- | :------------- | :----- |
-| `data` | 树的数据源 | <el-checkbox checked></el-checkbox> | treeNodeType[] | —      |
+| 参数   | 说明       | 必填                                | 类型             | 默认值 |
+| ------ | :--------- | :---------------------------------- | :--------------- | :----- |
+| `data` | 树的数据源 | <el-checkbox checked></el-checkbox> | `treeNodeType[]` | —      |

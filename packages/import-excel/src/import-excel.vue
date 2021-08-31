@@ -23,10 +23,9 @@ import BiuCard from '@packages/biu-card/src/biu-card.vue'
 import BiuTable, {
     tableColumnType
 } from '@packages/biu-table/src/biu-table.vue'
-import Operation, {
-    OperationOptionType
-} from '@packages/biu-table/src/operation.vue'
-import FileInput from '@packages/file-input/src/file-input'
+import { OperationOptionType } from 'calm-harin/types/operation'
+import Operation from '@packages/biu-table/src/operation.vue'
+import FileInput from '@packages/file-upload/src/file-upload'
 import { exportExcelTemp, importExcel } from './utils'
 
 @Component({

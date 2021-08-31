@@ -9,7 +9,7 @@ import './styles/elementUi.scss'
 // 引入组件
 import BiuDialog from '@packages/biu-dialog/index'
 import BiuDrawer from '@packages/biu-drawer/index'
-import FileInput from '@packages/file-input/index'
+import FileUpload from '@packages/file-upload/index'
 import BiuCardForm from '@packages/biu-card-form/index'
 import BiuCard from '@packages/biu-card/index'
 import BiuTable from '@packages/biu-table/index'
@@ -31,7 +31,7 @@ export { default as reg } from './utils/regExp.js'
 const components = {
     BiuDialog,
     BiuDrawer,
-    FileInput,
+    FileUpload,
     BiuCardForm,
     BiuCard,
     BiuTable,
@@ -85,7 +85,7 @@ export default {
     install,
     BiuDialog,
     BiuDrawer,
-    FileInput,
+    FileUpload,
     BiuCardForm,
     BiuCard,
     BiuTable,

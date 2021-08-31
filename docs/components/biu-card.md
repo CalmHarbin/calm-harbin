@@ -20,7 +20,7 @@
 
 #### BiuCard Attributes
 
-| 参数     | 说明         | 必填                                | 类型    | 默认值  |
-| -------- | :----------- | :---------------------------------- | :------ | :------ |
-| `title`  | 标题         | <el-checkbox></el-checkbox>         | string  | —       |
-| `border` | 是否显示边框 | <el-checkbox checked></el-checkbox> | boolean | `false` |
+| 参数     | 说明         | 必填                                | 类型      | 默认值  |
+| -------- | :----------- | :---------------------------------- | :-------- | :------ |
+| `title`  | 标题         | <el-checkbox></el-checkbox>         | `string`  | —       |
+| `border` | 是否显示边框 | <el-checkbox checked></el-checkbox> | `boolean` | `false` |

@@ -16,7 +16,7 @@
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
 
-        <file-input
+        <file-upload
             :divStyle="{
                 display: 'inline',
                 marginRight: '10px'
@@ -24,7 +24,7 @@
             accept=".xls,.xlsx"
         >
             <button>选择文件</button>
-        </file-input>
+        </file-upload>
     </div>
 </template>
 
