@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    base: './',
+    base: '/calm-harbin/docs/dist/', // 部署到github上
     dest: 'docs/dist',
     title: 'CalmHarbin',
     description: '快速搭建后台页面',

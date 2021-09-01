@@ -1,8 +1,9 @@
 // import Vue from 'vue'
 import ElementUI from 'element-ui' // 全局引入element-ui
+// import UmyUi from 'umy-ui' // 全局引入umy-ui
 
 // import calmHarbin from '../../lib/calmHarbin.umd.min.js'
-import calmHarbin from '@src/index'
+// import calmHarbin from '@src/index'
 
 import BiuCardDemo from '@test/components/biu-card/biu-card-demo.vue'
 import BiuCardFormDemo from '@test/components/biu-card-form/biu-card-form-demo.vue'
@@ -40,8 +41,16 @@ export default ({
     isServer // 当前应用配置是处于 服务端渲染 或 客户端
 }: any) => {
     Vue.use(ElementUI)
-    // console.log(calmHarbin)
-    Vue.use(calmHarbin)
+
+    if (!isServer) {
+        import('umy-ui').then((module) => {
+            Vue.use(module.default)
+        })
+
+        import('@src/index').then((module) => {
+            Vue.use(module.default)
+        })
+    }
 
     Vue.component(BiuCardDemo.name, BiuCardDemo)
     Vue.component(BiuCardFormDemo.name, BiuCardFormDemo)
@@ -58,6 +67,9 @@ export default ({
     Vue.component(FileUploadDemo.name, FileUploadDemo)
     Vue.component(exportExcel.name, exportExcel)
     Vue.component(summary.name, summary)
+    // Vue.use(UmyUi)
+    // console.log(calmHarbin)
+    // Vue.use(calmHarbin)
 
     // Vue.component('BiuPageTest', BiuPageTest)
     // ...做一些其他的应用级别的优化
