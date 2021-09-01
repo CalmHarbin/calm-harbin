@@ -8,7 +8,22 @@
     >
         <div style="padding: 24px">
             <!-- 第一个是源代码插槽 -->
-            <slot name="source"></slot>
+            <ClientOnly>
+                <slot name="source"></slot>
+            </ClientOnly>
+        </div>
+        <div
+            class="demo-block-control"
+            ref="control"
+            v-if="isExpanded"
+            @click="isExpanded = false"
+        >
+            <transition name="arrow-slide">
+                <i :class="[iconClass, { hovering: hovering }]"></i>
+            </transition>
+            <transition name="text-slide">
+                <span v-show="hovering">{{ controlText }}</span>
+            </transition>
         </div>
         <div class="meta" ref="meta">
             <div class="description" v-if="$slots.default">

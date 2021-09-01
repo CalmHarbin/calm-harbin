@@ -3,6 +3,7 @@
         v-model="form"
         :columns="columns"
         :tableData="tableData"
+        :tbHeight="36 * 4"
         show-summary
     >
     </BiuPage>
@@ -11,6 +12,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { summary } from 'calm-harbin'
+
 @Component
 export default class summaryDemo extends Vue {
     form = {}
@@ -54,7 +56,7 @@ export default class summaryDemo extends Vue {
         ]
     }
 
-    mounted() {
+    created() {
         const tableData = [
             {
                 productCode: 'TCS202108310001',

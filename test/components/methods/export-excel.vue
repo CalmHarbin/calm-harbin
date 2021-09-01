@@ -4,6 +4,7 @@
         :columns="columns"
         :tableData="tableData"
         :operationOptions="operationOptions"
+        :tbHeight="36 * 3"
     >
     </BiuPage>
 </template>

@@ -171,6 +171,7 @@
 
 <script lang="ts">
 import { treeNodeType } from 'calm-harin/types/biu-form-item'
+
 export default {
     name: 'BiuFormItemInput',
     data() {

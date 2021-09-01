@@ -1,25 +1,78 @@
-// import Vue from 'vue'
 import ElementUI from 'element-ui' // 全局引入element-ui
-// import UmyUi from 'umy-ui' // 全局引入umy-ui
 
-// import calmHarbin from '../../lib/calmHarbin.umd.min.js'
-// import calmHarbin from '@src/index'
-
-import BiuCardDemo from '@test/components/biu-card/biu-card-demo.vue'
-import BiuCardFormDemo from '@test/components/biu-card-form/biu-card-form-demo.vue'
-import BiuFormItemInput from '@test/components/biu-form-item/biu-form-item-input.vue'
-import BiuFormDemo from '@test/components/biu-form/biu-form-demo.vue'
-import BiuFormSpan from '@test/components/biu-form/biu-form-span.vue'
-import BiuFormBr from '@test/components/biu-form/biu-form-br.vue'
-import BiuFormSlot from '@test/components/biu-form/biu-form-slot.vue'
-import BiuFormResize from '@test/components/biu-form/biu-form-resize.vue'
-import BiuFormDirection from '@test/components/biu-form/biu-form-direction.vue'
-import BiuFormElement from '@test/components/biu-form/biu-form-element.vue'
-import BiuDialogDemo from '@test/components/biu-dialog/biu-dialog-demo.vue'
-import BiuDrawerDemo from '@test/components/biu-drawer/biu-drawer-demo.vue'
-import FileUploadDemo from '@test/components/file-upload/file-upload-demo.vue'
-import exportExcel from '@test/components/methods/export-excel.vue'
-import summary from '@test/components/methods/summary.vue'
+// 因为组件部分组件中有引入calm-harbin，故服务端渲染时统一放在beforeMount中去加载
+type componentsType = {
+    name: string
+    template: () => Promise<any>
+}
+const components: componentsType[] = [
+    {
+        name: 'BiuCardDemo',
+        template: () => import('@test/components/biu-card/biu-card-demo.vue')
+    },
+    {
+        name: 'BiuCardFormDemo',
+        template: () =>
+            import('@test/components/biu-card-form/biu-card-form-demo.vue')
+    },
+    {
+        name: 'BiuFormItemInput',
+        template: () =>
+            import('@test/components/biu-form-item/biu-form-item-input.vue')
+    },
+    {
+        name: 'BiuFormDemo',
+        template: () => import('@test/components/biu-form/biu-form-demo.vue')
+    },
+    {
+        name: 'BiuFormSpan',
+        template: () => import('@test/components/biu-form/biu-form-span.vue')
+    },
+    {
+        name: 'BiuFormBr',
+        template: () => import('@test/components/biu-form/biu-form-br.vue')
+    },
+    {
+        name: 'BiuFormSlot',
+        template: () => import('@test/components/biu-form/biu-form-slot.vue')
+    },
+    {
+        name: 'BiuFormResize',
+        template: () => import('@test/components/biu-form/biu-form-resize.vue')
+    },
+    {
+        name: 'BiuFormDirection',
+        template: () =>
+            import('@test/components/biu-form/biu-form-direction.vue')
+    },
+    {
+        name: 'BiuFormElement',
+        template: () => import('@test/components/biu-form/biu-form-element.vue')
+    },
+    {
+        name: 'BiuDialogDemo',
+        template: () =>
+            import('@test/components/biu-dialog/biu-dialog-demo.vue')
+    },
+    {
+        name: 'BiuDrawerDemo',
+        template: () =>
+            import('@test/components/biu-drawer/biu-drawer-demo.vue')
+    },
+    {
+        name: 'FileUploadDemo',
+        template: () =>
+            import('@test/components/file-upload/file-upload-demo.vue')
+    },
+    {
+        name: 'exportExcelDemo',
+        template: () => import('@test/components/methods/export-excel.vue')
+    },
+    {
+        name: 'summaryDemo',
+        template: () => import('@test/components/methods/summary.vue')
+    }
+]
 
 // import hljs from 'highlight.js' // 代码高亮
 // import 'highlight.js/styles/googlecode.css'
@@ -43,6 +96,7 @@ export default ({
     Vue.use(ElementUI)
 
     if (!isServer) {
+        // 浏览器渲染模式
         import('umy-ui').then((module) => {
             Vue.use(module.default)
         })
@@ -50,28 +104,33 @@ export default ({
         import('@src/index').then((module) => {
             Vue.use(module.default)
         })
+
+        components.forEach((component) => {
+            component.template().then((module: any) => {
+                Vue.component(component.name, module.default)
+            })
+        })
+    } else {
+        // 服务端渲染，以下组件created中存在访问window，故需要在beforeMount中延迟加载。
+        Vue.mixin({
+            beforeMount() {
+                import('umy-ui').then((module) => {
+                    Vue.use(module.default)
+                })
+
+                import('@src/index').then((module) => {
+                    Vue.use(module.default)
+                })
+
+                components.forEach((component) => {
+                    component.template().then((module: any) => {
+                        Vue.component(component.name, module.default)
+                    })
+                })
+            }
+        })
     }
 
-    Vue.component(BiuCardDemo.name, BiuCardDemo)
-    Vue.component(BiuCardFormDemo.name, BiuCardFormDemo)
-    Vue.component(BiuFormItemInput.name, BiuFormItemInput)
-    Vue.component(BiuFormDemo.name, BiuFormDemo)
-    Vue.component(BiuFormSpan.name, BiuFormSpan)
-    Vue.component(BiuFormBr.name, BiuFormBr)
-    Vue.component(BiuFormSlot.name, BiuFormSlot)
-    Vue.component(BiuFormResize.name, BiuFormResize)
-    Vue.component(BiuFormDirection.name, BiuFormDirection)
-    Vue.component(BiuFormElement.name, BiuFormElement)
-    Vue.component(BiuDialogDemo.name, BiuDialogDemo)
-    Vue.component(BiuDrawerDemo.name, BiuDrawerDemo)
-    Vue.component(FileUploadDemo.name, FileUploadDemo)
-    Vue.component(exportExcel.name, exportExcel)
-    Vue.component(summary.name, summary)
-    // Vue.use(UmyUi)
-    // console.log(calmHarbin)
-    // Vue.use(calmHarbin)
-
-    // Vue.component('BiuPageTest', BiuPageTest)
     // ...做一些其他的应用级别的优化
     // console.log(Vue, options, router, siteData, isServer)
 }
