@@ -26,8 +26,10 @@ node {
             sh 'npm run docs:build'
         }
         stage('部署') {
+            // 将容器内的文件copy到宿主机
+            sh 'docker cp myjenkins:/var/jenkins_mount/workspace/calmharbin文档/docs/dist /usr/share/nginx/html/dist'
             // 生成镜像
-            sh 'docker build -f /var/jenkins_mount/workspace/calmharbin文档/docs/Dockerfile -t calmharbin .'
+            // sh 'docker build -f /var/jenkins_mount/workspace/calmharbin文档/docs/Dockerfile -t calmharbin .'
             // 创建容器
             // sh 'docker run --name calmharbin -d -p 8888:80 -v'
         }
