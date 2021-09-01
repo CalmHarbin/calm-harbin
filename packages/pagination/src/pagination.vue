@@ -25,7 +25,7 @@ import { Pagination } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
 
 export default {
-    name: 'Pagination',
+    name: 'pagination',
     inheritAttrs: false,
     components: { [Pagination.name]: Pagination },
     props: {
