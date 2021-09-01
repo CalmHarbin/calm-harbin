@@ -25,11 +25,11 @@ import BiuTable, {
 } from '@packages/biu-table/src/biu-table.vue'
 import { OperationOptionType } from 'calm-harin/types/operation'
 import Operation from '@packages/biu-table/src/operation.vue'
-import FileInput from '@packages/file-upload/src/file-upload'
+import FileUpload from '@packages/file-upload/src/file-upload.vue'
 import { exportExcelTemp, importExcel } from './utils'
 
 @Component({
-    components: { BiuDrawer, Operation, BiuCard, BiuTable, FileInput }
+    components: { BiuDrawer, Operation, BiuCard, BiuTable }
 })
 export default class ImportExcel extends Vue {
     @PropSync('visible') visibleSync?: boolean
@@ -46,11 +46,8 @@ export default class ImportExcel extends Vue {
         return [
             {
                 render: () => (
-                    <FileInput
-                        divStyle={{
-                            display: 'inline',
-                            marginRight: '10px'
-                        }}
+                    <FileUpload
+                        style="display: inline;marginRight: 10px"
                         loading={this.loading}
                         accept=".xls,.xlsx"
                         importFile={this.onImportFile}
@@ -63,7 +60,7 @@ export default class ImportExcel extends Vue {
                             选择文件
                             <i class="el-icon-upload el-icon--right"></i>
                         </el-button>
-                    </FileInput>
+                    </FileUpload>
                 )
             },
             {

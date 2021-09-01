@@ -382,7 +382,7 @@ import {
 } from './biu-table'
 import BiuFormItem from '@packages/biu-form-item/src/biu-form-item.vue'
 import { Card, Tooltip, Input, Loading, Checkbox } from 'element-ui'
-import { UxGrid, UxTableColumn } from 'umy-ui'
+// import { UxGrid, UxTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
 import cloneDeep from 'lodash/cloneDeep'
 
@@ -411,9 +411,9 @@ Vue.use(Loading.directive)
         [Card.name]: Card,
         [Tooltip.name]: Tooltip,
         [Input.name]: Input,
-        [Checkbox.name]: Checkbox,
-        [UxGrid.name]: UxGrid,
-        [UxTableColumn.name]: UxTableColumn
+        [Checkbox.name]: Checkbox
+        // [UxGrid.name]: UxGrid,
+        // [UxTableColumn.name]: UxTableColumn
     }
 })
 export default class CoutomUxGrid extends Vue {
