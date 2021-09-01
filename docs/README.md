@@ -1,6 +1,5 @@
 ---
 home: true
-heroImage: /hero.png
 heroText: CalmHarbin
 tagline: null
 actionText: 快速上手 →
