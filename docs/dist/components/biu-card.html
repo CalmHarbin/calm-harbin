@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>BiuCard 卡片 | CalmHarbin</title>
+        <meta name="generator" content="VuePress 1.8.2" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/calm-harbin@0.2.3-pre/lib/calmHarbin.css"
+        />
+        <style>
+            .elx-table--header,
+            .elx-table--body {
+                display: table;
+                margin: 0;
+            }
+            .elx-table--header tr,
+            .elx-table--body tr {
+                border-top-width: 0;
+            }
+            .elx-table--header tr:nth-child(2n),
+            .elx-table--body tr:nth-child(2n) {
+                background-color: transparent;
+            }
+            .elx-table--header th,
+            .elx-table--header td,
+            .elx-table--body td,
+            .elx-table--body td {
+                padding: 0;
+                border-width: 0;
+            }
+        </style>
+
+         <meta name="description" content="快速搭建后台页面">  <link rel="preload" href="/calm-harbin/docs/dist/assets/css/0.styles.18bf90ea.css" as="style"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/app.2a41eec7.js" as="script"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/3.25daed40.js" as="script"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/13.deef1b0d.js" as="script"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/4.24de67f8.js" as="script"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/10.2a7e7025.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/11.90f7a2e7.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/12.8d4cdec3.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/14.13944e4f.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/15.3a02176b.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/16.0037c834.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/17.2b5a1c61.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/18.fec7f950.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/19.85f13b87.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/2.35eced5c.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/20.102683dc.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/21.6b8a76a8.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/22.a09c8e34.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/23.dd35c04f.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/24.42c0b795.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/5.3b5d4e35.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/6.b0d5ddea.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/7.2ed79117.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/8.6ac6caaf.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/9.fe526902.js"> <link rel="stylesheet" href="/calm-harbin/docs/dist/assets/css/0.styles.18bf90ea.css">
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.2.0/decimal.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+        <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/calm-harbin/docs/dist/" class="home-link router-link-active"><!----> <span class="site-name">CalmHarbin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/calm-harbin/docs/dist/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">更多</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/japanese/" class="nav-link">
+  Japanese
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/CalmHarbin/calm-harbin" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/calm-harbin/docs/dist/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">更多</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/japanese/" class="nav-link">
+  Japanese
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/CalmHarbin/calm-harbin" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>快速上手</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/calm-harbin/docs/dist/components/installation.html" class="sidebar-link">安装</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/changelog.html" class="sidebar-link">更新日志</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>组件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/calm-harbin/docs/dist/components/biu-form.html" class="sidebar-link">BiuForm 表单</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-form-item.html" class="sidebar-link">BiuFormItem 表单项</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-table.html" class="sidebar-link">BiuTable 表格</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-select-table.html" class="sidebar-link">BiuSelectTable 表格选择</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-card.html" aria-current="page" class="active sidebar-link">BiuCard 卡片</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-card-form.html" class="sidebar-link">BiuCardForm 分块表单</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-page.html" class="sidebar-link">BiuPage 列表页面</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-dialog.html" class="sidebar-link">BiuDialog 弹框</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-drawer.html" class="sidebar-link">BiuDrawer 抽屉</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/file-upload.html" class="sidebar-link">File 文件上传</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>属性/方法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/calm-harbin/docs/dist/components/attribute.html" class="sidebar-link">属性</a></li><li><a href="/calm-harbin/docs/dist/components/methods.html" class="sidebar-link">方法</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="biucard-卡片"><a href="#biucard-卡片" class="header-anchor">#</a> BiuCard 卡片</h3> <p>用于数据分块展示，统一样式。</p> <h4 id="基础用法"><a href="#基础用法" class="header-anchor">#</a> 基础用法</h4> <div class="demo-block demo-components demo-biu-card.html"><div style="padding: 24px"><div data-v-09b5424f><biu-card title="订单附件信息" data-v-09b5424f><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div></biu-card> <biu-card title="异常附件信息" data-v-09b5424f><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div><div class="el-image" data-v-09b5424f><div class="el-image__placeholder"></div><!----></div></biu-card> <biu-card title="订单备注" border="" class="remark" data-v-09b5424f><p data-v-09b5424f>
+            VuePress 由两部分组成：第一部分是一个极简静态网站生成器 (opens
+            new window)，它包含由 Vue 驱动的主题系统和插件
+            API，另一个部分是为书写技术文档而优化的默认主题，它的诞生初衷是为了支持
+            Vue 及其子项目的文档需求。
+        </p> <p data-v-09b5424f>
+            每一个由 VuePress 生成的页面都带有预渲染好的
+            HTML，也因此具有非常好的加载性能和搜索引擎优化（SEO）。同时，一旦页面被加载，Vue
+            将接管这些静态内容，并将其转换成一个完整的单页应用（SPA），其他的页面则会只在用户浏览到的时候才按需加载。
+        </p></biu-card></div></div> <div class="meta"><div class="description"><p>使用 title 属性来定义 自定义标题。</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-card</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>订单附件信息<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-image</span>
+                <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>(item, index) in fileList.slice(0, 3)<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">:preview-src-list</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>fileList.slice(0, 3)<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">fit</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>cover<span class="token punctuation">&quot;</span></span>
+            <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-image</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-card</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-card</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>异常附件信息<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-image</span>
+                <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>(item, index) in fileList.slice(3)<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">:src</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">:preview-src-list</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>fileList.slice(3)<span class="token punctuation">&quot;</span></span>
+                <span class="token attr-name">fit</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>cover<span class="token punctuation">&quot;</span></span>
+            <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-image</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-card</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-card</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>订单备注<span class="token punctuation">&quot;</span></span> <span class="token attr-name">border</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>remark<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+                VuePress 由两部分组成：第一部分是一个极简静态网站生成器 (opens
+                new window)，它包含由 Vue 驱动的主题系统和插件
+                API，另一个部分是为书写技术文档而优化的默认主题，它的诞生初衷是为了支持
+                Vue 及其子项目的文档需求。
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+                每一个由 VuePress 生成的页面都带有预渲染好的
+                HTML，也因此具有非常好的加载性能和搜索引擎优化（SEO）。同时，一旦页面被加载，Vue
+                将接管这些静态内容，并将其转换成一个完整的单页应用（SPA），其他的页面则会只在用户浏览到的时候才按需加载。
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-card</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> <span class="token string">'BiuCardDemo'</span><span class="token punctuation">,</span>
+    <span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            fileList<span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token string">'https://fuss10.elemecdn.com/a/3f/3302e58f9a181d2509f3dc0fa68b0jpeg.jpeg'</span><span class="token punctuation">,</span>
+                <span class="token string">'https://fuss10.elemecdn.com/1/34/19aa98b1fcb2781c4fba33d850549jpeg.jpeg'</span><span class="token punctuation">,</span>
+                <span class="token string">'https://fuss10.elemecdn.com/0/6f/e35ff375812e6b0020b6b4e8f9583jpeg.jpeg'</span><span class="token punctuation">,</span>
+                <span class="token string">'https://fuss10.elemecdn.com/9/bb/e27858e973f5d7d3904835f46abbdjpeg.jpeg'</span><span class="token punctuation">,</span>
+                <span class="token string">'https://fuss10.elemecdn.com/d/e6/c4d93a3805b3ce3f323f7974e6f78jpeg.jpeg'</span><span class="token punctuation">,</span>
+                <span class="token string">'https://fuss10.elemecdn.com/3/28/bbf893f792f03a54408b3b7a7ebf0jpeg.jpeg'</span><span class="token punctuation">,</span>
+                <span class="token string">'https://fuss10.elemecdn.com/2/11/6535bcfb26e4c79b48ddde44f4b6fjpeg.jpeg'</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-BiuCard ::v-deep &gt; .body</span> <span class="token punctuation">{</span>
+    <span class="token property">line-height</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.el-image</span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 80px<span class="token punctuation">;</span>
+    <span class="token property">margin-right</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> 5px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token selector">.remark ::v-deep &gt; .body</span> <span class="token punctuation">{</span>
+    <span class="token property">padding</span><span class="token punctuation">:</span> 0 15px<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="biucard-attributes"><a href="#biucard-attributes" class="header-anchor">#</a> BiuCard Attributes</h4> <table><thead><tr><th>参数</th> <th style="text-align:left;">说明</th> <th style="text-align:left;">必填</th> <th style="text-align:left;">类型</th> <th style="text-align:left;">默认值</th></tr></thead> <tbody><tr><td><code>title</code></td> <td style="text-align:left;">标题</td> <td style="text-align:left;"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>string</code></td> <td style="text-align:left;">—</td></tr> <tr><td><code>border</code></td> <td style="text-align:left;">是否显示边框</td> <td style="text-align:left;"><label class="el-checkbox is-checked"><span class="el-checkbox__input is-checked"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" checked="checked" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>boolean</code></td> <td style="text-align:left;"><code>false</code></td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/calm-harbin/docs/dist/components/biu-select-table.html" class="prev">
+        BiuSelectTable 表格选择
+      </a></span> <span class="next"><a href="/calm-harbin/docs/dist/components/biu-card-form.html">
+        BiuCardForm 分块表单
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+        <script src="/calm-harbin/docs/dist/assets/js/app.2a41eec7.js" defer></script><script src="/calm-harbin/docs/dist/assets/js/3.25daed40.js" defer></script><script src="/calm-harbin/docs/dist/assets/js/13.deef1b0d.js" defer></script><script src="/calm-harbin/docs/dist/assets/js/4.24de67f8.js" defer></script>
+    </body>
+</html>
