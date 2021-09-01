@@ -10,6 +10,7 @@ module.exports = {
         lineNumbers: true // 代码块显示行号
     },
     themeConfig: {
+        logo: '/logo.png',
         //主题配置
         nav: [
             {
