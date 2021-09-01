@@ -88,10 +88,6 @@ import {
     Emit,
     Watch
 } from 'vue-property-decorator'
-import { mapGetters } from 'vuex'
-import { post } from '@/utils/http.js'
-import { downLoadFile } from '@/api/publicselect.js'
-import { downloadBlob } from '@/utils/index'
 import { isEqualWith } from '@src/utils/util'
 
 type fileType = {
@@ -99,12 +95,9 @@ type fileType = {
     url: string
     uid: number
 }
-@Component({
-    computed: {
-        ...mapGetters(['token'])
-    }
-})
+@Component
 export default class Upload extends Vue {
+    @Prop(String) uploadUrl!: string
     @Prop({ type: Boolean, default: false }) disabled?: boolean
     @Prop({ type: String, default: 'all' }) type?: 'all' | 'file' | 'img'
     @Prop(String) accept?: string // 文件限制 传type可不传
@@ -123,8 +116,6 @@ export default class Upload extends Vue {
     ]
     // 当前操作的图片
     index = -1
-
-    uploadUrl = `${process.env.VUE_APP_DOWNLOAD_API}/uploadFile`
 
     /**
      * attrs用来表示this.$attrs
@@ -213,14 +204,14 @@ export default class Upload extends Vue {
                 if (/^http(s*):\/\//.test(this.fileList[index].url)) {
                     return window.open(this.fileList[index].url)
                 }
-                downLoadFile({
-                    url: this.fileList[index].url,
-                    token: this.token
-                }).then((res: any) => {
-                    const filePath = this.fileList[index].url.split('/')
-                    // 下载
-                    downloadBlob(res.data, filePath[filePath.length - 1])
-                })
+                // downLoadFile({
+                //     url: this.fileList[index].url,
+                //     token: this.token
+                // }).then((res: any) => {
+                //     const filePath = this.fileList[index].url.split('/')
+                //     // 下载
+                //     downloadBlob(res.data, filePath[filePath.length - 1])
+                // })
                 return
             }
         }
@@ -288,37 +279,39 @@ export default class Upload extends Vue {
     request(params: any) {
         const param = new FormData() //创建form对象
         param.append('file', params.file) //通过append向form对象添加数据
-        post(params.action, param, true, {
-            headers: {
-                'Content-Type': 'multipart/form-data;'
-            }
-        }).then((response: any) => {
-            this.fileList.push({
-                name: response.result,
-                url: response.result,
-                uid: params.file.uid
-            })
-        })
-    }
-    // async getUrl(url: string) {
-    //     if (/^http(s*):\/\//.test(url)) {
-    //         return url
-    //     }
-    //     // post请求获取图片
-    //     const res = await downLoadFile({
-    //         url: url,
-    //         token: this.token
-    //     })
-    //     // .then((res: any) => {
-    //     //     const filePath = this.fileList[index].url.split('/')
-    //     //     // 下载
-    //     //     downloadBlob(res.data, filePath[filePath.length - 1])
-    //     // })
-    //     console.log(window.URL.createObjectURL(res.data))
-    //     return window.URL.createObjectURL(res.data)
 
-    //     // return `${process.env.VUE_APP_DOWNLOAD_API}/downLoadFileLink?url=${url}&token=${this.token}`
-    // }
+        // this.httpRequest && this.httpRequest(params)
+
+        // post(params.action, param, true, {
+        //     headers: {
+        //         'Content-Type': 'multipart/form-data;'
+        //     }
+        // }).then((response: any) => {
+        //     this.fileList.push({
+        //         name: response.result,
+        //         url: response.result,
+        //         uid: params.file.uid
+        //     })
+        // })
+    }
+    /**
+     * blob类型下载
+     * @param blob blob文件
+     * @param fileName 保存的文件名
+     */
+    downloadBlob(blob: Blob, fileName: string) {
+        const reader = new FileReader()
+        reader.readAsDataURL(blob)
+        reader.onload = (e: any) => {
+            const a = document.createElement('a')
+            a.download = fileName
+            // 后端设置的文件名称在res.headers的 "content-disposition": "form-data; name=\"attachment\"; filename=\"20181211191944.zip\"",
+            a.href = e.target.result
+            document.body.appendChild(a)
+            a.click()
+            document.body.removeChild(a)
+        }
+    }
 }
 </script>
 
