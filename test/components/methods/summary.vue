@@ -15,20 +15,7 @@ import { summary } from 'calm-harbin'
 export default class summaryDemo extends Vue {
     form = {}
 
-    tableData = [
-        {
-            productCode: 'TCS202108310001',
-            productName: '名称一',
-            productType: '1',
-            number: 24
-        },
-        {
-            productCode: 'TCS202108310002',
-            productName: '名称二',
-            productType: '2',
-            number: 32
-        }
-    ]
+    tableData: any[] = []
 
     get columns() {
         return [
@@ -67,12 +54,26 @@ export default class summaryDemo extends Vue {
         ]
     }
 
-    created() {
+    mounted() {
+        const tableData = [
+            {
+                productCode: 'TCS202108310001',
+                productName: '名称一',
+                productType: '1',
+                number: 24
+            },
+            {
+                productCode: 'TCS202108310002',
+                productName: '名称二',
+                productType: '2',
+                number: 32
+            }
+        ]
         // 添加合计
-        const total = summary(this.tableData, {
+        const total = summary(tableData, {
             number: 0 // 这里传入需要合计的字段
         })
-        this.tableData = [...this.tableData, total]
+        this.tableData = [...tableData, total]
     }
 }
 </script>

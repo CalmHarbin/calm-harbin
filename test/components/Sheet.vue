@@ -1,8 +1,8 @@
 <template>
     <div>
-        <FileInput accept=".xls,.xlsx" :importFile="importFile">
+        <FileUpload accept=".xls,.xlsx" :importFile="importFile">
             <el-button>导入</el-button>
-        </FileInput>
+        </FileUpload>
 
         <el-button @click="exportFile">导出</el-button>
     </div>
@@ -116,5 +116,3 @@ export default {
     }
 }
 </script>
-
-<style></style>

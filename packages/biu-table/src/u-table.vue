@@ -244,7 +244,7 @@ import {
     tablePostfixOptionsType
 } from './biu-table'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
-import { UTable, UTableColumn } from 'umy-ui'
+// import { UTable, UTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
 import cloneDeep from 'lodash/cloneDeep'
 
@@ -270,9 +270,9 @@ Vue.use(Loading.directive)
         },
         [Card.name]: Card,
         [Tooltip.name]: Tooltip,
-        [Input.name]: Input,
-        [UTable.name]: UTable,
-        [UTableColumn.name]: UTableColumn
+        [Input.name]: Input
+        // [UTable.name]: UTable,
+        // [UTableColumn.name]: UTableColumn
     }
 })
 export default class CustomUTable extends Vue {

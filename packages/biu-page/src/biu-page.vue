@@ -61,15 +61,15 @@ import {
     Emit,
     Model
 } from 'vue-property-decorator'
-import BiuForm, { formAttrType } from '@packages/biu-form/src/biu-form.vue'
+import { formAttrType } from 'calm-harin/types/biu-form'
+import BiuForm from '@packages/biu-form/src/biu-form.vue'
 import BiuTable, {
     tableColumnType
 } from '@packages/biu-table/src/biu-table.vue'
 import Pagination from '@packages/pagination/src/pagination.vue'
-import Operation, {
-    OperationOptionType
-} from '@packages/biu-table/src/operation.vue'
-import { formTypeType } from '@packages/biu-form-item/src/biu-form-item.vue'
+import { OperationOptionType } from 'calm-harin/types/operation'
+import Operation from '@packages/biu-table/src/operation.vue'
+import { formTypeType } from 'calm-harin/types/biu-form-item'
 import { isEqualWith } from '@src/utils/util'
 import cloneDeep from 'lodash/cloneDeep'
 

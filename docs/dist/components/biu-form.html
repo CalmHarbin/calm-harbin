@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>BiuForm 表单 | CalmHarbin</title>
+        <meta name="generator" content="VuePress 1.8.2" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/calm-harbin@0.2.3-pre/lib/calmHarbin.css"
+        />
+        <style>
+            .elx-table--header,
+            .elx-table--body {
+                display: table;
+                margin: 0;
+            }
+            .elx-table--header tr,
+            .elx-table--body tr {
+                border-top-width: 0;
+            }
+            .elx-table--header tr:nth-child(2n),
+            .elx-table--body tr:nth-child(2n) {
+                background-color: transparent;
+            }
+            .elx-table--header th,
+            .elx-table--header td,
+            .elx-table--body td,
+            .elx-table--body td {
+                padding: 0;
+                border-width: 0;
+            }
+        </style>
+
+         <meta name="description" content="快速搭建后台页面">  <link rel="preload" href="/calm-harbin/docs/dist/assets/css/0.styles.18bf90ea.css" as="style"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/app.2a41eec7.js" as="script"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/3.25daed40.js" as="script"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/17.2b5a1c61.js" as="script"><link rel="preload" href="/calm-harbin/docs/dist/assets/js/4.24de67f8.js" as="script"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/10.2a7e7025.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/11.90f7a2e7.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/12.8d4cdec3.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/13.deef1b0d.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/14.13944e4f.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/15.3a02176b.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/16.0037c834.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/18.fec7f950.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/19.85f13b87.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/2.35eced5c.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/20.102683dc.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/21.6b8a76a8.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/22.a09c8e34.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/23.dd35c04f.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/24.42c0b795.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/5.3b5d4e35.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/6.b0d5ddea.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/7.2ed79117.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/8.6ac6caaf.js"><link rel="prefetch" href="/calm-harbin/docs/dist/assets/js/9.fe526902.js"> <link rel="stylesheet" href="/calm-harbin/docs/dist/assets/css/0.styles.18bf90ea.css">
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/decimal.js@10.2.0/decimal.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
+        <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/calm-harbin/docs/dist/" class="home-link router-link-active"><!----> <span class="site-name">CalmHarbin</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/calm-harbin/docs/dist/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">更多</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/japanese/" class="nav-link">
+  Japanese
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/CalmHarbin/calm-harbin" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/calm-harbin/docs/dist/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Language Menu" class="dropdown-title"><span class="title">更多</span> <span class="arrow down"></span></button> <button type="button" aria-label="Language Menu" class="mobile-dropdown-title"><span class="title">更多</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/chinese/" class="nav-link">
+  Chinese
+</a></li><li class="dropdown-item"><!----> <a href="/calm-harbin/docs/dist/language/japanese/" class="nav-link">
+  Japanese
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/CalmHarbin/calm-harbin" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>快速上手</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/calm-harbin/docs/dist/components/installation.html" class="sidebar-link">安装</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/changelog.html" class="sidebar-link">更新日志</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>组件</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/calm-harbin/docs/dist/components/biu-form.html" aria-current="page" class="active sidebar-link">BiuForm 表单</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-form-item.html" class="sidebar-link">BiuFormItem 表单项</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-table.html" class="sidebar-link">BiuTable 表格</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-select-table.html" class="sidebar-link">BiuSelectTable 表格选择</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-card.html" class="sidebar-link">BiuCard 卡片</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-card-form.html" class="sidebar-link">BiuCardForm 分块表单</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-page.html" class="sidebar-link">BiuPage 列表页面</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-dialog.html" class="sidebar-link">BiuDialog 弹框</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/biu-drawer.html" class="sidebar-link">BiuDrawer 抽屉</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/calm-harbin/docs/dist/components/file-upload.html" class="sidebar-link">File 文件上传</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>属性/方法</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/calm-harbin/docs/dist/components/attribute.html" class="sidebar-link">属性</a></li><li><a href="/calm-harbin/docs/dist/components/methods.html" class="sidebar-link">方法</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h3 id="biuform-表单"><a href="#biuform-表单" class="header-anchor">#</a> BiuForm 表单</h3> <p>快速开发表单页面，低代码，高效率。</p> <h4 id="基础用法"><a href="#基础用法" class="header-anchor">#</a> 基础用法</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><div data-v-df790602><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" rules="[object Object]" label-width="92px" label-position="right" data-v-df790602></biu-form> <operation operationOptions="[object Object],[object Object]" data-v-df790602></operation></div></div> <div class="meta"><div class="description"><p>你可以利用<code>span</code>自由配置宽度，使用<code>br</code>来强制换行，</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+            <span class="token attr-name">ref</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>biuForm<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">:rules</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>rules<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">label-width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>92px<span class="token punctuation">&quot;</span></span>
+            <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+        <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>operation</span> <span class="token attr-name">:operationOptions</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>operationOptions<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>operation</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> reg <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harbin'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> OperationOptionType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/operation'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormDemo</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'ordercode'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'系统订单号'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'carriercode'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'承运商单号'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'date'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'created'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'下单时间'</span><span class="token punctuation">,</span>
+                dateType<span class="token operator">:</span> <span class="token string">'datetime'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'select'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'orderSource'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'订单来源'</span><span class="token punctuation">,</span>
+                dicType<span class="token operator">:</span> <span class="token string">'订单来源'</span><span class="token punctuation">,</span>
+                disable<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                options<span class="token operator">:</span> <span class="token punctuation">[</span>
+                    <span class="token punctuation">{</span>
+                        label<span class="token operator">:</span> <span class="token string">'订单录入'</span><span class="token punctuation">,</span>
+                        value<span class="token operator">:</span> <span class="token string">'1'</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token punctuation">{</span>
+                        label<span class="token operator">:</span> <span class="token string">'订单导入'</span><span class="token punctuation">,</span>
+                        value<span class="token operator">:</span> <span class="token string">'2'</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'receivePerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'收货人'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'receivePhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'收货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'receiveArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'收货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'receiveAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">get</span> <span class="token function">rules</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">{</span>
+            sendPerson<span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    message<span class="token operator">:</span> <span class="token string">'请输入发货人'</span><span class="token punctuation">,</span>
+                    trigger<span class="token operator">:</span> <span class="token string">'change'</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+            sendPhone<span class="token operator">:</span> <span class="token punctuation">[</span>
+                <span class="token punctuation">{</span>
+                    required<span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    message<span class="token operator">:</span> <span class="token string">'请输入发货人电话'</span><span class="token punctuation">,</span>
+                    trigger<span class="token operator">:</span> <span class="token string">'change'</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token punctuation">{</span>
+                    type<span class="token operator">:</span> <span class="token string">'string'</span><span class="token punctuation">,</span>
+                    pattern<span class="token operator">:</span> reg<span class="token punctuation">.</span>phoneReg<span class="token punctuation">,</span>
+                    message<span class="token operator">:</span> <span class="token string">'发货人电话格式不正确'</span><span class="token punctuation">,</span>
+                    trigger<span class="token operator">:</span> <span class="token string">'change'</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">]</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">get</span> <span class="token function">operationOptions</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> OperationOptionType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                title<span class="token operator">:</span> <span class="token string">'重置'</span><span class="token punctuation">,</span>
+                <span class="token function-variable function">callback</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>form <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                title<span class="token operator">:</span> <span class="token string">'提交'</span><span class="token punctuation">,</span>
+                loading<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>loading<span class="token punctuation">,</span>
+                btnProps<span class="token operator">:</span> <span class="token punctuation">{</span>
+                    plain<span class="token operator">:</span> <span class="token boolean">true</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                callback<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>submit
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 提交表单
+     */</span>
+    <span class="token function">submit</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'提交'</span><span class="token punctuation">)</span>
+        <span class="token punctuation">;</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>$refs<span class="token punctuation">.</span>biuForm <span class="token keyword">as</span> any<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token parameter">valid<span class="token operator">:</span> boolean</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>valid<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword">this</span><span class="token punctuation">.</span>loading <span class="token operator">=</span> <span class="token boolean">true</span>
+                <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">$notify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
+                        title<span class="token operator">:</span> <span class="token string">'提交成功'</span><span class="token punctuation">,</span>
+                        message<span class="token operator">:</span> <span class="token string">'成功添加一条运单'</span><span class="token punctuation">,</span>
+                        type<span class="token operator">:</span> <span class="token string">'success'</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+                    <span class="token keyword">this</span><span class="token punctuation">.</span>loading <span class="token operator">=</span> <span class="token boolean">false</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br><span class="line-number">78</span><br><span class="line-number">79</span><br><span class="line-number">80</span><br><span class="line-number">81</span><br><span class="line-number">82</span><br><span class="line-number">83</span><br><span class="line-number">84</span><br><span class="line-number">85</span><br><span class="line-number">86</span><br><span class="line-number">87</span><br><span class="line-number">88</span><br><span class="line-number">89</span><br><span class="line-number">90</span><br><span class="line-number">91</span><br><span class="line-number">92</span><br><span class="line-number">93</span><br><span class="line-number">94</span><br><span class="line-number">95</span><br><span class="line-number">96</span><br><span class="line-number">97</span><br><span class="line-number">98</span><br><span class="line-number">99</span><br><span class="line-number">100</span><br><span class="line-number">101</span><br><span class="line-number">102</span><br><span class="line-number">103</span><br><span class="line-number">104</span><br><span class="line-number">105</span><br><span class="line-number">106</span><br><span class="line-number">107</span><br><span class="line-number">108</span><br><span class="line-number">109</span><br><span class="line-number">110</span><br><span class="line-number">111</span><br><span class="line-number">112</span><br><span class="line-number">113</span><br><span class="line-number">114</span><br><span class="line-number">115</span><br><span class="line-number">116</span><br><span class="line-number">117</span><br><span class="line-number">118</span><br><span class="line-number">119</span><br><span class="line-number">120</span><br><span class="line-number">121</span><br><span class="line-number">122</span><br><span class="line-number">123</span><br><span class="line-number">124</span><br><span class="line-number">125</span><br><span class="line-number">126</span><br><span class="line-number">127</span><br><span class="line-number">128</span><br><span class="line-number">129</span><br><span class="line-number">130</span><br><span class="line-number">131</span><br><span class="line-number">132</span><br><span class="line-number">133</span><br><span class="line-number">134</span><br><span class="line-number">135</span><br><span class="line-number">136</span><br><span class="line-number">137</span><br><span class="line-number">138</span><br><span class="line-number">139</span><br><span class="line-number">140</span><br><span class="line-number">141</span><br><span class="line-number">142</span><br><span class="line-number">143</span><br><span class="line-number">144</span><br><span class="line-number">145</span><br><span class="line-number">146</span><br><span class="line-number">147</span><br><span class="line-number">148</span><br><span class="line-number">149</span><br><span class="line-number">150</span><br><span class="line-number">151</span><br><span class="line-number">152</span><br><span class="line-number">153</span><br><span class="line-number">154</span><br><span class="line-number">155</span><br><span class="line-number">156</span><br><span class="line-number">157</span><br><span class="line-number">158</span><br><span class="line-number">159</span><br><span class="line-number">160</span><br><span class="line-number">161</span><br><span class="line-number">162</span><br><span class="line-number">163</span><br><span class="line-number">164</span><br><span class="line-number">165</span><br><span class="line-number">166</span><br><span class="line-number">167</span><br><span class="line-number">168</span><br><span class="line-number">169</span><br><span class="line-number">170</span><br><span class="line-number">171</span><br><span class="line-number">172</span><br><span class="line-number">173</span><br><span class="line-number">174</span><br><span class="line-number">175</span><br><span class="line-number">176</span><br><span class="line-number">177</span><br><span class="line-number">178</span><br><span class="line-number">179</span><br><span class="line-number">180</span><br><span class="line-number">181</span><br><span class="line-number">182</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="自定义列宽"><a href="#自定义列宽" class="header-anchor">#</a> 自定义列宽</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object]" label-width="92px" label-position="right" data-v-0921f13e></biu-form></div> <div class="meta"><div class="description"><p>你可以利用<code>span</code>自由配置宽度，目前仅支持 6，12，18，24 四种值，默认 6。</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+        <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>92px<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormSpan</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">12</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="自定义换行"><a href="#自定义换行" class="header-anchor">#</a> 自定义换行</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object]" label-width="92px" label-position="right" data-v-6f8723fa></biu-form></div> <div class="meta"><div class="description"><p>你可以配置<code>br</code>来控制换行。</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+        <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>92px<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormBr</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span><span class="token punctuation">,</span>
+                br<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token comment">// br 可配置该项后换行</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="自定义渲染"><a href="#自定义渲染" class="header-anchor">#</a> 自定义渲染</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object]" label-width="92px" label-position="right" data-v-c112b29a></biu-form></div> <div class="meta"><div class="description"><p>我们为自定义渲染提供了两种方式，分为为<code>render</code>和<code>slot</code>，请注意示例中 <strong>发货人</strong> 和 <strong>发货地区</strong> 的配置。</p> <div class="custom-block warning"><p class="custom-block-title">注意</p> <p>使用<code>render</code>来自定义渲染，注意：formType 必须为 slot 时生效。</p></div></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+        <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>92px<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span> <span class="token attr-name"><span class="token namespace">v-slot:</span>sendArea</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>{ col }<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>el-form-item</span> <span class="token attr-name">:label</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>col.label<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:prop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>col.id<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span><span class="token punctuation">&gt;</span></span>{{ form[col.id] }}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>el-form-item</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>tsx<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormSlot</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span>
+        sendPerson<span class="token operator">:</span> <span class="token string">'我是使用render自定义渲染的'</span><span class="token punctuation">,</span>
+        sendArea<span class="token operator">:</span> <span class="token string">'我是使用slot自定义渲染的，优先级比render高'</span>
+    <span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'slot'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span><span class="token punctuation">,</span>
+                <span class="token function-variable function">render</span><span class="token operator">:</span> <span class="token punctuation">(</span><span class="token parameter">h<span class="token punctuation">,</span> col</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span>
+                    <span class="token operator">&lt;</span>el<span class="token operator">-</span>form<span class="token operator">-</span>item
+                        label<span class="token operator">=</span><span class="token punctuation">{</span>col<span class="token punctuation">.</span>label<span class="token punctuation">}</span>
+                        label<span class="token operator">-</span>width<span class="token operator">=</span><span class="token string">&quot;92px&quot;</span>
+                        prop<span class="token operator">=</span><span class="token punctuation">{</span>col<span class="token punctuation">.</span>id<span class="token punctuation">}</span>
+                    <span class="token operator">&gt;</span>
+                        <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>form<span class="token punctuation">[</span>col<span class="token punctuation">.</span>id<span class="token punctuation">]</span><span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+                    <span class="token operator">&lt;</span><span class="token operator">/</span>el<span class="token operator">-</span>form<span class="token operator">-</span>item<span class="token operator">&gt;</span>
+                <span class="token punctuation">)</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br><span class="line-number">66</span><br><span class="line-number">67</span><br><span class="line-number">68</span><br><span class="line-number">69</span><br><span class="line-number">70</span><br><span class="line-number">71</span><br><span class="line-number">72</span><br><span class="line-number">73</span><br><span class="line-number">74</span><br><span class="line-number">75</span><br><span class="line-number">76</span><br><span class="line-number">77</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="不自动适应宽度"><a href="#不自动适应宽度" class="header-anchor">#</a> 不自动适应宽度</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object]" label-position="right" data-v-b0625f7e></biu-form></div> <div class="meta"><div class="description"><p>配置<code>resize</code>为<code>false</code>可以取消自动适应宽度，强制使用配置的<code>span</code>值。</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+        <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:resize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>false<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormResize</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="垂直排列"><a href="#垂直排列" class="header-anchor">#</a> 垂直排列</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object]" label-position="right" direction="vertical" data-v-61dfcc08></biu-form></div> <div class="meta"><div class="description"><p>配置<code>direction</code>为<code>vertical</code>可以让表单垂直排列。</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+        <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">direction</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>vertical<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormDirection</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">12</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="使用-elementui-的相关配置"><a href="#使用-elementui-的相关配置" class="header-anchor">#</a> 使用 elementUI 的相关配置</h4> <div class="demo-block demo-components demo-biu-form.html"><div style="padding: 24px"><biu-form source="[object Object],[object Object],[object Object],[object Object],[object Object]" label-suffix="：" label-width="92px" label-position="right" data-v-5dec68de></biu-form></div> <div class="meta"><div class="description"><p>对于<code>el-form</code>组件的属性你可以直接配置在<code>biu-form</code>组件上。
+如果你想对某个表单项设置其他属性，请尽管配置在<code>source</code>的相应控件上吧。</p></div> <div class="highlight"><div class="language-vue line-numbers-mode"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>biu-form</span>
+        <span class="token attr-name">v-model</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">:source</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>source<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-suffix</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>：<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>92px<span class="token punctuation">&quot;</span></span>
+        <span class="token attr-name">label-position</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>right<span class="token punctuation">&quot;</span></span>
+    <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>biu-form</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>ts<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Vue<span class="token punctuation">,</span> Component <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'vue-property-decorator'</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> BiuformType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'calm-harin/types/biu-form'</span>
+
+@Component
+<span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">BiuFormElement</span> <span class="token keyword">extends</span> <span class="token class-name">Vue</span> <span class="token punctuation">{</span>
+    form<span class="token operator">:</span> any <span class="token operator">=</span> <span class="token punctuation">{</span>
+        sendArea<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'北京市'</span><span class="token punctuation">,</span> <span class="token string">'北京市'</span><span class="token punctuation">,</span> <span class="token string">'东城区'</span><span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+
+    loading <span class="token operator">=</span> <span class="token boolean">false</span>
+
+    <span class="token keyword">get</span> <span class="token function">source</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> BiuformType<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPerson'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人'</span><span class="token punctuation">,</span>
+                disabled<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token comment">// 禁用</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendPhone'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货人电话'</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'area'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendArea'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'发货地区'</span><span class="token punctuation">,</span>
+                clearable<span class="token operator">:</span> <span class="token boolean">false</span> <span class="token comment">// 不允许删除</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'sendAddress'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'详细地址'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                formType<span class="token operator">:</span> <span class="token string">'input'</span><span class="token punctuation">,</span>
+                id<span class="token operator">:</span> <span class="token string">'remark'</span><span class="token punctuation">,</span>
+                label<span class="token operator">:</span> <span class="token string">'备注'</span><span class="token punctuation">,</span>
+                span<span class="token operator">:</span> <span class="token number">24</span><span class="token punctuation">,</span>
+                type<span class="token operator">:</span> <span class="token string">'textarea'</span><span class="token punctuation">,</span>
+                autosize<span class="token operator">:</span> <span class="token boolean">true</span> <span class="token comment">// 自适应高度</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+<span class="token selector">.calm-opear-container</span> <span class="token punctuation">{</span>
+    <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br><span class="line-number">52</span><br><span class="line-number">53</span><br><span class="line-number">54</span><br><span class="line-number">55</span><br><span class="line-number">56</span><br><span class="line-number">57</span><br><span class="line-number">58</span><br><span class="line-number">59</span><br><span class="line-number">60</span><br><span class="line-number">61</span><br><span class="line-number">62</span><br><span class="line-number">63</span><br><span class="line-number">64</span><br><span class="line-number">65</span><br></div></div></div></div> <div class="demo-block-control"><i class="el-icon-caret-bottom"></i> <span style="display:none;">显示代码</span></div></div> <h4 id="属性"><a href="#属性" class="header-anchor">#</a> 属性</h4> <table><thead><tr><th>参数</th> <th style="text-align:left;">说明</th> <th style="text-align:left;"><div style="white-space:nowrap;">必填</div></th> <th style="text-align:left;">类型</th> <th style="text-align:left;">默认值</th></tr></thead> <tbody><tr><td><code>source</code></td> <td style="text-align:left;">表单数据源</td> <td style="text-align:left;"><label class="el-checkbox is-checked"><span class="el-checkbox__input is-checked"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" checked="checked" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>BiuformType[]</code></td> <td style="text-align:left;">—</td></tr> <tr><td><code>value / v-model</code></td> <td style="text-align:left;">绑定值</td> <td style="text-align:left;"><label class="el-checkbox is-checked"><span class="el-checkbox__input is-checked"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" checked="checked" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>objType</code></td> <td style="text-align:left;">—</td></tr> <tr><td><code>showBtn</code></td> <td style="text-align:left;">是否显示搜索按钮</td> <td style="text-align:left;"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>boolean</code></td> <td style="text-align:left;"><code>false</code></td></tr> <tr><td><code>direction</code></td> <td style="text-align:left;">表单项排列方向</td> <td style="text-align:left;"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;">vertical， horizontal</td> <td style="text-align:left;"><code>horizontal</code></td></tr> <tr><td><code>resize</code></td> <td style="text-align:left;">是否自适应表单项的宽度</td> <td style="text-align:left;"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>boolean</code></td> <td style="text-align:left;"><code>false</code></td></tr> <tr><td><code>min</code></td> <td style="text-align:left;">表单项的最小宽度，仅当 resize=true 时生效</td> <td style="text-align:left;"><label class="el-checkbox"><span class="el-checkbox__input"><span class="el-checkbox__inner"></span><input type="checkbox" aria-hidden="false" class="el-checkbox__original"></span><!----></label></td> <td style="text-align:left;"><code>number</code></td> <td style="text-align:left;"><code>280</code></td></tr></tbody></table> <h4 id="方法"><a href="#方法" class="header-anchor">#</a> 方法</h4> <table><thead><tr><th>方法名</th> <th>说明</th> <th>类型</th></tr></thead> <tbody><tr><td><code>validate</code></td> <td>对整个表单进行校验，同 element 的 validate</td> <td><code>(callback: ValidateCallback) =&gt; void</code>或者<code>() =&gt; Promise</code></td></tr> <tr><td><code>validateField</code></td> <td>对部分表单字段进行校验，同 element 的 validateField</td> <td><code>(props:string | string[], callback?: ValidateFieldCallback) =&gt; void</code></td></tr> <tr><td><code>resetFields</code></td> <td>对整个表单进行重置到初始值，并移除校验结果，同 element 的 resetFields</td> <td><code>() =&gt; void</code></td></tr> <tr><td><code>clearValidate</code></td> <td>移除表单项的校验结果，同 element 的 clearValidate</td> <td><code>(props?: string | string[]) =&gt; void</code></td></tr></tbody></table></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/calm-harbin/docs/dist/components/changelog.html" class="prev">
+        更新日志
+      </a></span> <span class="next"><a href="/calm-harbin/docs/dist/components/biu-form-item.html">
+        BiuFormItem 表单项
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+        <script src="/calm-harbin/docs/dist/assets/js/app.2a41eec7.js" defer></script><script src="/calm-harbin/docs/dist/assets/js/3.25daed40.js" defer></script><script src="/calm-harbin/docs/dist/assets/js/17.2b5a1c61.js" defer></script><script src="/calm-harbin/docs/dist/assets/js/4.24de67f8.js" defer></script>
+    </body>
+</html>
