@@ -21,7 +21,7 @@ node {
             sh 'ls'
             
             if ("$install" == 'true') {
-                sh 'rm -rf node_modules && npm install'
+                sh 'rm -rf node_modules && yarn'
             }
             // 打包
             sh 'npm run docs:build'
@@ -38,7 +38,7 @@ node {
                                 cleanRemote: false, 
                                 excludes: '', 
                                 // 执行脚本
-                                execCommand: 'cd /usr/share/nginx/html/ && rm -rf dist && tar -xzvf dist.tar.gz', 
+                                execCommand: 'cd /usr/share/nginx/html/ && rm -rf dist && tar -xzvf dist.tar.gz && rm -rf dist.tar.gz', 
                                 execTimeout: 120000, 
                                 flatten: false, 
                                 makeEmptyDirs: false, 
@@ -60,14 +60,14 @@ node {
                 ]
             )
             // 将容器内的文件copy到宿主机
-            sh 'docker cp myjenkins:/var/jenkins_mount/workspace/calmharbin文档/docs/dist /usr/share/nginx/html/dist'
+            // sh 'docker cp myjenkins:/var/jenkins_mount/workspace/calmharbin文档/docs/dist /usr/share/nginx/html/dist'
             // 生成镜像
             // sh 'docker build -f /var/jenkins_mount/workspace/calmharbin文档/docs/Dockerfile -t calmharbin .'
             // 创建容器
             // sh 'docker run --name calmharbin -d -p 8888:80 -v'
         }
         stage('清理') {
-            sh 'pwd'
+            sh 'rm -rf docs/dist docs/dist.tar.gz'
         }
     }
 }
