@@ -4,8 +4,11 @@
 
 推荐使用 npm 的方式安装，它能友好的提供 ts 类型支持。
 
+[![](https://img.shields.io/npm/v/calm-harbin/latest)](https://www.npmjs.com/package/calm-harbin)
+[![](https://img.shields.io/github/stars/CalmHarbin/calm-harbin?style=social)](https://github.com/CalmHarbin/calm-harbin)
+
 ```
-npm i calm-harbin@next -S
+npm i calm-harbin@latest -S
 ```
 
 #### CDN
