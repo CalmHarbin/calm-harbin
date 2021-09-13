@@ -60,7 +60,7 @@ export default class App extends Vue {
 
     created(): void {
         // this.$hello()
-        const res = [{ a: 2589.34 }, { a: 1598.36 }, { a: 1569.36 }]
+        // const res = [{ a: 2589.34 }, { a: 1598.36 }, { a: 1569.36 }]
         // console.log(summary(res, { a: 0 }))
     }
 }
