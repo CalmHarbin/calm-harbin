@@ -22,11 +22,12 @@ import BiuSelectTable from '@packages/biu-select-table/index'
 import waves from './directive/waves/index'
 
 // 引入工具方法
-export { debounce, exportExcel, summary } from './utils'
-export { startandends } from './utils/date'
+import { debounce, exportExcel, summary } from './utils'
+import { startandends } from './utils/date'
 
 // 正则
-export { default as reg } from './utils/regExp.js'
+// export { default as reg } from './utils/regExp.js'
+import reg from './utils/regExp.js'
 
 const components = {
     BiuDialog,
@@ -80,6 +81,8 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
     install((window as any).Vue)
 }
 
+export { debounce, exportExcel, summary, startandends, reg }
+
 export default {
     version: '0.0.5',
     install,
@@ -92,5 +95,10 @@ export default {
     BiuPage,
     BiuForm,
     BiuFormItem,
-    BiuSelectTable
+    BiuSelectTable,
+    debounce,
+    exportExcel,
+    summary,
+    startandends,
+    reg
 }
