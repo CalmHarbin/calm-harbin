@@ -7,7 +7,6 @@
         :tableData="tableData"
         :loading="loading"
         :prop="{ id: 'id', label: 'clientName' }"
-        :pagination.sync="pagination"
         @search="(text) => getList(text, true)"
         @pagination="() => getList('', false)"
         @change="change"
@@ -91,12 +90,10 @@ export default class CarrierSelect extends Vue {
             if (!newVal) return this.setValue([])
             if (this.value?.toString() !== newVal?.toString())
                 return this.setValue(newVal)
+        } else if (!newVal) {
+            this.setValue('')
         } else {
-            if (!newVal) {
-                this.setValue('')
-            } else {
-                this.setValue(newVal)
-            }
+            this.setValue(newVal)
         }
     }
 

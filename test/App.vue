@@ -6,9 +6,10 @@
 
         <!-- <BiuTableTest></BiuTableTest> -->
 
-        <!-- <BiuTableSelectTest
+        <BiuTableSelectTest
             v-model="biuTableSelectTestValue"
-        ></BiuTableSelectTest> -->
+            multiple
+        ></BiuTableSelectTest>
 
         <!-- <BiuSelectTest></BiuSelectTest> -->
         <!-- <Sheet></Sheet> -->
@@ -33,7 +34,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from './components/HelloWorld.vue'
 // import Order from './components/order.vue'
 // import BiuPageTest from './components/BiuPageTest.vue'
-// import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
+import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
 // import BiuTableTest from './components/BiuTableTest.vue'
 // import BiuSelectTest from './components/BiuSelectTest.vue'
 // import Sheet from './components/Sheet.vue'
@@ -41,27 +42,31 @@ import HelloWorld from './components/HelloWorld.vue'
 
 @Component({
     components: {
-        HelloWorld
+        HelloWorld,
         // Order,
         // BiuPageTest,
-        // BiuTableSelectTest,
-        // BiuTableTest,
+        BiuTableSelectTest
+        // BiuTableTest
         // BiuSelectTest,
         // Sheet
     }
 })
 export default class App extends Vue {
-    biuTableSelectTestValue = ''
+    // biuTableSelectTestValue = ''
 
-    // biuTableSelectTestValue = [
-    //     '561cd82623e54e9882470b69bb74ce73',
-    //     'd92f6a3c49664b31beb30bec257f6ee2'
-    // ]
+    biuTableSelectTestValue: any[] = []
 
     created(): void {
         // this.$hello()
         // const res = [{ a: 2589.34 }, { a: 1598.36 }, { a: 1569.36 }]
         // console.log(summary(res, { a: 0 }))
+
+        setTimeout(() => {
+            this.biuTableSelectTestValue = [
+                'b88a1cdd2c5a421dab1004d17898b97a',
+                '3a3e3e24811042859667c6e387e46b47'
+            ]
+        }, 1000)
     }
 }
 </script>

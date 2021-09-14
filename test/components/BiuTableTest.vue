@@ -104,6 +104,7 @@ export default {
                         return (
                             <BiuTableSelectTest
                                 v-model={row[col.id]}
+                                multiple
                             ></BiuTableSelectTest>
                         )
                     }
