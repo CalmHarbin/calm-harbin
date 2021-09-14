@@ -23,6 +23,7 @@
                 :tbHeight="paginationSync ? 256 : 300"
                 :tableData="tableData"
                 :selection="multiple"
+                :multipleSelection.sync="multipleSelection"
                 @selection-change="handleSelectionChange"
                 v-bind="attrs"
                 @row-click="rowClick"
@@ -129,6 +130,18 @@ export default class BiuSelectTable extends Vue {
      * 搜索
      */
     filterMethod: (val: string) => void = () => {}
+
+    // 将选中的数据转为复选框格式 row[]
+    get multipleSelection() {
+        return this.checkList.map((item) =>
+            this.tableData.find((row) => row[this.prop.id] === item)
+        )
+    }
+    set multipleSelection(val) {
+        console.log(141, val)
+        this.checkList = val.map((item) => item[this.prop.id])
+    }
+
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -154,19 +167,12 @@ export default class BiuSelectTable extends Vue {
             if (!isEqualWith(this.value, newVal)) {
                 this.setValue(newVal)
             }
-        } else {
-            if (!isEqualWith(this.value, newVal[0])) {
-                this.setValue(newVal[0])
-            }
+        } else if (!isEqualWith(this.value, newVal[0])) {
+            this.setValue(newVal[0])
         }
 
         // 同步显示值
         this.checkListValue = this.getCheckListValue(newVal)
-
-        if (this.multiple) {
-            // 同步勾选状态
-            this.setMultipleSelection(newVal)
-        }
     }
 
     @Watch('value', { deep: true, immediate: true })
@@ -177,15 +183,12 @@ export default class BiuSelectTable extends Vue {
                     typeof item === 'number' ? String(item) : item
                 )
             }
-        } else {
-            // 单选时
-            if (typeof newVal === 'number') {
-                this.checkList = [String(newVal)]
-            } else if (typeof newVal === 'string' && newVal) {
-                this.checkList = [newVal]
-            } else if (this.checkList.length !== 0) {
-                this.checkList = []
-            }
+        } else if (typeof newVal === 'number') {
+            this.checkList = [String(newVal)]
+        } else if (typeof newVal === 'string' && newVal) {
+            this.checkList = [newVal]
+        } else if (this.checkList.length !== 0) {
+            this.checkList = []
         }
     }
 
@@ -317,17 +320,30 @@ export default class BiuSelectTable extends Vue {
      * 单选时
      */
     rowClick(row: any) {
-        // 多选不做任何处理
-        if (this.multiple) return
-        // 当单选时选中
-        this.checkList = [row[this.prop.id]]
+        // 多选点击行选中与反选
+        if (this.multiple) {
+            const index = this.checkList.findIndex(
+                (item) => row[this.prop.id] === item
+            )
+            if (index !== -1) {
+                this.checkList.splice(index, 1)
+            } else {
+                this.checkList.push(row[this.prop.id])
+            }
+        } else {
+            // 当单选时选中
+            this.checkList = [row[this.prop.id]]
+        }
+
         this.$emit(
             'change',
             this.getCheckListValue(this.checkList),
-            this.checkList[0],
+            this.multiple ? this.checkList : this.checkList[0],
             this.tableData,
             this.prop
         )
+        // 重新查询数据
+        this.updateTableData()
     }
     /**
      * 获取选中对应的值显示的值，inputable时为输入的值
@@ -348,8 +364,7 @@ export default class BiuSelectTable extends Vue {
     /**
      * 多选改变
      */
-    handleSelectionChange(val: any[]) {
-        this.checkList = val.map((item: any) => item[this.prop.id])
+    handleSelectionChange() {
         this.$emit(
             'change',
             this.getCheckListValue(this.checkList),
@@ -374,19 +389,6 @@ export default class BiuSelectTable extends Vue {
     paginationCallback(data: { page: number; limit: number }) {
         this.$emit('pagination', data)
         this.focus()
-    }
-    /**
-     * 同步复选框的勾选状态
-     */
-    setMultipleSelection(checkList: string[]) {
-        let multipleSelection = this.tableData.filter((item: any) =>
-            checkList.includes(item[this.prop.id])
-        )
-        if (this.$refs.BiuTable) {
-            ;(this.$refs.BiuTable as any).$refs.BiuTable.setMultipleSelection(
-                multipleSelection
-            )
-        }
     }
     /**
      * 重新查询tableData
