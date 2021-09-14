@@ -16,6 +16,7 @@
                 : true
         "
         :row-height="36"
+        :row-id="rowId"
         @header-dragend="headerDragend"
         v-bind="attrs"
         v-on="listeners"
@@ -236,7 +237,8 @@ import {
     Vue,
     Watch,
     Emit,
-    Model
+    Model,
+    PropSync
 } from 'vue-property-decorator'
 import {
     tableColumnType,
@@ -276,6 +278,7 @@ Vue.use(Loading.directive)
     }
 })
 export default class CustomUTable extends Vue {
+    @Prop({ type: String, default: 'id' }) rowId!: string
     @Prop(Boolean) private loading!: boolean
     @Prop(Number) private tbHeight!: number
     @Prop(Array) private tableData!: tableColumnType[]
@@ -292,10 +295,12 @@ export default class CustomUTable extends Vue {
     // 这里利用引用类型直接改值
     @Model('setValue') value: any
 
+    @PropSync('multipleSelection') multipleSelectionSync!: any[]
+
     isMounted = false // 用来表示dom已加载完成，计算表格宽度是否超过列总宽
 
     customTableData: any[] = []
-    multipleSelection: any[] = [] // 自定义实现多选
+
     refreshId = 1 // 强制刷新组件
     customValue = {} // 表单的数据
     /**
@@ -429,28 +434,28 @@ export default class CustomUTable extends Vue {
     // 全选的不确定状态
     get indeterminate() {
         // 如果没有选择false
-        if (!this.multipleSelection.length) return false
+        if (!this.multipleSelectionSync.length) return false
         // 如果选了但是没有全选则true
         if (this.showSummary) {
             return (
-                this.multipleSelection.length !==
+                this.multipleSelectionSync.length !==
                 this.customTableData.length - 1
             )
         }
-        return this.multipleSelection.length !== this.customTableData.length
+        return this.multipleSelectionSync.length !== this.customTableData.length
     }
     // 全选是否选中
     get isCheckedAll() {
         // 如果没有选择false
-        if (!this.multipleSelection.length) return false
+        if (!this.multipleSelectionSync.length) return false
         // 如果选了但是没有全选则true
         if (this.showSummary) {
             return (
-                this.multipleSelection.length ===
+                this.multipleSelectionSync.length ===
                 this.customTableData.length - 1
             )
         }
-        return this.multipleSelection.length === this.customTableData.length
+        return this.multipleSelectionSync.length === this.customTableData.length
     }
 
     mounted() {
@@ -461,12 +466,7 @@ export default class CustomUTable extends Vue {
     @Watch('tableData')
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
-            this.customTableData = newVal.map((item) => ({
-                ...item,
-                _XID: Math.random()
-            }))
-            // 清空复选框
-            this.multipleSelection = []
+            this.customTableData = cloneDeep(newVal)
         }
         // 使用umy-ui应该没有这个问题,有的话就放开
         // // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
@@ -538,18 +538,16 @@ export default class CustomUTable extends Vue {
     indexValue(index: number) {
         if (index + 1 < this.customTableData.length) {
             return index + 1
-        } else {
-            if (this.showSummary) return this.attrs['sum-text'] || '汇总'
-            else return index + 1
-        }
+        } else if (this.showSummary) return this.attrs['sum-text'] || '汇总'
+        else return index + 1
     }
     /**
      * 是否选中
      * @param {any} value 当前行id
      */
     isChecked(row: any) {
-        return !!this.multipleSelection.find(
-            (item: any) => item._XID === row._XID
+        return !!this.multipleSelectionSync.find(
+            (item: any) => item[this.rowId] === row[this.rowId]
         )
     }
     /**
@@ -558,16 +556,16 @@ export default class CustomUTable extends Vue {
      */
     checked(row: any) {
         if (this.isChecked(row)) {
-            this.multipleSelection.splice(
-                this.multipleSelection.findIndex(
-                    (item: any) => item._XID === row._XID
+            this.multipleSelectionSync.splice(
+                this.multipleSelectionSync.findIndex(
+                    (item: any) => item[this.rowId] === row[this.rowId]
                 ),
                 1
             )
         } else {
-            this.multipleSelection.push(row)
+            this.multipleSelectionSync.push(row)
         }
-        this.$emit('selection-change', this.multipleSelection)
+        this.$emit('selection-change', this.multipleSelectionSync)
     }
     /**
      * 全选与反选
@@ -575,14 +573,14 @@ export default class CustomUTable extends Vue {
     checkedAll(checked: boolean) {
         if (checked) {
             if (this.showSummary) {
-                this.multipleSelection = this.customTableData.slice(0, -1)
+                this.multipleSelectionSync = this.customTableData.slice(0, -1)
             } else {
-                this.multipleSelection = [...this.customTableData]
+                this.multipleSelectionSync = [...this.customTableData]
             }
         } else {
-            this.multipleSelection = []
+            this.multipleSelectionSync = []
         }
-        this.$emit('selection-change', this.multipleSelection)
+        this.$emit('selection-change', this.multipleSelectionSync)
     }
 }
 </script>

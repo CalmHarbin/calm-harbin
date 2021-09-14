@@ -16,6 +16,7 @@
                 : true
         "
         :rowKey="false"
+        :rowId="rowId"
         :scrollX="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
         :scrollY="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
         show-overflow="tooltip"
@@ -373,7 +374,8 @@ import {
     Vue,
     Watch,
     Model,
-    Emit
+    Emit,
+    PropSync
 } from 'vue-property-decorator'
 import {
     tableColumnType,
@@ -417,6 +419,7 @@ Vue.use(Loading.directive)
     }
 })
 export default class CoutomUxGrid extends Vue {
+    @Prop({ type: String, default: 'id' }) rowId!: string
     @Prop(Boolean) private loading!: boolean
     @Prop(Number) private tbHeight!: number
     @Prop(Array) private tableData!: tableColumnType[]
@@ -453,13 +456,15 @@ export default class CoutomUxGrid extends Vue {
      */
     @Prop(Function) plus?: (data: any) => any
 
+    @PropSync('multipleSelection') multipleSelectionSync!: any[]
+
     isMounted = false // 用来表示dom已加载完成，计算表格宽度是否超过列总宽
 
     customTableData: any[] = []
-    multipleSelection: any[] = [] // 自定义实现多选
+    // multipleSelection: any[] = [] // 自定义实现多选
     refreshId = 1 // 强制刷新组件
     customValue = {} // 表单的数据
-    activeRow?: string // 记录当前激活的行_XID
+    activeRow?: string // 记录当前激活的行，rowId
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -623,28 +628,32 @@ export default class CoutomUxGrid extends Vue {
     // 全选的不确定状态
     get indeterminate() {
         // 如果没有选择false
-        if (!this.multipleSelection.length) return false
+        if (!this.multipleSelectionSync?.length) return false
         // 如果选了但是没有全选则true
         if (this.showSummary) {
             return (
-                this.multipleSelection.length !==
+                this.multipleSelectionSync?.length !==
                 this.customTableData.length - 1
             )
         }
-        return this.multipleSelection.length !== this.customTableData.length
+        return (
+            this.multipleSelectionSync?.length !== this.customTableData.length
+        )
     }
     // 全选是否选中
     get isCheckedAll() {
         // 如果没有选择false
-        if (!this.multipleSelection.length) return false
+        if (!this.multipleSelectionSync?.length) return false
         // 如果选了但是没有全选则true
         if (this.showSummary) {
             return (
-                this.multipleSelection.length ===
+                this.multipleSelectionSync?.length ===
                 this.customTableData.length - 1
             )
         }
-        return this.multipleSelection.length === this.customTableData.length
+        return (
+            this.multipleSelectionSync?.length === this.customTableData.length
+        )
     }
 
     mounted() {
@@ -657,19 +666,12 @@ export default class CoutomUxGrid extends Vue {
     @Watch('tableData', { deep: true })
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
-            // 因为执行loadData后XID会改变,先找到之前的数据位置
+            // 先找到之前的数据位置
             let activeIndex = -1
             if (this.activeRow && this.editable) {
-                for (
-                    let i = 0, len = this.customTableData.length;
-                    i < len;
-                    i++
-                ) {
-                    if (this.customTableData[i]._XID === this.activeRow) {
-                        activeIndex = i
-                        break
-                    }
-                }
+                activeIndex = this.customTableData.findIndex(
+                    (item) => item[this.rowId] === this.activeRow
+                )
             }
             // 表格填充数据
             ;(this.$refs.table as any).loadData(newVal)
@@ -685,7 +687,7 @@ export default class CoutomUxGrid extends Vue {
             // TODO
             // 清空复选框，暂时为了解决外部点击搜索时，外部清空了multipleSelection，而内部没有同步，
             // 理应不应该这样实现，会导致数据一变就清空，待后续更改
-            this.multipleSelection = []
+            // this.multipleSelection = []
             this.$emit('update:table-data', this.customTableData)
         }
         // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
@@ -765,10 +767,8 @@ export default class CoutomUxGrid extends Vue {
         if (index === -1) return ''
         if (index + 1 < this.customTableData.length) {
             return index + 1
-        } else {
-            if (this.showSummary) return this.attrs['sum-text'] || '汇总'
-            else return index + 1
-        }
+        } else if (this.showSummary) return this.attrs['sum-text'] || '汇总'
+        else return index + 1
     }
     /**
      * 生成一行新的数据
@@ -830,8 +830,8 @@ export default class CoutomUxGrid extends Vue {
      * @param {any} value 当前行id
      */
     isChecked(row: any) {
-        return !!this.multipleSelection.find(
-            (item: any) => item._XID === row._XID
+        return !!this.multipleSelectionSync?.find(
+            (item: any) => item[this.rowId] === row[this.rowId]
         )
     }
     /**
@@ -840,16 +840,16 @@ export default class CoutomUxGrid extends Vue {
      */
     checked(row: any) {
         if (this.isChecked(row)) {
-            this.multipleSelection.splice(
-                this.multipleSelection.findIndex(
-                    (item: any) => item._XID === row._XID
+            this.multipleSelectionSync?.splice(
+                this.multipleSelectionSync?.findIndex(
+                    (item: any) => item[this.rowId] === row[this.rowId]
                 ),
                 1
             )
         } else {
-            this.multipleSelection.push(row)
+            this.multipleSelectionSync?.push(row)
         }
-        this.$emit('selection-change', this.multipleSelection)
+        this.$emit('selection-change', this.multipleSelectionSync)
     }
     /**
      * 全选与反选
@@ -857,20 +857,21 @@ export default class CoutomUxGrid extends Vue {
     checkedAll(checked: boolean) {
         if (checked) {
             if (this.showSummary) {
-                this.multipleSelection = this.customTableData.slice(0, -1)
+                this.multipleSelectionSync = this.customTableData.slice(0, -1)
             } else {
-                this.multipleSelection = [...this.customTableData]
+                this.multipleSelectionSync = [...this.customTableData]
             }
         } else {
-            this.multipleSelection = []
+            this.multipleSelectionSync = []
         }
-        this.$emit('selection-change', this.multipleSelection)
+
+        this.$emit('selection-change', this.multipleSelectionSync)
     }
     /**
-     * 改变multipleSelection的值
+     * 改变multipleSelection的值，表格勾选状态会自动更新
      */
     setMultipleSelection(val: any[]) {
-        this.multipleSelection = val
+        this.multipleSelectionSync = val
     }
     /**
      * 重新渲染表格
@@ -882,7 +883,7 @@ export default class CoutomUxGrid extends Vue {
      * 编辑状态下
      */
     editActived({ row }: any) {
-        this.activeRow = row._XID
+        this.activeRow = row[this.rowId]
     }
     /**
      * 失去激活状态
