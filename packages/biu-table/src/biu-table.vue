@@ -23,6 +23,7 @@ export type tableColumnType = customtableColumnType
 export type tablePostfixOptionsType = customTablePostfixOptionsType
 
 @Component({
+    inheritAttrs: false,
     components: { UTable, UxGrid }
 })
 export default class BiuTable extends Vue {
