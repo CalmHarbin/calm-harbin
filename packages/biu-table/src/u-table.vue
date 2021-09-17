@@ -555,16 +555,18 @@ export default class CustomUTable extends Vue {
      * @param {string} row 当前行
      */
     checked(row: any) {
+        const multipleSelectionSync = cloneDeep(this.multipleSelectionSync)
         if (this.isChecked(row)) {
-            this.multipleSelectionSync.splice(
-                this.multipleSelectionSync.findIndex(
+            multipleSelectionSync?.splice(
+                this.multipleSelectionSync?.findIndex(
                     (item: any) => item[this.rowId] === row[this.rowId]
                 ),
                 1
             )
         } else {
-            this.multipleSelectionSync.push(row)
+            multipleSelectionSync?.push(row)
         }
+        this.multipleSelectionSync = multipleSelectionSync
         this.$emit('selection-change', this.multipleSelectionSync)
     }
     /**
