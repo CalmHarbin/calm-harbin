@@ -1,5 +1,4 @@
 import { Loading } from 'element-ui'
-import packageInfo from '../package.json'
 
 // 将elementui和umyUi的样式打包进来，使用该包的时候就不用再引入了
 import 'element-ui/lib/theme-chalk/index.css'
@@ -85,7 +84,7 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
 export { debounce, exportExcel, summary, startandends, reg }
 
 export default {
-    version: packageInfo.version,
+    version: '0.2.6-pre',
     install,
     BiuDialog,
     BiuDrawer,
