@@ -466,6 +466,7 @@ export default class CoutomUxGrid extends Vue {
     refreshId = 1 // 强制刷新组件
     customValue = {} // 表单的数据
     activeRow?: string // 记录当前激活的行，rowId
+    activeCell?: string // 记录当前激活的单元格, col中的id
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -680,9 +681,18 @@ export default class CoutomUxGrid extends Vue {
 
             // loadData会丢失激活状态，编辑状态下,有激活的行,则激活
             if (activeIndex !== -1) {
-                ;(this.$refs.table as any).setActiveRow(
-                    this.customTableData[activeIndex]
-                )
+                if (this.attrs['edit-config']?.mode === 'cell') {
+                    // 单元格编辑
+                    ;(this.$refs.table as any).setActiveCell(
+                        this.customTableData[activeIndex],
+                        this.activeCell
+                    )
+                } else {
+                    // 行编辑
+                    ;(this.$refs.table as any).setActiveRow(
+                        this.customTableData[activeIndex]
+                    )
+                }
             }
 
             // TODO
@@ -885,14 +895,17 @@ export default class CoutomUxGrid extends Vue {
     /**
      * 编辑状态下
      */
-    editActived({ row }: any) {
+    editActived({ row, column }: any) {
+        console.log(889, column)
         this.activeRow = row[this.rowId]
+        this.activeCell = column.property
     }
     /**
      * 失去激活状态
      */
     editClosed() {
         this.activeRow = undefined
+        this.activeCell = undefined
     }
 }
 </script>
