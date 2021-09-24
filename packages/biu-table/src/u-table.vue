@@ -281,8 +281,8 @@ export default class CustomUTable extends Vue {
     @Prop({ type: String, default: 'id' }) rowId!: string
     @Prop(Boolean) private loading!: boolean
     @Prop(Number) private tbHeight!: number
-    @Prop(Array) private tableData!: tableColumnType[]
-    @Prop(Array) private columns!: any[]
+    @Prop(Array) private tableData!: any[]
+    @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
     @Prop(Boolean) private showSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
 
@@ -405,7 +405,7 @@ export default class CustomUTable extends Vue {
             if (columns.some((item) => item.width === undefined)) return columns
             // 全部设置了宽度则计算设置的总宽度是否超过了表格的宽度
             const widthSum = columns.reduce(
-                (sum: number, item) => sum + item.width,
+                (sum: number, item) => sum + (item.width as number),
                 0
             )
             // 宽度和小于表格宽度则去掉宽度

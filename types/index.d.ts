@@ -2,19 +2,56 @@ export { BiuCard } from './biu-card'
 
 import { PluginFunction } from 'vue'
 
+// type写法
 // type calmHarbin<T> = {
 //     install: PluginFunction<T>
 // }
 
 // export const calmHarbin: calmHarbin<any>
 
-import { debounce, exportExcel, summary } from '../src/utils/index'
+// namespace写法
+// import { debounce, exportExcel, summary } from '../src/utils/index'
 
 declare namespace calmHarbin {
     export function install<T>(): PluginFunction<T>
 
     // export const aa: (ops: number) => string
-    export { debounce, exportExcel, summary }
+    // export { debounce, exportExcel, summary }
+
+    function debounce(
+        fn: (...params: any) => any | void,
+        wait?: number,
+        throttle?: boolean
+    ): (this: any) => void
 }
 
+// export = calmHarbin;
+
+// export as namespace 'calm-harbin';
+
 export default calmHarbin
+
+// class写法
+// import { debounce, exportExcel, summary } from '../src/utils/index'
+
+// declare namespace CalmHarbin {
+//     // declare interface CalmHarbin {
+//     export class Base {
+//         install: <T>() => PluginFunction<T>
+//         debounce
+//         exportExcel
+//         summary
+//     }
+//     // export function install<T>(): PluginFunction<T>
+
+//     // export const aa: (ops: number) => string
+//     export class Utils {
+//         debounce
+//         exportExcel
+//         summary
+//     }
+// }
+
+// declare const calmHarbin: CalmHarbin.Base
+
+// export default calmHarbin
