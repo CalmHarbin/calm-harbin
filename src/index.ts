@@ -84,7 +84,7 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
 export { debounce, exportExcel, summary, startandends, reg }
 
 export default {
-    version: '0.2.6-pre',
+    version: '0.2.7-pre',
     install,
     BiuDialog,
     BiuDrawer,
