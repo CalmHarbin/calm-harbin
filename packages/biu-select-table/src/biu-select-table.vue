@@ -152,18 +152,28 @@ export default class BiuSelectTable extends Vue {
     private listeners: any = {}
 
     created() {
-        this.filterMethod = debounce(this.search)
+        this.filterMethod = debounce((v) => {
+            console.log(157)
+            this.search(v)
+        }, 500)
+        // this.filterMethod = () => {
+        //     console.log(157)
+        // }
     }
 
     @Watch('tableData', { deep: true, immediate: true })
     dataChange() {
         // 同步显示值,会有初始命中项,但是数据接口是异步查询,所以需要同步一遍
-        this.checkListValue = this.getCheckListValue(this.checkList)
+        const checkListValue = this.getCheckListValue(this.checkList)
+        if (!isEqualWith(this.checkListValue, checkListValue)) {
+            this.checkListValue = checkListValue
+        }
     }
 
     @Watch('checkList', { deep: true })
     checkListChange(newVal: string[]) {
         if (this.multiple) {
+            console.log(this.value, newVal, isEqualWith(this.value, newVal))
             if (!isEqualWith(this.value, newVal)) {
                 this.setValue(newVal)
             }
@@ -171,8 +181,12 @@ export default class BiuSelectTable extends Vue {
             this.setValue(newVal[0])
         }
 
-        // 同步显示值
-        this.checkListValue = this.getCheckListValue(newVal)
+        // 同步显示值，这里之所以要判断是否相等，是避免多选时，传入给el-select的value是数组，引用类型一直在改变，会触发搜索事件
+        // 就会导致多选时,搜索内容会触发两次search
+        const checkListValue = this.getCheckListValue(newVal)
+        if (!isEqualWith(this.checkListValue, checkListValue)) {
+            this.checkListValue = checkListValue
+        }
     }
 
     @Watch('value', { deep: true, immediate: true })
@@ -217,6 +231,7 @@ export default class BiuSelectTable extends Vue {
      */
     @Emit('search')
     search(value: string) {
+        console.log(220)
         this.checkList = []
         // 如果是可以输入的，把输入的数据当做选中的
         if (this.inputable && !this.multiple) {

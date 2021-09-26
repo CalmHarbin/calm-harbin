@@ -60,13 +60,12 @@ export default class App extends Vue {
         // this.$hello()
         // const res = [{ a: 2589.34 }, { a: 1598.36 }, { a: 1569.36 }]
         // console.log(summary(res, { a: 0 }))
-
-        setTimeout(() => {
-            this.biuTableSelectTestValue = [
-                'b88a1cdd2c5a421dab1004d17898b97a',
-                '3a3e3e24811042859667c6e387e46b47'
-            ]
-        }, 1000)
+        // setTimeout(() => {
+        //     this.biuTableSelectTestValue = [
+        //         'b88a1cdd2c5a421dab1004d17898b97a',
+        //         '3a3e3e24811042859667c6e387e46b47'
+        //     ]
+        // }, 1000)
     }
 }
 </script>
