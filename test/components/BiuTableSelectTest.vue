@@ -6,7 +6,8 @@
         :disabled="disabled"
         :tableData="tableData"
         :loading="loading"
-        :prop="{ id: 'id', label: 'clientName' }"
+        :inputable="inputable"
+        :prop="{ id: 'clientName', label: 'clientName' }"
         @search="(text) => getList(text, true)"
         @pagination="() => getList('', false)"
         @change="change"
@@ -29,6 +30,7 @@ import axios from 'axios'
 export default class CarrierSelect extends Vue {
     @Prop({ type: Boolean, default: false }) multiple
     @Prop({ type: Boolean, default: false }) disabled
+    @Prop({ type: Boolean, default: false }) inputable
     @Model('setValue') value
 
     customValue = []
@@ -61,31 +63,30 @@ export default class CarrierSelect extends Vue {
         // 当value为真时，按id去查询
         if (
             (this.multiple && this.value.length) ||
-            (!this.multiple && this.value)
+            (!this.multiple && this.value && !this.inputable)
         ) {
             this.getPageList(
                 '',
                 true,
                 this.multiple ? this.value.join(',') : this.value
             ).then(() => {
-                console.log(73, this.value)
+                this.customValue = this.multiple ? [...this.value] : this.value
+            })
+        } else if (!this.multiple && this.value && this.inputable) {
+            this.getPageList(this.value, true).then(() => {
                 this.customValue = this.multiple ? [...this.value] : this.value
             })
         } else {
             this.getPageList('', true).then(() => {
-                console.log(77, this.value)
                 this.customValue = this.multiple ? [...this.value] : this.value
             })
         }
-
-        console.log(82, this.multiple, this.value)
 
         this.getList = debounce(this.getPageList, 500)
     }
 
     @Watch('customValue', { deep: true })
     customValueChange(newVal) {
-        console.log(87, newVal, this.value)
         if (this.multiple) {
             if (!newVal) return this.setValue([])
             if (this.value?.toString() !== newVal?.toString())
@@ -99,7 +100,6 @@ export default class CarrierSelect extends Vue {
 
     @Watch('value', { deep: true })
     valueChange(newVal) {
-        console.log(89, newVal, this.customValue)
         if (
             this.multiple &&
             this.customValue.toString() !== newVal.toString()
@@ -153,7 +153,7 @@ export default class CarrierSelect extends Vue {
     }
 
     change(label, value, tableData, prop) {
-        console.log(label, value, tableData, prop)
+        console.log('change事件', label, value, tableData, prop)
     }
 }
 </script>

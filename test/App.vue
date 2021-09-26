@@ -52,9 +52,9 @@ import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
     }
 })
 export default class App extends Vue {
-    // biuTableSelectTestValue = ''
+    biuTableSelectTestValue = ''
 
-    biuTableSelectTestValue: any[] = []
+    // biuTableSelectTestValue: any[] = []
 
     created(): void {
         // this.$hello()

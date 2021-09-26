@@ -138,7 +138,6 @@ export default class BiuSelectTable extends Vue {
         )
     }
     set multipleSelection(val) {
-        console.log(141, val)
         this.checkList = val.map((item) => item[this.prop.id])
     }
 
@@ -152,13 +151,7 @@ export default class BiuSelectTable extends Vue {
     private listeners: any = {}
 
     created() {
-        this.filterMethod = debounce((v) => {
-            console.log(157)
-            this.search(v)
-        }, 500)
-        // this.filterMethod = () => {
-        //     console.log(157)
-        // }
+        this.filterMethod = debounce(this.search, 500)
     }
 
     @Watch('tableData', { deep: true, immediate: true })
@@ -173,12 +166,11 @@ export default class BiuSelectTable extends Vue {
     @Watch('checkList', { deep: true })
     checkListChange(newVal: string[]) {
         if (this.multiple) {
-            console.log(this.value, newVal, isEqualWith(this.value, newVal))
             if (!isEqualWith(this.value, newVal)) {
                 this.setValue(newVal)
             }
         } else if (!isEqualWith(this.value, newVal[0])) {
-            this.setValue(newVal[0])
+            this.setValue(newVal[0] || '')
         }
 
         // 同步显示值，这里之所以要判断是否相等，是避免多选时，传入给el-select的value是数组，引用类型一直在改变，会触发搜索事件
@@ -231,7 +223,6 @@ export default class BiuSelectTable extends Vue {
      */
     @Emit('search')
     search(value: string) {
-        console.log(220)
         this.checkList = []
         // 如果是可以输入的，把输入的数据当做选中的
         if (this.inputable && !this.multiple) {
@@ -241,7 +232,7 @@ export default class BiuSelectTable extends Vue {
             this.$emit(
                 'change',
                 this.checkListValue,
-                this.multiple ? this.checkList : this.checkList[0],
+                this.multiple ? this.checkList : this.checkList[0] || '',
                 this.tableData,
                 this.prop
             )
@@ -303,16 +294,17 @@ export default class BiuSelectTable extends Vue {
     visibleChange(state: boolean) {
         if (state) {
             this.isMounted = true
-            // 表格是空的，主动去查询还是空的，没必要
-            // // 如果显示时表格是空的,主动去查询一次数据
-            // if (this.tableData.length === 0) {
-            //     // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
-            //     if (this.inputable && this.checkList.length) {
-            //         this.search(this.checkList[0])
-            //     } else {
-            //         this.search('')
-            //     }
-            // }
+            // 表格是空的，主动去查询还是空的，没必要，x
+            // 当单选不可输入时，如果随便输入一个值搜索不到数据，此时失焦后，表格没有数据，再次点击还是没有数据，故要重新查询一下。
+            // 如果显示时表格是空的,主动去查询一次数据
+            if (this.tableData.length === 0) {
+                // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
+                if (this.inputable && this.checkList.length) {
+                    this.search(this.checkList[0] || '')
+                } else {
+                    this.search('')
+                }
+            }
 
             /**
              * 当可输入的时候，显示表格时不要清空输入框中已存在的
@@ -337,6 +329,9 @@ export default class BiuSelectTable extends Vue {
     rowClick(row: any) {
         // 多选点击行选中与反选
         if (this.multiple) {
+            // 重置el-select内部previousQuery='',防止因为勾选导致出发搜索事件，会
+            ;(this.$refs.select as any).previousQuery = ''
+
             const index = this.checkList.findIndex(
                 (item) => row[this.prop.id] === item
             )
@@ -353,7 +348,7 @@ export default class BiuSelectTable extends Vue {
         this.$emit(
             'change',
             this.getCheckListValue(this.checkList),
-            this.multiple ? this.checkList : this.checkList[0],
+            this.multiple ? this.checkList : this.checkList[0] || '',
             this.tableData,
             this.prop
         )
@@ -380,6 +375,9 @@ export default class BiuSelectTable extends Vue {
      * 多选改变
      */
     handleSelectionChange() {
+        // 重置el-select内部previousQuery='',防止因为勾选导致出发搜索事件，会
+        ;(this.$refs.select as any).previousQuery = ''
+
         this.$emit(
             'change',
             this.getCheckListValue(this.checkList),
