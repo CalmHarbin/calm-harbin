@@ -21,7 +21,7 @@
             <BiuTable
                 ref="BiuTable"
                 :tbHeight="paginationSync ? 256 : 300"
-                :tableData="tableData"
+                :tableData="customTableData"
                 :selection="multiple"
                 :multipleSelection.sync="multipleSelection"
                 @selection-change="handleSelectionChange"
@@ -127,6 +127,10 @@ export default class BiuSelectTable extends Vue {
      */
     checkListValue: string[] = []
     /**
+     * 用来缓存已选中的数据，用于多选时，搜索将数据插入到列表中
+     */
+    cacheList: any[] = []
+    /**
      * 搜索
      */
     filterMethod: (val: string) => void = () => {}
@@ -134,11 +138,27 @@ export default class BiuSelectTable extends Vue {
     // 将选中的数据转为复选框格式 row[]
     get multipleSelection() {
         return this.checkList.map((item) =>
-            this.tableData.find((row) => row[this.prop.id] === item)
+            this.customTableData.find((row) => row[this.prop.id] === item)
         )
     }
     set multipleSelection(val) {
         this.checkList = val.map((item) => item[this.prop.id])
+    }
+
+    /**
+     * 内部是数据,在tableData基础上加上之前选中的数据
+     */
+    get customTableData(): any[] {
+        const tableData: any[] = cloneDeep(this.tableData)
+
+        this.cacheList.forEach((item) => {
+            if (
+                !tableData.find((i) => i[this.prop.id] === item[this.prop.id])
+            ) {
+                tableData.push(item)
+            }
+        })
+        return tableData
     }
 
     /**
@@ -168,9 +188,30 @@ export default class BiuSelectTable extends Vue {
         if (this.multiple) {
             if (!isEqualWith(this.value, newVal)) {
                 this.setValue(newVal)
+
+                let cacheList: any[] = []
+                // 这里循环customTableData,保证表格中属性显示一致
+                this.customTableData.forEach((item) => {
+                    if (newVal.includes(item[this.prop.id])) {
+                        cacheList.push(item)
+                    }
+                })
+
+                this.cacheList = cacheList
             }
         } else if (!isEqualWith(this.value, newVal[0])) {
             this.setValue(newVal[0] || '')
+
+            if (newVal[0] && !this.inputable) {
+                // 单选没有顺序问题
+                this.cacheList = newVal.map((item: string) =>
+                    this.customTableData.find(
+                        (i: any) => i[this.prop.id] === item
+                    )
+                )
+            } else {
+                this.cacheList = []
+            }
         }
 
         // 同步显示值，这里之所以要判断是否相等，是避免多选时，传入给el-select的value是数组，引用类型一直在改变，会触发搜索事件
@@ -223,7 +264,7 @@ export default class BiuSelectTable extends Vue {
      */
     @Emit('search')
     search(value: string) {
-        this.checkList = []
+        // this.checkList = []
         // 如果是可以输入的，把输入的数据当做选中的
         if (this.inputable && !this.multiple) {
             this.checkList = [value]
@@ -297,7 +338,7 @@ export default class BiuSelectTable extends Vue {
             // 表格是空的，主动去查询还是空的，没必要，x
             // 当单选不可输入时，如果随便输入一个值搜索不到数据，此时失焦后，表格没有数据，再次点击还是没有数据，故要重新查询一下。
             // 如果显示时表格是空的,主动去查询一次数据
-            if (this.tableData.length === 0) {
+            if (this.customTableData.length === 0) {
                 // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
                 if (this.inputable && this.checkList.length) {
                     this.search(this.checkList[0] || '')
@@ -364,9 +405,14 @@ export default class BiuSelectTable extends Vue {
         if (this.inputable && !this.multiple) {
             checkListValue = checkList
         } else {
-            for (const item of this.tableData) {
-                if (checkList.includes(String(item[this.prop.id])))
-                    checkListValue.push(item[this.prop.label])
+            // 这里顺序checkList，保证checkListValue顺序与checkList一致
+            for (const item of checkList) {
+                const result: any = this.customTableData.find(
+                    (i) => i[this.prop.id] === item
+                )
+                if (result) {
+                    checkListValue.push(result[this.prop.label])
+                }
             }
         }
         return checkListValue
