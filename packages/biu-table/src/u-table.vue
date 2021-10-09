@@ -463,7 +463,7 @@ export default class CustomUTable extends Vue {
     }
 
     // 数据改变时表格重绘，避免表格错乱
-    @Watch('tableData')
+    @Watch('tableData', { immediate: true })
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
             this.customTableData = cloneDeep(newVal)

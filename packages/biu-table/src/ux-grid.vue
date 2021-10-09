@@ -665,7 +665,8 @@ export default class CoutomUxGrid extends Vue {
     }
 
     // 数据改变时表格重绘，避免表格错乱
-    @Watch('tableData', { deep: true })
+    // 加上immediate: true,不然初始tableData有数据内部无法同步
+    @Watch('tableData', { immediate: true, deep: true })
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
             // 先找到之前的数据位置
