@@ -660,7 +660,7 @@ export default class CoutomUxGrid extends Vue {
 
     mounted() {
         this.isMounted = true
-        this.customTableData = this.tableData
+        this.customTableData = cloneDeep(this.tableData)
         ;(this.$refs.table as any).reloadData(this.customTableData)
     }
 
@@ -677,8 +677,8 @@ export default class CoutomUxGrid extends Vue {
                 )
             }
             // 表格填充数据
-            ;(this.$refs.table as any).loadData(newVal)
-            this.customTableData = newVal
+            this.customTableData = cloneDeep(newVal)
+            ;(this.$refs.table as any).loadData(this.customTableData)
 
             // loadData会丢失激活状态，编辑状态下,有激活的行,则激活
             if (activeIndex !== -1) {
@@ -700,17 +700,17 @@ export default class CoutomUxGrid extends Vue {
             // 清空复选框，暂时为了解决外部点击搜索时，外部清空了multipleSelection，而内部没有同步，
             // 理应不应该这样实现，会导致数据一变就清空，待后续更改
             // this.multipleSelection = []
-            this.$emit('update:table-data', this.customTableData)
+            this.$emit('update:table-data', cloneDeep(this.customTableData))
         }
         // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
         // this.$nextTick(() => {
         //     this.headerDragend()
         // })
     }
-    // @Watch('customTableData')
-    // customTableDataChange(newVal: any) {
-    //     this.$emit('update:table-data', newVal)
-    // }
+    @Watch('customTableData', { deep: true })
+    customTableDataChange(newVal: any) {
+        this.$emit('update:table-data', cloneDeep(newVal))
+    }
     @Watch('tbHeight')
     tbHeightChange() {
         this.$nextTick(() => {
@@ -817,7 +817,7 @@ export default class CoutomUxGrid extends Vue {
 
         // 同步更新数据
         this.customTableData = table.getTableData().fullData
-        this.$emit('update:table-data', this.customTableData)
+        this.$emit('update:table-data', cloneDeep(this.customTableData))
     }
     /**
      * 删除一行
@@ -834,7 +834,7 @@ export default class CoutomUxGrid extends Vue {
         } else {
             // 同步更新数据
             this.customTableData = fullData
-            this.$emit('update:table-data', this.customTableData)
+            this.$emit('update:table-data', cloneDeep(this.customTableData))
         }
     }
     /**
