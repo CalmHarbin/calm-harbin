@@ -71,6 +71,10 @@ const components: componentsType[] = [
     {
         name: 'summaryDemo',
         template: () => import('@test/components/methods/summary.vue')
+    },
+    {
+        name: 'OperationDemo',
+        template: () => import('@test/components/operation/operation-demo.vue')
     }
 ]
 

@@ -52,7 +52,8 @@ module.exports = {
                     '/components/biu-page',
                     '/components/biu-dialog',
                     '/components/biu-drawer',
-                    '/components/file-upload'
+                    '/components/file-upload',
+                    '/components/operation'
                     //...
                     // 每加一个菜单需要在这里也新增一下
                 ]
