@@ -230,7 +230,6 @@ export default class BiuForm extends Vue {
 
     @Watch('source', { immediate: true, deep: true })
     sourceChange(newVal: BiuFormItem[]) {
-        this.isOpen = false // 数据源改变时，重置展开
         this.setCustomSource(newVal)
     }
     @Watch('direction', { immediate: true, deep: true })
