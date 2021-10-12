@@ -678,7 +678,7 @@ export default class CoutomUxGrid extends Vue {
             }
             // 表格填充数据
             this.customTableData = cloneDeep(newVal)
-            ;(this.$refs.table as any).loadData(this.customTableData)
+            ;(this.$refs.table as any)?.loadData(this.customTableData)
 
             // loadData会丢失激活状态，编辑状态下,有激活的行,则激活
             if (activeIndex !== -1) {
