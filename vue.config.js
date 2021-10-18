@@ -63,7 +63,12 @@ module.exports = {
                               root: 'Decimal'
                           },
                           dayjs: 'dayjs',
-                          vue: 'Vue'
+                          vue: {
+                              commonjs: 'vue',
+                              amd: 'vue',
+                              commonjs2: 'vue',
+                              root: 'Vue'
+                          }
                       }
                     : {
                           vue: 'Vue',
