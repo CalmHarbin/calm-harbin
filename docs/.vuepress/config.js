@@ -124,7 +124,7 @@ module.exports = {
             path.resolve(__dirname, '../../types')
         )
         config.resolve.alias.set('@src', path.resolve(__dirname, '../../src'))
-        // 配置calm-harin别名,使文档展示用法能和真实用户保持一致。
+        // 配置calm-harbin别名,使文档展示用法能和真实用户保持一致。
         config.resolve.alias.set(
             'calm-harbin',
             path.resolve(__dirname, '../../src/index.ts')
