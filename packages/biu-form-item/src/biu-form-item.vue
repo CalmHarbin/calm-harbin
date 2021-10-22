@@ -112,7 +112,7 @@ import {
 } from 'vue-property-decorator'
 import { Input, DatePicker, TimePicker } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
-import { formTypeType } from 'calm-harin/types/biu-form-item'
+import { formTypeType } from 'calm-harbin/types/biu-form-item'
 import Area from './area.vue'
 // 下拉框
 import BiuSelect from './biu-select.vue'

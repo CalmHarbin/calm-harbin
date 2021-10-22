@@ -57,7 +57,7 @@ import {
 } from 'vue-property-decorator'
 import { Select, Option, Tree, Checkbox } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
-import { treeNodeType } from 'calm-harin/types/biu-form-item'
+import { treeNodeType } from 'calm-harbin/types/biu-form-item'
 
 @Component({
     inheritAttrs: false,

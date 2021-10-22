@@ -6,7 +6,7 @@
 
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
-import { OperationOptionType } from 'calm-harin/types/operation'
+import { OperationOptionType } from 'calm-harbin/types/operation'
 
 @Component
 export default class BiuFormBr extends Vue {

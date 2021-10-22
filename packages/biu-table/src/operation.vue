@@ -44,7 +44,7 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import { Button, Tooltip } from 'element-ui'
 import waves from '@src/directive/waves/index'
-import { OperationOptionType } from 'calm-harin/types/operation'
+import { OperationOptionType } from 'calm-harbin/types/operation'
 
 @Component({
     components: {

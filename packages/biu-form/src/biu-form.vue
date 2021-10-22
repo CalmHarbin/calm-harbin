@@ -137,7 +137,7 @@ import {
     Model,
     Emit
 } from 'vue-property-decorator'
-import { directionType, BiuformType } from 'calm-harin/types/biu-form'
+import { directionType, BiuformType } from 'calm-harbin/types/biu-form'
 import BiuFormItem from '@packages/biu-form-item/src/biu-form-item.vue'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
