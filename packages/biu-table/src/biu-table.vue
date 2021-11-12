@@ -12,15 +12,9 @@
 <script lang="tsx">
 import { isEqualWith } from '@src/utils/util'
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
-import {
-    tableColumnType as customtableColumnType,
-    tablePostfixOptionsType as customTablePostfixOptionsType
-} from './biu-table'
+import { tableColumnType } from 'calm-harbin/types/biu-table'
 import UTable from './u-table.vue'
 import UxGrid from './ux-grid.vue'
-
-export type tableColumnType = customtableColumnType
-export type tablePostfixOptionsType = customTablePostfixOptionsType
 
 @Component({
     inheritAttrs: false,
@@ -40,14 +34,12 @@ export default class BiuTable extends Vue {
     private listeners = {}
 
     get customColumns(): tableColumnType[] {
-        return this.columns.map((item: any) => {
+        return this.columns.map((item) => {
             // 这里处理外部使用的slot功能，传给BiuTable组件用render方式
             // eslint-disable-next-line no-undef
-            let render: (h: any, scope: any) => JSX.Element | Element =
-                item.render
+            let render = item.render
             // eslint-disable-next-line no-undef
-            let editRender: (h: any, scope: any) => JSX.Element | Element =
-                item.editRender
+            let editRender = item.editRender
             if (this.$slots[item.id]) {
                 render = () => <div>{this.$slots[item.id]}</div>
             } else if (this.$scopedSlots[item.id]) {

@@ -368,6 +368,7 @@
 </template>
 
 <script lang="tsx">
+import { VNode } from 'vue'
 import dayjs from 'dayjs'
 import {
     Component,
@@ -381,8 +382,10 @@ import {
 import {
     tableColumnType,
     scopeType,
-    tablePostfixOptionsType
-} from './biu-table'
+    tablePostfixOptionsType,
+    expandRenderProp
+} from 'calm-harbin/types/biu-table'
+import { objType } from 'calm-harbin/types/index'
 import BiuFormItem from '@packages/biu-form-item/src/biu-form-item.vue'
 import { Card, Tooltip, Input, Loading, Checkbox } from 'element-ui'
 import { UxGrid, UxTableColumn } from 'umy-ui'
@@ -423,18 +426,14 @@ export default class CoutomUxGrid extends Vue {
     @Prop({ type: String, default: 'id' }) rowId!: string
     @Prop(Boolean) private loading!: boolean
     @Prop(Number) private tbHeight!: number
-    @Prop(Array) private tableData!: any[]
+    @Prop(Array) private tableData!: objType[]
     @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
     @Prop(Boolean) private showSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
     @Prop(Function) private expandRender?: ({
         row,
         rowIndex
-    }: {
-        row: any
-        rowIndex: number
-        // eslint-disable-next-line no-undef
-    }) => JSX.Element // 是否可选择
+    }: expandRenderProp) => VNode // 是否可选择
 
     // 右侧操作列
     @Prop(Array)
@@ -455,7 +454,7 @@ export default class CoutomUxGrid extends Vue {
      * @param data 默认要插入的数据
      * @returns 插入的数据
      */
-    @Prop(Function) plus?: (data: any) => any
+    @Prop(Function) plus?: (data: objType) => objType
 
     @PropSync('multipleSelection') multipleSelectionSync!: any[]
 
@@ -534,7 +533,7 @@ export default class CoutomUxGrid extends Vue {
                 if (item.timeFormat && !cur.render) {
                     // 时间格式化
                     cur.width = cur.width || 140 // 时间增加默认宽度
-                    cur.render = (h: any, { col, row }: any) => {
+                    cur.render = (h, { col, row }) => {
                         return (
                             <div>
                                 {row[col.id]
@@ -550,7 +549,7 @@ export default class CoutomUxGrid extends Vue {
                     !item.render
                 ) {
                     // 下拉框表格显示自动转化
-                    cur.render = (h: any, { col, row }: any) => {
+                    cur.render = (h, { col, row }) => {
                         return (
                             <div>
                                 {col.formAttr.options.find(
@@ -587,21 +586,16 @@ export default class CoutomUxGrid extends Vue {
      * 过滤掉无权限的
      */
     get customTablePostfixOptions() {
-        const editOptions = {
+        const editOptions: tablePostfixOptionsType = {
             title: '编辑',
             icon: 'el-icon-edit-outline',
-            // disabled: ({ row }) => {
-            //     return row.creater !== this.userInfo.name
-            // },
-            onLinkClick: ({ row }: any) => {
+            onLinkClick: ({ row }) => {
                 ;(this.$refs.table as any).setActiveRow(row)
             }
         }
         const trigger = this.attrs['edit-config']?.trigger || 'manual'
         if (this.tablePostfixOptions) {
-            const list = this.tablePostfixOptions.filter(
-                (item: tablePostfixOptionsType) => !item.hidden
-            )
+            const list = this.tablePostfixOptions.filter((item) => !item.hidden)
 
             // 可编辑表格操作加载右侧边栏
             if (this.editable && trigger === 'manual' && list.length) {
@@ -897,7 +891,6 @@ export default class CoutomUxGrid extends Vue {
      * 编辑状态下
      */
     editActived({ row, column }: any) {
-        console.log(889, column)
         this.activeRow = row[this.rowId]
         this.activeCell = column.property
     }

@@ -121,14 +121,18 @@
 
 #### 属性
 
-| 参数              | 说明                                      | <div style="white-space: nowrap;">必填</div> | 类型                  | 默认值       |
-| ----------------- | :---------------------------------------- | :------------------------------------------- | :-------------------- | :----------- |
-| `source`          | 表单数据源                                | <el-checkbox checked></el-checkbox>          | `BiuformType[]`       | —            |
-| `value / v-model` | 绑定值                                    | <el-checkbox checked></el-checkbox>          | `objType`             | —            |
-| `showBtn`         | 是否显示搜索按钮                          | <el-checkbox></el-checkbox>                  | `boolean`             | `false`      |
-| `direction`       | 表单项排列方向                            | <el-checkbox></el-checkbox>                  | vertical， horizontal | `horizontal` |
-| `resize`          | 是否自适应表单项的宽度                    | <el-checkbox></el-checkbox>                  | `boolean`             | `false`      |
-| `min`             | 表单项的最小宽度，仅当 resize=true 时生效 | <el-checkbox></el-checkbox>                  | `number`              | `280`        |
+| 参数              | 说明                                      | <div style="white-space: nowrap;">必填</div> | 类型                                                                                                                      | 默认值       |
+| ----------------- | :---------------------------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ | :----------- |
+| `source`          | 表单数据源                                | <el-checkbox checked></el-checkbox>          | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-form.d.ts#L80" target="_blank">`BiuformType[]`</a> | —            |
+| `value / v-model` | 绑定值                                    | <el-checkbox checked></el-checkbox>          | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/index.d.ts#L13" target="_blank">`objType`</a>          | —            |
+| `showBtn`         | 是否显示搜索按钮                          | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                 | `false`      |
+| `direction`       | 表单项排列方向                            | <el-checkbox></el-checkbox>                  | vertical， horizontal                                                                                                     | `horizontal` |
+| `resize`          | 是否自适应表单项的宽度                    | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                 | `false`      |
+| `min`             | 表单项的最小宽度，仅当 resize=true 时生效 | <el-checkbox></el-checkbox>                  | `number`                                                                                                                  | `280`        |
+
+<tooltip content="内容">
+    <el-tag>标签一</el-tag>
+</tooltip>
 
 #### 方法
 

@@ -61,49 +61,15 @@ import {
     Emit,
     Model
 } from 'vue-property-decorator'
-import { formAttrType } from 'calm-harbin/types/biu-form'
 import BiuForm from '@packages/biu-form/src/biu-form.vue'
-import BiuTable, {
-    tableColumnType
-} from '@packages/biu-table/src/biu-table.vue'
+import BiuTable from '@packages/biu-table/src/biu-table.vue'
 import Pagination from '@packages/pagination/src/pagination.vue'
-import { OperationOptionType } from 'calm-harbin/types/operation'
 import Operation from '@packages/biu-table/src/operation.vue'
-import { formTypeType } from 'calm-harbin/types/biu-form-item'
 import { isEqualWith } from '@src/utils/util'
 import cloneDeep from 'lodash/cloneDeep'
-
-type objType = {
-    [x: string]: any
-}
-export type pageColumnsType = {
-    /**
-     * 表单项的类型
-     */
-    formType?: formTypeType
-    /**
-     * 不在表格中显示
-     */
-    noShow?: boolean
-    /**
-     * 不在表单中显示
-     */
-    noSearch?: boolean
-    /**
-     * 表单的显示排序
-     */
-    sort?: number
-    /**
-     * 表单字段id,当表单和表格不一致时配置
-     */
-    formId?: string
-    /**
-     * Todo
-     * 暂时没有该功能,后面有需要添加
-     * 表单项的额外配置
-     */
-    formAttr?: formAttrType
-} & tableColumnType
+import { OperationOptionType } from 'calm-harbin/types/operation'
+import { pageColumnsType, paginationType } from 'calm-harbin/types/biu-page'
+import { objType } from 'calm-harbin/types/index'
 
 @Component({
     inheritAttrs: false,
@@ -144,7 +110,7 @@ export default class BiuPage extends Vue {
     @Prop(Array) private operationOptions?: OperationOptionType[] // 操作按钮
     @Prop(Number) private tbHeight?: number
     @Prop(Array) private columns!: pageColumnsType[]
-    @PropSync('pagination') private paginationSync?: objType
+    @PropSync('pagination') private paginationSync?: paginationType
     // 表单的绑定值,利用引用类型同步改值
     // @Prop(Object) private value?: objType
     @Model('setValue') private value?: objType
@@ -175,16 +141,6 @@ export default class BiuPage extends Vue {
             .filter((item) => !item.noSearch) // 筛选出搜索列
             .sort((a, b) => (a.sort || 0) - (b.sort || 0)) // 排序
             .map((item) => {
-                // let placeholder: string
-                // if (item.formType === 'area') {
-                //     placeholder =
-                //         (item.formAttr && item.formAttr.placeholder) ||
-                //         '请选择' + item.label
-                // } else {
-                //     placeholder =
-                //         (item.formAttr && item.formAttr.placeholder) ||
-                //         item.label
-                // }
                 return {
                     ...item.formAttr,
                     formType: item.formType,
@@ -227,9 +183,7 @@ export default class BiuPage extends Vue {
      */
     get customOperationOptions() {
         if (this.operationOptions) {
-            const list = this.operationOptions.filter(
-                (item: OperationOptionType) => !item.hidden
-            )
+            const list = this.operationOptions.filter((item) => !item.hidden)
             return list.length ? list : false
         }
         return false

@@ -1,6 +1,18 @@
 export { BiuCard } from './biu-card'
+export { BiuDialog } from './biu-dialog'
+export { BiuDrawer } from './biu-drawer'
+export { BiuFormItem } from './biu-form-item'
+export { BiuForm } from './biu-form'
+export { BiuPage } from './biu-page'
+export { BiuTable } from './biu-table'
+export { FileUpload } from './file-upload'
+export { Operation } from './operation'
 
 import { PluginFunction } from 'vue'
+
+export type objType = {
+    [x: string]: any
+}
 
 // type写法
 // type calmHarbin<T> = {

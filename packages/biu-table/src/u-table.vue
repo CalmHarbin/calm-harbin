@@ -244,7 +244,7 @@ import {
     tableColumnType,
     scopeType,
     tablePostfixOptionsType
-} from './biu-table'
+} from 'calm-harbin/types/biu-table'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UTable, UTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'

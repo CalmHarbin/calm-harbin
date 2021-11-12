@@ -1,3 +1,5 @@
+import { CalmComponent } from './component'
+
 /**
  * 可选表单项类型
  */
@@ -21,4 +23,12 @@ export type treeNodeType = {
     id: string
     pid?: string
     children?: treeNodeType[]
+}
+
+/** BiuFormItem组件 */
+export declare class BiuFormItem extends CalmComponent {
+    /** 表单类型 */
+    formType: formTypeType
+    /** 值，可使用v-model */
+    value: any
 }

@@ -75,6 +75,10 @@ const components: componentsType[] = [
     {
         name: 'OperationDemo',
         template: () => import('@test/components/operation/operation-demo.vue')
+    },
+    {
+        name: 'BiuTableBase',
+        template: () => import('@test/components/biu-table/biu-table-base.vue')
     }
 ]
 
