@@ -4,7 +4,7 @@ const path = require('path')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const CDN_CSS = [
-    // 'https://cdn.jsdelivr.net/npm/calm-harbin@0.2.3-pre/lib/calmHarbin.css'
+    // 'https://cdn.jsdelivr.net/npm/calm-harbin@0.2.9-pre/lib/calmHarbin.css'
 ]
 const CDN_JS = [
     'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',

@@ -23,6 +23,7 @@
         @header-dragend="headerDragend"
         @edit-actived="editActived"
         @edit-closed="editClosed"
+        @table-body-scroll="tableBodyScrollDebounce"
         :tree-config="treeConfig"
         :edit-config="
             editable
@@ -391,6 +392,7 @@ import { Card, Tooltip, Input, Loading, Checkbox } from 'element-ui'
 import { UxGrid, UxTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
 import cloneDeep from 'lodash/cloneDeep'
+import { debounce } from '@src/utils/index'
 
 Vue.use(Loading.directive)
 
@@ -461,7 +463,6 @@ export default class CoutomUxGrid extends Vue {
     isMounted = false // 用来表示dom已加载完成，计算表格宽度是否超过列总宽
 
     customTableData: any[] = []
-    // multipleSelection: any[] = [] // 自定义实现多选
     refreshId = 1 // 强制刷新组件
     customValue = {} // 表单的数据
     activeRow?: string // 记录当前激活的行，rowId
@@ -474,6 +475,8 @@ export default class CoutomUxGrid extends Vue {
      */
     private attrs: any = {}
     private listeners = {}
+
+    tableBodyScrollDebounce: any
 
     // 计算属性
     get height() {
@@ -652,6 +655,10 @@ export default class CoutomUxGrid extends Vue {
         )
     }
 
+    created() {
+        this.tableBodyScrollDebounce = debounce(this.tableBodyScroll)
+    }
+
     mounted() {
         this.isMounted = true
         this.customTableData = cloneDeep(this.tableData)
@@ -690,10 +697,6 @@ export default class CoutomUxGrid extends Vue {
                 }
             }
 
-            // TODO
-            // 清空复选框，暂时为了解决外部点击搜索时，外部清空了multipleSelection，而内部没有同步，
-            // 理应不应该这样实现，会导致数据一变就清空，待后续更改
-            // this.multipleSelection = []
             this.$emit('update:table-data', cloneDeep(this.customTableData))
         }
         // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
@@ -893,6 +896,10 @@ export default class CoutomUxGrid extends Vue {
     editActived({ row, column }: any) {
         this.activeRow = row[this.rowId]
         this.activeCell = column.property
+        console.log(this.scrollTop, this.scrollLeft)
+        console.log(this.$el)
+        // 设置滚动位置
+        // ;(this.$refs.table as any).pagingScrollTopLeft()
     }
     /**
      * 失去激活状态
@@ -900,6 +907,20 @@ export default class CoutomUxGrid extends Vue {
     editClosed() {
         this.activeRow = undefined
         this.activeCell = undefined
+    }
+    /**
+     * 滚动事件，用来记录滚动位置，因为进入编辑状态位置会丢掉
+     */
+    tableBodyScroll({
+        scrollTop,
+        scrollLeft
+    }: {
+        scrollTop: number
+        scrollLeft: number
+    }) {
+        this.scrollTop = scrollTop
+        this.scrollLeft = scrollLeft
+        console.log(925, this.scrollTop, this.scrollLeft)
     }
 }
 </script>

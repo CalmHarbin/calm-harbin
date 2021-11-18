@@ -13,10 +13,11 @@
         <biu-table
             :columns="columns"
             :table-data="tableData"
-            editable
+            :virtual="false"
             :max-height="300"
             :edit-config="editConfig"
             :edit-action="editAction"
+            :plus="plus"
         >
             <!-- 宽度编辑状态下显示 -->
             <template slot="width-edit" slot-scope="{ row, col, $index }">
@@ -234,6 +235,17 @@ export default class BiuTableBase extends Vue {
             { ...row, volume },
             ...this.tableData.slice($index + 1)
         ]
+    }
+
+    /**
+     * 可以通过这个方式自定义设置插入的数据
+     * @param { Object } row 默认插入的数据
+     */
+    plus(row: any) {
+        return {
+            ...row,
+            packing: 'apple'
+        }
     }
 }
 </script>

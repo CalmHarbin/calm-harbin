@@ -30,6 +30,7 @@
 -   给组件配置`edit-action=false`可以关闭 添加/删除 按钮
 -   `columns`某一项配置了`editable=true`，则该列居有编辑功能，默认会提供一个 text 输入框。如果你想自定义内容，你可以使用`editRender`或者使用 slot。
 -   `columns`配置了`required=true`后表头会变红色，可以用来表示必填，但是校验功能需要自行实现。
+-   可以通过`plus`来自定义插入的数据
 
 ::: slot highlight
 
