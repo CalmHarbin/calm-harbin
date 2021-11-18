@@ -7,9 +7,9 @@
 <BiuTableBase></BiuTableBase>
 :::
 
-`tb-height`可以设置表格的高度，`max-height`可设置最大高度<br />
-`biu-table`默认是开启虚拟表格的，如果你想关闭只需要配置`virtual=false`<br />
-自定义渲染可以使用`render`或者插槽两种方式，插槽优先级更高
+-   `tb-height`可以设置表格的高度，`max-height`可设置最大高度
+-   `biu-table`默认是开启虚拟表格的，如果你想关闭只需要配置`virtual=false`
+-   自定义渲染可以使用`render`或者插槽两种方式，插槽优先级更高
 
 ::: slot highlight
 
@@ -19,6 +19,24 @@
 </demo-block>
 
 #### 可编辑表格
+
+<demo-block>
+::: slot source
+<BiuTableEditable></BiuTableEditable>
+:::
+
+-   给组件配置`editable=true`则开启可编辑功能。
+-   编辑模式默认使用的是 显示编辑按钮，一共提供 3 种编辑模式。
+-   给组件配置`edit-action=false`可以关闭 添加/删除 按钮
+-   `columns`某一项配置了`editable=true`，则该列居有编辑功能，默认会提供一个 text 输入框。如果你想自定义内容，你可以使用`editRender`或者使用 slot。
+-   `columns`配置了`required=true`后表头会变红色，可以用来表示必填，但是校验功能需要自行实现。
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-editable.vue
+
+:::
+</demo-block>
 
 #### 可筛选表格
 

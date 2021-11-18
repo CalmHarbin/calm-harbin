@@ -11,22 +11,32 @@
         />
         <style>
             .elx-table--header,
-            .elx-table--body {
+            .el-table__header,
+            .elx-table--body,
+            .el-table__body {
                 display: table;
                 margin: 0;
             }
             .elx-table--header tr,
-            .elx-table--body tr {
+            .el-table__header tr,
+            .elx-table--body tr,
+            .el-table__body tr {
                 border-top-width: 0;
             }
             .elx-table--header tr:nth-child(2n),
-            .elx-table--body tr:nth-child(2n) {
+            .el-table__header tr:nth-child(2n),
+            .elx-table--body tr:nth-child(2n),
+            .el-table__body tr:nth-child(2n) {
                 background-color: transparent;
             }
             .elx-table--header th,
+            .el-table__header th,
             .elx-table--header td,
+            .el-table__header td,
             .elx-table--body td,
-            .elx-table--body td {
+            .el-table__body td,
+            .elx-table--body td,
+            .el-table__body td {
                 padding: 0;
                 border-width: 0;
             }

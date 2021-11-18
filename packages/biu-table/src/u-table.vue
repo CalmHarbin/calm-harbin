@@ -6,7 +6,11 @@
         v-loading="loading"
         :data="customTableData"
         :height="height"
-        :class="attrs['show-summary'] ? 'el-table-footer' : ''"
+        :class="
+            attrs['show-summary']
+                ? 'el-table-footer calm-uTable'
+                : 'calm-uTable'
+        "
         style="width: 100%"
         border
         fit
@@ -52,7 +56,7 @@
             type="index"
             :key="'index' + random"
             :index="indexValue"
-            width="50"
+            width="56"
             :resizable="true"
             align="center"
         ></u-table-column>
@@ -65,6 +69,17 @@
                 :resizable="true"
                 :align="col.align || 'center'"
             >
+                <template v-slot:header>
+                    <i
+                        v-if="col.editable"
+                        class="elx-cell--edit-icon el-icon-edit-outline"
+                    ></i>
+                    <span
+                        :class="col.required ? 'calm-BiuTable-required' : ''"
+                        :title="col.label"
+                        >{{ col.label }}</span
+                    >
+                </template>
                 <u-table-column
                     v-bind="col"
                     :resizable="true"
@@ -145,6 +160,14 @@
                 :min-width="col.minWidth || col.width || 120"
                 :prop="col.id"
             >
+                <!-- 表头 -->
+                <template v-slot:header>
+                    <span
+                        :class="col.required ? 'calm-BiuTable-required' : ''"
+                        :title="col.label"
+                        >{{ col.label }}</span
+                    >
+                </template>
                 <template slot-scope="scope">
                     <!-- 数据传递出去 -->
                     <slot
@@ -586,7 +609,3 @@ export default class CustomUTable extends Vue {
     }
 }
 </script>
-
-<style lang="scss">
-@import './index.scss';
-</style>

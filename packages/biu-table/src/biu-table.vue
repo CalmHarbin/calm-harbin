@@ -88,3 +88,7 @@ export default class BiuTable extends Vue {
     }
 }
 </script>
+
+<style lang="scss">
+@import './index.scss';
+</style>

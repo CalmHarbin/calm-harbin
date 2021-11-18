@@ -4,12 +4,12 @@
 
         <!-- <BiuPageTest></BiuPageTest> -->
 
-        <!-- <BiuTableTest></BiuTableTest> -->
+        <BiuTableTest></BiuTableTest>
 
-        <BiuTableSelectTest
+        <!-- <BiuTableSelectTest
             v-model="biuTableSelectTestValue"
             multiple
-        ></BiuTableSelectTest>
+        ></BiuTableSelectTest> -->
 
         <!-- <BiuSelectTest></BiuSelectTest> -->
         <!-- <Sheet></Sheet> -->
@@ -34,8 +34,8 @@ import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from './components/HelloWorld.vue'
 // import Order from './components/order.vue'
 // import BiuPageTest from './components/BiuPageTest.vue'
-import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
-// import BiuTableTest from './components/BiuTableTest.vue'
+// import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
+import BiuTableTest from './components/BiuTableTest.vue'
 // import BiuSelectTest from './components/BiuSelectTest.vue'
 // import Sheet from './components/Sheet.vue'
 // import { summary } from '@src/index'
@@ -45,8 +45,8 @@ import BiuTableSelectTest from './components/BiuTableSelectTest.vue'
         HelloWorld,
         // Order,
         // BiuPageTest,
-        BiuTableSelectTest
-        // BiuTableTest
+        // BiuTableSelectTest
+        BiuTableTest
         // BiuSelectTest,
         // Sheet
     }

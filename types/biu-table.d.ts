@@ -2,6 +2,12 @@ import { VNode } from 'vue'
 import { CalmComponent } from './component'
 import { objType } from './index'
 
+type scopeType = {
+    row: any
+    col?: any
+    $index: number
+}
+
 /**
  * 表格每一项的配置
  */
@@ -29,7 +35,7 @@ export type tableColumnType = {
     /**
      * 可编辑时的自定义渲染
      */
-    editRender?: (h: any, scope: any) => VNode
+    editRender?: (h: any, scope: scopeType) => VNode
     /**
      *
      * 针对时间格式转化显示: 时间戳转格式
@@ -46,18 +52,12 @@ export type tableColumnType = {
      * 自定义渲染，注意该配置必须写在 @Component中，不然会报错
      * 还可以使用slot来自定义渲染，name=id 推荐使用。
      */
-    render?: (h: any, scope: any) => VNode
+    render?: (h: any, scope: scopeType) => VNode
 
     /** 列头显示红丝，表示必填，可通过类 calm-BiuTable-required 修改样式 */
     required?: boolean
 
     [x: string]: any
-}
-
-type scopeType = {
-    row: any
-    col?: any
-    $index: number
 }
 
 export type expandRenderProp = {

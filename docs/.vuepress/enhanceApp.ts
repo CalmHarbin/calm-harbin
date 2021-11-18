@@ -79,6 +79,11 @@ const components: componentsType[] = [
     {
         name: 'BiuTableBase',
         template: () => import('@test/components/biu-table/biu-table-base.vue')
+    },
+    {
+        name: 'BiuTableEditable',
+        template: () =>
+            import('@test/components/biu-table/biu-table-editable.vue')
     }
 ]
 

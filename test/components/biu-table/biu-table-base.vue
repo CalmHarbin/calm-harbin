@@ -1,7 +1,7 @@
 <template>
     <div>
-        <el-button @click="add(20)">添加20条数据</el-button>
-        <el-button @click="add(200)">添加200条数据</el-button>
+        <el-button @click="add(10)">添加10条数据</el-button>
+        <el-button @click="add(100)">添加100条数据</el-button>
         <el-button @click="add(10000)">添加10000条数据</el-button>
         <el-button @click="tableData = []">清空数据</el-button>
         <el-button @click="Immutable = !Immutable"
