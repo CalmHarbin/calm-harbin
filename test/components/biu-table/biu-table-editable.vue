@@ -13,7 +13,7 @@
         <biu-table
             :columns="columns"
             :table-data="tableData"
-            :virtual="false"
+            editable
             :max-height="300"
             :edit-config="editConfig"
             :edit-action="editAction"

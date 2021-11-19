@@ -84,6 +84,19 @@ const components: componentsType[] = [
         name: 'BiuTableEditable',
         template: () =>
             import('@test/components/biu-table/biu-table-editable.vue')
+    },
+    {
+        name: 'BiuTableShowHeaderFilter',
+        template: () =>
+            import('@test/components/biu-table/biu-table-showHeaderFilter.vue')
+    },
+    {
+        name: 'BiuPageDemo',
+        template: () => import('@test/components/biu-page/biu-page-demo.vue')
+    },
+    {
+        name: 'BiuPageDemo2',
+        template: () => import('@test/components/biu-page/biu-page-demo2.vue')
     }
 ]
 

@@ -142,7 +142,7 @@ export default class BiuPage extends Vue {
             .sort((a, b) => (a.sort || 0) - (b.sort || 0)) // 排序
             .map((item) => {
                 return {
-                    ...item.formAttr,
+                    ...(item.formAttr || {}),
                     formType: item.formType,
                     label: item.label, // 暂时不要label
                     id: item.formId || item.id, // 优先使用formId字段

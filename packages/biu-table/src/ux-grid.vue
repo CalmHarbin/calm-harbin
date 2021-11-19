@@ -492,8 +492,8 @@ export default class CoutomUxGrid extends Vue {
                     // 处理表单的其余属性和事件
                     formAttr: {
                         ...item.formAttr,
-                        otherAttr: otherAttr(item.formAttr),
-                        otherEvent: otherEvent(item.formAttr)
+                        otherAttr: otherAttr(item.formAttr || {}),
+                        otherEvent: otherEvent(item.formAttr || {})
                     }
                 }
 

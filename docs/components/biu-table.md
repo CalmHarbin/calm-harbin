@@ -41,6 +41,28 @@
 
 #### 可筛选表格
 
+<demo-block>
+::: slot source
+<BiuTableShowHeaderFilter></BiuTableShowHeaderFilter>
+:::
+
+-   给组件配置`show-header-filter=true`则开启表头筛选功能。
+
+::: tip 提示
+关于 表头筛选的表单项配置 `formType` 可以查看 `BiuForm` 组件
+:::
+
+::: warning 警告
+开启表头筛选后必须配置`v-model`，因为你肯定需要获取筛选的条件。
+:::
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-showHeaderFilter.vue
+
+:::
+</demo-block>
+
 #### 合计
 
 #### 单选/多选

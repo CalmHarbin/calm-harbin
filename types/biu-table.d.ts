@@ -1,4 +1,5 @@
 import { VNode } from 'vue'
+import { formAttrType } from './biu-form'
 import { CalmComponent } from './component'
 import { objType } from './index'
 
@@ -56,6 +57,9 @@ export type tableColumnType = {
 
     /** 列头显示红丝，表示必填，可通过类 calm-BiuTable-required 修改样式 */
     required?: boolean
+
+    /** 表头的表单项配置 */
+    formAttr?: formAttrType
 
     [x: string]: any
 }
