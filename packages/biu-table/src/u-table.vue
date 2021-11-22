@@ -207,19 +207,25 @@
             v-if="customTablePostfixOptions"
             label="操作"
             fixed="right"
+            align="center"
             :resizable="true"
             :width="customTablePostfixOptions.length * 31 + 22"
         >
             <div
                 slot-scope="scope"
-                class="tableOperate"
+                class="calm-BiuTable-tableOperate"
                 v-if="!showSummary || scope.$index !== tableData.length - 1"
             >
                 <el-tooltip
                     v-for="(item, index) in customTablePostfixOptions"
                     :key="index"
                     effect="light"
-                    :content="format(item.title, scope)"
+                    :content="
+                        format(item.disabled, scope)
+                            ? format(item.message, scope) ||
+                              format(item.title, scope)
+                            : format(item.title, scope)
+                    "
                     placement="top"
                     :enterable="false"
                 >
@@ -349,8 +355,8 @@ export default class CustomUTable extends Vue {
                     // 处理表单的其余属性和事件
                     formAttr: {
                         ...item.formAttr,
-                        otherAttr: otherAttr(item.formAttr),
-                        otherEvent: otherEvent(item.formAttr)
+                        otherAttr: otherAttr(item.formAttr || {}),
+                        otherEvent: otherEvent(item.formAttr || {})
                     }
                 }
                 // 添加事件，文本框回车搜索，其他类型改变搜索
@@ -514,7 +520,7 @@ export default class CustomUTable extends Vue {
 
     @Emit('setValue')
     setValue() {
-        return this.customValue
+        return cloneDeep(this.customValue)
     }
     /**
      * 监听$attrs是否改变
@@ -553,7 +559,7 @@ export default class CustomUTable extends Vue {
      */
     clickRightbtn(item: tablePostfixOptionsType, scope: scopeType) {
         if (item.disabled && item.disabled(scope)) return
-        item.onLinkClick && item.onLinkClick(scope)
+        item.callback && item.callback(scope)
     }
     /**
      * 索引的显示内容

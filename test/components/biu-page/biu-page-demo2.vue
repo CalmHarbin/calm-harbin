@@ -5,17 +5,26 @@
             :loading="loading"
             :columns="columns"
             :tableData="tableData"
+            :operationOptions="operationOptions"
+            :tablePostfixOptions="tablePostfixOptions"
             show-header-filter
+            show-summary
+            selection
+            :multipleSelection.sync="multipleSelection"
+            :pagination.sync="pagination"
             @search="search"
             @reset="reset"
+            @pagination="() => search()"
         ></biu-page>
     </div>
 </template>
 
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
-import { pageColumnsType } from 'calm-harbin/types/biu-page'
-import { startandends } from 'calm-harbin'
+import { pageColumnsType, paginationType } from 'calm-harbin/types/biu-page'
+import { OperationOptionType } from 'calm-harbin/types/operation'
+import { tablePostfixOptionsType } from 'calm-harbin/types/biu-table'
+import { startandends, exportExcel, summary } from 'calm-harbin'
 
 const defaultValue = {
     createdTime: startandends(30) // 生成距离当前30天的时间，用法见文档中的方法
@@ -27,6 +36,9 @@ export default class BiuPageDemo extends Vue {
     loading = false
 
     tableData: any[] = []
+
+    // 多选的数据
+    multipleSelection: any[] = []
 
     packingOptions = [
         {
@@ -43,6 +55,7 @@ export default class BiuPageDemo extends Vue {
         }
     ]
 
+    // 列配置
     get columns(): pageColumnsType[] {
         return [
             {
@@ -149,8 +162,68 @@ export default class BiuPageDemo extends Vue {
         ]
     }
 
+    // 按钮配置
+    get operationOptions(): OperationOptionType[] {
+        return [
+            {
+                title: '添加',
+                hidden: false,
+                callback: () => {
+                    console.log('添加')
+                }
+            },
+            {
+                title: '导出全部',
+                hidden: false,
+                callback: () => {
+                    exportExcel(
+                        this.columns,
+                        this.tableData.slice(0, -1),
+                        'test数据导出'
+                    )
+                }
+            }
+        ]
+    }
+
+    // 表格右侧操作配置
+    get tablePostfixOptions(): tablePostfixOptionsType[] {
+        return [
+            {
+                title: '编辑',
+                hidden: false,
+                icon: 'el-icon-edit-outline',
+                disabled: ({ $index }) => {
+                    if ($index % 2 === 0) return true
+                    return false
+                },
+                message: ({ $index }) => {
+                    if ($index % 2 === 0) return '奇数行不可编辑哦'
+                    return ''
+                },
+                callback: () => {
+                    console.log('编辑')
+                }
+            },
+            {
+                title: '作废',
+                hidden: false,
+                icon: 'el-icon-delete',
+                callback: () => {
+                    console.log('作废')
+                }
+            }
+        ]
+    }
+
     created() {
         this.add(20)
+    }
+
+    pagination: paginationType = {
+        page: 1,
+        size: 20,
+        total: 0
     }
 
     /**
@@ -177,6 +250,17 @@ export default class BiuPageDemo extends Vue {
                     netWeight: 99.99
                 })
             })
+            // 计算合计数据
+            const total = summary(this.tableData, {
+                number: 0,
+                weight: 0,
+                volume: 0,
+                length: 0,
+                width: 0,
+                height: 0,
+                netWeight: 0
+            })
+            this.tableData.push(total)
         }, 1000)
     }
 

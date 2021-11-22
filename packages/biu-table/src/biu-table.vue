@@ -6,6 +6,7 @@
         :columns="customColumns"
         v-bind="attrs"
         v-on="listeners"
+        @setValue="(e) => $emit('input', e)"
     ></component>
 </template>
 

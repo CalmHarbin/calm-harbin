@@ -23,7 +23,6 @@
         @header-dragend="headerDragend"
         @edit-actived="editActived"
         @edit-closed="editClosed"
-        @table-body-scroll="tableBodyScrollDebounce"
         :tree-config="treeConfig"
         :edit-config="
             editable
@@ -449,7 +448,7 @@ export default class CoutomUxGrid extends Vue {
     @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
 
     // 这里利用引用类型直接改值
-    @Model('setValue') value: any
+    @Model('setValue') private value?: objType
 
     /**
      * 点添加按钮时的回调,然后结果会当做插入的数据
@@ -592,7 +591,7 @@ export default class CoutomUxGrid extends Vue {
         const editOptions: tablePostfixOptionsType = {
             title: '编辑',
             icon: 'el-icon-edit-outline',
-            onLinkClick: ({ row }) => {
+            callback: ({ row }) => {
                 ;(this.$refs.table as any).setActiveRow(row)
             }
         }
@@ -730,7 +729,7 @@ export default class CoutomUxGrid extends Vue {
 
     @Emit('setValue')
     setValue() {
-        return this.customValue
+        return cloneDeep(this.customValue)
     }
     /**
      * 监听$attrs是否改变
@@ -767,7 +766,7 @@ export default class CoutomUxGrid extends Vue {
      */
     clickRightbtn(item: tablePostfixOptionsType, scope: scopeType) {
         if (item.disabled && item.disabled(scope)) return
-        item.onLinkClick && item.onLinkClick(scope)
+        item.callback && item.callback(scope)
     }
     /**
      * 索引的显示内容
@@ -896,8 +895,6 @@ export default class CoutomUxGrid extends Vue {
     editActived({ row, column }: any) {
         this.activeRow = row[this.rowId]
         this.activeCell = column.property
-        console.log(this.scrollTop, this.scrollLeft)
-        console.log(this.$el)
         // 设置滚动位置
         // ;(this.$refs.table as any).pagingScrollTopLeft()
     }
@@ -920,7 +917,6 @@ export default class CoutomUxGrid extends Vue {
     }) {
         this.scrollTop = scrollTop
         this.scrollLeft = scrollLeft
-        console.log(925, this.scrollTop, this.scrollLeft)
     }
 }
 </script>

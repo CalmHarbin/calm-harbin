@@ -73,7 +73,13 @@ export type expandRenderProp = {
  * 表格右侧操作按钮的配置
  */
 export type tablePostfixOptionsType = {
+    /** 按钮名字 */
     title: string | ((scope: scopeType) => string)
+    /**
+     * 图标
+     * @url https://element.eleme.io/#/zh-CN/component/icon
+     */
+    icon: string | ((scope: scopeType) => string)
     /**
      * 隐藏按钮
      */
@@ -83,14 +89,13 @@ export type tablePostfixOptionsType = {
      */
     disabled?: (scope: scopeType) => boolean
     /**
-     * 图标
-     * @url https://element.eleme.io/#/zh-CN/component/icon
+     * 禁用时的提示语，不传默认展示title
      */
-    icon: string | ((scope: scopeType) => string)
+    message?: string | ((scope: scopeType) => string)
     /**
      * 点击事件
      */
-    onLinkClick: (scope: scopeType) => void // 值见element table的自定义单元格的slot-scope
+    callback: (scope: scopeType) => void
 }
 
 /** BiuCard组件 */

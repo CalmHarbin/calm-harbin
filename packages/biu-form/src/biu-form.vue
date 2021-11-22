@@ -259,7 +259,7 @@ export default class BiuForm extends Vue {
 
     @Emit('setValue')
     setValue() {
-        return this.customValue
+        return cloneDeep(this.customValue)
     }
 
     /**
