@@ -6,7 +6,11 @@
         v-loading="loading"
         :data="customTableData"
         :height="height"
-        :class="attrs['show-summary'] ? 'el-table-footer' : ''"
+        :class="
+            attrs['show-summary']
+                ? 'el-table-footer calm-uTable'
+                : 'calm-uTable'
+        "
         style="width: 100%"
         border
         fit
@@ -16,6 +20,7 @@
                 : true
         "
         :row-height="36"
+        :row-id="rowId"
         @header-dragend="headerDragend"
         v-bind="attrs"
         v-on="listeners"
@@ -51,7 +56,7 @@
             type="index"
             :key="'index' + random"
             :index="indexValue"
-            width="50"
+            width="56"
             :resizable="true"
             align="center"
         ></u-table-column>
@@ -64,6 +69,17 @@
                 :resizable="true"
                 :align="col.align || 'center'"
             >
+                <template v-slot:header>
+                    <i
+                        v-if="col.editable"
+                        class="elx-cell--edit-icon el-icon-edit-outline"
+                    ></i>
+                    <span
+                        :class="col.required ? 'calm-BiuTable-required' : ''"
+                        :title="col.label"
+                        >{{ col.label }}</span
+                    >
+                </template>
                 <u-table-column
                     v-bind="col"
                     :resizable="true"
@@ -144,6 +160,14 @@
                 :min-width="col.minWidth || col.width || 120"
                 :prop="col.id"
             >
+                <!-- 表头 -->
+                <template v-slot:header>
+                    <span
+                        :class="col.required ? 'calm-BiuTable-required' : ''"
+                        :title="col.label"
+                        >{{ col.label }}</span
+                    >
+                </template>
                 <template slot-scope="scope">
                     <!-- 数据传递出去 -->
                     <slot
@@ -183,19 +207,25 @@
             v-if="customTablePostfixOptions"
             label="操作"
             fixed="right"
+            align="center"
             :resizable="true"
             :width="customTablePostfixOptions.length * 31 + 22"
         >
             <div
                 slot-scope="scope"
-                class="tableOperate"
+                class="calm-BiuTable-tableOperate"
                 v-if="!showSummary || scope.$index !== tableData.length - 1"
             >
                 <el-tooltip
                     v-for="(item, index) in customTablePostfixOptions"
                     :key="index"
                     effect="light"
-                    :content="format(item.title, scope)"
+                    :content="
+                        format(item.disabled, scope)
+                            ? format(item.message, scope) ||
+                              format(item.title, scope)
+                            : format(item.title, scope)
+                    "
                     placement="top"
                     :enterable="false"
                 >
@@ -236,13 +266,14 @@ import {
     Vue,
     Watch,
     Emit,
-    Model
+    Model,
+    PropSync
 } from 'vue-property-decorator'
 import {
     tableColumnType,
     scopeType,
     tablePostfixOptionsType
-} from './biu-table'
+} from 'calm-harbin/types/biu-table'
 import { Card, Tooltip, Input, Loading } from 'element-ui'
 import { UTable, UTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
@@ -276,10 +307,11 @@ Vue.use(Loading.directive)
     }
 })
 export default class CustomUTable extends Vue {
+    @Prop({ type: String, default: 'id' }) rowId!: string
     @Prop(Boolean) private loading!: boolean
     @Prop(Number) private tbHeight!: number
-    @Prop(Array) private tableData!: tableColumnType[]
-    @Prop(Array) private columns!: any[]
+    @Prop(Array) private tableData!: any[]
+    @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
     @Prop(Boolean) private showSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
 
@@ -292,10 +324,12 @@ export default class CustomUTable extends Vue {
     // 这里利用引用类型直接改值
     @Model('setValue') value: any
 
+    @PropSync('multipleSelection') multipleSelectionSync!: any[]
+
     isMounted = false // 用来表示dom已加载完成，计算表格宽度是否超过列总宽
 
     customTableData: any[] = []
-    multipleSelection: any[] = [] // 自定义实现多选
+
     refreshId = 1 // 强制刷新组件
     customValue = {} // 表单的数据
     /**
@@ -321,8 +355,8 @@ export default class CustomUTable extends Vue {
                     // 处理表单的其余属性和事件
                     formAttr: {
                         ...item.formAttr,
-                        otherAttr: otherAttr(item.formAttr),
-                        otherEvent: otherEvent(item.formAttr)
+                        otherAttr: otherAttr(item.formAttr || {}),
+                        otherEvent: otherEvent(item.formAttr || {})
                     }
                 }
                 // 添加事件，文本框回车搜索，其他类型改变搜索
@@ -400,7 +434,7 @@ export default class CustomUTable extends Vue {
             if (columns.some((item) => item.width === undefined)) return columns
             // 全部设置了宽度则计算设置的总宽度是否超过了表格的宽度
             const widthSum = columns.reduce(
-                (sum: number, item) => sum + item.width,
+                (sum: number, item) => sum + (item.width as number),
                 0
             )
             // 宽度和小于表格宽度则去掉宽度
@@ -429,28 +463,28 @@ export default class CustomUTable extends Vue {
     // 全选的不确定状态
     get indeterminate() {
         // 如果没有选择false
-        if (!this.multipleSelection.length) return false
+        if (!this.multipleSelectionSync.length) return false
         // 如果选了但是没有全选则true
         if (this.showSummary) {
             return (
-                this.multipleSelection.length !==
+                this.multipleSelectionSync.length !==
                 this.customTableData.length - 1
             )
         }
-        return this.multipleSelection.length !== this.customTableData.length
+        return this.multipleSelectionSync.length !== this.customTableData.length
     }
     // 全选是否选中
     get isCheckedAll() {
         // 如果没有选择false
-        if (!this.multipleSelection.length) return false
+        if (!this.multipleSelectionSync.length) return false
         // 如果选了但是没有全选则true
         if (this.showSummary) {
             return (
-                this.multipleSelection.length ===
+                this.multipleSelectionSync.length ===
                 this.customTableData.length - 1
             )
         }
-        return this.multipleSelection.length === this.customTableData.length
+        return this.multipleSelectionSync.length === this.customTableData.length
     }
 
     mounted() {
@@ -458,15 +492,10 @@ export default class CustomUTable extends Vue {
     }
 
     // 数据改变时表格重绘，避免表格错乱
-    @Watch('tableData')
+    @Watch('tableData', { immediate: true })
     tableDataChange(newVal: any[]) {
         if (!isEqualWith(newVal, this.customTableData)) {
-            this.customTableData = newVal.map((item) => ({
-                ...item,
-                _XID: Math.random()
-            }))
-            // 清空复选框
-            this.multipleSelection = []
+            this.customTableData = cloneDeep(newVal)
         }
         // 使用umy-ui应该没有这个问题,有的话就放开
         // // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
@@ -491,7 +520,7 @@ export default class CustomUTable extends Vue {
 
     @Emit('setValue')
     setValue() {
-        return this.customValue
+        return cloneDeep(this.customValue)
     }
     /**
      * 监听$attrs是否改变
@@ -530,7 +559,7 @@ export default class CustomUTable extends Vue {
      */
     clickRightbtn(item: tablePostfixOptionsType, scope: scopeType) {
         if (item.disabled && item.disabled(scope)) return
-        item.onLinkClick && item.onLinkClick(scope)
+        item.callback && item.callback(scope)
     }
     /**
      * 索引的显示内容
@@ -538,18 +567,16 @@ export default class CustomUTable extends Vue {
     indexValue(index: number) {
         if (index + 1 < this.customTableData.length) {
             return index + 1
-        } else {
-            if (this.showSummary) return this.attrs['sum-text'] || '汇总'
-            else return index + 1
-        }
+        } else if (this.showSummary) return this.attrs['sum-text'] || '汇总'
+        else return index + 1
     }
     /**
      * 是否选中
      * @param {any} value 当前行id
      */
     isChecked(row: any) {
-        return !!this.multipleSelection.find(
-            (item: any) => item._XID === row._XID
+        return !!this.multipleSelectionSync.find(
+            (item: any) => item[this.rowId] === row[this.rowId]
         )
     }
     /**
@@ -557,17 +584,19 @@ export default class CustomUTable extends Vue {
      * @param {string} row 当前行
      */
     checked(row: any) {
+        const multipleSelectionSync = cloneDeep(this.multipleSelectionSync)
         if (this.isChecked(row)) {
-            this.multipleSelection.splice(
-                this.multipleSelection.findIndex(
-                    (item: any) => item._XID === row._XID
+            multipleSelectionSync?.splice(
+                this.multipleSelectionSync?.findIndex(
+                    (item: any) => item[this.rowId] === row[this.rowId]
                 ),
                 1
             )
         } else {
-            this.multipleSelection.push(row)
+            multipleSelectionSync?.push(row)
         }
-        this.$emit('selection-change', this.multipleSelection)
+        this.multipleSelectionSync = multipleSelectionSync
+        this.$emit('selection-change', this.multipleSelectionSync)
     }
     /**
      * 全选与反选
@@ -575,18 +604,14 @@ export default class CustomUTable extends Vue {
     checkedAll(checked: boolean) {
         if (checked) {
             if (this.showSummary) {
-                this.multipleSelection = this.customTableData.slice(0, -1)
+                this.multipleSelectionSync = this.customTableData.slice(0, -1)
             } else {
-                this.multipleSelection = [...this.customTableData]
+                this.multipleSelectionSync = [...this.customTableData]
             }
         } else {
-            this.multipleSelection = []
+            this.multipleSelectionSync = []
         }
-        this.$emit('selection-change', this.multipleSelection)
+        this.$emit('selection-change', this.multipleSelectionSync)
     }
 }
 </script>
-
-<style lang="scss">
-@import './index.scss';
-</style>

@@ -5,3 +5,7 @@ declare module 'lodash/merge'
 declare module 'lodash/isEqualWith'
 declare module 'lodash/trim'
 declare module 'calm-harbin'
+declare module '*.json' {
+    const value: any
+    export default value
+}

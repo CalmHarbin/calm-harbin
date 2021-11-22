@@ -71,6 +71,32 @@ const components: componentsType[] = [
     {
         name: 'summaryDemo',
         template: () => import('@test/components/methods/summary.vue')
+    },
+    {
+        name: 'OperationDemo',
+        template: () => import('@test/components/operation/operation-demo.vue')
+    },
+    {
+        name: 'BiuTableBase',
+        template: () => import('@test/components/biu-table/biu-table-base.vue')
+    },
+    {
+        name: 'BiuTableEditable',
+        template: () =>
+            import('@test/components/biu-table/biu-table-editable.vue')
+    },
+    {
+        name: 'BiuTableShowHeaderFilter',
+        template: () =>
+            import('@test/components/biu-table/biu-table-showHeaderFilter.vue')
+    },
+    {
+        name: 'BiuPageDemo',
+        template: () => import('@test/components/biu-page/biu-page-demo.vue')
+    },
+    {
+        name: 'BiuPageDemo2',
+        template: () => import('@test/components/biu-page/biu-page-demo2.vue')
     }
 ]
 

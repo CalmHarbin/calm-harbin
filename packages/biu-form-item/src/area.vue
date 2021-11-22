@@ -39,7 +39,7 @@ import {
 import { provinceOptions, cityPicker, countyPicker } from './area.js'
 import { Cascader } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
-import { areaType } from 'calm-harin/types/biu-form-item'
+import { areaType } from 'calm-harbin/types/biu-form-item'
 import BiuSelect from './biu-select.vue'
 
 @Component({

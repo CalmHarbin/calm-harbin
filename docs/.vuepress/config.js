@@ -10,6 +10,7 @@ module.exports = {
         lineNumbers: true // 代码块显示行号
     },
     themeConfig: {
+        logo: '/logo.png',
         //主题配置
         nav: [
             {
@@ -42,16 +43,17 @@ module.exports = {
                 title: '组件',
                 collapsable: false,
                 children: [
-                    '/components/biu-form',
-                    '/components/biu-form-item',
+                    '/components/biu-page',
                     '/components/biu-table',
                     '/components/biu-select-table',
+                    '/components/biu-form',
+                    '/components/biu-form-item',
                     '/components/biu-card',
                     '/components/biu-card-form',
-                    '/components/biu-page',
                     '/components/biu-dialog',
                     '/components/biu-drawer',
-                    '/components/file-upload'
+                    '/components/file-upload',
+                    '/components/operation'
                     //...
                     // 每加一个菜单需要在这里也新增一下
                 ]
@@ -78,6 +80,7 @@ module.exports = {
     configureWebpack: {
         externals: {
             xlsx: 'XLSX',
+            'decimal.js': 'Decimal',
             dayjs: 'dayjs'
         },
         module: {
@@ -121,7 +124,7 @@ module.exports = {
             path.resolve(__dirname, '../../types')
         )
         config.resolve.alias.set('@src', path.resolve(__dirname, '../../src'))
-        // 配置calm-harin别名,使文档展示用法能和真实用户保持一致。
+        // 配置calm-harbin别名,使文档展示用法能和真实用户保持一致。
         config.resolve.alias.set(
             'calm-harbin',
             path.resolve(__dirname, '../../src/index.ts')

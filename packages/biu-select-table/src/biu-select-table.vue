@@ -21,8 +21,9 @@
             <BiuTable
                 ref="BiuTable"
                 :tbHeight="paginationSync ? 256 : 300"
-                :tableData="tableData"
+                :tableData="customTableData"
                 :selection="multiple"
+                :multipleSelection.sync="multipleSelection"
                 @selection-change="handleSelectionChange"
                 v-bind="attrs"
                 @row-click="rowClick"
@@ -126,9 +127,40 @@ export default class BiuSelectTable extends Vue {
      */
     checkListValue: string[] = []
     /**
+     * 用来缓存已选中的数据，用于多选时，搜索将数据插入到列表中
+     */
+    cacheList: any[] = []
+    /**
      * 搜索
      */
     filterMethod: (val: string) => void = () => {}
+
+    // 将选中的数据转为复选框格式 row[]
+    get multipleSelection() {
+        return this.checkList.map((item) =>
+            this.customTableData.find((row) => row[this.prop.id] === item)
+        )
+    }
+    set multipleSelection(val) {
+        this.checkList = val.map((item) => item[this.prop.id])
+    }
+
+    /**
+     * 内部是数据,在tableData基础上加上之前选中的数据
+     */
+    get customTableData(): any[] {
+        const tableData: any[] = cloneDeep(this.tableData)
+
+        this.cacheList.forEach((item) => {
+            if (
+                !tableData.find((i) => i[this.prop.id] === item[this.prop.id])
+            ) {
+                tableData.push(item)
+            }
+        })
+        return tableData
+    }
+
     /**
      * attrs用来表示this.$attrs
      * 在组件上不可以直接使用v-bind="$attrs"，这样使用会导致该组件不具有缓存功能了
@@ -139,13 +171,16 @@ export default class BiuSelectTable extends Vue {
     private listeners: any = {}
 
     created() {
-        this.filterMethod = debounce(this.search)
+        this.filterMethod = debounce(this.search, 500)
     }
 
     @Watch('tableData', { deep: true, immediate: true })
     dataChange() {
         // 同步显示值,会有初始命中项,但是数据接口是异步查询,所以需要同步一遍
-        this.checkListValue = this.getCheckListValue(this.checkList)
+        const checkListValue = this.getCheckListValue(this.checkList)
+        if (!isEqualWith(this.checkListValue, checkListValue)) {
+            this.checkListValue = checkListValue
+        }
     }
 
     @Watch('checkList', { deep: true })
@@ -153,19 +188,37 @@ export default class BiuSelectTable extends Vue {
         if (this.multiple) {
             if (!isEqualWith(this.value, newVal)) {
                 this.setValue(newVal)
+
+                let cacheList: any[] = []
+                // 这里循环customTableData,保证表格中属性显示一致
+                this.customTableData.forEach((item) => {
+                    if (newVal.includes(item[this.prop.id])) {
+                        cacheList.push(item)
+                    }
+                })
+
+                this.cacheList = cacheList
             }
-        } else {
-            if (!isEqualWith(this.value, newVal[0])) {
-                this.setValue(newVal[0])
+        } else if (!isEqualWith(this.value, newVal[0])) {
+            this.setValue(newVal[0] || '')
+
+            if (newVal[0] && !this.inputable) {
+                // 单选没有顺序问题
+                this.cacheList = newVal.map((item: string) =>
+                    this.customTableData.find(
+                        (i: any) => i[this.prop.id] === item
+                    )
+                )
+            } else {
+                this.cacheList = []
             }
         }
 
-        // 同步显示值
-        this.checkListValue = this.getCheckListValue(newVal)
-
-        if (this.multiple) {
-            // 同步勾选状态
-            this.setMultipleSelection(newVal)
+        // 同步显示值，这里之所以要判断是否相等，是避免多选时，传入给el-select的value是数组，引用类型一直在改变，会触发搜索事件
+        // 就会导致多选时,搜索内容会触发两次search
+        const checkListValue = this.getCheckListValue(newVal)
+        if (!isEqualWith(this.checkListValue, checkListValue)) {
+            this.checkListValue = checkListValue
         }
     }
 
@@ -177,15 +230,12 @@ export default class BiuSelectTable extends Vue {
                     typeof item === 'number' ? String(item) : item
                 )
             }
-        } else {
-            // 单选时
-            if (typeof newVal === 'number') {
-                this.checkList = [String(newVal)]
-            } else if (typeof newVal === 'string' && newVal) {
-                this.checkList = [newVal]
-            } else if (this.checkList.length !== 0) {
-                this.checkList = []
-            }
+        } else if (typeof newVal === 'number') {
+            this.checkList = [String(newVal)]
+        } else if (typeof newVal === 'string' && newVal) {
+            this.checkList = [newVal]
+        } else if (this.checkList.length !== 0) {
+            this.checkList = []
         }
     }
 
@@ -214,7 +264,7 @@ export default class BiuSelectTable extends Vue {
      */
     @Emit('search')
     search(value: string) {
-        this.checkList = []
+        // this.checkList = []
         // 如果是可以输入的，把输入的数据当做选中的
         if (this.inputable && !this.multiple) {
             this.checkList = [value]
@@ -223,7 +273,7 @@ export default class BiuSelectTable extends Vue {
             this.$emit(
                 'change',
                 this.checkListValue,
-                this.multiple ? this.checkList : this.checkList[0],
+                this.multiple ? this.checkList : this.checkList[0] || '',
                 this.tableData,
                 this.prop
             )
@@ -285,16 +335,17 @@ export default class BiuSelectTable extends Vue {
     visibleChange(state: boolean) {
         if (state) {
             this.isMounted = true
-            // 表格是空的，主动去查询还是空的，没必要
-            // // 如果显示时表格是空的,主动去查询一次数据
-            // if (this.tableData.length === 0) {
-            //     // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
-            //     if (this.inputable && this.checkList.length) {
-            //         this.search(this.checkList[0])
-            //     } else {
-            //         this.search('')
-            //     }
-            // }
+            // 表格是空的，主动去查询还是空的，没必要，x
+            // 当单选不可输入时，如果随便输入一个值搜索不到数据，此时失焦后，表格没有数据，再次点击还是没有数据，故要重新查询一下。
+            // 如果显示时表格是空的,主动去查询一次数据
+            if (this.customTableData.length === 0) {
+                // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
+                if (this.inputable && this.checkList.length) {
+                    this.search(this.checkList[0] || '')
+                } else {
+                    this.search('')
+                }
+            }
 
             /**
              * 当可输入的时候，显示表格时不要清空输入框中已存在的
@@ -317,17 +368,33 @@ export default class BiuSelectTable extends Vue {
      * 单选时
      */
     rowClick(row: any) {
-        // 多选不做任何处理
-        if (this.multiple) return
-        // 当单选时选中
-        this.checkList = [row[this.prop.id]]
+        // 多选点击行选中与反选
+        if (this.multiple) {
+            // 重置el-select内部previousQuery='',防止因为勾选导致出发搜索事件，会
+            ;(this.$refs.select as any).previousQuery = ''
+
+            const index = this.checkList.findIndex(
+                (item) => row[this.prop.id] === item
+            )
+            if (index !== -1) {
+                this.checkList.splice(index, 1)
+            } else {
+                this.checkList.push(row[this.prop.id])
+            }
+        } else {
+            // 当单选时选中
+            this.checkList = [row[this.prop.id]]
+        }
+
         this.$emit(
             'change',
             this.getCheckListValue(this.checkList),
-            this.checkList[0],
+            this.multiple ? this.checkList : this.checkList[0] || '',
             this.tableData,
             this.prop
         )
+        // 重新查询数据
+        this.updateTableData()
     }
     /**
      * 获取选中对应的值显示的值，inputable时为输入的值
@@ -338,9 +405,14 @@ export default class BiuSelectTable extends Vue {
         if (this.inputable && !this.multiple) {
             checkListValue = checkList
         } else {
-            for (const item of this.tableData) {
-                if (checkList.includes(String(item[this.prop.id])))
-                    checkListValue.push(item[this.prop.label])
+            // 这里顺序checkList，保证checkListValue顺序与checkList一致
+            for (const item of checkList) {
+                const result: any = this.customTableData.find(
+                    (i) => i[this.prop.id] === item
+                )
+                if (result) {
+                    checkListValue.push(result[this.prop.label])
+                }
             }
         }
         return checkListValue
@@ -348,8 +420,10 @@ export default class BiuSelectTable extends Vue {
     /**
      * 多选改变
      */
-    handleSelectionChange(val: any[]) {
-        this.checkList = val.map((item: any) => item[this.prop.id])
+    handleSelectionChange() {
+        // 重置el-select内部previousQuery='',防止因为勾选导致出发搜索事件，会
+        ;(this.$refs.select as any).previousQuery = ''
+
         this.$emit(
             'change',
             this.getCheckListValue(this.checkList),
@@ -374,19 +448,6 @@ export default class BiuSelectTable extends Vue {
     paginationCallback(data: { page: number; limit: number }) {
         this.$emit('pagination', data)
         this.focus()
-    }
-    /**
-     * 同步复选框的勾选状态
-     */
-    setMultipleSelection(checkList: string[]) {
-        let multipleSelection = this.tableData.filter((item: any) =>
-            checkList.includes(item[this.prop.id])
-        )
-        if (this.$refs.BiuTable) {
-            ;(this.$refs.BiuTable as any).$refs.BiuTable.setMultipleSelection(
-                multipleSelection
-            )
-        }
     }
     /**
      * 重新查询tableData

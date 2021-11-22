@@ -4,11 +4,15 @@
         <input type="text" v-model="form.name" />
         <biu-form v-model="form" :source="source"></biu-form>
         <BiuTable
-            editable
+            :virtual="false"
             :columns="columns"
             :tableData.sync="tableData"
             max-height="300"
-            :edit-config="{ trigger: 'click', mode: 'cell' }"
+        ></BiuTable>
+        <BiuTable
+            :columns="columns"
+            :tableData.sync="tableData"
+            max-height="300"
         ></BiuTable>
     </div>
 </template>
@@ -104,6 +108,7 @@ export default {
                         return (
                             <BiuTableSelectTest
                                 v-model={row[col.id]}
+                                multiple
                             ></BiuTableSelectTest>
                         )
                     }

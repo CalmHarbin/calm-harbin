@@ -384,7 +384,7 @@ export default class Order extends Vue {
             message: ({ $index }) => {
                 if ($index % 2 === 0) return '奇数行不可编辑哦'
             },
-            onLinkClick: (scope) => {
+            callback: (scope) => {
                 this.add.show = true
                 this.add.payload = { ...scope.row }
             }
@@ -393,7 +393,7 @@ export default class Order extends Vue {
             title: '作废',
             hidden: false,
             icon: 'el-icon-delete',
-            onLinkClick: (scope) => {
+            callback: (scope) => {
                 this.handleDelete(scope.row)
             }
         }

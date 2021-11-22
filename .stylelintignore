@@ -1,0 +1,17 @@
+node_modules/*
+
+dist/*
+
+docs/*
+
+lib/*
+
+'**/*.js'
+
+'**/*.jsx'
+
+'**/*.tsx'
+
+'**/*.ts'
+
+'**/*.md'

@@ -4,7 +4,7 @@ const path = require('path')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const CDN_CSS = [
-    // 'https://cdn.jsdelivr.net/npm/calm-harbin@0.2.3-pre/lib/calmHarbin.css'
+    // 'https://cdn.jsdelivr.net/npm/calm-harbin@0.2.9-pre/lib/calmHarbin.css'
 ]
 const CDN_JS = [
     'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',
@@ -63,7 +63,12 @@ module.exports = {
                               root: 'Decimal'
                           },
                           dayjs: 'dayjs',
-                          vue: 'Vue'
+                          vue: {
+                              commonjs: 'vue',
+                              amd: 'vue',
+                              commonjs2: 'vue',
+                              root: 'Vue'
+                          }
                       }
                     : {
                           vue: 'Vue',
@@ -83,7 +88,7 @@ module.exports = {
         config.resolve.alias.set('@test', path.resolve(__dirname, './test'))
         config.resolve.alias.set('@src', path.resolve(__dirname, './src'))
         config.resolve.alias.set(
-            'calm-harin/types',
+            'calm-harbin/types',
             path.resolve(__dirname, './types')
         )
 

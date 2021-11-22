@@ -137,7 +137,7 @@ import {
     Model,
     Emit
 } from 'vue-property-decorator'
-import { directionType, BiuformType } from 'calm-harin/types/biu-form'
+import { directionType, BiuformType } from 'calm-harbin/types/biu-form'
 import BiuFormItem from '@packages/biu-form-item/src/biu-form-item.vue'
 import { Row, Col, Form, FormItem, Button } from 'element-ui'
 import { debounce } from '@src/utils/index'
@@ -230,7 +230,6 @@ export default class BiuForm extends Vue {
 
     @Watch('source', { immediate: true, deep: true })
     sourceChange(newVal: BiuFormItem[]) {
-        this.isOpen = false // 数据源改变时，重置展开
         this.setCustomSource(newVal)
     }
     @Watch('direction', { immediate: true, deep: true })
@@ -260,7 +259,7 @@ export default class BiuForm extends Vue {
 
     @Emit('setValue')
     setValue() {
-        return this.customValue
+        return cloneDeep(this.customValue)
     }
 
     /**

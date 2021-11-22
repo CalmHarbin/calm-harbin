@@ -29,6 +29,7 @@ module.exports = {
         'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
         'comma-dangle': ['off', 'never'], //是否允许对象中出现结尾逗号
         'no-var': 'warn', //使用let和const代替var
+        'no-lonely-if': 'error',
         indent: ['off', 4], //代码缩进
         'no-mixed-spaces-and-tabs': 2, //代码缩进不能混用空格和tab。
         quotes: [2, 'single'],

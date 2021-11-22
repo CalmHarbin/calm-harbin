@@ -6,7 +6,7 @@
         @mouseenter="hovering = true"
         @mouseleave="hovering = false"
     >
-        <div style="padding: 24px">
+        <div style="padding: 24px" :key="key">
             <!-- 第一个是源代码插槽 -->
             <ClientOnly>
                 <slot name="source"></slot>
@@ -56,6 +56,7 @@ export default {
     name: 'demo-block',
     data() {
         return {
+            key: 0,
             hovering: false,
             isExpanded: false,
             fixedControl: false,
@@ -168,6 +169,15 @@ export default {
                 highlight.borderRight = 'none'
             }
         })
+        /**
+         * 这里之所以要延时去改变key，主要是为了重新渲染组件，
+         * 因为使用了服务端渲染，组件初次渲染会有未解析的情况，
+         * 等组件注册完毕后再去重新渲染下即可。见enhanceApp.ts文件
+         */
+
+        setTimeout(() => {
+            this.key++
+        }, 300)
     },
 
     beforeDestroy() {

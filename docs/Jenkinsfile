@@ -17,31 +17,58 @@ node {
                 url: 'https://github.com/CalmHarbin/calm-harbin.git' //仓库
         }
         stage('构建') {
+            sh 'pwd'
             sh 'ls'
             
-            if (install == 'true') {
-                sh 'npm install'
+            if ("$install" == 'true') {
+                sh 'rm -rf node_modules && yarn'
             }
-
+            // 打包
             sh 'npm run docs:build'
+            // 制作压缩包
+            sh 'cd docs && tar -czf dist.tar.gz ./dist'
         }
         stage('部署') {
+            sshPublisher(
+                publishers: [
+                    sshPublisherDesc(
+                        configName: '阿里云', // 远程服务器名称，提前配置在jenkins中配置
+                        transfers: [
+                            sshTransfer(
+                                cleanRemote: false, 
+                                excludes: '', 
+                                // 执行脚本
+                                execCommand: 'cd /usr/share/nginx/html/ && rm -rf dist && tar -xzvf dist.tar.gz && rm -rf dist.tar.gz', 
+                                execTimeout: 120000, 
+                                flatten: false, 
+                                makeEmptyDirs: false, 
+                                noDefaultExcludes: false, 
+                                patternSeparator: '[, ]+', 
+                                // 复制到远程服务器的目录位置
+                                remoteDirectory: '/usr/share/nginx/html/', 
+                                remoteDirectorySDF: false, 
+                                // 去除的前缀
+                                removePrefix: 'docs/', 
+                                // 需要复制的文件，位于jenkins的工作空间中
+                                sourceFiles: 'docs/dist.tar.gz'
+                            )
+                        ], 
+                        usePromotionTimestamp: false, 
+                        useWorkspaceInPromotion: false, 
+                        verbose: false
+                    )
+                ]
+            )
+            // 将容器内的文件copy到宿主机
+            // sh 'docker cp myjenkins:/var/jenkins_mount/workspace/calmharbin文档/docs/dist /usr/share/nginx/html/dist'
             // 生成镜像
-            sh 'docker build -f /var/jenkins_mount/workspace/calmharbin文档/docs/Dockerfile -t calmharbin .'
+            // sh 'docker build -f /var/jenkins_mount/workspace/calmharbin文档/docs/Dockerfile -t calmharbin .'
             // 创建容器
             // sh 'docker run --name calmharbin -d -p 8888:80 -v'
         }
-
-
-        // stage('删除镜像') {
-        //     sh 'docker stop nhfd-container || true'
-        //     sh 'docker rm -f nhfd-container || true'
-        //     sh 'rm -rf ./nginx/ || true'
-        // }
-        // stage('部署') {
-        //     sh 'cp -rf dist/ nginx'
-        //     sh "docker run --name nhfd-container -d -p 8080:80 -v /var/jenkins_mount/workspace/${JOB_NAME}/nginx:/usr/share/nginx/html nginx"
-        // }
+        stage('清理') {
+            sh 'rm -rf docs/dist docs/dist.tar.gz'
+        }
     }
 }
 

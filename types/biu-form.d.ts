@@ -8,6 +8,12 @@ type objType = {
     [x: string]: any
 }
 
+type tableHeaderFormType = {
+    col: BiuformType
+    $index: number
+    $columnIndex: number
+}
+
 export type formAttrType = {
     /**
      * label的宽度
@@ -67,9 +73,10 @@ export type formAttrType = {
     clearable?: boolean
     /**
      * 自定义渲染，注意该配置必须写在 @Component中，不然会报错
+     * tableHeaderFormType类型 为 使用BiuTable组件时
+     * BiuformType类型 为 使用BiuForm组件时
      */
-    // eslint-disable-next-line no-undef
-    render?: (h: any, scope: BiuformType) => VNode
+    render?: (h: any, scope: tableHeaderFormType & BiuformType) => VNode
     /**
      * 字段
      */

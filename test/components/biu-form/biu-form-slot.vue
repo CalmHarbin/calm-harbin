@@ -15,7 +15,7 @@
 
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
-import { BiuformType } from 'calm-harin/types/biu-form'
+import { BiuformType } from 'calm-harbin/types/biu-form'
 
 @Component
 export default class BiuFormSlot extends Vue {

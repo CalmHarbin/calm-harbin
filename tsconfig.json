@@ -19,7 +19,7 @@
             "@packages/*": ["packages/*"],
             "@src/*": ["src/*"],
             "@test/*": ["test/*"],
-            "calm-harin/*": ["./*"]
+            "calm-harbin/*": ["./*"]
         },
         "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
     },
