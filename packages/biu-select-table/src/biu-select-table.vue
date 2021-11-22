@@ -18,7 +18,7 @@
         @remove-tag="removeTag"
     >
         <el-option value="1111111111">
-            <BiuTable
+            <!-- <BiuTable
                 ref="BiuTable"
                 :tbHeight="paginationSync ? 256 : 300"
                 :tableData="customTableData"
@@ -27,7 +27,7 @@
                 @selection-change="handleSelectionChange"
                 v-bind="attrs"
                 @row-click="rowClick"
-            />
+            /> -->
             <!--分页数据-->
             <Pagination
                 v-if="paginationSync"
@@ -171,6 +171,7 @@ export default class BiuSelectTable extends Vue {
     private listeners: any = {}
 
     created() {
+        console.log(174, this)
         this.filterMethod = debounce(this.search, 500)
     }
 

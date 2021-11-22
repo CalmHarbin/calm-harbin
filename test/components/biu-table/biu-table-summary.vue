@@ -1,24 +1,18 @@
 <template>
     <biu-table
-        v-model="form"
         :columns="columns"
         :table-data="tableData"
-        show-header-filter
-        :max-height="500"
-        @search="search"
-    >
-    </biu-table>
+        show-summary
+    ></biu-table>
 </template>
 
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
 import { tableColumnType } from 'calm-harbin/types/biu-table'
+import { summary } from 'calm-harbin'
 
 @Component
-export default class BiuTableBase extends Vue {
-    form: any = {
-        goodsName: ''
-    }
+export default class BiuTableSummary extends Vue {
     tableData: any[] = []
 
     packingOptions = [
@@ -49,18 +43,7 @@ export default class BiuTableBase extends Vue {
                             (i) => i.value === row[col.id]
                         )?.label || row[col.id]}
                     </div>
-                ),
-                formAttr: {
-                    render: (h, { col }) => (
-                        <biu-form-item
-                            formType="select"
-                            style="width: 100%"
-                            v-model={this.form[col.id]}
-                            options={this.packingOptions}
-                            size="mini"
-                        ></biu-form-item>
-                    )
-                }
+                )
             },
             {
                 formType: 'input',
@@ -134,14 +117,18 @@ export default class BiuTableBase extends Vue {
                 netWeight: 99.99
             })
         })
-    }
 
-    /**
-     * 搜索
-     */
-    search() {
-        // form含有最新的数据，可以用来自行实现过滤逻辑
-        console.log(this.form)
+        // 计算合计数据
+        const total = summary(this.tableData, {
+            number: 0,
+            weight: 0,
+            volume: 0,
+            length: 0,
+            width: 0,
+            height: 0,
+            netWeight: 0
+        })
+        this.tableData.push(total)
     }
 }
 </script>

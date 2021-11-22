@@ -91,6 +91,26 @@ const components: componentsType[] = [
             import('@test/components/biu-table/biu-table-showHeaderFilter.vue')
     },
     {
+        name: 'BiuTableSummary',
+        template: () =>
+            import('@test/components/biu-table/biu-table-summary.vue')
+    },
+    {
+        name: 'BiuTableSelection',
+        template: () =>
+            import('@test/components/biu-table/biu-table-selection.vue')
+    },
+    {
+        name: 'BiuTableExpandRender',
+        template: () =>
+            import('@test/components/biu-table/biu-table-expandRender.vue')
+    },
+    {
+        name: 'BiuSelectTable',
+        template: () =>
+            import('@test/components/biu-select-table/biu-select-table.vue')
+    },
+    {
         name: 'BiuPageDemo',
         template: () => import('@test/components/biu-page/biu-page-demo.vue')
     },

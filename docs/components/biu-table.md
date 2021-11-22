@@ -65,9 +65,58 @@
 
 #### 合计
 
+<demo-block>
+::: slot source
+<BiuTableSummary></BiuTableSummary>
+:::
+
+-   给组件配置`show-summary=true`则开启合计功能。会自动将最后一行序号变为合计，如果你想自定义合计文本，可以使用`sum-text`来配置
+
+::: warning 提示
+如果要使用合计功能，一定要自行计算好数据放入表格最后一项。可以使用`summary`来帮助你计算。<br/>
+`summary`的使用方法详见文档方法部分。
+:::
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-summary.vue
+
+:::
+</demo-block>
+
 #### 单选/多选
 
+多选
+
+<demo-block>
+::: slot source
+<BiuTableSelection></BiuTableSelection>
+:::
+
+-   配置`selection=true`可以开启多选功能，同时传入`multipleSelection`来控制勾选的数据
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-selection.vue
+
+:::
+</demo-block>
+
 #### 自定义展开
+
+<demo-block>
+::: slot source
+<BiuTableExpandRender></BiuTableExpandRender>
+:::
+
+-   使用`expandRender`配置展开内容
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-expandRender.vue
+
+:::
+</demo-block>
 
 #### 属性
 

@@ -1,24 +1,20 @@
 <template>
     <biu-table
-        v-model="form"
         :columns="columns"
         :table-data="tableData"
-        show-header-filter
-        :max-height="500"
-        @search="search"
-    >
-    </biu-table>
+        :expandRender="expandRender"
+    ></biu-table>
 </template>
 
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
-import { tableColumnType } from 'calm-harbin/types/biu-table'
+import {
+    tableColumnType,
+    expandRenderPropType
+} from 'calm-harbin/types/biu-table'
 
 @Component
-export default class BiuTableBase extends Vue {
-    form: any = {
-        goodsName: ''
-    }
+export default class BiuTableExpandRender extends Vue {
     tableData: any[] = []
 
     packingOptions = [
@@ -49,18 +45,7 @@ export default class BiuTableBase extends Vue {
                             (i) => i.value === row[col.id]
                         )?.label || row[col.id]}
                     </div>
-                ),
-                formAttr: {
-                    render: (h, { col }) => (
-                        <biu-form-item
-                            formType="select"
-                            style="width: 100%"
-                            v-model={this.form[col.id]}
-                            options={this.packingOptions}
-                            size="mini"
-                        ></biu-form-item>
-                    )
-                }
+                )
             },
             {
                 formType: 'input',
@@ -109,6 +94,17 @@ export default class BiuTableBase extends Vue {
         ]
     }
 
+    /**
+     * 控制展开渲染内容
+     */
+    expandRender(h: any, { row, $index }: expandRenderPropType) {
+        return (
+            <div style="padding-left: 80px;">
+                第{$index + 1}行，内容是 {JSON.stringify(row)}
+            </div>
+        )
+    }
+
     created() {
         this.add(5)
     }
@@ -121,7 +117,7 @@ export default class BiuTableBase extends Vue {
 
         new Array(num).fill('').forEach((_item, index) => {
             this.tableData.push({
-                id: length + index,
+                id: `${length + index}`,
                 packing: ['apple', 'orange', 'pear'][~~(Math.random() * 3)],
                 goodsName: ['苹果', '橘子', '梨'][~~(Math.random() * 3)],
                 number: ~~(Math.random() * 1000),
@@ -134,14 +130,6 @@ export default class BiuTableBase extends Vue {
                 netWeight: 99.99
             })
         })
-    }
-
-    /**
-     * 搜索
-     */
-    search() {
-        // form含有最新的数据，可以用来自行实现过滤逻辑
-        console.log(this.form)
     }
 }
 </script>

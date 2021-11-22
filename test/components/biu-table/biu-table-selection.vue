@@ -1,13 +1,10 @@
 <template>
     <biu-table
-        v-model="form"
         :columns="columns"
         :table-data="tableData"
-        show-header-filter
-        :max-height="500"
-        @search="search"
-    >
-    </biu-table>
+        selection
+        :multipleSelection.sync="multipleSelection"
+    ></biu-table>
 </template>
 
 <script lang="tsx">
@@ -15,10 +12,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { tableColumnType } from 'calm-harbin/types/biu-table'
 
 @Component
-export default class BiuTableBase extends Vue {
-    form: any = {
-        goodsName: ''
-    }
+export default class BiuTableSelection extends Vue {
     tableData: any[] = []
 
     packingOptions = [
@@ -36,6 +30,9 @@ export default class BiuTableBase extends Vue {
         }
     ]
 
+    // 这里记录了勾选的数据
+    multipleSelection: any[] = []
+
     get columns(): tableColumnType[] {
         return [
             {
@@ -49,18 +46,7 @@ export default class BiuTableBase extends Vue {
                             (i) => i.value === row[col.id]
                         )?.label || row[col.id]}
                     </div>
-                ),
-                formAttr: {
-                    render: (h, { col }) => (
-                        <biu-form-item
-                            formType="select"
-                            style="width: 100%"
-                            v-model={this.form[col.id]}
-                            options={this.packingOptions}
-                            size="mini"
-                        ></biu-form-item>
-                    )
-                }
+                )
             },
             {
                 formType: 'input',
@@ -134,14 +120,6 @@ export default class BiuTableBase extends Vue {
                 netWeight: 99.99
             })
         })
-    }
-
-    /**
-     * 搜索
-     */
-    search() {
-        // form含有最新的数据，可以用来自行实现过滤逻辑
-        console.log(this.form)
     }
 }
 </script>

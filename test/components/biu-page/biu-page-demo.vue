@@ -24,18 +24,18 @@ export default class BiuPageDemo extends Vue {
 
     tableData: any[] = []
 
-    modeOptions = [
+    packingOptions = [
         {
-            label: '编辑按钮',
-            value: '1'
+            label: '苹果apple',
+            value: 'apple'
         },
         {
-            label: '点击行',
-            value: '2'
+            label: '橘子orange',
+            value: 'orange'
         },
         {
-            label: '点击单元格',
-            value: '3'
+            label: '梨pear',
+            value: 'pear'
         }
     ]
 
@@ -46,7 +46,7 @@ export default class BiuPageDemo extends Vue {
                 label: '商品编码',
                 id: 'packing',
                 formAttr: {
-                    options: this.modeOptions
+                    options: this.packingOptions
                 }
             },
             {

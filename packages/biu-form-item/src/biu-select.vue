@@ -56,10 +56,6 @@ export default class BiuSelect extends Vue {
     private attrs = {}
     private listeners = {}
 
-    created() {
-        console.log(this.value, this.$attrs.options)
-    }
-
     @Watch('value', { immediate: true })
     valueChange(newVal: string | string[]) {
         // 数字统一转字符串
