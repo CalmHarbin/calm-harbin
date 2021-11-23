@@ -138,22 +138,27 @@ export default class BiuSelectTable extends Vue {
     // 将选中的数据转为复选框格式 row[]
     get multipleSelection() {
         return this.checkList.map((item) =>
-            this.customTableData.find((row) => row[this.prop.id] === item)
+            this.customTableData.find(
+                (row) => String(row[this.prop.id]) === String(item)
+            )
         )
     }
     set multipleSelection(val) {
-        this.checkList = val.map((item) => item[this.prop.id])
+        this.checkList = val.map((item) => String(item[this.prop.id]))
     }
 
     /**
-     * 内部是数据,在tableData基础上加上之前选中的数据
+     * 内部的数据,在tableData基础上加上之前选中的数据
      */
     get customTableData(): any[] {
         const tableData: any[] = cloneDeep(this.tableData)
 
         this.cacheList.forEach((item) => {
             if (
-                !tableData.find((i) => i[this.prop.id] === item[this.prop.id])
+                !tableData.find(
+                    (i) =>
+                        String(i[this.prop.id]) === String(item[this.prop.id])
+                )
             ) {
                 tableData.push(item)
             }
@@ -192,7 +197,7 @@ export default class BiuSelectTable extends Vue {
                 let cacheList: any[] = []
                 // 这里循环customTableData,保证表格中属性显示一致
                 this.customTableData.forEach((item) => {
-                    if (newVal.includes(item[this.prop.id])) {
+                    if (newVal.includes(String(item[this.prop.id]))) {
                         cacheList.push(item)
                     }
                 })
@@ -206,7 +211,7 @@ export default class BiuSelectTable extends Vue {
                 // 单选没有顺序问题
                 this.cacheList = newVal.map((item: string) =>
                     this.customTableData.find(
-                        (i: any) => i[this.prop.id] === item
+                        (i: any) => String(i[this.prop.id]) === String(item)
                     )
                 )
             } else {
@@ -374,16 +379,16 @@ export default class BiuSelectTable extends Vue {
             ;(this.$refs.select as any).previousQuery = ''
 
             const index = this.checkList.findIndex(
-                (item) => row[this.prop.id] === item
+                (item) => String(row[this.prop.id]) === String(item)
             )
             if (index !== -1) {
                 this.checkList.splice(index, 1)
             } else {
-                this.checkList.push(row[this.prop.id])
+                this.checkList.push(String(row[this.prop.id]))
             }
         } else {
             // 当单选时选中
-            this.checkList = [row[this.prop.id]]
+            this.checkList = [String(row[this.prop.id])]
         }
 
         this.$emit(
@@ -408,7 +413,7 @@ export default class BiuSelectTable extends Vue {
             // 这里顺序checkList，保证checkListValue顺序与checkList一致
             for (const item of checkList) {
                 const result: any = this.customTableData.find(
-                    (i) => i[this.prop.id] === item
+                    (i) => String(i[this.prop.id]) === item
                 )
                 if (result) {
                     checkListValue.push(result[this.prop.label])

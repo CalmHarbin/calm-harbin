@@ -130,15 +130,11 @@
 | `resize`          | 是否自适应表单项的宽度                    | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                 | `false`      |
 | `min`             | 表单项的最小宽度，仅当 resize=true 时生效 | <el-checkbox></el-checkbox>                  | `number`                                                                                                                  | `280`        |
 
-<tooltip content="内容">
-    <el-tag>标签一</el-tag>
-</tooltip>
-
 #### 方法
 
-| 方法名          | 说明                                                                  | 类型                                                      |
-| --------------- | --------------------------------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------- |
-| `validate`      | 对整个表单进行校验，同 element 的 validate                            | `(callback: ValidateCallback) => void`或者`() => Promise` |
-| `validateField` | 对部分表单字段进行校验，同 element 的 validateField                   | `(props:string                                            | string[], callback?: ValidateFieldCallback) => void` |
-| `resetFields`   | 对整个表单进行重置到初始值，并移除校验结果，同 element 的 resetFields | `() => void`                                              |
-| `clearValidate` | 移除表单项的校验结果，同 element 的 clearValidate                     | `(props?: string                                          | string[]) => void`                                   |
+| 方法名          | 说明                                                                  | 类型                                                                                                                                                                                          |
+| --------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `validate`      | 对整个表单进行校验，同 element 的 validate                            | <div class="custom-table-td">`(callback: `<a href="https://github.com/ElemeFE/element/blob/dev/types/form.d.ts#L5" target="_blank">`ValidateCallback`</a>`) => void`或者`() => Promise`</div> |
+| `validateField` | 对部分表单字段进行校验，同 element 的 validateField                   | <div class="custom-table-td">`(props:string                                                                                                                                                   | string[], callback?: `<a href="https://github.com/ElemeFE/element/blob/dev/types/form.d.ts#L15" target="_blank">`ValidateFieldCallback`</a>`) => void`</div> |
+| `resetFields`   | 对整个表单进行重置到初始值，并移除校验结果，同 element 的 resetFields | `() => void`                                                                                                                                                                                  |
+| `clearValidate` | 移除表单项的校验结果，同 element 的 clearValidate                     | `(props?: string                                                                                                                                                                              | string[]) => void`                                                                                                                                           |

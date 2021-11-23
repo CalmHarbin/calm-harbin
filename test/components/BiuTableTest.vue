@@ -104,7 +104,6 @@ export default {
                     editable: true,
                     required: true,
                     editRender: (h, { row, col }) => {
-                        console.log(101, row[col.id])
                         return (
                             <BiuTableSelectTest
                                 v-model={row[col.id]}
@@ -254,7 +253,6 @@ export default {
                         (row.height * 1000)) /
                     (1000 * 1000 * 1000 * 1000)
             }
-            console.log(565, row)
         },
         setForm() {
             this.form.name = '张三'

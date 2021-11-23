@@ -119,23 +119,21 @@ export default class BiuTableBase extends Vue {
     add(num: number) {
         const length = this.tableData.length
 
-        setTimeout(() => {
-            new Array(num).fill('').forEach((_item, index) => {
-                this.tableData.push({
-                    id: length + index,
-                    packing: ['apple', 'orange', 'pear'][~~(Math.random() * 3)],
-                    goodsName: ['苹果', '橘子', '梨'][~~(Math.random() * 3)],
-                    number: ~~(Math.random() * 1000),
-                    remark: '',
-                    weight: 10,
-                    volume: 1000,
-                    length: 10,
-                    width: 10,
-                    height: 10,
-                    netWeight: 99.99
-                })
+        new Array(num).fill('').forEach((_item, index) => {
+            this.tableData.push({
+                id: length + index,
+                packing: ['apple', 'orange', 'pear'][~~(Math.random() * 3)],
+                goodsName: ['苹果', '橘子', '梨'][~~(Math.random() * 3)],
+                number: ~~(Math.random() * 1000),
+                remark: '',
+                weight: 10,
+                volume: 1000,
+                length: 10,
+                width: 10,
+                height: 10,
+                netWeight: 99.99
             })
-        }, 1000)
+        })
     }
 
     /**

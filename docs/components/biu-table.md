@@ -65,29 +65,84 @@
 
 #### 合计
 
+<demo-block>
+::: slot source
+<BiuTableSummary></BiuTableSummary>
+:::
+
+-   给组件配置`show-summary=true`则开启合计功能。会自动将最后一行序号变为合计，如果你想自定义合计文本，可以使用`sum-text`来配置
+
+::: warning 提示
+如果要使用合计功能，一定要自行计算好数据放入表格最后一项。可以使用`summary`来帮助你计算。<br/>
+`summary`的使用方法详见文档方法部分。
+:::
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-summary.vue
+
+:::
+</demo-block>
+
 #### 单选/多选
+
+多选
+
+<demo-block>
+::: slot source
+<BiuTableSelection></BiuTableSelection>
+:::
+
+-   配置`selection=true`可以开启多选功能，同时传入`multipleSelection`来控制勾选的数据
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-selection.vue
+
+:::
+</demo-block>
 
 #### 自定义展开
 
+<demo-block>
+::: slot source
+<BiuTableExpandRender></BiuTableExpandRender>
+:::
+
+-   使用`expandRender`配置展开内容
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-expandRender.vue
+
+:::
+</demo-block>
+
 #### 属性
 
-| 参数                    | 说明                                                                                    | <div style="white-space: nowrap;">必填</div> | 类型                        | 默认值  |
-| ----------------------- | :-------------------------------------------------------------------------------------- | :------------------------------------------- | :-------------------------- | :------ |
-| `columns`               | 表格配置项                                                                              | <el-checkbox checked></el-checkbox>          | `tableColumnType[]`         | —       |
-| `value / v-model`       | 筛选条件绑定值(当`showHeaderFilter=true`时必填)                                         | <el-checkbox></el-checkbox>                  | `objType`                   | —       |
-| `table-data`            | 表格显示的数据(支持.sync)                                                               | <el-checkbox checked></el-checkbox>          | `objType[]`                 | `[]`    |
-| `rowId`                 | 每一行的唯一值                                                                          | <el-checkbox></el-checkbox>                  | `string`                    | `id`    |
-| `loading`               | 控制表格是否处于加载状态                                                                | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
-| `tb-height`             | 表格的高度，设置高度后，超过高度的数据会在表格内部滚动                                  | <el-checkbox></el-checkbox>                  | `number`                    | —       |
-| `selection`             | 是不是多选                                                                              | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
-| `show-summary`          | 是否显示汇总(会将最后一行认为是汇总数据，请自行计算汇总数据并插入`tableData`的最后一行) | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
-| `expand-render`         | 自定义展开功能渲染                                                                      | <el-checkbox></el-checkbox>                  |                             | —       |
-| `table-postfix-options` | 表格右侧操作按钮                                                                        | <el-checkbox></el-checkbox>                  | `tablePostfixOptionsType[]` | —       |
-| `virtual`               | 是否为虚拟表格                                                                          | <el-checkbox></el-checkbox>                  | `boolean`                   | `true`  |
-| `editable`              | 是否为可编辑表格(可编辑表格会强制`virtual=true`)                                        | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
-| `editAction`            | 是否显示新增/删除一行按钮(仅可编辑表格生效)                                             | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
-| `plus`                  | 自定义添加一行插入的数据(仅`editAction=true`生效)                                       | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
-| `show-header-filter`    | 是否显示表头筛选功能                                                                    | <el-checkbox></el-checkbox>                  | `boolean`                   | `false` |
+| 参数                    | 说明                                                                                    | <div style="white-space: nowrap;">必填</div> | 类型                                                                                                                                                                                   | 默认值  |
+| ----------------------- | :-------------------------------------------------------------------------------------- | :------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| `columns`               | 表格配置项                                                                              | <el-checkbox checked></el-checkbox>          | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-table.d.ts#L15" target="_blank">`tableColumnType[]`</a>                                                         | —       |
+| `value / v-model`       | 筛选条件绑定值(当`showHeaderFilter=true`时必填)                                         | <el-checkbox></el-checkbox>                  | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/index.d.ts#L13" target="_blank">`objType`</a>                                                                       | —       |
+| `table-data`            | 表格显示的数据(支持.sync)                                                               | <el-checkbox checked></el-checkbox>          | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/index.d.ts#L13" target="_blank">`objType[]`</a>                                                                     | `[]`    |
+| `rowId`                 | 每一行的唯一值                                                                          | <el-checkbox></el-checkbox>                  | `string`                                                                                                                                                                               | `id`    |
+| `loading`               | 控制表格是否处于加载状态                                                                | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `tb-height`             | 表格的高度，设置高度后，超过高度的数据会在表格内部滚动                                  | <el-checkbox></el-checkbox>                  | `number`                                                                                                                                                                               | —       |
+| `selection`             | 是不是多选                                                                              | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `show-summary`          | 是否显示汇总(会将最后一行认为是汇总数据，请自行计算汇总数据并插入`tableData`的最后一行) | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `expand-render`         | 自定义展开功能渲染                                                                      | <el-checkbox></el-checkbox>                  | <div class="custom-table-td">`(h: any, scope: `<a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-table.d.ts#L6" target="_blank">`scopeType`</a>`) => VNode`</div> | —       |
+| `table-postfix-options` | 表格右侧操作按钮                                                                        | <el-checkbox></el-checkbox>                  | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-table.d.ts#L77" target="_blank">`tablePostfixOptionsType[]`</a>                                                 | —       |
+| `virtual`               | 是否为虚拟表格                                                                          | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `true`  |
+| `editable`              | 是否为可编辑表格(可编辑表格会强制`virtual=true`)                                        | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `editAction`            | 是否显示新增/删除一行按钮(仅可编辑表格生效)                                             | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `plus`                  | 自定义添加一行插入的数据(仅`editAction=true`生效)                                       | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `show-header-filter`    | 是否显示表头筛选功能                                                                    | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+
+#### 事件
+
+| 事件名   | 说明                     | 类型         |
+| -------- | ------------------------ | ------------ |
+| `search` | 搜索，表头筛选改变时触发 | `() => void` |
 
 #### 方法
 

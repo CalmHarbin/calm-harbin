@@ -11976,7 +11976,7 @@ xe-utils@^3.0.0-beta.12:
   resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-3.3.1.tgz#77af254b12d5ae2d4d3f32c3df7e3a5ccde1fad8"
   integrity sha512-OdQgl9WPV9dK3/djneFPrGX8z1M4neX+VOkzra5oONjoNsCKQhwdiut99WlxceNMQ5vXDv4EQ/wKA2fux3Gdug==
 
-xlsx@^0.17.0:
+xlsx@^0.17.4:
   version "0.17.1"
   resolved "https://registry.yarnpkg.com/xlsx/-/xlsx-0.17.1.tgz#2557400d594998301831ef60b08ddde80f2842ee"
   integrity sha512-SrvK+kMEjiVIKYyJSjSIJwzm2cZn8nQWVh708g7O+pTsmgjoa+uYNLEUn7jmwQdMI/ffCHcY5yEvwBXssBwpRA==

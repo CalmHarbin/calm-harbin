@@ -24,10 +24,10 @@
 
 #### 属性
 
-| 参数              | 说明   | 必填                                | 类型                                                                     | 默认值 |
-| ----------------- | :----- | :---------------------------------- | :----------------------------------------------------------------------- | :----- |
-| `formType`        | 标题   | <el-checkbox checked></el-checkbox> | text，input，select，date，timeSelect，timerange，area，treeSelect，slot | —      |
-| `value / v-model` | 绑定值 | <el-checkbox checked></el-checkbox> | `objType`                                                                | —      |
+| 参数              | 说明   | 必填                                | 类型                                                                                                             | 默认值 |
+| ----------------- | :----- | :---------------------------------- | :--------------------------------------------------------------------------------------------------------------- | :----- |
+| `formType`        | 标题   | <el-checkbox checked></el-checkbox> | text，input，select，date，timeSelect，timerange，area，treeSelect，slot                                         | —      |
+| `value / v-model` | 绑定值 | <el-checkbox checked></el-checkbox> | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/index.d.ts#L13" target="_blank">`objType`</a> | —      |
 
 #### formType='input'
 
@@ -55,6 +55,6 @@
 
 #### formType='treeSelect'
 
-| 参数   | 说明       | 必填                                | 类型             | 默认值 |
-| ------ | :--------- | :---------------------------------- | :--------------- | :----- |
-| `data` | 树的数据源 | <el-checkbox checked></el-checkbox> | `treeNodeType[]` | —      |
+| 参数   | 说明       | 必填                                | 类型                                                                                                                            | 默认值 |
+| ------ | :--------- | :---------------------------------- | :------------------------------------------------------------------------------------------------------------------------------ | :----- |
+| `data` | 树的数据源 | <el-checkbox checked></el-checkbox> | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-form-item.d.ts#L21" target="_blank">`treeNodeType[]`</a> | —      |

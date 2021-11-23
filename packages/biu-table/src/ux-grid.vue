@@ -368,7 +368,6 @@
 </template>
 
 <script lang="tsx">
-import { VNode } from 'vue'
 import dayjs from 'dayjs'
 import {
     Component,
@@ -383,7 +382,7 @@ import {
     tableColumnType,
     scopeType,
     tablePostfixOptionsType,
-    expandRenderProp
+    expandRenderType
 } from 'calm-harbin/types/biu-table'
 import { objType } from 'calm-harbin/types/index'
 import BiuFormItem from '@packages/biu-form-item/src/biu-form-item.vue'
@@ -431,10 +430,7 @@ export default class CoutomUxGrid extends Vue {
     @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
     @Prop(Boolean) private showSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
-    @Prop(Function) private expandRender?: ({
-        row,
-        rowIndex
-    }: expandRenderProp) => VNode // 是否可选择
+    @Prop(Function) private expandRender?: expandRenderType // 自定义展开内容
 
     // 右侧操作列
     @Prop(Array)

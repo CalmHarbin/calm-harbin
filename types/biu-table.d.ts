@@ -64,10 +64,12 @@ export type tableColumnType = {
     [x: string]: any
 }
 
-export type expandRenderProp = {
+export type expandRenderPropType = {
     row: objType
-    rowIndex: number
+    $index: number
 }
+
+export type expandRenderType = (h, scoped: expandRenderPropType) => VNode
 
 /**
  * 表格右侧操作按钮的配置
@@ -133,5 +135,5 @@ export declare class BiuTable extends CalmComponent {
     /** 是否显示汇总，需要自行计算汇总数据放入tableData最后一项，默认false */
     showSummary?: boolean
     /** 自定义展开内容， */
-    expandRender?: ({ row, rowIndex }: expandRenderProp) => VNode
+    expandRender?: ({ row, $index }: expandRenderPropType) => VNode
 }

@@ -2,7 +2,12 @@ import XLSX from 'xlsx'
 import { Message } from 'element-ui'
 import { Decimal } from 'decimal.js'
 import dayjs from 'dayjs'
-/*
+import {
+    debounceType,
+    exportExcelType,
+    summaryType
+} from 'calm-harbin/types/utils'
+/**
  * 函数节流:当连续触发函数时,函数在n秒内只会执行一次
  * 函数防抖:函数频繁触发的情况下，只有函数触发的间隔超过指定间隔的时候，函数才会执行
  * @method debounce
@@ -11,13 +16,13 @@ import dayjs from 'dayjs'
  * @param {Boolean} throttle 是不是节流, 默认false,默认为防抖函数
  * @returns {undefined}
  */
-export const debounce = function (
-    fn: (...params: any) => any | void,
+export const debounce: debounceType = function (
+    fn,
     wait = 500,
     throttle = false
 ) {
     let timeout: number | null
-    return function (this: any) {
+    return function (this) {
         const context = this
         // eslint-disable-next-line prefer-rest-params
         const args: any = arguments
@@ -45,7 +50,11 @@ export const debounce = function (
  * @param data antd table dataSource
  * @param fileName 文件名称
  */
-export const exportExcel = (columns: any[], data: any[], fileName: string) => {
+export const exportExcel: exportExcelType = (
+    columns,
+    data,
+    fileName: string
+) => {
     if (!data?.length) {
         Message({
             message: '没有要导出的数据',
@@ -59,7 +68,7 @@ export const exportExcel = (columns: any[], data: any[], fileName: string) => {
     const aoaData = [header.map((item) => item.label)]
 
     data.forEach((item) => {
-        const rowData = header.reduce((row, column) => {
+        const rowData = header.reduce((row: string[], column) => {
             let val = item[column.id] ?? ''
             if (
                 (column.formType === 'select' ||
@@ -69,7 +78,7 @@ export const exportExcel = (columns: any[], data: any[], fileName: string) => {
                 // 下拉菜单数据转化
                 val =
                     column?.formAttr?.options?.find(
-                        (i: any) => i.value === val.toString()
+                        (i) => i.value === val.toString()
                     )?.label || val
             } else if (column.timeFormat && val) {
                 // 时间转化
@@ -92,11 +101,11 @@ export const exportExcel = (columns: any[], data: any[], fileName: string) => {
 
 /**
  * 表格合计行计算功能
- * @param list 待计算的数据
+ * @param data 待计算的数据
  * @param obj 需要计算的列
  */
-export const summary = (list: any[] = [], obj = {}) => {
-    const total = list.reduce((prev: any, cur: any) => {
+export const summary: summaryType = (data = [], obj = {}) => {
+    const total = data.reduce((prev: any, cur: any) => {
         for (const key in obj) {
             if (cur[key]) {
                 // 相加时防止精度问题

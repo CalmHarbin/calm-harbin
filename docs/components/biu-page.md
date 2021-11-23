@@ -53,3 +53,11 @@
 | `columns`          | 配置项，表格和表单共用       | <el-checkbox checked></el-checkbox> | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-page.d.ts#L8" target="_blank">`pageColumnsType[]`</a>      | —      |
 | `operationOptions` | 操作按钮配置                 | <el-checkbox></el-checkbox>         | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/operation.d.ts#L5" target="_blank">`OperationOptionType[]`</a> | —      |
 | `pagination`       | 分页配置，支持 sync 用法     | <el-checkbox></el-checkbox>         | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/biu-page.d.ts#L37" target="_blank">`paginationType`</a>        | —      |
+
+#### 事件
+
+| 事件名       | 说明                                         | 类型                                             |
+| ------------ | -------------------------------------------- | ------------------------------------------------ |
+| `search`     | 搜索事件，点击搜索按钮，或者改变表头筛选触发 | `() => void`                                     |
+| `reset`      | 重置，点击重置按钮触发                       | `() => void`                                     |
+| `pagination` | 分页改变事件                                 | `(data: { page: number, limit: number}) => void` |

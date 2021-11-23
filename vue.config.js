@@ -4,11 +4,11 @@ const path = require('path')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const CDN_CSS = [
-    // 'https://cdn.jsdelivr.net/npm/calm-harbin@0.2.9-pre/lib/calmHarbin.css'
+    // 'https://cdn.jsdelivr.net/npm/calm-harbin@1.0.0/lib/calmHarbin.css'
 ]
 const CDN_JS = [
     'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',
-    'https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.min.js',
+    'https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.min.js',
     'https://lib.baomitu.com/element-ui/2.13.2/index.js',
     'https://cdn.jsdelivr.net/npm/umy-ui@1.1.6/lib/index.js',
     'https://cdn.jsdelivr.net/npm/decimal.js@10.2.0/decimal.min.js',
