@@ -13,10 +13,10 @@ import FileUpload from '@packages/file-upload/index'
 import BiuCardForm from '@packages/biu-card-form/index'
 import BiuCard from '@packages/biu-card/index'
 import BiuTable from '@packages/biu-table/index'
+import BiuSelectTable from '@packages/biu-select-table/index'
 import BiuPage from '@packages/biu-page/index'
 import BiuForm from '@packages/biu-form/index'
 import BiuFormItem from '@packages/biu-form-item/index'
-import BiuSelectTable from '@packages/biu-select-table/index'
 
 // 引入指令
 import waves from './directive/waves/index'
@@ -46,12 +46,10 @@ const directives = [waves]
 
 const install = function (Vue: any): void {
     directives.forEach((directive) => {
-        // console.log(42, directive)
         Vue.use(directive)
     })
 
     Object.values(components).forEach((component) => {
-        // console.log(9, component.name, component)
         // 这里不要用Vue.component方式，打包后component.name会变成n
         // Vue.component(component.name, component)
         Vue.use(component)
@@ -59,12 +57,8 @@ const install = function (Vue: any): void {
 
     //挂载原型方法及属性
     // Object.keys(prototype).forEach((key: string) => {
-    //     console.log(29, '原型', key)
-
     //     Vue.prototype[key] = (prototype as any)[key]
     // })
-
-    // console.log(51, Vue)
 
     Vue.use(Loading)
     // element-ui组件
@@ -84,18 +78,18 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
 export { debounce, exportExcel, summary, startandends, reg }
 
 export default {
-    version: '0.2.9-pre',
+    version: '1.0.0',
     install,
     BiuDialog,
     BiuDrawer,
     FileUpload,
     BiuCardForm,
     BiuCard,
-    BiuTable,
     BiuPage,
+    BiuTable,
+    BiuSelectTable,
     BiuForm,
     BiuFormItem,
-    BiuSelectTable,
     debounce,
     exportExcel,
     summary,

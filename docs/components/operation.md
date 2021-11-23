@@ -20,7 +20,7 @@
 
 #### 属性
 
-| 参数               | 说明                          | 必填                                | 类型                    | 默认值  |
-| ------------------ | :---------------------------- | :---------------------------------- | :---------------------- | :------ |
-| `operationOptions` | 按钮配置                      | <el-checkbox checked></el-checkbox> | `OperationOptionType[]` | —       |
-| `loading`          | 所有按钮是否处于 loading 状态 | <el-checkbox></el-checkbox>         | `boolean`               | `false` |
+| 参数               | 说明                          | 必填                                | 类型                                                                                                                              | 默认值  |
+| ------------------ | :---------------------------- | :---------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- | :------ |
+| `operationOptions` | 按钮配置                      | <el-checkbox checked></el-checkbox> | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/operation.d.ts#L5" target="_blank">`OperationOptionType[]`</a> | —       |
+| `loading`          | 所有按钮是否处于 loading 状态 | <el-checkbox></el-checkbox>         | `boolean`                                                                                                                         | `false` |
