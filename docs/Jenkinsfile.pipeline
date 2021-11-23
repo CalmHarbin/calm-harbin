@@ -1,0 +1,83 @@
+#!/usr/bin/env groovy
+
+pipeline {
+    // 指示 Jenkins 为流水线分配一个执行器和工作区
+    agent any
+
+    // 阶段
+    stages {
+        stage('拉取代码') {
+            steps {
+                git branch: "${branch}", // 分支
+                // credentialsId: 'github', // 凭证
+                url: 'https://hub.fastgit.org/CalmHarbin/calm-harbin.git' //仓库
+            }
+        }
+
+        stage('构建') {
+            steps {
+                nodejs('node') {
+                    sh("node -v && npm -v")
+                    sh 'pwd'
+                    sh 'ls'
+                    
+                    script {
+                        if ("$install" == 'true') {
+                            sh 'rm -rf node_modules && yarn'
+                        }
+                    }
+                    
+                    // 打包
+                    sh 'npm run docs:build'
+                    // 制作压缩包
+                    sh 'cd docs && tar -czf dist.tar.gz ./dist'
+                }
+            }
+        }
+        stage('部署') {
+            steps {
+                sshPublisher(
+                    publishers: [
+                        sshPublisherDesc(
+                            configName: '阿里云', // 远程服务器名称，提前配置在jenkins中配置
+                            transfers: [
+                                sshTransfer(
+                                    cleanRemote: false, 
+                                    excludes: '', 
+                                    // 执行脚本
+                                    execCommand: 'cd /usr/share/nginx/html/ && rm -rf dist && tar -xzvf dist.tar.gz && rm -rf dist.tar.gz', 
+                                    execTimeout: 120000, 
+                                    flatten: false, 
+                                    makeEmptyDirs: false, 
+                                    noDefaultExcludes: false, 
+                                    patternSeparator: '[, ]+', 
+                                    // 复制到远程服务器的目录位置
+                                    remoteDirectory: '/usr/share/nginx/html/', 
+                                    remoteDirectorySDF: false, 
+                                    // 去除的前缀
+                                    removePrefix: 'docs/', 
+                                    // 需要复制的文件，位于jenkins的工作空间中
+                                    sourceFiles: 'docs/dist.tar.gz'
+                                )
+                            ], 
+                            usePromotionTimestamp: false, 
+                            useWorkspaceInPromotion: false, 
+                            verbose: false
+                        )
+                    ]
+                )
+            }
+        }
+        stage('清理') {
+            steps {
+                sh 'rm -rf docs/dist docs/dist.tar.gz'
+            }
+        }
+    }
+
+    post {
+        always {
+            echo '部署成功'
+        }
+    }
+}
