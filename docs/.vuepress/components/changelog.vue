@@ -14,8 +14,8 @@
                 <li>BiuFormItem组件</li>
                 <li>BiuCard组件</li>
                 <li>BiuCardForm组件</li>
-                <li>BiuCardDialog组件</li>
-                <li>BiuCardDrawer组件</li>
+                <li>BiuDialog组件</li>
+                <li>BiuDrawer组件</li>
                 <li>FileUpload组件</li>
                 <li>Operation组件</li>
             </ul>
