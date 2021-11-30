@@ -1,6 +1,35 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.1</h3>
+
+            <el-tag type="info">2021-11-23</el-tag>
+
+            <p>新功能</p>
+            <ul>
+                <li>BiuPage组件</li>
+            </ul>
+            <el-link
+                type="primary"
+                href="https://github.com/CalmHarbin/calm-harbin/tree/main/packages"
+                >https://github.com/CalmHarbin/calm-harbin/tree/main/packages</el-link
+            >
+
+            <p>style</p>
+            <ul>
+                <li>
+                    全局样式: 去掉 .el-col-24 的样式设置。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/d6e649c78bcddfb22aaea7413649c664ab59eb81"
+                        target="_blank"
+                        >#d6e649c</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+
+        <section class="version">
             <h3>v1.0.0</h3>
 
             <el-tag type="info">2021-11-23</el-tag>
