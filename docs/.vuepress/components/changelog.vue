@@ -3,18 +3,29 @@
         <section class="version">
             <h3>v1.0.1</h3>
 
-            <el-tag type="info">2021-11-23</el-tag>
+            <el-tag type="info">2021-12-10</el-tag>
 
             <p>新功能</p>
             <ul>
-                <li>导出列头方法exportExcelTemp</li>
-                <li>导入Excel方法importExcel</li>
+                <li>
+                    导出列头方法exportExcelTemp。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/blob/main/src/utils/index.ts#L108"
+                        target="_blank"
+                        >code</el-link
+                    >
+                </li>
+                <li>
+                    导入Excel方法importExcel。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/blob/main/src/utils/index.ts#L133"
+                        target="_blank"
+                        >code</el-link
+                    >
+                </li>
             </ul>
-            <el-link
-                type="primary"
-                href="https://github.com/CalmHarbin/calm-harbin/tree/main/packages"
-                >https://github.com/CalmHarbin/calm-harbin/tree/main/packages</el-link
-            >
 
             <p>style</p>
             <ul>
@@ -52,6 +63,7 @@
             <el-link
                 type="primary"
                 href="https://github.com/CalmHarbin/calm-harbin/tree/main/packages"
+                target="_blank"
                 >https://github.com/CalmHarbin/calm-harbin/tree/main/packages</el-link
             >
 
