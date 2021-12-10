@@ -27,6 +27,22 @@
 :::
 </demo-block>
 
+### 导入
+
+<demo-block>
+::: slot source
+<importExcelDemo></importExcelDemo>
+:::
+
+使用 `importExcel` 方法来解析文件，获取 Excel 中的数据。
+
+::: slot highlight
+
+<<< @/test/components/methods/import-excel.vue
+
+:::
+</demo-block>
+
 #### 表格合计
 
 <demo-block>

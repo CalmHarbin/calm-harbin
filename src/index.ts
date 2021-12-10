@@ -22,7 +22,13 @@ import BiuFormItem from '@packages/biu-form-item/index'
 import waves from './directive/waves/index'
 
 // 引入工具方法
-import { debounce, exportExcel, summary } from './utils'
+import {
+    debounce,
+    exportExcel,
+    exportExcelTemp,
+    importExcel,
+    summary
+} from './utils'
 import { startandends } from './utils/date'
 
 // 正则
@@ -75,7 +81,15 @@ if (typeof window !== 'undefined' && (window as any).Vue) {
     install((window as any).Vue)
 }
 
-export { debounce, exportExcel, summary, startandends, reg }
+export {
+    debounce,
+    exportExcel,
+    exportExcelTemp,
+    importExcel,
+    summary,
+    startandends,
+    reg
+}
 
 export default {
     version: '1.0.0',
@@ -92,6 +106,8 @@ export default {
     BiuFormItem,
     debounce,
     exportExcel,
+    exportExcelTemp,
+    importExcel,
     summary,
     startandends,
     reg

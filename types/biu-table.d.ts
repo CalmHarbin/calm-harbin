@@ -102,7 +102,7 @@ export type tablePostfixOptionsType = {
 
 /** BiuCard组件 */
 export declare class BiuTable extends CalmComponent {
-    /** 每一行的唯一表示，默认为id */
+    /** 每一行的唯一标识，默认为id */
     rowId?: string
     /** 是否处于loading状态，默认false */
     loading?: boolean

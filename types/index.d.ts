@@ -9,7 +9,13 @@ export { BiuFormItem } from './biu-form-item'
 
 import { PluginFunction } from 'vue'
 
-import { regExp, debounceType, exportExcelType, summaryType } from './utils'
+import {
+    regExp,
+    debounceType,
+    exportExcelType,
+    importExcelType,
+    summaryType
+} from './utils'
 
 export type objType = {
     [x: string]: any
@@ -25,6 +31,8 @@ export const reg: regExp
 export const debounce: debounceType
 
 export const exportExcel: exportExcelType
+
+export const importExcelType: importExcelType
 
 export const summary: summaryType
 
