@@ -69,6 +69,10 @@ const components: componentsType[] = [
         template: () => import('@test/components/methods/export-excel.vue')
     },
     {
+        name: 'importExcelDemo',
+        template: () => import('@test/components/methods/import-excel.vue')
+    },
+    {
         name: 'summaryDemo',
         template: () => import('@test/components/methods/summary.vue')
     },

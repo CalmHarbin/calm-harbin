@@ -41,6 +41,30 @@ export type exportExcelType = (
 ) => void
 
 /**
+ * 导出Excel模板(只有头部，没有数据)
+ * @param columns 要导出的列
+ * @param fileName 文件名称
+ * @param omit 要过滤的列
+ * @returns { undefined }
+ */
+export type exportExcelTempType = (
+    columns: tableColumnType[],
+    fileName: string,
+    omit: string[]
+) => void
+
+/**
+ * 导入功能
+ * @param { Object } file 文件对象
+ * @param { Array } columns 要导出的列
+ * @returns { Promise }
+ */
+export type importExcelType = (
+    file: File,
+    columns: tableColumnType[]
+) => Promise<objType[]>
+
+/**
  * 表格合计行计算功能
  * @param data 待计算的数据
  * @param obj 需要计算的列

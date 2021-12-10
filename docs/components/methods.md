@@ -1,4 +1,4 @@
-#### 方法
+### 方法
 
 #### 防抖/节流
 
@@ -23,6 +23,22 @@
 ::: slot highlight
 
 <<< @/test/components/methods/export-excel.vue
+
+:::
+</demo-block>
+
+#### 导入 Excel
+
+<demo-block>
+::: slot source
+<importExcelDemo></importExcelDemo>
+:::
+
+使用 `importExcel` 方法来解析文件，获取 Excel 中的数据。
+
+::: slot highlight
+
+<<< @/test/components/methods/import-excel.vue
 
 :::
 </demo-block>

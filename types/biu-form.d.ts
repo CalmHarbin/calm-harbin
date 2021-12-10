@@ -2,7 +2,7 @@ import { VNode } from 'vue'
 import { DatePickerType } from 'element-ui/types/date-picker'
 import { ValidateCallback, ValidateFieldCallback } from 'element-ui/types/form'
 import { CalmComponent } from './component'
-import { areaType, formTypeType } from './biu-form-item'
+import { areaType, formTypeType, treeNodeType } from './biu-form-item'
 
 type objType = {
     [x: string]: any
@@ -59,14 +59,16 @@ export type formAttrType = {
      */
     subWith?: boolean
     /**
-     * 机构树选择是由有默认值,筛选条件通常有默认值
-     * @tip 仅支持含下级时使用
+     * 树选择组件
+     * 是否只能选中最底层,配置该项时,选中项只能是最底层的。
+     * 只针对单选有效，开启后点击文本是展开/收起，未开启点击文本是选中
      */
-    defaultValue?: boolean
+    substrate?: boolean
     /**
-     * 机构树是否查询所有的机构，false时查询自己含下级数据，默认false
+     * 树选择组件
+     * 数据源
      */
-    whole?: boolean
+    data?: treeNodeType[]
     /**
      * 下拉菜单显示清空图标 默认true
      */

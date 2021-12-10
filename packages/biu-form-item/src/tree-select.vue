@@ -73,7 +73,8 @@ export default class TreeSelect extends Vue {
     @Prop({ type: Boolean, default: false }) subWith?: boolean
     @Prop({ type: Boolean, default: false }) multiple?: boolean
     /**
-     * 是否只能选中最底层,配置该项时,选中项只能是最里层的(即没有子集的项)
+     * 是否只能选中最底层,配置该项时,选中项只能是最里层的(即没有子集的项)。
+     * 只针对单选有效，开启后点击文本是展开/收起，未开启点击文本是选中
      */
     @Prop({ type: Boolean, default: false }) substrate?: boolean
     @Prop({ type: Array, default: () => [] }) data!: treeNodeType[]

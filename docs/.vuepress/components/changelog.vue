@@ -1,6 +1,47 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.1</h3>
+
+            <el-tag type="info">2021-12-10</el-tag>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    导出列头方法exportExcelTemp。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/blob/main/src/utils/index.ts#L108"
+                        target="_blank"
+                        >code</el-link
+                    >
+                </li>
+                <li>
+                    导入Excel方法importExcel。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/blob/main/src/utils/index.ts#L133"
+                        target="_blank"
+                        >code</el-link
+                    >
+                </li>
+            </ul>
+
+            <p>style</p>
+            <ul>
+                <li>
+                    全局样式: 去掉 .el-col-24 的样式设置。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/d6e649c78bcddfb22aaea7413649c664ab59eb81"
+                        target="_blank"
+                        >#d6e649c</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+
+        <section class="version">
             <h3>v1.0.0</h3>
 
             <el-tag type="info">2021-11-23</el-tag>
@@ -14,14 +55,15 @@
                 <li>BiuFormItem组件</li>
                 <li>BiuCard组件</li>
                 <li>BiuCardForm组件</li>
-                <li>BiuCardDialog组件</li>
-                <li>BiuCardDrawer组件</li>
+                <li>BiuDialog组件</li>
+                <li>BiuDrawer组件</li>
                 <li>FileUpload组件</li>
                 <li>Operation组件</li>
             </ul>
             <el-link
                 type="primary"
                 href="https://github.com/CalmHarbin/calm-harbin/tree/main/packages"
+                target="_blank"
                 >https://github.com/CalmHarbin/calm-harbin/tree/main/packages</el-link
             >
 
