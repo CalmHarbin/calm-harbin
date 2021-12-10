@@ -12,6 +12,7 @@ import {
 } from 'calm-harbin/types/utils'
 import { tableColumnType } from '@/types/biu-table'
 import { objType } from '@/types'
+
 /**
  * 函数节流:当连续触发函数时,函数在n秒内只会执行一次
  * 函数防抖:函数频繁触发的情况下，只有函数触发的间隔超过指定间隔的时候，函数才会执行
@@ -196,38 +197,36 @@ export const importExcel: importExcelType = (file, columns) =>
                  *      ['数据', '数据', '数据']
                  * ]
                  */
-                const tableData = aoaData.reduce(
-                    (sum, item, index): string[] => {
-                        const customColumns: tableColumnType[] =
-                            cloneDeep(columns)
-                        // 去掉列头的循环
-                        if (index) {
-                            const row = item.reduce((obj, value, idx): any => {
-                                // 当列头存在时
-                                if (aoaData[0][idx]) {
-                                    // 用列头去columns中寻找id
-                                    const position = customColumns.findIndex(
+                const tableData = aoaData.reduce((sum, item, index) => {
+                    const customColumns: tableColumnType[] = cloneDeep(columns)
+                    // 去掉列头的循环
+                    if (index) {
+                        // 将数组中所有数据转化成一个对象
+                        const row = item.reduce((obj, value, idx): objType => {
+                            // 当列头存在时
+                            if (aoaData[0][idx]) {
+                                // 用列头去columns中寻找id
+                                const position: number =
+                                    customColumns.findIndex(
                                         (column) =>
                                             column.label?.trim() ===
                                             aoaData[0][idx].trim()
                                     )
 
-                                    if (position > -1) {
-                                        obj[customColumns[position].id] = value
-                                        customColumns.splice(position, 1)
-                                    } else {
-                                        obj[aoaData[0][idx].trim()] = value
-                                    }
+                                if (position > -1) {
+                                    obj[customColumns[position].id] = value
+                                    customColumns.splice(position, 1)
+                                } else {
+                                    obj[aoaData[0][idx].trim()] = value
                                 }
-                                return obj
-                            }, {})
+                            }
+                            return obj
+                        }, {} as objType)
 
-                            return [...sum, row]
-                        }
-                        return []
-                    },
-                    []
-                )
+                        return [...sum, row]
+                    }
+                    return []
+                }, [] as objType[])
                 resolve(tableData)
             } else {
                 resolve(aoaData)

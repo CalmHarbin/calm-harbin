@@ -3,9 +3,7 @@ const path = require('path')
 // const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 const StyleLintPlugin = require('stylelint-webpack-plugin')
 
-const CDN_CSS = [
-    // 'https://cdn.jsdelivr.net/npm/calm-harbin@1.0.0/lib/calmHarbin.css'
-]
+const CDN_CSS = []
 const CDN_JS = [
     'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',
     'https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.min.js',

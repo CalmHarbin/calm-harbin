@@ -89,7 +89,7 @@ export default class importExcelDemo extends Vue {
             {
                 title: '保存',
                 callback: () => {
-                    this.$emit('submit')
+                    alert(`当前有${this.tableData.length}行数据`)
                 },
                 btnProps: {
                     disabled: this.tableData.length === 0
@@ -98,7 +98,7 @@ export default class importExcelDemo extends Vue {
             {
                 title: '清空数据',
                 callback: () => {
-                    this.$emit('clear')
+                    this.tableData = []
                 },
                 btnProps: {
                     disabled: this.tableData.length === 0
@@ -115,8 +115,9 @@ export default class importExcelDemo extends Vue {
 
     importFile(files: File[]) {
         console.log(files)
-        importExcel(files[0], this.columns).then((res) => {
+        importExcel(files[0], this.columns).then((res: any[]) => {
             console.log(res)
+            this.tableData = res
         })
     }
 }

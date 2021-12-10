@@ -7,7 +7,8 @@
 
             <p>新功能</p>
             <ul>
-                <li>BiuPage组件</li>
+                <li>导出列头方法exportExcelTemp</li>
+                <li>导入Excel方法importExcel</li>
             </ul>
             <el-link
                 type="primary"

@@ -13,6 +13,7 @@ import {
     regExp,
     debounceType,
     exportExcelType,
+    exportExcelTempType,
     importExcelType,
     summaryType
 } from './utils'
@@ -32,7 +33,9 @@ export const debounce: debounceType
 
 export const exportExcel: exportExcelType
 
-export const importExcelType: importExcelType
+export const exportExcelTemp: exportExcelTempType
+
+export const importExcel: importExcelType
 
 export const summary: summaryType
 

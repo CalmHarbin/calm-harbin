@@ -62,7 +62,7 @@ export type exportExcelTempType = (
 export type importExcelType = (
     file: File,
     columns: tableColumnType[]
-) => Promise
+) => Promise<objType[]>
 
 /**
  * 表格合计行计算功能
