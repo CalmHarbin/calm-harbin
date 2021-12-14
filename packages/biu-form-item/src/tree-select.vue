@@ -195,8 +195,17 @@ export default class TreeSelect extends Vue {
         }
         // 同步显示值
         this.updateCheckListValue(newVal)
-        // 同步勾选状态
-        ;(this.$refs.tree as any).setCheckedKeys(newVal)
+        if (this.customMultiple) {
+            if (this.$refs.tree) {
+                // 同步勾选状态
+                ;(this.$refs.tree as any).setCheckedKeys(newVal)
+            } else {
+                this.$nextTick(() => {
+                    // 同步勾选状态
+                    ;(this.$refs.tree as any).setCheckedKeys(newVal)
+                })
+            }
+        }
     }
 
     /**
