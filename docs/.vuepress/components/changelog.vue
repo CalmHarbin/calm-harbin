@@ -1,6 +1,34 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.2</h3>
+
+            <el-tag type="info">2021-12-10</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    TreeSelect: 修复 setCheckedKeys 报错问题
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/d0fd86406509f538252435a14dbc9109faaba717"
+                        target="_blank"
+                        >d0fd864</el-link
+                    >
+                </li>
+                <li>
+                    BiuDialog: 修复 全屏时限制了最大高度
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/9b4cb0e4f9aef4dd144d8cf364dbca3493aa559f"
+                        target="_blank"
+                        >9b4cb0e</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+
+        <section class="version">
             <h3>v1.0.1</h3>
 
             <el-tag type="info">2021-12-10</el-tag>
