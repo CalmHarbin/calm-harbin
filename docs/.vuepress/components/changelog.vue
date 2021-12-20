@@ -26,6 +26,28 @@
                     >
                 </li>
             </ul>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    BiuPage组件：为按钮和分页配置插槽功能。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/d34fde056b06b3241926ad88f4f2e7625e0dd5fe"
+                        target="_blank"
+                        >d34fde0</el-link
+                    >
+                </li>
+                <li>
+                    BiuPage组件：增加表单的属性和事件配置。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/b9198527f298dca686bd52262e59f1ec968b45db"
+                        target="_blank"
+                        >b919852</el-link
+                    >
+                </li>
+            </ul>
         </section>
 
         <section class="version">
