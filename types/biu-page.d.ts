@@ -52,4 +52,8 @@ export declare class BiuPage extends CalmComponent {
     pagination?: paginationType
     /** 值，可使用v-model */
     value: objType
+    /** 表单属性 */
+    formAttr: objType
+    /** 表单事件 */
+    formEvent: objType
 }

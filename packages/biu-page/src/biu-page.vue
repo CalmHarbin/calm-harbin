@@ -9,6 +9,8 @@
             @reset="() => $emit('reset')"
             ref="BiuForm"
             showBtn
+            v-bind="formAttr"
+            v-on="formEvent"
         />
         <div style="flex: 1; padding: 0 10px" ref="container">
             <slot name="operation">
@@ -102,10 +104,11 @@ export default class BiuPage extends Vue {
     @Prop(Number) private tbHeight?: number
     @Prop(Array) private columns!: pageColumnsType[]
     @PropSync('pagination') private paginationSync?: paginationType
-    // 表单的绑定值,利用引用类型同步改值
-    // @Prop(Object) private value?: objType
     @Model('setValue') private value?: objType
-    // @Model('setForm', { type: Object }) private form?: objType
+
+    @Prop(Object) private formAttr?: objType
+    @Prop(Object) private formEvent?: objType
+
     /**
      * 动态计算表格的高度
      */
