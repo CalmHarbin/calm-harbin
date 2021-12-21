@@ -2,7 +2,6 @@
     <u-table
         ref="table"
         :key="height"
-        size="mini"
         v-loading="loading"
         :data="customTableData"
         :height="height"
@@ -12,14 +11,11 @@
                 : 'calm-uTable'
         "
         style="width: 100%"
-        border
-        fit
-        :highlight-current-row="
-            attrs['highlight-current-row'] !== undefined
-                ? attrs['highlight-current-row']
-                : true
-        "
-        :row-height="36"
+        :size="defaultAttr('size', 'mini')"
+        :border="defaultAttr('border', true)"
+        :fit="defaultAttr('fit', true)"
+        :highlight-current-row="defaultAttr('highlight-current-row', true)"
+        :row-height="defaultAttr('row-height', 36)"
         :row-id="rowId"
         @header-dragend="headerDragend"
         v-bind="attrs"
@@ -108,7 +104,9 @@
                                 <BiuFormItem
                                     v-else
                                     :formType="col.formType"
-                                    size="mini"
+                                    :size="
+                                        col.formAttr.otherAttr.size || 'mini'
+                                    "
                                     v-model="customValue[col.formId || col.id]"
                                     v-bind="col.formAttr.otherAttr"
                                     v-on="col.formAttr.otherEvent"
@@ -612,6 +610,9 @@ export default class CustomUTable extends Vue {
             this.multipleSelectionSync = []
         }
         this.$emit('selection-change', this.multipleSelectionSync)
+    }
+    defaultAttr(key: string, value: any) {
+        return this.attrs[key] ?? value
     }
 }
 </script>

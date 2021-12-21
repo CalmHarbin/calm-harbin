@@ -2,31 +2,27 @@
     <ux-grid
         ref="table"
         :key="height"
-        size="mini"
         v-loading="loading"
         :height="height"
         :class="attrs['show-summary'] ? 'el-table-footer' : ''"
         style="width: 100%"
-        border
-        fit
+        :size="defaultAttr('size', 'mini')"
+        :border="defaultAttr('border', true)"
+        :fit="defaultAttr('fit', true)"
+        :highlight-current-row="defaultAttr('highlight-current-row', true)"
         widthResize
-        :highlight-current-row="
-            attrs['highlight-current-row'] !== undefined
-                ? attrs['highlight-current-row']
-                : true
-        "
         :rowKey="false"
         :rowId="rowId"
         :scrollX="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
         :scrollY="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
-        show-overflow="tooltip"
+        :show-overflow="defaultAttr('show-overflow', 'tooltip')"
         @header-dragend="headerDragend"
         @edit-actived="editActived"
         @edit-closed="editClosed"
         :tree-config="treeConfig"
         :edit-config="
             editable
-                ? attrs['edit-config'] || { trigger: 'manual', mode: 'row' }
+                ? defaultAttr('edit-config', { trigger: 'manual', mode: 'row' })
                 : undefined
         "
         v-bind="attrs"
@@ -150,7 +146,9 @@
                                 <BiuFormItem
                                     v-else
                                     :formType="col.formType"
-                                    size="mini"
+                                    :size="
+                                        col.formAttr.otherAttr.size || 'mini'
+                                    "
                                     v-model="customValue[col.formId || col.id]"
                                     v-bind="col.formAttr.otherAttr"
                                     v-on="col.formAttr.otherEvent"
@@ -913,6 +911,10 @@ export default class CoutomUxGrid extends Vue {
     }) {
         this.scrollTop = scrollTop
         this.scrollLeft = scrollLeft
+    }
+
+    defaultAttr(key: string, value: any) {
+        return this.attrs[key] ?? value
     }
 }
 </script>
