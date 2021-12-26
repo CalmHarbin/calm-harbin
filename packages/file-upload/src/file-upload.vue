@@ -8,7 +8,7 @@
             :accept="accept"
             :disabled="disabled"
             :style="{
-                disabled: 'none'
+                display: 'none'
             }"
             @change="change"
             v-bind="attrs"
