@@ -25,6 +25,28 @@
                         >9b4cb0e</el-link
                     >
                 </li>
+                <li>
+                    FileUpload: 修复display样式写错了,导致页面显示了input组件
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/a893a40e8a3a2e60a7a1dfbb35704facd41b23db"
+                        target="_blank"
+                        >a893a40</el-link
+                    >
+                </li>
+            </ul>
+
+            <p style="color: red">更新</p>
+            <ul>
+                <li>
+                    BiuTable组件：原有showSummary方式更正为elementUI的用法，继续使用自定义合计请使用customShowSummary
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/0d7e922627ecb04649de175cdf3cef7805cb65e0"
+                        target="_blank"
+                        >0d7e922</el-link
+                    >
+                </li>
             </ul>
 
             <p>新功能</p>
