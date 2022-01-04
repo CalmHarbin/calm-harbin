@@ -5,12 +5,12 @@ const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const CDN_CSS = []
 const CDN_JS = [
-    'https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js',
-    'https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.min.js',
+    'https://unpkg.com/vue@2.6.14/dist/vue.min.js',
+    'https://unpkg.com/xlsx@0.17.4/dist/xlsx.min.js',
     'https://lib.baomitu.com/element-ui/2.13.2/index.js',
-    'https://cdn.jsdelivr.net/npm/umy-ui@1.1.6/lib/index.js',
-    'https://cdn.jsdelivr.net/npm/decimal.js@10.2.0/decimal.min.js',
-    'https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js'
+    'https://unpkg.com/umy-ui@1.1.6/lib/index.js',
+    'https://unpkg.com/decimal.js@10.2.0/decimal.min.js',
+    'https://unpkg.com/dayjs@1.10.4/dayjs.min.js'
 ]
 
 module.exports = {

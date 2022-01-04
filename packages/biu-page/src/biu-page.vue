@@ -9,13 +9,17 @@
             @reset="() => $emit('reset')"
             ref="BiuForm"
             showBtn
+            v-bind="formAttr"
+            v-on="formEvent"
         />
         <div style="flex: 1; padding: 0 10px" ref="container">
-            <Operation
-                v-if="customOperationOptions"
-                :operationOptions="customOperationOptions"
-                ref="Operation"
-            />
+            <slot name="operation">
+                <Operation
+                    v-if="customOperationOptions"
+                    :operationOptions="customOperationOptions"
+                    ref="Operation"
+                />
+            </slot>
             <BiuTable
                 ref="BiuTable"
                 v-model="customValue"
@@ -24,30 +28,19 @@
                 v-bind="attrs"
                 v-on="listeners"
             >
-                <!-- 这里会导致BiuTable一直重新渲染, 将slot功能改到render中去 -->
-                <!-- <template
-                    :slot="pagecol.id"
-                    v-for="pagecol in tableColumns"
-                    slot-scope="{ col, row, $index }"
-                >
-                    <slot
-                        :name="'table-' + pagecol.id"
-                        :col="col"
-                        :row="row"
-                        :$index="$index"
-                    ></slot>
-                </template> -->
             </BiuTable>
         </div>
         <!--分页数据-->
-        <Pagination
-            v-if="paginationSync"
-            ref="Pagination"
-            :total="paginationSync.total"
-            :page.sync="page"
-            :limit.sync="size"
-            @pagination="(data) => $emit('pagination', data)"
-        />
+        <slot name="pagination">
+            <Pagination
+                v-if="paginationSync"
+                ref="Pagination"
+                :total="paginationSync.total"
+                :page.sync="page"
+                :limit.sync="size"
+                @pagination="(data) => $emit('pagination', data)"
+            />
+        </slot>
     </div>
 </template>
 
@@ -111,10 +104,11 @@ export default class BiuPage extends Vue {
     @Prop(Number) private tbHeight?: number
     @Prop(Array) private columns!: pageColumnsType[]
     @PropSync('pagination') private paginationSync?: paginationType
-    // 表单的绑定值,利用引用类型同步改值
-    // @Prop(Object) private value?: objType
     @Model('setValue') private value?: objType
-    // @Model('setForm', { type: Object }) private form?: objType
+
+    @Prop(Object) private formAttr?: objType
+    @Prop(Object) private formEvent?: objType
+
     /**
      * 动态计算表格的高度
      */

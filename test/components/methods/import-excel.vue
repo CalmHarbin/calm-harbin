@@ -72,7 +72,7 @@ export default class importExcelDemo extends Vue {
             {
                 render: () => (
                     <file-upload
-                        divStyle={{
+                        style={{
                             display: 'inline',
                             marginRight: '10px'
                         }}

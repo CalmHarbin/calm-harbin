@@ -22,16 +22,16 @@ npm i calm-harbin@latest -S
 <!-- 引入样式 -->
 <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/calm-harbin/lib/calmHarbin.css"
+    href="https://unpkg.com/calm-harbin/lib/calmHarbin.css"
 />
 <!-- 引入组件库 -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.5/lib/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/umy-ui@1.1.6/lib/index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.4/dist/xlsx.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/decimal.js@10.2.0/decimal.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/calm-harbin/lib/calmHarbin.umd.min.js"></script>
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+<script src="https://unpkg.com/element-ui@2.15.5/lib/index.js"></script>
+<script src="https://unpkg.com/umy-ui@1.1.6/lib/index.js"></script>
+<script src="https://unpkg.com/xlsx@0.17.4/dist/xlsx.min.js"></script>
+<script src="https://unpkg.com/decimal.js@10.2.0/decimal.min.js"></script>
+<script src="https://unpkg.com/dayjs@1.10.4/dayjs.min.js"></script>
+<script src="https://unpkg.com/calm-harbin/lib/calmHarbin.umd.min.js"></script>
 ```
 
 ::: warning 提示

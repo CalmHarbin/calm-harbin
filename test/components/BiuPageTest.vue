@@ -8,6 +8,10 @@
             :operationOptions="operationOptions"
             :tablePostfixOptions="tablePostfixOptions"
             :pagination.sync="pagination"
+            selection
+            :multipleSelection.sync="multipleSelection"
+            show-summary
+            :summary-method="summaryMethod"
             @search="() => handleFilter(true)"
             @reset="reset"
             @pagination="() => handleFilter()"
@@ -27,6 +31,7 @@
 </template>
 
 <script lang="jsx">
+import { summary } from '../../src'
 import dayjs from 'dayjs'
 import { Vue, Component } from 'vue-property-decorator'
 // import { exportExcel } from '@src/index';
@@ -40,6 +45,8 @@ export default class Order extends Vue {
     form = {}
 
     show = false
+
+    multipleSelection = []
 
     get columns() {
         return [
@@ -1288,6 +1295,17 @@ export default class Order extends Vue {
     // eslint-disable-next-line class-methods-use-this
     copy(text) {
         // copy(text)
+    }
+
+    /**
+     * 自定义合计
+     */
+    summaryMethod(d) {
+        console.log(d)
+        const total = summary(this.tableData, { totalNum: 0 })
+        const totalData = this.columns.map((item) => total[item.id] || '')
+        console.log(['', '汇总', ...totalData])
+        return [['', '汇总', ...totalData]]
     }
 }
 </script>

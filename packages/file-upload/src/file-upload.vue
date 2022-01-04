@@ -8,11 +8,7 @@
             :accept="accept"
             :disabled="disabled"
             :style="{
-                width: 0,
-                height: 0,
-                visibility: 'hidden',
-                disabled: 'block',
-                fontSize: '0px'
+                display: 'none'
             }"
             @change="change"
             v-bind="attrs"

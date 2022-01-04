@@ -2,31 +2,27 @@
     <ux-grid
         ref="table"
         :key="height"
-        size="mini"
         v-loading="loading"
         :height="height"
-        :class="attrs['show-summary'] ? 'el-table-footer' : ''"
+        :class="attrs['custom-show-summary'] ? 'el-table-footer' : ''"
         style="width: 100%"
-        border
-        fit
+        :size="defaultAttr('size', 'mini')"
+        :border="defaultAttr('border', true)"
+        :fit="defaultAttr('fit', true)"
+        :highlight-current-row="defaultAttr('highlight-current-row', true)"
         widthResize
-        :highlight-current-row="
-            attrs['highlight-current-row'] !== undefined
-                ? attrs['highlight-current-row']
-                : true
-        "
         :rowKey="false"
         :rowId="rowId"
         :scrollX="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
         :scrollY="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
-        show-overflow="tooltip"
+        :show-overflow="defaultAttr('show-overflow', 'tooltip')"
         @header-dragend="headerDragend"
         @edit-actived="editActived"
         @edit-closed="editClosed"
         :tree-config="treeConfig"
         :edit-config="
             editable
-                ? attrs['edit-config'] || { trigger: 'manual', mode: 'row' }
+                ? defaultAttr('edit-config', { trigger: 'manual', mode: 'row' })
                 : undefined
         "
         v-bind="attrs"
@@ -52,7 +48,8 @@
                 <el-checkbox
                     :value="isChecked(row)"
                     v-if="
-                        !showSummary || $rowIndex !== customTableData.length - 1
+                        !customShowSummary ||
+                        $rowIndex !== customTableData.length - 1
                     "
                     @click.native.stop
                     @change="() => checked(row)"
@@ -150,7 +147,9 @@
                                 <BiuFormItem
                                     v-else
                                     :formType="col.formType"
-                                    size="mini"
+                                    :size="
+                                        col.formAttr.otherAttr.size || 'mini'
+                                    "
                                     v-model="customValue[col.formId || col.id]"
                                     v-bind="col.formAttr.otherAttr"
                                     v-on="col.formAttr.otherEvent"
@@ -309,7 +308,8 @@
                 <div
                     class="calm-BiuTable-tableOperate"
                     v-if="
-                        !showSummary || seq - 1 !== customTableData.length - 1
+                        !customShowSummary ||
+                        seq - 1 !== customTableData.length - 1
                     "
                 >
                     <el-tooltip
@@ -429,7 +429,7 @@ export default class CoutomUxGrid extends Vue {
     @Prop(Array) private tableData!: objType[]
     @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
-    @Prop(Boolean) private showSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
+    @Prop(Boolean) private customShowSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
     @Prop(Function) private expandRender?: expandRenderType // 自定义展开内容
 
     // 右侧操作列
@@ -624,7 +624,7 @@ export default class CoutomUxGrid extends Vue {
         // 如果没有选择false
         if (!this.multipleSelectionSync?.length) return false
         // 如果选了但是没有全选则true
-        if (this.showSummary) {
+        if (this.customShowSummary) {
             return (
                 this.multipleSelectionSync?.length !==
                 this.customTableData.length - 1
@@ -639,7 +639,7 @@ export default class CoutomUxGrid extends Vue {
         // 如果没有选择false
         if (!this.multipleSelectionSync?.length) return false
         // 如果选了但是没有全选则true
-        if (this.showSummary) {
+        if (this.customShowSummary) {
             return (
                 this.multipleSelectionSync?.length ===
                 this.customTableData.length - 1
@@ -771,7 +771,8 @@ export default class CoutomUxGrid extends Vue {
         if (index === -1) return ''
         if (index + 1 < this.customTableData.length) {
             return index + 1
-        } else if (this.showSummary) return this.attrs['sum-text'] || '汇总'
+        } else if (this.customShowSummary)
+            return this.attrs['sum-text'] || '汇总'
         else return index + 1
     }
     /**
@@ -862,7 +863,7 @@ export default class CoutomUxGrid extends Vue {
      */
     checkedAll(checked: boolean) {
         if (checked) {
-            if (this.showSummary) {
+            if (this.customShowSummary) {
                 this.multipleSelectionSync = this.customTableData.slice(0, -1)
             } else {
                 this.multipleSelectionSync = [...this.customTableData]
@@ -913,6 +914,10 @@ export default class CoutomUxGrid extends Vue {
     }) {
         this.scrollTop = scrollTop
         this.scrollLeft = scrollLeft
+    }
+
+    defaultAttr(key: string, value: any) {
+        return this.attrs[key] ?? value
     }
 }
 </script>

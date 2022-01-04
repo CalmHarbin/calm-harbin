@@ -2,24 +2,20 @@
     <u-table
         ref="table"
         :key="height"
-        size="mini"
         v-loading="loading"
         :data="customTableData"
         :height="height"
         :class="
-            attrs['show-summary']
+            attrs['custom-show-summary']
                 ? 'el-table-footer calm-uTable'
                 : 'calm-uTable'
         "
         style="width: 100%"
-        border
-        fit
-        :highlight-current-row="
-            attrs['highlight-current-row'] !== undefined
-                ? attrs['highlight-current-row']
-                : true
-        "
-        :row-height="36"
+        :size="defaultAttr('size', 'mini')"
+        :border="defaultAttr('border', true)"
+        :fit="defaultAttr('fit', true)"
+        :highlight-current-row="defaultAttr('highlight-current-row', true)"
+        :row-height="defaultAttr('row-height', 36)"
         :row-id="rowId"
         @header-dragend="headerDragend"
         v-bind="attrs"
@@ -44,7 +40,10 @@
             <template #default="{ row, $index }">
                 <el-checkbox
                     :value="isChecked(row)"
-                    v-if="!showSummary || $index !== customTableData.length - 1"
+                    v-if="
+                        !customShowSummary ||
+                        $index !== customTableData.length - 1
+                    "
                     @change="() => checked(row)"
                 ></el-checkbox>
             </template>
@@ -108,7 +107,9 @@
                                 <BiuFormItem
                                     v-else
                                     :formType="col.formType"
-                                    size="mini"
+                                    :size="
+                                        col.formAttr.otherAttr.size || 'mini'
+                                    "
                                     v-model="customValue[col.formId || col.id]"
                                     v-bind="col.formAttr.otherAttr"
                                     v-on="col.formAttr.otherEvent"
@@ -214,7 +215,9 @@
             <div
                 slot-scope="scope"
                 class="calm-BiuTable-tableOperate"
-                v-if="!showSummary || scope.$index !== tableData.length - 1"
+                v-if="
+                    !customShowSummary || scope.$index !== tableData.length - 1
+                "
             >
                 <el-tooltip
                     v-for="(item, index) in customTablePostfixOptions"
@@ -313,7 +316,7 @@ export default class CustomUTable extends Vue {
     @Prop(Array) private tableData!: any[]
     @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
-    @Prop(Boolean) private showSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
+    @Prop(Boolean) private customShowSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
 
     // 右侧操作列
     @Prop(Array)
@@ -465,7 +468,7 @@ export default class CustomUTable extends Vue {
         // 如果没有选择false
         if (!this.multipleSelectionSync.length) return false
         // 如果选了但是没有全选则true
-        if (this.showSummary) {
+        if (this.customShowSummary) {
             return (
                 this.multipleSelectionSync.length !==
                 this.customTableData.length - 1
@@ -478,7 +481,7 @@ export default class CustomUTable extends Vue {
         // 如果没有选择false
         if (!this.multipleSelectionSync.length) return false
         // 如果选了但是没有全选则true
-        if (this.showSummary) {
+        if (this.customShowSummary) {
             return (
                 this.multipleSelectionSync.length ===
                 this.customTableData.length - 1
@@ -567,7 +570,8 @@ export default class CustomUTable extends Vue {
     indexValue(index: number) {
         if (index + 1 < this.customTableData.length) {
             return index + 1
-        } else if (this.showSummary) return this.attrs['sum-text'] || '汇总'
+        } else if (this.customShowSummary)
+            return this.attrs['sum-text'] || '汇总'
         else return index + 1
     }
     /**
@@ -603,7 +607,7 @@ export default class CustomUTable extends Vue {
      */
     checkedAll(checked: boolean) {
         if (checked) {
-            if (this.showSummary) {
+            if (this.customShowSummary) {
                 this.multipleSelectionSync = this.customTableData.slice(0, -1)
             } else {
                 this.multipleSelectionSync = [...this.customTableData]
@@ -612,6 +616,9 @@ export default class CustomUTable extends Vue {
             this.multipleSelectionSync = []
         }
         this.$emit('selection-change', this.multipleSelectionSync)
+    }
+    defaultAttr(key: string, value: any) {
+        return this.attrs[key] ?? value
     }
 }
 </script>
