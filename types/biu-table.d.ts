@@ -54,6 +54,10 @@ export type tableColumnType = {
      * 还可以使用slot来自定义渲染，name=id 推荐使用。
      */
     render?: (h: any, scope: scopeType) => VNode
+    /**
+     * 表头自定义渲染
+     */
+    headRender?: (h: any, col: any) => VNode
 
     /** 列头显示红丝，表示必填，可通过类 calm-BiuTable-required 修改样式 */
     required?: boolean
@@ -125,8 +129,8 @@ export declare class BiuTable extends CalmComponent {
 
     /** 是否为可编辑表格，默认false */
     editable?: boolean
-    // /** 是否显示新增/删除一行操作列，默认false，仅editable=true生效*/
-    editAction?: boolean
+    // /** 是否显示新增/删除一行操作列，默认false，仅editable=true生效, 同时会传入给 el-table-column*/
+    editAction?: objType
     /** 可编辑表格时，插入一行的数据 */
     plus?: (data: objType) => objType
 
