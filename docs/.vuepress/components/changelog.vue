@@ -1,6 +1,38 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.3</h3>
+
+            <el-tag type="info">2022-01-06</el-tag>
+
+            <p style="color: red">更新</p>
+            <ul>
+                <li>
+                    BiuTable组件：editAction用法改变，原先为布尔值，更正为传入对象可配置列属性。{
+                    show: false } 可关闭。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/28050220a244ee51d5e5006272147d632758a2eb"
+                        target="_blank"
+                        >2805022</el-link
+                    >
+                </li>
+            </ul>
+
+            <p style="color: red">新功能</p>
+            <ul>
+                <li>
+                    BiuTable组件：增加headReader配置，可自定义渲染列头。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/9150e6bb12ff52244428efba06b790b58ddf2c69"
+                        target="_blank"
+                        >9150e6b</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.2</h3>
 
             <el-tag type="info">2021-12-10</el-tag>
