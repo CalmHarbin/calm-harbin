@@ -69,5 +69,5 @@
 import { startandends } from 'calm-harbin'
 // 生成距离当前时间指定天的时间范围
 // 假设当前时间为2021/7/24
-startandends(30) // [new Date('2021/6/24 00:00:00'), new Date('2021/7/24 23:59:59')
+startandends(30) // [new Date('2021/6/25 00:00:00'), new Date('2021/7/24 23:59:59')]
 ```
