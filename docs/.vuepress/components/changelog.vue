@@ -31,6 +31,19 @@
                     >
                 </li>
             </ul>
+
+            <p>style</p>
+            <ul>
+                <li>
+                    BiuDialog、BiuDrawer: 更改头部、底部的边框线颜色。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/6a87474f0bcdd271c1c2235990110246d4c3b0c6"
+                        target="_blank"
+                        >#6a87474</el-link
+                    >
+                </li>
+            </ul>
         </section>
         <section class="version">
             <h3>v1.0.2</h3>
