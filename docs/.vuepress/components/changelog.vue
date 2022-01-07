@@ -25,9 +25,9 @@
                     BiuTable组件：增加headReader配置，可自定义渲染列头。
                     <el-link
                         type="primary"
-                        href="https://github.com/CalmHarbin/calm-harbin/commit/9150e6bb12ff52244428efba06b790b58ddf2c69"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/0e39ca552f8b0eac32fc5e68f8df38c0518f8cdc"
                         target="_blank"
-                        >9150e6b</el-link
+                        >0e39ca5</el-link
                     >
                 </li>
             </ul>
