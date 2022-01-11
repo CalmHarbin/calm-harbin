@@ -1,6 +1,20 @@
 <template>
     <div>
         <section class="version">
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuTable: 修复 editAction 类型定义错误
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/1659bc6e704dc1281567aa97b17cb31c4d501d67"
+                        target="_blank"
+                        >1659bc6</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.3</h3>
 
             <el-tag type="info">2022-01-06</el-tag>
