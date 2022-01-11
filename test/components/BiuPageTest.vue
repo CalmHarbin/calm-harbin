@@ -2,16 +2,19 @@
     <div class="app-container">
         <BiuPage
             v-model="form"
+            rowId="workCode"
             :loading="loading"
             :columns="columns"
             :tableData="tableData"
             :operationOptions="operationOptions"
             :tablePostfixOptions="tablePostfixOptions"
             :pagination.sync="pagination"
+            :tbHeight="200"
             selection
             :multipleSelection.sync="multipleSelection"
             show-summary
             :summary-method="summaryMethod"
+            :virtual="false"
             @search="() => handleFilter(true)"
             @reset="reset"
             @pagination="() => handleFilter()"
@@ -1241,7 +1244,10 @@ export default class Order extends Vue {
             }
         }
 
-        this.tableData = result.result.rows
+        this.tableData = []
+        setTimeout(() => {
+            this.tableData = result.result.rows
+        }, 1000)
 
         // this.loading = true
         // this.Http(

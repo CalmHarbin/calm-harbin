@@ -72,10 +72,11 @@
         </ux-table-column>
 
         <ux-table-column
-            v-if="editable && editAction"
+            v-if="editable && editAction && editAction.show"
             title="操作"
             align="center"
             :width="120"
+            v-bind="editAction"
         >
             <template #default="{ row, seq }">
                 <!-- <div v-if="!$refs.table.isActiveByRow(row)" style="display: inline" class="calm-BiuTable-operation"> -->
@@ -107,16 +108,25 @@
                 :resizable="true"
             >
                 <template v-slot:header>
-                    <i
-                        v-if="col.editable"
-                        class="elx-cell--edit-icon el-icon-edit-outline"
-                    ></i>
-                    <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
-                    <span
-                        :class="col.required ? 'calm-BiuTable-required' : ''"
-                        :title="col.label"
-                        >{{ col.label }}</span
-                    >
+                    <Render
+                        v-if="col.headRender"
+                        :render-func="col.headRender"
+                        :scope="col"
+                    ></Render>
+                    <template>
+                        <i
+                            v-if="col.editable"
+                            class="elx-cell--edit-icon el-icon-edit-outline"
+                        ></i>
+                        <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
+                        <span
+                            :class="
+                                col.required ? 'calm-BiuTable-required' : ''
+                            "
+                            :title="col.label"
+                            >{{ col.label }}</span
+                        >
+                    </template>
                 </template>
                 <ux-table-column
                     v-bind="col"
@@ -230,7 +240,13 @@
             >
                 <!-- 表头 -->
                 <template v-slot:header>
+                    <Render
+                        v-if="col.headRender"
+                        :render-func="col.headRender"
+                        :scope="col"
+                    ></Render>
                     <span
+                        v-else
                         :class="col.required ? 'calm-BiuTable-required' : ''"
                         :title="col.label"
                         >{{ col.label }}</span
@@ -439,7 +455,8 @@ export default class CoutomUxGrid extends Vue {
     // 可编辑表格
     @Prop(Boolean) editable?: boolean // true表示可编辑表格
 
-    @Prop({ type: Boolean, default: true }) editAction?: boolean // 是否显示新增/删除一行操作列
+    @Prop({ type: Boolean, default: () => ({ show: true }) })
+    editAction?: objType // 是否显示新增/删除一行操作列
 
     @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
 

@@ -69,15 +69,24 @@
                 :align="col.align || 'center'"
             >
                 <template v-slot:header>
-                    <i
-                        v-if="col.editable"
-                        class="elx-cell--edit-icon el-icon-edit-outline"
-                    ></i>
-                    <span
-                        :class="col.required ? 'calm-BiuTable-required' : ''"
-                        :title="col.label"
-                        >{{ col.label }}</span
-                    >
+                    <Render
+                        v-if="col.headRender"
+                        :render-func="col.headRender"
+                        :scope="col"
+                    ></Render>
+                    <template v-else>
+                        <i
+                            v-if="col.editable"
+                            class="elx-cell--edit-icon el-icon-edit-outline"
+                        ></i>
+                        <span
+                            :class="
+                                col.required ? 'calm-BiuTable-required' : ''
+                            "
+                            :title="col.label"
+                            >{{ col.label }}</span
+                        >
+                    </template>
                 </template>
                 <u-table-column
                     v-bind="col"
@@ -163,7 +172,13 @@
             >
                 <!-- 表头 -->
                 <template v-slot:header>
+                    <Render
+                        v-if="col.headRender"
+                        :render-func="col.headRender"
+                        :scope="col"
+                    ></Render>
                     <span
+                        v-else
                         :class="col.required ? 'calm-BiuTable-required' : ''"
                         :title="col.label"
                         >{{ col.label }}</span
