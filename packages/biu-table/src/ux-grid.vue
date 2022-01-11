@@ -455,7 +455,7 @@ export default class CoutomUxGrid extends Vue {
     // 可编辑表格
     @Prop(Boolean) editable?: boolean // true表示可编辑表格
 
-    @Prop({ type: Boolean, default: () => ({ show: true }) })
+    @Prop({ type: Object, default: () => ({ show: true }) })
     editAction?: objType // 是否显示新增/删除一行操作列
 
     @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
