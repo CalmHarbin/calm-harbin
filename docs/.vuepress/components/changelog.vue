@@ -19,7 +19,7 @@
                 </li>
             </ul>
 
-            <p style="color: red">新功能</p>
+            <p>新功能</p>
             <ul>
                 <li>
                     BiuTable组件：增加headReader配置，可自定义渲染列头。
