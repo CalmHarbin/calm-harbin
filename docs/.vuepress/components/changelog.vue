@@ -1,6 +1,8 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.4</h3>
+
             <p>Bug 修复</p>
             <ul>
                 <li>
@@ -10,6 +12,19 @@
                         href="https://github.com/CalmHarbin/calm-harbin/commit/1659bc6e704dc1281567aa97b17cb31c4d501d67"
                         target="_blank"
                         >1659bc6</el-link
+                    >
+                </li>
+            </ul>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    BiuPage组件：增加Pagination配置，可自定义配置分页属性和事件。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/3b1e4cf3dab18c4422a336af49c35dab1e499677"
+                        target="_blank"
+                        >3b1e4cf</el-link
                     >
                 </li>
             </ul>
