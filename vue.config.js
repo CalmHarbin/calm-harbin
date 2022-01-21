@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 // const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
-const StyleLintPlugin = require('stylelint-webpack-plugin')
+// const StyleLintPlugin = require('stylelint-webpack-plugin')
 
 const CDN_CSS = []
 const CDN_JS = [
@@ -127,15 +127,15 @@ module.exports = {
         /** lodash按需加载 */
 
         // stylelint配置
-        config.plugin('stylelint').use(StyleLintPlugin, [
-            {
-                files: ['**/*.{html,vue,css,sass,scss}'],
-                fix: true, // 自动修复
-                cache: true,
-                emitError: true,
-                failOnError: false
-            }
-        ])
+        // config.plugin('stylelint').use(StyleLintPlugin, [
+        //     {
+        //         files: ['**/*.{html,vue,css,sass,scss}'],
+        //         fix: true, // 自动修复
+        //         cache: true,
+        //         emitError: true,
+        //         failOnError: false
+        //     }
+        // ])
     },
     devServer: {
         //请求代理

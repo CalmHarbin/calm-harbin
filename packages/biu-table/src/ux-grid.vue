@@ -371,7 +371,7 @@
             class="calm-notdatacss"
             slot="empty"
             style="
-                color: rgba(0, 0, 0, 0.25);
+                color: rgb(0 0 0 / 25%);
                 line-height: 1em;
                 text-align: center;
                 border: none;

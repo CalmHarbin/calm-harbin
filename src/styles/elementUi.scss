@@ -1,4 +1,4 @@
-//覆盖一些element-ui样式
+// 覆盖一些element-ui样式
 
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {
@@ -39,13 +39,14 @@
     .cell {
         padding: 0 10px;
         text-align: center;
+
         .el-tag {
             margin-right: 0;
         }
     }
 }
 
-//暂时性解决dialog 问题 https://github.com/ElemeFE/element/issues/2461
+// 暂时性解决dialog 问题 https://github.com/ElemeFE/element/issues/2461
 .el-dialog {
     position: relative;
     left: 0;
@@ -53,7 +54,7 @@
     transform: none;
 }
 
-//文章页textarea修改样式
+// 文章页textarea修改样式
 .article-textarea {
     textarea {
         padding-right: 40px;
@@ -64,10 +65,11 @@
     }
 }
 
-//element ui upload
+// element ui upload
 .upload-container {
     .el-upload {
         width: 100%;
+
         .el-upload-dragger {
             width: 100%;
             height: 200px;
@@ -75,25 +77,29 @@
     }
 }
 
-//dropdown
+// dropdown
 .el-dropdown-menu {
     a {
         display: block;
     }
 }
+
 // 表格样式调整
 .el-table th {
     line-height: 20px;
     background-color: #fafafa;
 }
+
 .el-table--border,
 .el-table--group {
     border: 1px solid #f0f0f0;
 }
+
 .el-table td,
 .el-table th.is-leaf {
     border-bottom: 1px solid #f0f0f0;
 }
+
 .el-table--border td,
 .el-table--border th,
 .el-table__body-wrapper .el-table--border.is-scrolling-left ~ .el-table__fixed {
@@ -103,17 +109,20 @@
 .el-table .cell {
     line-height: 28px;
 }
+
 .el-button--primary.is-plain {
     color: #409eff;
     background: #fff;
     border-color: #b3d8ff;
 }
+
 .el-button--primary.is-plain:focus,
 .el-button--primary.is-plain:hover {
     color: #fff;
     background: #409eff;
     border-color: #409eff;
 }
+
 .el-button--primary.is-plain:active {
     color: #fff;
     background: #3a8ee6;
@@ -127,6 +136,7 @@
 .el-table--mini td {
     padding: 3px 0;
 }
+
 .el-table--mini th {
     padding: 1px 0 0;
 }
@@ -164,25 +174,31 @@
 .el-form-item__error {
     position: static;
 }
+
 // 错误提示强制换行
 .el-notification {
     word-break: break-all;
 }
+
 // 禁用输入框颜色正常颜色
 .el-input.is-disabled .el-input__inner {
     color: #606266;
 }
+
 // tooltip 限制宽度
 .el-tooltip__popper {
     max-width: 50vw;
 }
+
 // 下拉框 inline元素的3px间距消除
 .el-select.el-select--mini > .el-input {
     font-size: 0;
+
     .el-input__inner {
         font-size: 12px;
     }
 }
+
 // 表格 fixed列遮住了横向滚动条
 // .el-table__fixed,
 // .el-table__fixed-right {
@@ -208,15 +224,17 @@
     &::-webkit-scrollbar {
         width: 4px;
     }
+
     &::-webkit-scrollbar-thumb {
-        background: rgba(0, 0, 0, 0.2);
+        background: rgb(0 0 0 / 20%);
         border-radius: 10px;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 20%);
     }
+
     &::-webkit-scrollbar-track {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgb(0 0 0 / 10%);
         border-radius: 0;
-        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        box-shadow: inset 0 0 5px rgb(0 0 0 / 20%);
     }
 }
 

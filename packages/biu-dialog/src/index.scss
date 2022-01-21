@@ -3,28 +3,34 @@
         padding: 15px 20px 10px;
         border-bottom: 1px solid #dcdfe6;
     }
+
     .el-dialog__body {
         max-height: 65vh;
         padding: 0 20px;
         overflow: auto;
     }
+
     .el-dialog__footer {
         padding: 10px 20px 15px;
         border-top: 1px solid #dcdfe6;
     }
+
     .calm-BiuDialog-footer {
         display: flex;
         align-items: center;
         justify-content: flex-end;
+
         // padding: 0 20px;
         .calm-opear-container {
             padding-bottom: 0;
         }
+
         .calm-opear-container + .el-button {
             margin-left: 10px;
         }
     }
 }
+
 .calm-BiuDialog.is-fullscreen .el-dialog__body {
     max-height: none;
 }

@@ -1,6 +1,7 @@
 .calm-area {
     .el-cascader {
         display: block;
+
         &.el-cascader--mini .el-input--mini .el-input__inner {
             height: 28px !important;
         }
@@ -12,6 +13,7 @@
     .el-select {
         display: block;
     }
+
     .el-input,
     .el-select > .el-input {
         /** 解决 input相对于div实际有点向下偏移，
@@ -20,6 +22,7 @@
         display: flex;
         width: 100%;
     }
+
     .el-date-editor--daterange.el-input,
     .el-date-editor--daterange.el-input__inner,
     .el-date-editor--timerange.el-input,
@@ -35,34 +38,43 @@
 .calm-treeSelect {
     display: flex;
     align-items: center;
+
     .el-checkbox__label,
     .el-checkbox {
         padding-left: 5px;
     }
+
     .el-select {
         flex: 1;
     }
+
     .el-select > .el-input {
         display: flex;
     }
+
     .el-select__input {
         display: none;
     }
 }
+
 .calm-treeSelectContainer {
     min-width: 250px !important;
     height: 270px;
     overflow: hidden;
+
     .el-select-dropdown__item {
         height: auto;
     }
+
     .el-select-dropdown__item.hover,
     .el-select-dropdown__item:hover {
         background-color: #fff;
     }
+
     .el-scrollbar {
         height: 100%;
     }
+
     .el-scrollbar__wrap {
         height: 100%;
         overflow: auto;

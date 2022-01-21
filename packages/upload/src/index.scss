@@ -1,5 +1,5 @@
 .calm-Upload {
-    .calm-upload-btn {
+    %common-btn {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -11,32 +11,42 @@
         font-size: 30px;
         cursor: pointer;
     }
+
+    .calm-upload-btn {
+        @extend %calm-upload-btn;
+    }
+
     .calm-Prevbtn {
-        @extend .calm-upload-btn;
+        @extend %calm-upload-btn;
 
         left: 0;
         background-image: linear-gradient(90deg, #00000059 0%, #00000038 100%);
     }
+
     .calm-Nextbtn {
-        @extend .calm-upload-btn;
+        @extend %calm-upload-btn;
 
         right: 0;
         background-image: linear-gradient(90deg, #00000059 100%, #00000038 0%);
     }
+
     .el-upload-list__item-thumbnail {
         width: 110px;
         height: 110px;
         object-fit: cover;
     }
+
     .el-upload-list--picture-card .el-upload-list__item {
         width: 110px;
         height: 110px;
     }
+
     .el-upload--picture-card {
         width: 110px;
         height: 110px;
         line-height: 110px;
     }
+
     .hidden .el-upload {
         display: none;
     }
