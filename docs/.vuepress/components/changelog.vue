@@ -1,6 +1,23 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.5</h3>
+            <el-tag type="info">2022-02-17</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuCardForm: 修复BiuCardForm的validate功能异常
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/8553479dd2aeaf2558c2dab4c20aabc8f66d3389"
+                        target="_blank"
+                        >8553479</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.4</h3>
 
             <p>Bug 修复</p>
