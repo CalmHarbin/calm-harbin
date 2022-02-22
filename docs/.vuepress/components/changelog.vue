@@ -15,6 +15,15 @@
                         >8553479</el-link
                     >
                 </li>
+                <li>
+                    全局样式：解决弹出层里面表格汇总的tooltip层级太低
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/389c93ac8fa137ed8d3d98b946cf54a050b0256b"
+                        target="_blank"
+                        >389c93a</el-link
+                    >
+                </li>
             </ul>
         </section>
         <section class="version">
