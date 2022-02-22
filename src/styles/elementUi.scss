@@ -247,3 +247,8 @@
 .el-tooltip__popper.is-dark div {
     color: #fff;
 }
+
+// 解决弹出层里面表格汇总的tooltip层级太低
+.elx-table--tooltip-wrapper.theme--dark {
+    z-index: 3000 !important;
+}
