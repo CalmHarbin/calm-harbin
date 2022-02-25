@@ -24,6 +24,15 @@
                         >389c93a</el-link
                     >
                 </li>
+                <li>
+                    BiuSelectTable：修复cacheList初次未同步，增加记录表格滚动位置
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/fb2996e5d3c2f5604c6c89cc3a70b083c2c9a198"
+                        target="_blank"
+                        >fb2996e</el-link
+                    >
+                </li>
             </ul>
         </section>
         <section class="version">
