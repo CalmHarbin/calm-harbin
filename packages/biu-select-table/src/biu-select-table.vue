@@ -194,6 +194,8 @@ export default class BiuSelectTable extends Vue {
         if (!isEqualWith(this.checkListValue, checkListValue)) {
             this.checkListValue = checkListValue
         }
+        // 选中值改变了就重新计算缓存
+        this.setCacheList(this.checkList)
     }
 
     @Watch('checkList', { deep: true })
@@ -481,7 +483,7 @@ export default class BiuSelectTable extends Vue {
      * 设置缓存
      */
     setCacheList(checkList: string[]) {
-        if (this.multiple) {
+        if (this.multiple || (checkList[0] && !this.inputable)) {
             let cacheList: any[] = []
             // 这里循环customTableData,保证表格中属性显示一致
             this.customTableData.forEach((item) => {
@@ -491,13 +493,6 @@ export default class BiuSelectTable extends Vue {
             })
 
             this.cacheList = cacheList
-        } else if (checkList[0] && !this.inputable) {
-            // 单选没有顺序问题
-            this.cacheList = checkList.map((item: string) =>
-                this.customTableData.find(
-                    (i: any) => String(i[this.prop.id]) === String(item)
-                )
-            )
         } else {
             this.cacheList = []
         }
@@ -513,5 +508,5 @@ export default class BiuSelectTable extends Vue {
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>
