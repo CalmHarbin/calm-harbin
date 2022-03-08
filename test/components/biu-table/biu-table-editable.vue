@@ -7,8 +7,8 @@
             size="mini"
         ></biu-form-item>
 
-        <el-button @click="editAction = !editAction"
-            >{{ editAction ? '隐藏' : '显示' }}加减行按钮</el-button
+        <el-button @click="editAction.show = !editAction.show"
+            >{{ editAction.show ? '隐藏' : '显示' }}加减行按钮</el-button
         >
         <biu-table
             :columns="columns"
@@ -94,7 +94,10 @@ export default class BiuTableBase extends Vue {
         }
     ]
 
-    editAction = true
+    editAction = {
+        fixed: 'left',
+        show: true
+    }
 
     /**
      * 表格列
