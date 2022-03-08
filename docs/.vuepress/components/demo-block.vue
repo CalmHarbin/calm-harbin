@@ -192,8 +192,8 @@ export default {
     border-radius: 3px;
     transition: 0.2s;
     &.hover {
-        box-shadow: 0 0 8px 0 rgb(232, 237, 250 / 60%),
-            0 2px 4px 0 rgb(232, 237, 250 / 50%);
+        box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6),
+            0 2px 4px 0 rgba(232, 237, 250, 0.5);
     }
 
     code {
