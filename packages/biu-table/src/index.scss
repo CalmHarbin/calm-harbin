@@ -2,6 +2,7 @@
     display: flex;
     padding-bottom: 10px;
     line-height: 0;
+
     .calm-operation-btnBox + .calm-operation-btnBox {
         margin-left: 10px;
     }
@@ -15,6 +16,7 @@
 .calm-BiuTable-operation {
     color: #409eff;
     font-size: 24px;
+
     i {
         margin: 0 3px;
         cursor: pointer;
@@ -24,10 +26,12 @@
 .calm-BiuTable-tableOperate {
     color: #409eff;
     font-size: 17px;
+
     i {
         margin: 0 7px;
         cursor: pointer;
     }
+
     .disabled {
         color: #c0c4cc;
         cursor: not-allowed;

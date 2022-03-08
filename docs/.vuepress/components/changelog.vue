@@ -1,6 +1,87 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.6</h3>
+            <el-tag type="info">2022-03-02</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuSelectTable：修复单选时未判断数据是否有值就做缓存
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/13ffcad97077429e0ec9372413ba1beb10e9c78f"
+                        target="_blank"
+                        >13ffcad</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
+            <h3>v1.0.5</h3>
+            <el-tag type="info">2022-02-17</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuCardForm: 修复BiuCardForm的validate功能异常
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/8553479dd2aeaf2558c2dab4c20aabc8f66d3389"
+                        target="_blank"
+                        >8553479</el-link
+                    >
+                </li>
+                <li>
+                    全局样式：解决弹出层里面表格汇总的tooltip层级太低
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/389c93ac8fa137ed8d3d98b946cf54a050b0256b"
+                        target="_blank"
+                        >389c93a</el-link
+                    >
+                </li>
+                <li>
+                    BiuSelectTable：修复cacheList初次未同步，增加记录表格滚动位置
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/fb2996e5d3c2f5604c6c89cc3a70b083c2c9a198"
+                        target="_blank"
+                        >fb2996e</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
+            <h3>v1.0.4</h3>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuTable: 修复 editAction 类型定义错误
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/1659bc6e704dc1281567aa97b17cb31c4d501d67"
+                        target="_blank"
+                        >1659bc6</el-link
+                    >
+                </li>
+            </ul>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    BiuPage组件：增加Pagination配置，可自定义配置分页属性和事件。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/3b1e4cf3dab18c4422a336af49c35dab1e499677"
+                        target="_blank"
+                        >3b1e4cf</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.3</h3>
 
             <el-tag type="info">2022-01-06</el-tag>
@@ -19,7 +100,7 @@
                 </li>
             </ul>
 
-            <p style="color: red">新功能</p>
+            <p>新功能</p>
             <ul>
                 <li>
                     BiuTable组件：增加headReader配置，可自定义渲染列头。

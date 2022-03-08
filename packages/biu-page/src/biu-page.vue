@@ -39,6 +39,8 @@
                 :page.sync="page"
                 :limit.sync="size"
                 @pagination="(data) => $emit('pagination', data)"
+                v-bind="paginationAttr"
+                v-on="paginationEvent"
             />
         </slot>
     </div>
@@ -108,6 +110,9 @@ export default class BiuPage extends Vue {
 
     @Prop(Object) private formAttr?: objType
     @Prop(Object) private formEvent?: objType
+
+    @Prop(Object) private paginationAttr?: objType
+    @Prop(Object) private paginationEvent?: objType
 
     /**
      * 动态计算表格的高度

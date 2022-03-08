@@ -8,10 +8,12 @@
         font-size: 16px;
         line-height: 46px;
         border-bottom: 1px solid #dcdfe6;
+
         * {
             outline: none;
         }
     }
+
     .el-drawer__body {
         display: flex;
         flex: initial;
@@ -19,20 +21,24 @@
         height: calc(100vh - 46px);
     }
 }
+
 .calm-BiuDrawer-body {
     flex: 1;
     padding: 0 20px;
     overflow: auto;
 }
+
 .calm-BiuDrawer-footer {
     display: flex;
     align-items: center;
     height: 44px;
     padding: 0 20px;
     border-top: 1px solid #dcdfe6;
+
     .calm-opear-container {
         padding-bottom: 0;
     }
+
     .calm-opear-container + .el-button {
         margin-left: 10px;
     }

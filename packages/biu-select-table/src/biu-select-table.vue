@@ -27,6 +27,7 @@
                 @selection-change="handleSelectionChange"
                 v-bind="attrs"
                 @row-click="rowClick"
+                @table-body-scroll="tableBodyScroll"
             />
             <!--分页数据-->
             <Pagination
@@ -134,6 +135,13 @@ export default class BiuSelectTable extends Vue {
      * 搜索
      */
     filterMethod: (val: string) => void = () => {}
+    /**
+     * 记录滚动位置
+     */
+    scrollTop = 0
+    scrollLeft = 0
+
+    tableBodyScroll: ((val: any) => void) | undefined
 
     // 将选中的数据转为复选框格式 row[]
     get multipleSelection() {
@@ -152,7 +160,6 @@ export default class BiuSelectTable extends Vue {
      */
     get customTableData(): any[] {
         const tableData: any[] = cloneDeep(this.tableData)
-
         this.cacheList.forEach((item) => {
             if (
                 !tableData.find(
@@ -177,6 +184,7 @@ export default class BiuSelectTable extends Vue {
 
     created() {
         this.filterMethod = debounce(this.search, 500)
+        this.tableBodyScroll = debounce(this.scrollEvent, 500)
     }
 
     @Watch('tableData', { deep: true, immediate: true })
@@ -186,6 +194,8 @@ export default class BiuSelectTable extends Vue {
         if (!isEqualWith(this.checkListValue, checkListValue)) {
             this.checkListValue = checkListValue
         }
+        // 选中值改变了就重新计算缓存
+        this.setCacheList(this.checkList)
     }
 
     @Watch('checkList', { deep: true })
@@ -193,30 +203,9 @@ export default class BiuSelectTable extends Vue {
         if (this.multiple) {
             if (!isEqualWith(this.value, newVal)) {
                 this.setValue(newVal)
-
-                let cacheList: any[] = []
-                // 这里循环customTableData,保证表格中属性显示一致
-                this.customTableData.forEach((item) => {
-                    if (newVal.includes(String(item[this.prop.id]))) {
-                        cacheList.push(item)
-                    }
-                })
-
-                this.cacheList = cacheList
             }
         } else if (!isEqualWith(this.value, newVal[0])) {
             this.setValue(newVal[0] || '')
-
-            if (newVal[0] && !this.inputable) {
-                // 单选没有顺序问题
-                this.cacheList = newVal.map((item: string) =>
-                    this.customTableData.find(
-                        (i: any) => String(i[this.prop.id]) === String(item)
-                    )
-                )
-            } else {
-                this.cacheList = []
-            }
         }
 
         // 同步显示值，这里之所以要判断是否相等，是避免多选时，传入给el-select的value是数组，引用类型一直在改变，会触发搜索事件
@@ -242,6 +231,8 @@ export default class BiuSelectTable extends Vue {
         } else if (this.checkList.length !== 0) {
             this.checkList = []
         }
+        // 选中值改变了就重新计算缓存
+        this.setCacheList(this.checkList)
     }
 
     /**
@@ -335,7 +326,7 @@ export default class BiuSelectTable extends Vue {
         this.updateTableData()
     }
     /**
-     * 显示时触发
+     * 显示/隐藏时触发
      */
     visibleChange(state: boolean) {
         if (state) {
@@ -343,7 +334,10 @@ export default class BiuSelectTable extends Vue {
             // 表格是空的，主动去查询还是空的，没必要，x
             // 当单选不可输入时，如果随便输入一个值搜索不到数据，此时失焦后，表格没有数据，再次点击还是没有数据，故要重新查询一下。
             // 如果显示时表格是空的,主动去查询一次数据
-            if (this.customTableData.length === 0) {
+            /**
+             * 2022/2/25 判断条件改成和 cacheList的长度做比较，因为有缓存列表时其实也想重新查询下。
+             */
+            if (this.customTableData.length === this.cacheList.length) {
                 // 如果是可输入的，重新查询数据时，把之前输入的内容带过去，不能清空了
                 if (this.inputable && this.checkList.length) {
                     this.search(this.checkList[0] || '')
@@ -366,6 +360,20 @@ export default class BiuSelectTable extends Vue {
                     elSelect.selectedLabel = elSelect.currentPlaceholder
                     elSelect.currentPlaceholder = ''
                 }
+            }
+
+            /**
+             * 还原表格滚动位置
+             */
+            const BiuTableVm = this.$refs.BiuTable as any
+            if (BiuTableVm) {
+                // 经测试,这里不加点延时滚动无效
+                this.$nextTick(() => {
+                    BiuTableVm.$refs.BiuTable.$refs.table.pagingScrollTopLeft(
+                        this.scrollTop,
+                        this.scrollLeft
+                    )
+                })
             }
         }
     }
@@ -471,9 +479,34 @@ export default class BiuSelectTable extends Vue {
             }
         }
     }
+    /**
+     * 设置缓存
+     */
+    setCacheList(checkList: string[]) {
+        if (this.multiple || (checkList[0] && !this.inputable)) {
+            let cacheList: any[] = []
+            // 这里循环customTableData,保证表格中属性显示一致
+            this.customTableData.forEach((item) => {
+                if (checkList.includes(String(item[this.prop.id]))) {
+                    cacheList.push(item)
+                }
+            })
+
+            this.cacheList = cacheList
+        } else {
+            this.cacheList = []
+        }
+    }
+    /**
+     * 记录滚动位置
+     */
+    scrollEvent({ scrollTop, scrollLeft }: any) {
+        this.scrollTop = scrollTop
+        this.scrollLeft = scrollLeft
+    }
 }
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>

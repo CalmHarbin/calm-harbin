@@ -95,10 +95,12 @@ export default class BiuCardForm extends Vue {
         ;(this.$refs.BiuForm as any).forEach((BiuForm: any) => {
             BiuForm.$refs.form.validate((valid: boolean) => {
                 validList.push(valid)
+                if (validList.length === (this.$refs.BiuForm as any).length) {
+                    callback &&
+                        callback(validList.every((valid: boolean) => valid))
+                }
             })
         })
-
-        callback && callback(validList.every((valid: boolean) => valid))
     }
     public resetFields() {
         ;(this.$refs.BiuForm as any).forEach((BiuForm: any) => {

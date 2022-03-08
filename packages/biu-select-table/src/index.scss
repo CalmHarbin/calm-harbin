@@ -1,19 +1,24 @@
 .calm-biuSelectContainer {
     width: 600px !important;
+
     .el-select-dropdown__item {
         height: auto;
         padding: 0;
     }
+
     .el-select-dropdown__item.hover,
     .el-select-dropdown__item:hover {
         background-color: #fff;
     }
+
     .el-scrollbar {
         height: 300px;
     }
+
     .el-select-dropdown__list {
         padding: 0;
     }
+
     .el-scrollbar__wrap {
         height: auto;
         max-height: none;
@@ -22,6 +27,7 @@
         overflow: auto;
     }
 }
+
 .calm-BiuSelectTable {
     &.el-select > .el-input {
         display: flex;
