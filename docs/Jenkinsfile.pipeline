@@ -9,8 +9,8 @@ pipeline {
         stage('拉取代码') {
             steps {
                 git branch: "${branch}", // 分支
-                // credentialsId: 'github', // 凭证
-                url: 'https://hub.fastgit.org/CalmHarbin/calm-harbin.git' //仓库
+                credentialsId: 'gogs', // 凭证
+                url: 'http://git.calmharbin.icu/zhanghuan/calm-harbin.git' //仓库
             }
         }
 
