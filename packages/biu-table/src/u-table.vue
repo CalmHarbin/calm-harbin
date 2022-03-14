@@ -516,10 +516,10 @@ export default class CustomUTable extends Vue {
             this.customTableData = cloneDeep(newVal)
         }
         // 使用umy-ui应该没有这个问题,有的话就放开
-        // // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
-        // this.$nextTick(() => {
-        //     this.headerDragend()
-        // })
+        // 这里等dom渲染完,不然可能会无效的(表格依然错位或者底部合计显示有问题)
+        this.$nextTick(() => {
+            this.headerDragend()
+        })
     }
 
     @Watch('value', { immediate: true, deep: true })
