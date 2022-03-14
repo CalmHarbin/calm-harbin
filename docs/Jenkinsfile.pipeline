@@ -9,7 +9,7 @@ pipeline {
         stage('拉取代码') {
             steps {
                 git branch: "${branch}", // 分支
-                credentialsId: 'gogs', // 凭证
+                credentialsId: '9fc23f36-1b7e-48f6-a023-16250047d8bd', // 凭证
                 url: 'http://git.calmharbin.icu/zhanghuan/calm-harbin.git' //仓库
             }
         }
