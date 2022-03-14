@@ -8,20 +8,26 @@
             .elx-table--header,
             .el-table__header,
             .elx-table--body,
-            .el-table__body {
+            .el-table__body,
+            .elx-table--footer,
+            .el-table__footer {
                 display: table;
                 margin: 0;
             }
             .elx-table--header tr,
             .el-table__header tr,
             .elx-table--body tr,
-            .el-table__body tr {
+            .el-table__body tr,
+            .elx-table--footer tr,
+            .el-table__footer tr {
                 border-top-width: 0;
             }
             .elx-table--header tr:nth-child(2n),
             .el-table__header tr:nth-child(2n),
             .elx-table--body tr:nth-child(2n),
-            .el-table__body tr:nth-child(2n) {
+            .el-table__body tr:nth-child(2n),
+            .elx-table--footer tr:nth-child(2n),
+            .el-table__footer tr:nth-child(2n) {
                 background-color: transparent;
             }
             .elx-table--header th,
@@ -31,7 +37,11 @@
             .elx-table--body td,
             .el-table__body td,
             .elx-table--body td,
-            .el-table__body td {
+            .el-table__body td,
+            .elx-table--footer th,
+            .el-table__footer th,
+            .elx-table--footer td,
+            .el-table__footer td {
                 padding: 0;
                 border-width: 0;
             }

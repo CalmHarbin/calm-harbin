@@ -1,6 +1,36 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.7</h3>
+            <el-tag type="info">2022-03-02</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuTable：修复表格有时候错误、合计显示不对
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/ceb5799440fadf66f476758c2e54a9230b425518"
+                        target="_blank"
+                        >#ceb5799</el-link
+                    >
+                </li>
+            </ul>
+
+            <p>style</p>
+            <ul>
+                <li>
+                    全局样式: 修复表格横向滚动条被固定列遮住问题
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/5fc869ac5d3d5822d4a03752687d816b2fdfe8e7"
+                        target="_blank"
+                        >#5fc869a</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.6</h3>
             <el-tag type="info">2022-03-02</el-tag>
 

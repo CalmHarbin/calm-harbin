@@ -95,6 +95,11 @@ const components: componentsType[] = [
             import('@test/components/biu-table/biu-table-showHeaderFilter.vue')
     },
     {
+        name: 'BiuTableCustomSummary',
+        template: () =>
+            import('@test/components/biu-table/biu-table-custom-summary.vue')
+    },
+    {
         name: 'BiuTableSummary',
         template: () =>
             import('@test/components/biu-table/biu-table-summary.vue')
