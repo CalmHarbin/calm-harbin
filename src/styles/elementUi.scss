@@ -200,14 +200,8 @@
 }
 
 // 表格 fixed列遮住了横向滚动条
-// .el-table__fixed,
-// .el-table__fixed-right {
-//     bottom: 16px;
-//     height: auto !important;
-// }
-// .el-table__footer-wrapper {
-//     position: absolute;
-//     bottom: 0;
+// .el-table--scrollable-x .el-table__body-wrapper {
+//     z-index: 1;
 // }
 
 // 省市区选择限高

@@ -69,7 +69,7 @@ export default class Order extends Vue {
                     dicType: '订单状态',
                     options: []
                 },
-                render: (h) => <div>23123</div>
+                render: () => <div>23123</div>
             },
             {
                 formType: 'input',
@@ -1299,7 +1299,7 @@ export default class Order extends Vue {
      * 复制
      */
     // eslint-disable-next-line class-methods-use-this
-    copy(text) {
+    copy() {
         // copy(text)
     }
 
