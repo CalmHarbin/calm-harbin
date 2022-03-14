@@ -84,5 +84,5 @@ export default class BiuDialog extends Vue {
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>
