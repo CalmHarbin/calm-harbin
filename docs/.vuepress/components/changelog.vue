@@ -29,6 +29,19 @@
                     >
                 </li>
             </ul>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    BiuTable组件：增加可配置是否显示索引列。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/471066259928a0f3228d555a4f82d38f2da8062b"
+                        target="_blank"
+                        >4710662</el-link
+                    >
+                </li>
+            </ul>
         </section>
         <section class="version">
             <h3>v1.0.6</h3>

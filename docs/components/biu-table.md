@@ -153,6 +153,7 @@
 | `editAction`            | 是否显示新增/删除一行按钮(仅可编辑表格生效),同时会传入给 el-table-column                | <el-checkbox></el-checkbox>                  | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/index.d.ts#L13" target="_blank">`objType`</a>                                                                       | `false` |
 | `plus`                  | 自定义添加一行插入的数据(仅`editAction.show=true`生效)                                  | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
 | `show-header-filter`    | 是否显示表头筛选功能                                                                    | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `show-index`            | 是否显示索引列                                                                          | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `true`  |
 
 #### 事件
 
