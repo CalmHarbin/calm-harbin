@@ -257,3 +257,19 @@ export const summary: summaryType = (data = [], obj = {}) => {
     }, obj)
     return total
 }
+
+/**
+ * 下载文件，传入文件全路径下载
+ * @param { string } url 文件全路径
+ */
+export const downLoadFile = (url: string) => {
+    const iframe = document.createElement('iframe')
+    const timestamp = Date.now()
+    iframe.src = url
+    iframe.id = `iframe${timestamp}`
+    iframe.style.display = 'none'
+    document.body.appendChild(iframe)
+    setTimeout(() => {
+        document.getElementById(`iframe${timestamp}`)?.remove()
+    }, 1000)
+}
