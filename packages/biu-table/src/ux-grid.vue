@@ -58,6 +58,7 @@
         </ux-table-column>
         <!-- 索引 -->
         <ux-table-column
+            v-if="showIndex"
             title="#"
             fixed="left"
             type="index"
@@ -459,6 +460,8 @@ export default class CoutomUxGrid extends Vue {
     editAction?: objType // 是否显示新增/删除一行操作列
 
     @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
+
+    @Prop({ type: Boolean, default: true }) showIndex?: boolean = true // 是否显示索引列
 
     // 这里利用引用类型直接改值
     @Model('setValue') private value?: objType

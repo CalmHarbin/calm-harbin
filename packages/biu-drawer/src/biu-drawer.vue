@@ -100,5 +100,5 @@ export default class BiuDrawer extends Vue {
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>
