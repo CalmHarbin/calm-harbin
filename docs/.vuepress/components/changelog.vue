@@ -28,6 +28,15 @@
                         >#5fc869a</el-link
                     >
                 </li>
+                <li>
+                    BiuDialog: 调整弹框最大高度65vh->72vh
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/64e4a97baa1a220f24a030574244f0f348a932d1"
+                        target="_blank"
+                        >#64e4a97</el-link
+                    >
+                </li>
             </ul>
 
             <p>新功能</p>
@@ -38,7 +47,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/471066259928a0f3228d555a4f82d38f2da8062b"
                         target="_blank"
-                        >4710662</el-link
+                        >#4710662</el-link
                     >
                 </li>
                 <li>
@@ -47,7 +56,34 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/dbc3222e3ed0e02f6f11493084d4a8be74546c61"
                         target="_blank"
-                        >dbc3222</el-link
+                        >#dbc3222</el-link
+                    >
+                </li>
+                <li>
+                    增加v-loadMore指令。给element-ui的el-select组件赋予滚动加载能力
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/e9dffe1799d88119d667e0e99d8e360fc3a6bd80"
+                        target="_blank"
+                        >#e9dffe1</el-link
+                    >
+                </li>
+                <li>
+                    增加v-dialogDrag指令。给element-ui的el-dialog组件赋予拖拽的能力
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/002ac36cae9511ffcbbdb19c3bbbc3d15b306a85"
+                        target="_blank"
+                        >#002ac36</el-link
+                    >
+                </li>
+                <li>
+                    增加v-dialogDragWidth指令。给element-ui的el-dialog组件赋予宽度拖拽的能力
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/8e2e15cd742223f89e3a2a070d07dd8f8ecdeedf"
+                        target="_blank"
+                        >#8e2e15c</el-link
                     >
                 </li>
             </ul>
@@ -64,7 +100,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/13ffcad97077429e0ec9372413ba1beb10e9c78f"
                         target="_blank"
-                        >13ffcad</el-link
+                        >#13ffcad</el-link
                     >
                 </li>
             </ul>
@@ -81,7 +117,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/8553479dd2aeaf2558c2dab4c20aabc8f66d3389"
                         target="_blank"
-                        >8553479</el-link
+                        >#8553479</el-link
                     >
                 </li>
                 <li>
@@ -90,7 +126,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/389c93ac8fa137ed8d3d98b946cf54a050b0256b"
                         target="_blank"
-                        >389c93a</el-link
+                        >#389c93a</el-link
                     >
                 </li>
                 <li>
@@ -99,7 +135,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/fb2996e5d3c2f5604c6c89cc3a70b083c2c9a198"
                         target="_blank"
-                        >fb2996e</el-link
+                        >#fb2996e</el-link
                     >
                 </li>
             </ul>
@@ -115,7 +151,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/1659bc6e704dc1281567aa97b17cb31c4d501d67"
                         target="_blank"
-                        >1659bc6</el-link
+                        >#1659bc6</el-link
                     >
                 </li>
             </ul>
@@ -128,7 +164,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/3b1e4cf3dab18c4422a336af49c35dab1e499677"
                         target="_blank"
-                        >3b1e4cf</el-link
+                        >#3b1e4cf</el-link
                     >
                 </li>
             </ul>
@@ -147,7 +183,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/28050220a244ee51d5e5006272147d632758a2eb"
                         target="_blank"
-                        >2805022</el-link
+                        >#2805022</el-link
                     >
                 </li>
             </ul>
@@ -160,7 +196,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/0e39ca552f8b0eac32fc5e68f8df38c0518f8cdc"
                         target="_blank"
-                        >0e39ca5</el-link
+                        >#0e39ca5</el-link
                     >
                 </li>
             </ul>
@@ -191,7 +227,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/d0fd86406509f538252435a14dbc9109faaba717"
                         target="_blank"
-                        >d0fd864</el-link
+                        >#d0fd864</el-link
                     >
                 </li>
                 <li>
@@ -200,7 +236,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/9b4cb0e4f9aef4dd144d8cf364dbca3493aa559f"
                         target="_blank"
-                        >9b4cb0e</el-link
+                        >#9b4cb0e</el-link
                     >
                 </li>
                 <li>
@@ -209,7 +245,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/a893a40e8a3a2e60a7a1dfbb35704facd41b23db"
                         target="_blank"
-                        >a893a40</el-link
+                        >#a893a40</el-link
                     >
                 </li>
             </ul>
@@ -222,7 +258,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/0d7e922627ecb04649de175cdf3cef7805cb65e0"
                         target="_blank"
-                        >0d7e922</el-link
+                        >#0d7e922</el-link
                     >
                 </li>
             </ul>
@@ -235,7 +271,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/d34fde056b06b3241926ad88f4f2e7625e0dd5fe"
                         target="_blank"
-                        >d34fde0</el-link
+                        >#d34fde0</el-link
                     >
                 </li>
                 <li>
@@ -244,7 +280,7 @@
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/b9198527f298dca686bd52262e59f1ec968b45db"
                         target="_blank"
-                        >b919852</el-link
+                        >#b919852</el-link
                     >
                 </li>
             </ul>
