@@ -27,7 +27,8 @@ import {
     exportExcel,
     exportExcelTemp,
     importExcel,
-    summary
+    summary,
+    downLoadFile
 } from './utils'
 import { startandends } from './utils/date'
 
@@ -87,6 +88,7 @@ export {
     exportExcelTemp,
     importExcel,
     summary,
+    downLoadFile,
     startandends,
     reg
 }
@@ -109,6 +111,7 @@ export default {
     exportExcelTemp,
     importExcel,
     summary,
+    downLoadFile,
     startandends,
     reg
 }
