@@ -1,5 +1,7 @@
 <template>
     <el-dialog
+        v-dialogDrag="attrs.dialogDrag"
+        v-dialogDragWidth="attrs.dialogDragWidth"
         :visible.sync="visibleSync"
         append-to-body
         modal-append-to-body
