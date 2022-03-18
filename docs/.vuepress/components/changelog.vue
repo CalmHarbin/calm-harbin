@@ -41,6 +41,15 @@
                         >4710662</el-link
                     >
                 </li>
+                <li>
+                    增加下载文件方法。
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/dbc3222e3ed0e02f6f11493084d4a8be74546c61"
+                        target="_blank"
+                        >dbc3222</el-link
+                    >
+                </li>
             </ul>
         </section>
         <section class="version">
