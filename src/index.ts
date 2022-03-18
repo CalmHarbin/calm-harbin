@@ -20,6 +20,9 @@ import BiuFormItem from '@packages/biu-form-item/index'
 
 // 引入指令
 import waves from './directive/waves/index'
+import loadMore from './directive/loadMore/index'
+import dialogDrag from './directive/dialogDrag/index'
+import dialogDragWidth from './directive/dialogDragWidth/index'
 
 // 引入工具方法
 import {
@@ -48,7 +51,7 @@ const components = {
     BiuSelectTable
 }
 
-const directives = [waves]
+const directives = [waves, loadMore, dialogDrag, dialogDragWidth]
 
 const install = function (Vue: any): void {
     directives.forEach((directive) => {
