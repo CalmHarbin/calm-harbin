@@ -15,6 +15,15 @@
                         >#ceb5799</el-link
                     >
                 </li>
+                <li>
+                    BiuSelectTable：修复配置prop.id时导致勾选不显示了
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/744a850ffa538d1ef6c7d407dd0a1c834727a0de"
+                        target="_blank"
+                        >#744a850</el-link
+                    >
+                </li>
             </ul>
 
             <p>style</p>
