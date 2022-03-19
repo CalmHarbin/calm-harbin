@@ -23,6 +23,7 @@
                 :tbHeight="paginationSync ? 256 : 300"
                 :tableData="customTableData"
                 :selection="multiple"
+                :rowId="prop.id"
                 :multipleSelection.sync="multipleSelection"
                 @selection-change="handleSelectionChange"
                 v-bind="attrs"
@@ -36,6 +37,7 @@
                 :total="paginationSync.total"
                 :page.sync="page"
                 :limit.sync="size"
+                :page-sizes="pageSizes"
                 @pagination="paginationCallback"
                 @click.native="focus"
             />
@@ -115,6 +117,7 @@ export default class BiuSelectTable extends Vue {
     }
     // id为双向绑定的值，label为输入框中显示的值，会自动从数据源中取
     @Prop(Object) prop!: { id: string; label: string }
+    @Prop({ type: Array }) pageSizes?: number[]
     @Model('setValue') value!: string | string[]
 
     // dom是否已经加载,加载后在渲染表格,不然表格没法自动填充满
