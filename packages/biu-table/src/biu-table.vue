@@ -39,8 +39,6 @@ export default class BiuTable extends Vue {
             // 这里处理外部使用的slot功能，传给BiuTable组件用render方式
             // eslint-disable-next-line no-undef
             let render = item.render
-            // eslint-disable-next-line no-undef
-            let editRender = item.editRender
             if (this.$slots[item.id]) {
                 render = () => <div>{this.$slots[item.id]}</div>
             } else if (this.$scopedSlots[item.id]) {
@@ -48,6 +46,9 @@ export default class BiuTable extends Vue {
                     <div>{(this.$scopedSlots[item.id] as any)(scope)}</div>
                 )
             }
+
+            // eslint-disable-next-line no-undef
+            let editRender = item.editRender
             // 可编辑表格转为自定义渲染
             if (this.$slots[`${item.id}-edit`]) {
                 editRender = () => <div>{this.$slots[`${item.id}-edit`]}</div>
@@ -58,10 +59,50 @@ export default class BiuTable extends Vue {
                     </div>
                 )
             }
+
+            // eslint-disable-next-line no-undef
+            let headRender = item.headRender
+            // 可编辑表格转为自定义渲染
+            if (this.$slots[`header-${item.id}`]) {
+                headRender = () => <div>{this.$slots[`header-${item.id}`]}</div>
+            } else if (this.$scopedSlots[`header-${item.id}`]) {
+                headRender = (h, col) => {
+                    return (
+                        <div>
+                            {(this.$scopedSlots[`header-${item.id}`] as any)({
+                                col
+                            })}
+                        </div>
+                    )
+                }
+            }
+
+            // eslint-disable-next-line no-undef
+            let formRender = item.formAttr?.render
+            // 可编辑表格转为自定义渲染
+            if (this.$slots[`form-${item.id}`]) {
+                formRender = () => <div>{this.$slots[`form-${item.id}`]}</div>
+            } else if (this.$scopedSlots[`form-${item.id}`]) {
+                formRender = (h, col) => {
+                    return (
+                        <div>
+                            {(this.$scopedSlots[`form-${item.id}`] as any)({
+                                col
+                            })}
+                        </div>
+                    )
+                }
+            }
+
             return {
                 ...item,
                 render,
-                editRender
+                editRender,
+                headRender,
+                formAttr: {
+                    ...item.formAttr,
+                    render: formRender
+                }
             }
         })
     }

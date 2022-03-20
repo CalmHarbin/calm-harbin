@@ -70,24 +70,26 @@
                 :align="col.align || 'center'"
             >
                 <template v-slot:header>
-                    <Render
-                        v-if="col.headRender"
-                        :render-func="col.headRender"
-                        :scope="col"
-                    ></Render>
-                    <template v-else>
-                        <i
-                            v-if="col.editable"
-                            class="elx-cell--edit-icon el-icon-edit-outline"
-                        ></i>
-                        <span
-                            :class="
-                                col.required ? 'calm-BiuTable-required' : ''
-                            "
-                            :title="col.label"
-                            >{{ col.label }}</span
-                        >
-                    </template>
+                    <slot :name="'header-' + col.id" :col="col">
+                        <Render
+                            v-if="col.headRender"
+                            :render-func="col.headRender"
+                            :scope="col"
+                        ></Render>
+                        <template v-else>
+                            <i
+                                v-if="col.editable"
+                                class="elx-cell--edit-icon el-icon-edit-outline"
+                            ></i>
+                            <span
+                                :class="
+                                    col.required ? 'calm-BiuTable-required' : ''
+                                "
+                                :title="col.label"
+                                >{{ col.label }}</span
+                            >
+                        </template>
+                    </slot>
                 </template>
                 <u-table-column
                     v-bind="col"
@@ -97,22 +99,13 @@
                     :prop="col.id"
                 >
                     <!-- 表头 -->
-                    <template v-slot:header="{ $index }">
-                        <slot
-                            :name="col.id + '-header'"
-                            :col="col"
-                            :$columnIndex="$index"
-                            :$index="$index"
-                        >
+                    <template v-slot:header>
+                        <slot :name="col.id + '-header'" :col="col">
                             <template v-if="col.formType">
                                 <Render
                                     v-if="col.formType === 'slot'"
                                     :render-func="col.formAttr.render"
-                                    :scope="{
-                                        col: col,
-                                        $index: $index,
-                                        $columnIndex: $index
-                                    }"
+                                    :scope="col"
                                 ></Render>
                                 <BiuFormItem
                                     v-else
@@ -173,17 +166,21 @@
             >
                 <!-- 表头 -->
                 <template v-slot:header>
-                    <Render
-                        v-if="col.headRender"
-                        :render-func="col.headRender"
-                        :scope="col"
-                    ></Render>
-                    <span
-                        v-else
-                        :class="col.required ? 'calm-BiuTable-required' : ''"
-                        :title="col.label"
-                        >{{ col.label }}</span
-                    >
+                    <slot :name="'header-' + col.id" :col="col">
+                        <Render
+                            v-if="col.headRender"
+                            :render-func="col.headRender"
+                            :scope="col"
+                        ></Render>
+                        <span
+                            v-else
+                            :class="
+                                col.required ? 'calm-BiuTable-required' : ''
+                            "
+                            :title="col.label"
+                            >{{ col.label }}</span
+                        >
+                    </slot>
                 </template>
                 <template slot-scope="scope">
                     <!-- 数据传递出去 -->

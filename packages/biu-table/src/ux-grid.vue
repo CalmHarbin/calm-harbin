@@ -109,25 +109,27 @@
                 :resizable="true"
             >
                 <template v-slot:header>
-                    <Render
-                        v-if="col.headRender"
-                        :render-func="col.headRender"
-                        :scope="col"
-                    ></Render>
-                    <template>
-                        <i
-                            v-if="col.editable"
-                            class="elx-cell--edit-icon el-icon-edit-outline"
-                        ></i>
-                        <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
-                        <span
-                            :class="
-                                col.required ? 'calm-BiuTable-required' : ''
-                            "
-                            :title="col.label"
-                            >{{ col.label }}</span
-                        >
-                    </template>
+                    <slot :name="'header-' + col.id" :col="col">
+                        <Render
+                            v-if="col.headRender"
+                            :render-func="col.headRender"
+                            :scope="col"
+                        ></Render>
+                        <template v-else>
+                            <i
+                                v-if="col.editable"
+                                class="elx-cell--edit-icon el-icon-edit-outline"
+                            ></i>
+                            <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
+                            <span
+                                :class="
+                                    col.required ? 'calm-BiuTable-required' : ''
+                                "
+                                :title="col.label"
+                                >{{ col.label }}</span
+                            >
+                        </template>
+                    </slot>
                 </template>
                 <ux-table-column
                     v-bind="col"
@@ -138,22 +140,16 @@
                     :edit-render="col.editable"
                 >
                     <!-- 表头 -->
-                    <template v-slot:header="{ $columnIndex, $rowIndex }">
+                    <template v-slot:header>
                         <slot
-                            :name="col.id + '-header'"
+                            :name="'form-' + (col.formId || col.id)"
                             :col="col"
-                            :$columnIndex="$columnIndex"
-                            :$index="$rowIndex"
                         >
                             <template v-if="col.formType">
                                 <Render
                                     v-if="col.formType === 'slot'"
                                     :render-func="col.formAttr.render"
-                                    :scope="{
-                                        col: col,
-                                        $index: $rowIndex,
-                                        $columnIndex
-                                    }"
+                                    :scope="col"
                                 ></Render>
                                 <BiuFormItem
                                     v-else
@@ -241,17 +237,21 @@
             >
                 <!-- 表头 -->
                 <template v-slot:header>
-                    <Render
-                        v-if="col.headRender"
-                        :render-func="col.headRender"
-                        :scope="col"
-                    ></Render>
-                    <span
-                        v-else
-                        :class="col.required ? 'calm-BiuTable-required' : ''"
-                        :title="col.label"
-                        >{{ col.label }}</span
-                    >
+                    <slot :name="'header-' + col.id" :col="col">
+                        <Render
+                            v-if="col.headRender"
+                            :render-func="col.headRender"
+                            :scope="col"
+                        ></Render>
+                        <span
+                            v-else
+                            :class="
+                                col.required ? 'calm-BiuTable-required' : ''
+                            "
+                            :title="col.label"
+                            >{{ col.label }}</span
+                        >
+                    </slot>
                 </template>
                 <!-- 可编辑时显示 -->
                 <template #edit="{ row, seq }">

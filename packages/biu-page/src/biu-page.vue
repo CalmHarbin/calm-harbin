@@ -185,9 +185,49 @@ export default class BiuPage extends Vue {
                         </div>
                     )
                 }
+
+                let headRender = item.headRender
+                if (this.$slots[`table-header-${item.id}`]) {
+                    headRender = () => (
+                        <div>{this.$slots[`table-header-${item.id}`]}</div>
+                    )
+                } else if (this.$scopedSlots[`table-header-${item.id}`]) {
+                    headRender = (h, col) => (
+                        <div>
+                            {(
+                                this.$scopedSlots[
+                                    `table-header-${item.id}`
+                                ] as any
+                            )({ col })}
+                        </div>
+                    )
+                }
+
+                let id = item.formId || item.id
+                // 这里处理外部使用的slot功能，传给BiuForm组件用render方式
+                let formRender = item.formAttr?.render
+                if (this.$slots[`table-form-${id}`]) {
+                    formRender = () => (
+                        <div>{this.$slots[`table-form-${id}`]}</div>
+                    )
+                } else if (this.$scopedSlots[`table-form-${id}`]) {
+                    formRender = (h, col) => (
+                        <div>
+                            {(this.$scopedSlots[`table-form-${id}`] as any)({
+                                col
+                            })}
+                        </div>
+                    )
+                }
+
                 return {
                     ...item,
-                    render
+                    render,
+                    headRender,
+                    formAttr: {
+                        ...item.formAttr,
+                        render: formRender
+                    }
                 }
             })
     }
