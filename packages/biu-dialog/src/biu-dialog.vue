@@ -1,7 +1,7 @@
 <template>
     <el-dialog
-        v-dialogDrag="attrs.dialogDrag"
-        v-dialogDragWidth="attrs.dialogDragWidth"
+        v-dialogDrag="attrs['dialog-drag']"
+        v-dialogDragWidth="attrs['dialog-drag-width']"
         :visible.sync="visibleSync"
         append-to-body
         modal-append-to-body
@@ -75,6 +75,7 @@ export default class BiuDialog extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
+        console.log(newVal)
         if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
 
