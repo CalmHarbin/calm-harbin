@@ -1,6 +1,23 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.8</h3>
+            <el-tag type="info">2022-03-02</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuDialog：修复dialogDrag配置无效
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/789ebc7ce3cc09079684ef17e0fb58d4c5cc9414"
+                        target="_blank"
+                        >#789ebc7</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.7</h3>
             <el-tag type="info">2022-03-20</el-tag>
 
