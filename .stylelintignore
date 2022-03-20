@@ -17,3 +17,5 @@ lib/*
 '**/*.md'
 
 public/*
+
+.eslintrc.js

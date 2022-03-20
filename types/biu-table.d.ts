@@ -63,9 +63,7 @@ export type tableColumnType = {
     required?: boolean
 
     /** 表头的表单项配置 */
-    formAttr?: formAttrType & {
-        render?: (h: any, col: tableColumnType) => VNode
-    }
+    formAttr?: formAttrType
 
     [x: string]: any
 }
