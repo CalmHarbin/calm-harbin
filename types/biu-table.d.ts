@@ -57,7 +57,7 @@ export type tableColumnType = {
     /**
      * 表头自定义渲染
      */
-    headRender?: (h: any, col: any) => VNode
+    headRender?: (h: any, col: tableColumnType) => VNode
 
     /** 列头显示红丝，表示必填，可通过类 calm-BiuTable-required 修改样式 */
     required?: boolean

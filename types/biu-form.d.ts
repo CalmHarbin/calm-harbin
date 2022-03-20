@@ -3,15 +3,10 @@ import { DatePickerType } from 'element-ui/types/date-picker'
 import { ValidateCallback, ValidateFieldCallback } from 'element-ui/types/form'
 import { CalmComponent } from './component'
 import { areaType, formTypeType, treeNodeType } from './biu-form-item'
+import { pageColumnsType } from './biu-page'
 
 type objType = {
     [x: string]: any
-}
-
-type tableHeaderFormType = {
-    col: BiuformType
-    $index: number
-    $columnIndex: number
 }
 
 export type formAttrType = {
@@ -75,10 +70,10 @@ export type formAttrType = {
     clearable?: boolean
     /**
      * 自定义渲染，注意该配置必须写在 @Component中，不然会报错
-     * tableHeaderFormType类型 为 使用BiuTable组件时
+     * pageColumnsType类型 为 使用BiuTable组件时
      * BiuformType类型 为 使用BiuForm组件时
      */
-    render?: (h: any, scope: tableHeaderFormType & BiuformType) => VNode
+    render?: (h: any, scope: pageColumnsType | BiuformType) => VNode
     /**
      * 字段
      */

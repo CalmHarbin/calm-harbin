@@ -19,17 +19,45 @@
             @reset="reset"
             @pagination="() => handleFilter()"
         >
-            <template slot="table-workCode" slot-scope="{ col, row }">
-                <span class="collookcss" @click="showDetail(row)">{{
-                    row[col.id]
-                }}</span>
+            <template slot="table-workCode" slot-scope="{ col, row, $index }">
+                <span
+                    :ref="'collookcss' + $index"
+                    class="collookcss"
+                    @click="showDetail(row)"
+                    >{{ row[col.id] }}</span
+                >
                 <i
                     class="table-td-copy el-icon-document-copy"
                     @click="copy(row[col.id])"
                 ></i>
             </template>
+            <template slot="form-workCode" slot-scope="col">
+                {{ col }}
+                <el-form-item :label="col.label" :prop="col.id">
+                    <input ref="input" type="text" />
+                </el-form-item>
+            </template>
         </BiuPage>
         <BiuDialogTest :visible.sync="show"></BiuDialogTest>
+        <el-button @click="submit">提交</el-button>
+        <BiuForm
+            ref="biuForm"
+            v-model="form"
+            :source="columns.slice(0, 2)"
+            :rules="rules"
+        >
+            <template slot="workCode" slot-scope="{ col }">
+                {{ form[col.id] }}
+                <el-form-item :label="col.label" :prop="col.id">
+                    <!-- <input v-model="form[col.id]" ref="input" type="text" /> -->
+                    <el-input
+                        v-model="form[col.id]"
+                        ref="input"
+                        type="text"
+                    ></el-input>
+                </el-form-item>
+            </template>
+        </BiuForm>
     </div>
 </template>
 
@@ -45,7 +73,9 @@ import BiuDialogTest from './BiuDialogTest.vue'
     components: { BiuDialogTest }
 })
 export default class Order extends Vue {
-    form = {}
+    form = {
+        workCode: ''
+    }
 
     show = false
 
@@ -54,11 +84,22 @@ export default class Order extends Vue {
     get columns() {
         return [
             {
-                formType: 'input',
+                formType: 'slot',
                 label: '订单号',
                 id: 'workCode',
                 width: 140,
-                sort: 3
+                sort: 3,
+                render: (h, col) => (
+                    <el-form-item label={col.label} prop={col.id}>
+                        <el-input v-model={this.form[col.id]}></el-input>
+                    </el-form-item>
+                )
+            },
+            {
+                formType: 'input',
+                label: '出库单号',
+                id: 'clientOrderCode',
+                noSearch: true
             },
             {
                 formType: 'dicSelect',
@@ -69,14 +110,9 @@ export default class Order extends Vue {
                     dicType: '订单状态',
                     options: []
                 },
-                render: (h) => <div>23123</div>
+                render: () => <div>23123</div>
             },
-            {
-                formType: 'input',
-                label: '出库单号',
-                id: 'clientOrderCode',
-                noSearch: true
-            },
+
             {
                 formType: 'input',
                 label: '经销商名称',
@@ -324,6 +360,25 @@ export default class Order extends Vue {
         ]
     }
 
+    get rules() {
+        return {
+            workCode: [
+                {
+                    required: true,
+                    message: '不能为空',
+                    trigger: 'change'
+                }
+            ],
+            clientOrderCode: [
+                {
+                    required: true,
+                    message: '不能为空',
+                    trigger: 'change'
+                }
+            ]
+        }
+    }
+
     tableData = []
 
     loading = false
@@ -450,11 +505,10 @@ export default class Order extends Vue {
      * 查询数据
      */
     handleFilter(clear = false) {
+        console.log(this.$refs.input)
         if (clear) {
             this.pagination.page = 1
         }
-
-        console.log(this.queryCriteria())
 
         const result = {
             success: true,
@@ -1299,19 +1353,21 @@ export default class Order extends Vue {
      * 复制
      */
     // eslint-disable-next-line class-methods-use-this
-    copy(text) {
+    copy() {
         // copy(text)
     }
 
     /**
      * 自定义合计
      */
-    summaryMethod(d) {
-        console.log(d)
+    summaryMethod() {
         const total = summary(this.tableData, { totalNum: 0 })
         const totalData = this.columns.map((item) => total[item.id] || '')
-        console.log(['', '汇总', ...totalData])
         return [['', '汇总', ...totalData]]
+    }
+
+    submit() {
+        this.$refs.biuForm.validate()
     }
 }
 </script>

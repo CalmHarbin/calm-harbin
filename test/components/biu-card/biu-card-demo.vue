@@ -57,12 +57,14 @@ export default {
 .calm-BiuCard ::v-deep > .body {
     line-height: 0;
 }
+
 .el-image {
     width: 80px;
     height: 80px;
     margin-right: 5px;
     margin-bottom: 5px;
 }
+
 .remark ::v-deep > .body {
     padding: 0 15px;
 }

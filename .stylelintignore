@@ -15,3 +15,7 @@ lib/*
 '**/*.ts'
 
 '**/*.md'
+
+public/*
+
+.eslintrc.js

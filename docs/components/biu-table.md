@@ -63,19 +63,35 @@
 :::
 </demo-block>
 
-#### 合计
+#### 不固定的合计
+
+<demo-block>
+::: slot source
+<BiuTableCustomSummary></BiuTableCustomSummary>
+:::
+
+-   给组件配置`custom-show-summary=true`则开启合计功能。会自动将最后一行序号变为合计，如果你想自定义合计文本，可以使用`sum-text`来配置
+
+::: warning 提示
+如果要使用不固定的合计功能，其原理是自行计算好数据放入表格最后一项。可以使用`summary`来帮助你计算。<br/>
+[`summary`](./methods.html#表格合计)的使用方法详见文档方法部分。
+:::
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-custom-summary.vue
+
+:::
+</demo-block>
+
+#### 固定的合计
 
 <demo-block>
 ::: slot source
 <BiuTableSummary></BiuTableSummary>
 :::
 
--   给组件配置`show-summary=true`则开启合计功能。会自动将最后一行序号变为合计，如果你想自定义合计文本，可以使用`sum-text`来配置
-
-::: warning 提示
-如果要使用合计功能，一定要自行计算好数据放入表格最后一项。可以使用`summary`来帮助你计算。<br/>
-`summary`的使用方法详见文档方法部分。
-:::
+-   给组件配置`show-summary=true`则开启合计功能。使用`summary-method`来自定义控制合计显示的内容
 
 ::: slot highlight
 
@@ -118,6 +134,22 @@
 :::
 </demo-block>
 
+#### 自定义渲染 Render/slot
+
+<demo-block>
+::: slot source
+<BiuTableRender></BiuTableRender>
+:::
+
+-   提供了两种自定义渲染的方式，render 函数和插槽。
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-render.vue
+
+:::
+</demo-block>
+
 #### 属性
 
 | 参数                    | 说明                                                                                    | <div style="white-space: nowrap;">必填</div> | 类型                                                                                                                                                                                   | 默认值  |
@@ -137,6 +169,7 @@
 | `editAction`            | 是否显示新增/删除一行按钮(仅可编辑表格生效),同时会传入给 el-table-column                | <el-checkbox></el-checkbox>                  | <a href="https://github.com/CalmHarbin/calm-harbin/blob/main/types/index.d.ts#L13" target="_blank">`objType`</a>                                                                       | `false` |
 | `plus`                  | 自定义添加一行插入的数据(仅`editAction.show=true`生效)                                  | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
 | `show-header-filter`    | 是否显示表头筛选功能                                                                    | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `false` |
+| `show-index`            | 是否显示索引列                                                                          | <el-checkbox></el-checkbox>                  | `boolean`                                                                                                                                                                              | `true`  |
 
 #### 事件
 
@@ -149,3 +182,12 @@
 | 方法名          | 说明                                 | 类型         |
 | --------------- | ------------------------------------ | ------------ |
 | `headerDragend` | 表格重新渲染，同 element 的 doLayout | `() => void` |
+
+#### 插槽
+
+| 插槽名        | 说明         | 类型                            |
+| ------------- | ------------ | ------------------------------- |
+| `header-[id]` | 头部插槽     | `{ col, $index, $columnIndex }` |
+| `form-[id]`   | 表头筛选插槽 | `{ col, $index, $columnIndex }` |
+| `[id]`        | 单元格插槽   | `{ row, col, $index }`          |
+| `edit-[id]`   | 编辑时插槽   | `{ row, col, $index }`          |

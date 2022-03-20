@@ -34,7 +34,12 @@
 
 ::: tip 提示
 `BiuTable`，`BiuForm`组件的`render`以及插槽用法也可以直接使用。<br/>
+
+-   render 用法参考 总重量 列
+-   插槽用法参考 总体积 列
+
 如果你想使用 Element 的一些配置，请直接传入给`BiuPage`组件，最终会传入到 Element 的 Table 组件上。
+
 :::
 
 ::: slot highlight

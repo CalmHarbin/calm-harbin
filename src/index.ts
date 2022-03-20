@@ -20,6 +20,9 @@ import BiuFormItem from '@packages/biu-form-item/index'
 
 // 引入指令
 import waves from './directive/waves/index'
+import loadMore from './directive/loadMore/index'
+import dialogDrag from './directive/dialogDrag/index'
+import dialogDragWidth from './directive/dialogDragWidth/index'
 
 // 引入工具方法
 import {
@@ -27,7 +30,8 @@ import {
     exportExcel,
     exportExcelTemp,
     importExcel,
-    summary
+    summary,
+    downLoadFile
 } from './utils'
 import { startandends } from './utils/date'
 
@@ -48,7 +52,7 @@ const components = {
     BiuSelectTable
 }
 
-const directives = [waves]
+const directives = [waves, loadMore, dialogDrag, dialogDragWidth]
 
 const install = function (Vue: any): void {
     directives.forEach((directive) => {
@@ -87,12 +91,13 @@ export {
     exportExcelTemp,
     importExcel,
     summary,
+    downLoadFile,
     startandends,
     reg
 }
 
 export default {
-    version: '1.0.6',
+    version: '1.0.7',
     install,
     BiuDialog,
     BiuDrawer,
@@ -109,6 +114,7 @@ export default {
     exportExcelTemp,
     importExcel,
     summary,
+    downLoadFile,
     startandends,
     reg
 }

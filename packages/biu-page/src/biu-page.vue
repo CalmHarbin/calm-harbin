@@ -8,7 +8,7 @@
             @search="() => $emit('search')"
             @reset="() => $emit('reset')"
             ref="BiuForm"
-            showBtn
+            :showBtn="defaultAttr('showBtn', true, formAttr)"
             v-bind="formAttr"
             v-on="formEvent"
         />
@@ -129,7 +129,7 @@ export default class BiuPage extends Vue {
      * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
-    private attrs = {}
+    private attrs: any = {}
     private listeners = {}
 
     /**
@@ -140,12 +140,27 @@ export default class BiuPage extends Vue {
             .filter((item) => !item.noSearch) // 筛选出搜索列
             .sort((a, b) => (a.sort || 0) - (b.sort || 0)) // 排序
             .map((item) => {
+                let id = item.formId || item.id
+                // 这里处理外部使用的slot功能，传给BiuForm组件用render方式
+                let render = item.formAttr?.render
+                if (this.$slots[`form-${id}`]) {
+                    render = () => <div>{this.$slots[`form-${id}`]}</div>
+                } else if (this.$scopedSlots[`form-${id}`]) {
+                    render = (h, col) => (
+                        <div>
+                            {/*这里用 {col} 为了和 biu-form组件保持一致*/}
+                            {(this.$scopedSlots[`form-${id}`] as any)({ col })}
+                        </div>
+                    )
+                }
+
                 return {
                     ...(item.formAttr || {}),
                     formType: item.formType,
                     label: item.label, // 暂时不要label
-                    id: item.formId || item.id, // 优先使用formId字段
-                    placeholder: item.placeholder
+                    id, // 优先使用formId字段
+                    placeholder: item.placeholder,
+                    render
                 }
             })
     }
@@ -170,9 +185,49 @@ export default class BiuPage extends Vue {
                         </div>
                     )
                 }
+
+                let headRender = item.headRender
+                if (this.$slots[`table-header-${item.id}`]) {
+                    headRender = () => (
+                        <div>{this.$slots[`table-header-${item.id}`]}</div>
+                    )
+                } else if (this.$scopedSlots[`table-header-${item.id}`]) {
+                    headRender = (h, col) => (
+                        <div>
+                            {(
+                                this.$scopedSlots[
+                                    `table-header-${item.id}`
+                                ] as any
+                            )({ col })}
+                        </div>
+                    )
+                }
+
+                let id = item.formId || item.id
+                // 这里处理外部使用的slot功能，传给BiuForm组件用render方式
+                let formRender = item.formAttr?.render
+                if (this.$slots[`table-form-${id}`]) {
+                    formRender = () => (
+                        <div>{this.$slots[`table-form-${id}`]}</div>
+                    )
+                } else if (this.$scopedSlots[`table-form-${id}`]) {
+                    formRender = (h, col) => (
+                        <div>
+                            {(this.$scopedSlots[`table-form-${id}`] as any)({
+                                col
+                            })}
+                        </div>
+                    )
+                }
+
                 return {
                     ...item,
-                    render
+                    render,
+                    headRender,
+                    formAttr: {
+                        ...item.formAttr,
+                        render: formRender
+                    }
                 }
             })
     }
@@ -238,9 +293,14 @@ export default class BiuPage extends Vue {
 
         this.height = height
     }
+
+    defaultAttr(key: string, value: any, obj?: any) {
+        let d = obj || this.attrs
+        return d[key] ?? value
+    }
 }
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>

@@ -95,6 +95,11 @@ const components: componentsType[] = [
             import('@test/components/biu-table/biu-table-showHeaderFilter.vue')
     },
     {
+        name: 'BiuTableCustomSummary',
+        template: () =>
+            import('@test/components/biu-table/biu-table-custom-summary.vue')
+    },
+    {
         name: 'BiuTableSummary',
         template: () =>
             import('@test/components/biu-table/biu-table-summary.vue')
@@ -108,6 +113,11 @@ const components: componentsType[] = [
         name: 'BiuTableExpandRender',
         template: () =>
             import('@test/components/biu-table/biu-table-expandRender.vue')
+    },
+    {
+        name: 'BiuTableRender',
+        template: () =>
+            import('@test/components/biu-table/biu-table-render.vue')
     },
     {
         name: 'BiuSelectTableDemo',
@@ -137,6 +147,22 @@ const components: componentsType[] = [
     {
         name: 'BiuPageDemo2',
         template: () => import('@test/components/biu-page/biu-page-demo2.vue')
+    },
+    {
+        name: 'WavesDemo',
+        template: () => import('@test/components/directive/waves.vue')
+    },
+    {
+        name: 'LoadMoreDemo',
+        template: () => import('@test/components/directive/loadMore.vue')
+    },
+    {
+        name: 'DialogDragDemo',
+        template: () => import('@test/components/directive/dialogDrag.vue')
+    },
+    {
+        name: 'DialogDragWidthDemo',
+        template: () => import('@test/components/directive/dialogDragWidth.vue')
     }
 ]
 

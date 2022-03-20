@@ -1,5 +1,7 @@
 <template>
     <el-dialog
+        v-dialogDrag="attrs.dialogDrag"
+        v-dialogDragWidth="attrs.dialogDragWidth"
         :visible.sync="visibleSync"
         append-to-body
         modal-append-to-body
@@ -84,5 +86,5 @@ export default class BiuDialog extends Vue {
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>

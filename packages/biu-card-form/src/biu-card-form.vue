@@ -116,5 +116,5 @@ export default class BiuCardForm extends Vue {
 </script>
 
 <style lang="scss">
-@import './index.scss';
+@import './index';
 </style>

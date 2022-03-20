@@ -3,6 +3,9 @@
         :columns="columns"
         :table-data="tableData"
         show-summary
+        :summary-method="summaryMethod"
+        :virtual="false"
+        tbHeight="200"
     ></biu-table>
 </template>
 
@@ -117,9 +120,13 @@ export default class BiuTableSummary extends Vue {
                 netWeight: 99.99
             })
         })
+    }
 
-        // 计算合计数据
-        const total = summary(this.tableData, {
+    /**
+     * 自定义合计
+     */
+    summaryMethod() {
+        const defaultTotal = {
             number: 0,
             weight: 0,
             volume: 0,
@@ -127,8 +134,11 @@ export default class BiuTableSummary extends Vue {
             width: 0,
             height: 0,
             netWeight: 0
-        })
-        this.tableData.push(total)
+        }
+        const total = summary(this.tableData, defaultTotal)
+        const totalData = this.columns.map((item) => total[item.id] ?? '')
+
+        return [['汇总', ...totalData]]
     }
 }
 </script>

@@ -4,7 +4,7 @@
         :columns="columns"
         :tableData="tableData"
         :tbHeight="36 * 4"
-        show-summary
+        custom-show-summary
     >
     </BiuPage>
 </template>
