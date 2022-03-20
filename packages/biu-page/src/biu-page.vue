@@ -140,12 +140,27 @@ export default class BiuPage extends Vue {
             .filter((item) => !item.noSearch) // 筛选出搜索列
             .sort((a, b) => (a.sort || 0) - (b.sort || 0)) // 排序
             .map((item) => {
+                let id = item.formId || item.id
+                // 这里处理外部使用的slot功能，传给BiuForm组件用render方式
+                let render = item.formAttr?.render
+                if (this.$slots[`form-${id}`]) {
+                    render = () => <div>{this.$slots[`form-${id}`]}</div>
+                } else if (this.$scopedSlots[`form-${id}`]) {
+                    render = (h, col) => (
+                        <div>
+                            {/*这里用 {col} 为了和 biu-form组件保持一致*/}
+                            {(this.$scopedSlots[`form-${id}`] as any)({ col })}
+                        </div>
+                    )
+                }
+
                 return {
                     ...(item.formAttr || {}),
                     formType: item.formType,
                     label: item.label, // 暂时不要label
-                    id: item.formId || item.id, // 优先使用formId字段
-                    placeholder: item.placeholder
+                    id, // 优先使用formId字段
+                    placeholder: item.placeholder,
+                    render
                 }
             })
     }
