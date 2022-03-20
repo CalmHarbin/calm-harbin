@@ -142,6 +142,22 @@ const components: componentsType[] = [
     {
         name: 'BiuPageDemo2',
         template: () => import('@test/components/biu-page/biu-page-demo2.vue')
+    },
+    {
+        name: 'WavesDemo',
+        template: () => import('@test/components/directive/waves.vue')
+    },
+    {
+        name: 'LoadMoreDemo',
+        template: () => import('@test/components/directive/loadMore.vue')
+    },
+    {
+        name: 'DialogDragDemo',
+        template: () => import('@test/components/directive/dialogDrag.vue')
+    },
+    {
+        name: 'DialogDragWidthDemo',
+        template: () => import('@test/components/directive/dialogDragWidth.vue')
     }
 ]
 

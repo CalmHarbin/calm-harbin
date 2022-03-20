@@ -62,6 +62,11 @@ module.exports = {
                 title: '属性/方法',
                 collapsable: false,
                 children: ['/components/attribute', '/components/methods']
+            },
+            {
+                title: '指令',
+                collapsable: false,
+                children: ['/components/directive']
             }
         ],
         smoothScroll: true // 页面滚动
