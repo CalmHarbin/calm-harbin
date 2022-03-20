@@ -8,7 +8,7 @@
             @search="() => $emit('search')"
             @reset="() => $emit('reset')"
             ref="BiuForm"
-            showBtn
+            :showBtn="defaultAttr('showBtn', true, formAttr)"
             v-bind="formAttr"
             v-on="formEvent"
         />
@@ -129,7 +129,7 @@ export default class BiuPage extends Vue {
      * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
-    private attrs = {}
+    private attrs: any = {}
     private listeners = {}
 
     /**
@@ -237,6 +237,11 @@ export default class BiuPage extends Vue {
         }
 
         this.height = height
+    }
+
+    defaultAttr(key: string, value: any, obj?: any) {
+        let d = obj || this.attrs
+        return d[key] ?? value
     }
 }
 </script>
