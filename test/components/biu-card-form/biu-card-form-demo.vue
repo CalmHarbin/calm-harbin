@@ -3,7 +3,7 @@
         ref="BiuCardForm"
         v-model="form"
         :source="source"
-        :formAttr="{ rules: rules, 'label-width': '92px' }"
+        :form-attr="{ rules: rules, 'label-width': '92px' }"
     ></biu-card-form>
 </template>
 

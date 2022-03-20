@@ -2,16 +2,16 @@
     <div class="app-container">
         <BiuPage
             v-model="form"
-            rowId="workCode"
+            row-id="workCode"
             :loading="loading"
             :columns="columns"
-            :tableData="tableData"
-            :operationOptions="operationOptions"
-            :tablePostfixOptions="tablePostfixOptions"
+            :table-data="tableData"
+            :operation-options="operationOptions"
+            :table-postfix-options="tablePostfixOptions"
             :pagination.sync="pagination"
-            :tbHeight="200"
+            :tb-height="200"
             selection
-            :multipleSelection.sync="multipleSelection"
+            :multiple-selection.sync="multipleSelection"
             show-summary
             :summary-method="summaryMethod"
             :virtual="false"
@@ -51,8 +51,8 @@
                 <el-form-item :label="col.label" :prop="col.id">
                     <!-- <input v-model="form[col.id]" ref="input" type="text" /> -->
                     <el-input
-                        v-model="form[col.id]"
                         ref="input"
+                        v-model="form[col.id]"
                         type="text"
                     ></el-input>
                 </el-form-item>

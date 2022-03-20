@@ -5,7 +5,7 @@
         show-summary
         :summary-method="summaryMethod"
         :virtual="false"
-        tbHeight="200"
+        tb-height="200"
     ></biu-table>
 </template>
 

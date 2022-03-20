@@ -1,8 +1,8 @@
 <template>
     <div ref="formBox" class="calm-BiuForm">
         <el-form
-            :class="customDirection"
             ref="form"
+            :class="customDirection"
             :model="customValue"
             :validate-on-rule-change="false"
             :size="attrs['size'] || 'mini'"
@@ -16,15 +16,15 @@
             v-bind="attrs"
         >
             <el-row
-                :gutter="10"
                 v-for="(sourceGroup, index) in formList"
                 :key="index"
+                :gutter="10"
                 :class="index !== 0 ? 'calm-gutter' : ''"
             >
                 <el-col
-                    :span="formItem.span || 6"
                     v-for="formItem in sourceGroup"
                     :key="formItem.id"
+                    :span="formItem.span || 6"
                 >
                     <slot :name="formItem.id" :col="formItem">
                         <Render
@@ -44,15 +44,15 @@
                         >
                             <span
                                 v-if="formItem.label"
-                                class="ellipsis"
                                 slot="label"
+                                class="ellipsis"
                                 :title="formItem.label"
                                 >{{ formItem.label
                                 }}{{ attrs['label-suffix'] || '' }}</span
                             >
                             <BiuFormItem
-                                :formType="formItem.formType"
                                 v-model="customValue[formItem.id]"
+                                :form-type="formItem.formType"
                                 v-bind="formItem.otherAttr"
                                 v-on="formItem.otherEvent"
                             />
@@ -62,13 +62,13 @@
                 <template v-if="showBtn">
                     <!-- 首行的 -->
                     <el-col
-                        :span="6 * proportion"
                         v-if="
                             (!isOpentext &&
                                 index === formList.length - 1 &&
                                 !isOpen) ||
                             (index === row - 1 && !isOpen)
                         "
+                        :span="6 * proportion"
                         :class="rightFloat ? 'calm-rightFloat' : ''"
                     >
                         <div class="calm-operation">
@@ -87,7 +87,7 @@
                                 @click="() => $emit('reset')"
                                 >重置</el-button
                             >
-                            <div @click="change" v-if="isOpentext">
+                            <div v-if="isOpentext" @click="change">
                                 <span>展开</span>
                                 <i class="el-icon-arrow-down"></i>
                             </div>
@@ -95,10 +95,10 @@
                     </el-col>
                     <!-- 展开后的 -->
                     <el-col
+                        v-if="index === sourceList.length - 1 && isOpen"
                         style="float: right"
                         :class="buttonIndependent ? 'calm-gutter' : ''"
                         :span="6 * proportion"
-                        v-if="index === sourceList.length - 1 && isOpen"
                     >
                         <div class="calm-operation">
                             <el-button

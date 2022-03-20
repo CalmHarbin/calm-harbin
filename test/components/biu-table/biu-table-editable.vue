@@ -1,8 +1,8 @@
 <template>
     <div>
         <biu-form-item
-            formType="select"
             v-model="mode"
+            form-type="select"
             :options="modeOptions"
             size="mini"
         ></biu-form-item>
@@ -22,8 +22,8 @@
             <!-- 宽度编辑状态下显示 -->
             <template slot="width-edit" slot-scope="{ row, col, $index }">
                 <el-input-number
-                    style="width: 100%"
                     v-model="row[col.id]"
+                    style="width: 100%"
                     :min="0"
                     :precision="2"
                     :controls="false"

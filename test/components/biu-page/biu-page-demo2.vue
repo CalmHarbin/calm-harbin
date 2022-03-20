@@ -4,13 +4,13 @@
             v-model="form"
             :loading="loading"
             :columns="columns"
-            :tableData="tableData"
-            :operationOptions="operationOptions"
-            :tablePostfixOptions="tablePostfixOptions"
+            :table-data="tableData"
+            :operation-options="operationOptions"
+            :table-postfix-options="tablePostfixOptions"
             show-header-filter
             show-summary
             selection
-            :multipleSelection.sync="multipleSelection"
+            :multiple-selection.sync="multipleSelection"
             :pagination.sync="pagination"
             @search="search"
             @reset="reset"

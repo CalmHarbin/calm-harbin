@@ -19,8 +19,8 @@
                     attrs.clearable !== undefined ? attrs.clearable : true
                 "
                 filterable
-                @change="handleChange"
                 v-bind="attrs"
+                @change="handleChange"
                 v-on="listeners"
             ></el-cascader>
         </template>

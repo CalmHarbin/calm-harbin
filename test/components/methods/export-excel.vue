@@ -2,9 +2,9 @@
     <BiuPage
         v-model="form"
         :columns="columns"
-        :tableData="tableData"
-        :operationOptions="operationOptions"
-        :tbHeight="36 * 3"
+        :table-data="tableData"
+        :operation-options="operationOptions"
+        :tb-height="36 * 3"
     >
     </BiuPage>
 </template>

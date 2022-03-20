@@ -1,20 +1,20 @@
 <template>
-    <el-form labelWidth="70px">
+    <el-form label-width="70px">
         <el-form-item label="文本">
-            <biu-form-item v-model="form.text" formType="text"></biu-form-item>
+            <biu-form-item v-model="form.text" form-type="text"></biu-form-item>
         </el-form-item>
 
         <el-form-item label="输入框">
             <biu-form-item
                 v-model="form.input"
-                formType="input"
+                form-type="input"
             ></biu-form-item>
         </el-form-item>
 
         <el-form-item label="下拉框">
             <biu-form-item
                 v-model="form.select"
-                formType="select"
+                form-type="select"
                 :options="options"
             ></biu-form-item>
         </el-form-item>
@@ -24,8 +24,8 @@
                 <el-form-item label="年">
                     <biu-form-item
                         v-model="form.year"
-                        formType="date"
-                        dateType="year"
+                        form-type="date"
+                        date-type="year"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -33,8 +33,8 @@
                 <el-form-item label="月">
                     <biu-form-item
                         v-model="form.month"
-                        formType="date"
-                        dateType="month"
+                        form-type="date"
+                        date-type="month"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -42,8 +42,8 @@
                 <el-form-item label="周">
                     <biu-form-item
                         v-model="form.week"
-                        formType="date"
-                        dateType="week"
+                        form-type="date"
+                        date-type="week"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -54,7 +54,7 @@
                 <el-form-item label="日">
                     <biu-form-item
                         v-model="form.date"
-                        formType="date"
+                        form-type="date"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -62,8 +62,8 @@
                 <el-form-item label="日期范围">
                     <biu-form-item
                         v-model="form.daterange"
-                        formType="date"
-                        dateType="daterange"
+                        form-type="date"
+                        date-type="daterange"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -71,8 +71,8 @@
                 <el-form-item label="月份范围">
                     <biu-form-item
                         v-model="form.monthrange"
-                        formType="date"
-                        dateType="monthrange"
+                        form-type="date"
+                        date-type="monthrange"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -83,7 +83,7 @@
                 <el-form-item label="时间">
                     <biu-form-item
                         v-model="form.timeSelect"
-                        formType="timeSelect"
+                        form-type="timeSelect"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -91,7 +91,7 @@
                 <el-form-item label="时间范围">
                     <biu-form-item
                         v-model="form.timerange"
-                        formType="timerange"
+                        form-type="timerange"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -102,8 +102,8 @@
                 <el-form-item label="省">
                     <biu-form-item
                         v-model="form.province"
-                        formType="area"
-                        areaType="province"
+                        form-type="area"
+                        area-type="province"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -111,8 +111,8 @@
                 <el-form-item label="省市">
                     <biu-form-item
                         v-model="form.city"
-                        formType="area"
-                        areaType="city"
+                        form-type="area"
+                        area-type="city"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -120,7 +120,7 @@
                 <el-form-item label="省市区">
                     <biu-form-item
                         v-model="form.area"
-                        formType="area"
+                        form-type="area"
                     ></biu-form-item>
                 </el-form-item>
             </el-col>
@@ -129,7 +129,7 @@
         <el-form-item label="省市区">
             <biu-form-item
                 v-model="form.checkStrictly"
-                formType="area"
+                form-type="area"
                 :props="{ checkStrictly: true }"
             ></biu-form-item>
         </el-form-item>
@@ -139,7 +139,7 @@
                 <el-form-item label="树选择">
                     <biu-form-item
                         v-model="form.tree1"
-                        formType="treeSelect"
+                        form-type="treeSelect"
                         :data="treeData"
                     ></biu-form-item>
                 </el-form-item>
@@ -148,7 +148,7 @@
                 <el-form-item label="树选择">
                     <biu-form-item
                         v-model="form.tree2"
-                        formType="treeSelect"
+                        form-type="treeSelect"
                         :data="treeData"
                         multiple
                     ></biu-form-item>
@@ -158,10 +158,10 @@
                 <el-form-item label="树选择">
                     <biu-form-item
                         v-model="form.tree3"
-                        formType="treeSelect"
+                        form-type="treeSelect"
                         :data="treeData"
                         multiple
-                        subWith
+                        sub-with
                     ></biu-form-item>
                 </el-form-item>
             </el-col>

@@ -1,6 +1,6 @@
 <template>
     <div :class="['calm-BiuCard', border ? 'border' : '']" v-bind="attrs">
-        <div class="calm-BiuCard-title" v-if="title">
+        <div v-if="title" class="calm-BiuCard-title">
             <slot name="title">
                 {{ title }}
             </slot>

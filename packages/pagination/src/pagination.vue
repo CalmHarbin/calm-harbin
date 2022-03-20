@@ -25,9 +25,9 @@ import { Pagination } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
 
 export default {
-    name: 'pagination',
-    inheritAttrs: false,
+    name: 'Pagination',
     components: { [Pagination.name]: Pagination },
+    inheritAttrs: false,
     props: {
         total: {
             required: true,
@@ -89,20 +89,20 @@ export default {
             }
         }
     },
-    methods: {
-        handleSizeChange(val) {
-            this.$emit('pagination', { page: this.currentPage, limit: val })
-        },
-        handleCurrentChange(val) {
-            this.$emit('pagination', { page: val, limit: this.pageSize })
-        }
-    },
     watch: {
         ['$attrs']: {
             immediate: true,
             handler(newVal) {
                 if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
             }
+        }
+    },
+    methods: {
+        handleSizeChange(val) {
+            this.$emit('pagination', { page: this.currentPage, limit: val })
+        },
+        handleCurrentChange(val) {
+            this.$emit('pagination', { page: val, limit: this.pageSize })
         }
     }
 }

@@ -7,15 +7,15 @@
             <template v-if="attrs.unit">
                 <div style="display: flex">
                     <el-input
-                        :clearable="true"
                         v-model="formValue"
+                        :clearable="true"
                         v-bind="attrs"
-                        v-on="listeners"
                         class="elInput"
-                        @keypress.native.enter="() => $emit('enter')"
                         :autocomplete="
                             attrs.type === 'password' ? 'new-password' : 'off'
                         "
+                        v-on="listeners"
+                        @keypress.native.enter="() => $emit('enter')"
                     ></el-input>
                     <span style="margin-left: 5px; white-space: nowrap">{{
                         attrs.unit
@@ -24,15 +24,15 @@
             </template>
             <el-input
                 v-else
-                :clearable="true"
                 v-model="formValue"
+                :clearable="true"
                 v-bind="attrs"
-                v-on="listeners"
                 class="elInput"
-                @keypress.native.enter="() => $emit('enter')"
                 :autocomplete="
                     attrs.type === 'password' ? 'new-password' : 'off'
                 "
+                v-on="listeners"
+                @keypress.native.enter="() => $emit('enter')"
             ></el-input>
         </template>
         <template v-else-if="formType === 'select' || formType === 'dicSelect'">
@@ -68,13 +68,13 @@
         </template>
         <!-- 固定时间点范围选择 -->
         <div
+            v-else-if="formType === 'timerange'"
             class="BiuFormItem-timerange"
             style="display: flex"
-            v-else-if="formType === 'timerange'"
         >
             <el-time-picker
-                is-range
                 v-model="formValue"
+                is-range
                 range-separator="至"
                 start-placeholder="开始时间"
                 end-placeholder="结束时间"

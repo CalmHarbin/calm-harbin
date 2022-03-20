@@ -21,7 +21,7 @@
 
 <script>
 export default {
-    name: 'dialogDragWidth',
+    name: 'DialogDragWidth',
     data() {
         return {
             dialogVisible: false
