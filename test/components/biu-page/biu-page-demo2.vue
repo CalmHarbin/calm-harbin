@@ -15,7 +15,30 @@
             @search="search"
             @reset="reset"
             @pagination="() => search()"
-        ></biu-page>
+        >
+            <!-- 表头插槽 -->
+            <template slot="table-header-volume" slot-scope="{ col }">
+                <span style="color: #409eff">{{ col.label }}</span>
+            </template>
+            <!-- 表头筛选框插槽 -->
+            <template slot="table-form-volume" slot-scope="{ col }">
+                <el-input
+                    v-model="form[col.id]"
+                    type="number"
+                    size="mini"
+                ></el-input>
+            </template>
+            <!-- 表格插槽写法，使用table-前缀 -->
+            <template slot="table-volume" slot-scope="{ row, col, $index }">
+                <div>{{ row[col.id] }}-{{ $index }}</div>
+            </template>
+            <!-- 表单插槽写法，使用form-前缀 -->
+            <template slot="form-volume" slot-scope="{ col }">
+                <el-form-item :label="col.label" :prop="col.id">
+                    <el-input v-model="form[col.id]" type="number"></el-input>
+                </el-form-item>
+            </template>
+        </biu-page>
     </div>
 </template>
 
@@ -122,14 +145,36 @@ export default class BiuPageDemo extends Vue {
                 }
             },
             {
+                formType: 'slot',
                 label: '总重量(KG)',
                 id: 'weight',
-                // 使用render实现自定义渲染
-                noSearch: true,
-                render: (h, { row, col }) => <div>custom-{row[col.id]}</div>
+                // 表头渲染
+                headRender: (h, col) => {
+                    return <span style="color: #409eff">{col.label}</span>
+                },
+                // 单元格渲染
+                render: (h, { row, col, $index }) => (
+                    <div>
+                        {row[col.id]}-{$index}
+                    </div>
+                ),
+                formAttr: {
+                    // 表单自定义渲染
+                    render: (h, col) => {
+                        return (
+                            <biu-form-item
+                                formType="input"
+                                style="width: 100%"
+                                type="number"
+                                v-model={this.form[col.id]}
+                                size="mini"
+                            ></biu-form-item>
+                        )
+                    }
+                }
             },
             {
-                formType: 'input',
+                formType: 'slot',
                 label: '总体积(m³)',
                 id: 'volume'
             },

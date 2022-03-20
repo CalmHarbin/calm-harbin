@@ -265,6 +265,7 @@ export default {
     }
 
     .demo-block-control {
+        z-index: 1;
         position: relative;
         box-sizing: border-box;
         height: 44px;

@@ -134,6 +134,22 @@
 :::
 </demo-block>
 
+#### 自定义渲染 Render/slot
+
+<demo-block>
+::: slot source
+<BiuTableRender></BiuTableRender>
+:::
+
+-   提供了两种自定义渲染的方式，render 函数和插槽。
+
+::: slot highlight
+
+<<< @/test/components/biu-table/biu-table-render.vue
+
+:::
+</demo-block>
+
 #### 属性
 
 | 参数                    | 说明                                                                                    | <div style="white-space: nowrap;">必填</div> | 类型                                                                                                                                                                                   | 默认值  |
@@ -166,3 +182,12 @@
 | 方法名          | 说明                                 | 类型         |
 | --------------- | ------------------------------------ | ------------ |
 | `headerDragend` | 表格重新渲染，同 element 的 doLayout | `() => void` |
+
+#### 插槽
+
+| 插槽名        | 说明         | 类型                            |
+| ------------- | ------------ | ------------------------------- |
+| `header-[id]` | 头部插槽     | `{ col, $index, $columnIndex }` |
+| `form-[id]`   | 表头筛选插槽 | `{ col, $index, $columnIndex }` |
+| `[id]`        | 单元格插槽   | `{ row, col, $index }`          |
+| `edit-[id]`   | 编辑时插槽   | `{ row, col, $index }`          |

@@ -115,6 +115,11 @@ const components: componentsType[] = [
             import('@test/components/biu-table/biu-table-expandRender.vue')
     },
     {
+        name: 'BiuTableRender',
+        template: () =>
+            import('@test/components/biu-table/biu-table-render.vue')
+    },
+    {
         name: 'BiuSelectTableDemo',
         template: () =>
             import(
