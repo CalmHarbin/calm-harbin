@@ -75,7 +75,6 @@ export default class BiuDialog extends Vue {
      */
     @Watch('$attrs', { immediate: true })
     $attrsChange(newVal: any) {
-        console.log(newVal)
         if (!isEqualWith(newVal, this.attrs)) this.attrs = { ...newVal }
     }
 

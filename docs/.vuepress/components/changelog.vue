@@ -403,4 +403,12 @@ export default {
 .version ::v-deep a:hover {
     text-decoration: none;
 }
+h3 {
+    margin: 20px 0;
+}
+p,
+li,
+ul {
+    margin: 20px 0;
+}
 </style>
