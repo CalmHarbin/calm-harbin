@@ -15,6 +15,24 @@
                         >#789ebc7</el-link
                     >
                 </li>
+                <li>
+                    BiuDialog：修复有选中值没有数据源时会报错
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/f0f8e060c962619984d974aa18196fbd251cc8ff"
+                        target="_blank"
+                        >#f0f8e06</el-link
+                    >
+                </li>
+                <li>
+                    v-dialogDrag：去掉absolute定位导致有些情况位置不对
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/a2f4dc0ca85e17347fb4fcd4b292b5c29cbe2ba0"
+                        target="_blank"
+                        >#a2f4dc0</el-link
+                    >
+                </li>
             </ul>
         </section>
         <section class="version">
