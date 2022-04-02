@@ -148,11 +148,13 @@ export default class BiuSelectTable extends Vue {
 
     // 将选中的数据转为复选框格式 row[]
     get multipleSelection() {
-        return this.checkList.map((item) =>
-            this.customTableData.find(
-                (row) => String(row[this.prop.id]) === String(item)
+        return this.checkList
+            .map((item) =>
+                this.customTableData.find(
+                    (row) => String(row[this.prop.id]) === String(item)
+                )
             )
-        )
+            .filter((i) => i)
     }
     set multipleSelection(val) {
         this.checkList = val.map((item) => String(item[this.prop.id]))
