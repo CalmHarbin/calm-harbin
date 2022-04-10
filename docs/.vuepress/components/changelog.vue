@@ -1,6 +1,23 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.9</h3>
+            <el-tag type="info">2022-03-02</el-tag>
+
+            <p>style</p>
+            <ul>
+                <li>
+                    BiuTable: 可编辑表格表头筛选时去掉icon
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/3e0dfa0bbf994c35207dba4bbbe8e91efc9a7639"
+                        target="_blank"
+                        >#3e0dfa0</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.8</h3>
             <el-tag type="info">2022-03-02</el-tag>
 
