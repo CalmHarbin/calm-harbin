@@ -118,6 +118,7 @@
                         <template v-else>
                             <i
                                 v-if="col.editable"
+                                style="display: inline-block"
                                 class="elx-cell--edit-icon el-icon-edit-outline"
                             ></i>
                             <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
