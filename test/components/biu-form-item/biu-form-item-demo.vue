@@ -170,7 +170,7 @@
 </template>
 
 <script lang="ts">
-import { treeNodeType } from 'calm-harbin/types/biu-form-item'
+import { treeNodeType } from 'calm-harbin/types/biu-tree'
 
 export default {
     name: 'BiuFormItemInput',
