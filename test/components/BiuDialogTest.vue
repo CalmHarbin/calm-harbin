@@ -3,7 +3,7 @@
         ref="biuDrawer"
         :visible.sync="visibleSync"
         title="我是标题"
-        :btnLoading="btnLoading"
+        :btn-loading="btnLoading"
         :footer="footer"
     >
         1111111111111111111111111

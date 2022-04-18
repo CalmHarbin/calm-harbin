@@ -2,28 +2,28 @@
     <div class="calm-BiuPageContainer">
         <BiuForm
             v-if="source.length"
+            ref="BiuForm"
             v-model="customValue"
             :source="source"
+            :show-btn="defaultAttr('showBtn', true, formAttr)"
+            v-bind="formAttr"
             @openChange="() => $nextTick(resize)"
             @search="() => $emit('search')"
             @reset="() => $emit('reset')"
-            ref="BiuForm"
-            :showBtn="defaultAttr('showBtn', true, formAttr)"
-            v-bind="formAttr"
             v-on="formEvent"
         />
-        <div style="flex: 1; padding: 0 10px" ref="container">
+        <div ref="container" style="flex: 1; padding: 0 10px">
             <slot name="operation">
                 <Operation
                     v-if="customOperationOptions"
-                    :operationOptions="customOperationOptions"
                     ref="Operation"
+                    :operation-options="customOperationOptions"
                 />
             </slot>
             <BiuTable
                 ref="BiuTable"
                 v-model="customValue"
-                :tbHeight="tbHeight || height"
+                :tb-height="tbHeight || height"
                 :columns="tableColumns"
                 v-bind="attrs"
                 v-on="listeners"
@@ -38,8 +38,8 @@
                 :total="paginationSync.total"
                 :page.sync="page"
                 :limit.sync="size"
-                @pagination="(data) => $emit('pagination', data)"
                 v-bind="paginationAttr"
+                @pagination="(data) => $emit('pagination', data)"
                 v-on="paginationEvent"
             />
         </slot>

@@ -4,7 +4,7 @@
         :columns="columns"
         :multiple="multiple"
         :disabled="disabled"
-        :tableData="tableData"
+        :table-data="tableData"
         :loading="loading"
         :inputable="inputable"
         :prop="{ id: 'clientName', label: 'clientName' }"

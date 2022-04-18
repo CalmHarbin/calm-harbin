@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Operation :operationOptions="footer"></Operation>
+        <Operation :operation-options="footer"></Operation>
 
         <biu-table
             :columns="columns"

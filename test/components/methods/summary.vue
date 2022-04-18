@@ -2,8 +2,8 @@
     <BiuPage
         v-model="form"
         :columns="columns"
-        :tableData="tableData"
-        :tbHeight="36 * 4"
+        :table-data="tableData"
+        :tb-height="36 * 4"
         custom-show-summary
     >
     </BiuPage>

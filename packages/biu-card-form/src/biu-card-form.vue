@@ -1,16 +1,16 @@
 <template>
     <el-row class="calm-BiuCardForm" :gutter="10">
         <el-col
-            :span="group.span || 24"
             v-for="(group, index) in customSource"
             :key="group.title"
+            :span="group.span || 24"
         >
             <slot :name="group.id || index">
                 <BiuCard :border="group.showBorder" :title="group.title">
                     <BiuForm
                         ref="BiuForm"
-                        :source="group.list"
                         v-model="customForm"
+                        :source="group.list"
                         v-bind="formAttr"
                     />
                 </BiuCard>

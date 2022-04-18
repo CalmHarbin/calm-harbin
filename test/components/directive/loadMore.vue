@@ -1,5 +1,5 @@
 <template>
-    <el-select value="" v-loadMore="loadMore">
+    <el-select v-loadMore="loadMore" value="">
         <el-option
             v-for="(item, index) in Array(20)"
             :key="index"
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-    name: 'loadMore',
+    name: 'LoadMore',
     methods: {
         loadMore() {
             console.log('触底了')

@@ -5,19 +5,19 @@
         :direction="attrs.direction || 'rtl'"
         append-to-body
         :size="attrs.size || '80%'"
-        :wrapperClosable="false"
+        :wrapper-closable="false"
+        v-bind="attrs"
         @opened="opened"
         @closed="closed"
-        v-bind="attrs"
     >
-        <div class="calm-BiuDrawer-body" v-if="customVisible">
+        <div v-if="customVisible" class="calm-BiuDrawer-body">
             <slot></slot>
         </div>
-        <div class="calm-BiuDrawer-footer" v-if="footer">
+        <div v-if="footer" class="calm-BiuDrawer-footer">
             <slot name="footer">
                 <Operation
                     v-if="operationShow"
-                    :operationOptions="footer"
+                    :operation-options="footer"
                     :loading="btnLoading"
                 />
                 <el-button

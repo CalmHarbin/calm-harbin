@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[45],{840:function(e,n,t){"use strict";t.r(n);var a={name:"WavesDemo"},s=t(47),i=Object(s.a)(a,(function(){var e=this.$createElement;return(this._self._c||e)("el-button",{directives:[{name:"waves",rawName:"v-waves"}]},[this._v("按钮")])}),[],!1,null,null,null);n.default=i.exports}}]);

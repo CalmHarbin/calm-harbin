@@ -1,6 +1,6 @@
 <template>
     <div>
-        <operation :operationOptions="operationOptions"></operation>
+        <operation :operation-options="operationOptions"></operation>
     </div>
 </template>
 

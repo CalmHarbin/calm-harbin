@@ -19,8 +19,8 @@
             <!-- 图片展示 -->
             <div v-if="type === 'img'" slot="file" slot-scope="{ file }">
                 <img
-                    class="el-upload-list__item-thumbnail"
                     v-img="file.url"
+                    class="el-upload-list__item-thumbnail"
                     alt=""
                 />
                 <span class="el-upload-list__item-actions">
@@ -48,8 +48,8 @@
             <!-- 数量限制 -->
             <template v-if="isUploadReady">
                 <i
-                    class="el-icon-plus avatar-uploader-icon"
                     v-if="type === 'img'"
+                    class="el-icon-plus avatar-uploader-icon"
                 ></i>
                 <el-button v-else size="mini" type="primary"
                     >点击上传</el-button
@@ -64,9 +64,9 @@
             @closed="() => (index = -1)"
         >
             <img
-                width="100%"
                 v-if="index !== -1"
                 v-img="fileList[index].url"
+                width="100%"
                 alt=""
             />
             <div class="calm-Prevbtn" @click="prev">

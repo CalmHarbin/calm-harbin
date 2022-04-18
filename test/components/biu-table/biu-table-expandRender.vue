@@ -2,7 +2,7 @@
     <biu-table
         :columns="columns"
         :table-data="tableData"
-        :expandRender="expandRender"
+        :expand-render="expandRender"
     ></biu-table>
 </template>
 

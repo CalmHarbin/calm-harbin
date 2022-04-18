@@ -16,9 +16,9 @@ const components: componentsType[] = [
             import('@test/components/biu-card-form/biu-card-form-demo.vue')
     },
     {
-        name: 'BiuFormItemInput',
+        name: 'BiuFormItemDemo',
         template: () =>
-            import('@test/components/biu-form-item/biu-form-item-input.vue')
+            import('@test/components/biu-form-item/biu-form-item-demo.vue')
     },
     {
         name: 'BiuFormDemo',
@@ -163,6 +163,10 @@ const components: componentsType[] = [
     {
         name: 'DialogDragWidthDemo',
         template: () => import('@test/components/directive/dialogDragWidth.vue')
+    },
+    {
+        name: 'BiuTreeDemo',
+        template: () => import('@test/components/biu-tree/biu-tree-demo.vue')
     }
 ]
 

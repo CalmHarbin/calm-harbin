@@ -21,7 +21,7 @@
 
 <script>
 export default {
-    name: 'dialogDrag',
+    name: 'DialogDrag',
     data() {
         return {
             dialogVisible: false

@@ -3,7 +3,7 @@
         :columns="columns"
         :table-data="tableData"
         selection
-        :multipleSelection.sync="multipleSelection"
+        :multiple-selection.sync="multipleSelection"
     ></biu-table>
 </template>
 

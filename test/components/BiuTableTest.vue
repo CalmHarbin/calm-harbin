@@ -1,17 +1,17 @@
 <template>
     <div>
         <button @click="setForm">按钮</button>
-        <input type="text" v-model="form.name" />
+        <input v-model="form.name" type="text" />
         <biu-form v-model="form" :source="source"></biu-form>
         <BiuTable
             :virtual="false"
             :columns="columns"
-            :tableData.sync="tableData"
+            :table-data.sync="tableData"
             max-height="300"
         ></BiuTable>
         <BiuTable
             :columns="columns"
-            :tableData.sync="tableData"
+            :table-data.sync="tableData"
             max-height="300"
         ></BiuTable>
     </div>

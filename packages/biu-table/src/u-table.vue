@@ -17,17 +17,17 @@
         :highlight-current-row="defaultAttr('highlight-current-row', true)"
         :row-height="defaultAttr('row-height', 36)"
         :row-id="rowId"
-        @header-dragend="headerDragend"
         v-bind="attrs"
+        @header-dragend="headerDragend"
         v-on="listeners"
     >
         <!-- 可选择 -->
         <u-table-column
             v-if="selection"
+            :key="'selection' + random"
             width="50"
             fixed="left"
             :resizable="true"
-            :key="'selection' + random"
             align="center"
         >
             <template #header>
@@ -39,11 +39,11 @@
             </template>
             <template #default="{ row, $index }">
                 <el-checkbox
-                    :value="isChecked(row)"
                     v-if="
                         !customShowSummary ||
                         $index !== customTableData.length - 1
                     "
+                    :value="isChecked(row)"
                     @change="() => checked(row)"
                 ></el-checkbox>
             </template>
@@ -51,10 +51,10 @@
         <!-- 索引 -->
         <u-table-column
             v-if="showIndex"
+            :key="'index' + random"
             label="#"
             fixed="left"
             type="index"
-            :key="'index' + random"
             :index="indexValue"
             width="56"
             :resizable="true"
@@ -109,11 +109,11 @@
                                 ></Render>
                                 <BiuFormItem
                                     v-else
-                                    :formType="col.formType"
+                                    v-model="customValue[col.formId || col.id]"
+                                    :form-type="col.formType"
                                     :size="
                                         col.formAttr.otherAttr.size || 'mini'
                                     "
-                                    v-model="customValue[col.formId || col.id]"
                                     v-bind="col.formAttr.otherAttr"
                                     v-on="col.formAttr.otherEvent"
                                 />
@@ -140,9 +140,9 @@
                             <!-- 可编辑的单元格 -->
                             <template v-else-if="col.editable">
                                 <el-input
+                                    v-model="scope.row[col.id]"
                                     class="calm-editableInput"
                                     type="text"
-                                    v-model="scope.row[col.id]"
                                     size="mini"
                                     clearable
                                 />
@@ -202,9 +202,9 @@
                         <!-- 可编辑的单元格 -->
                         <template v-else-if="col.editable">
                             <el-input
+                                v-model="scope.row[col.id]"
                                 class="calm-editableInput"
                                 type="text"
-                                v-model="scope.row[col.id]"
                                 size="mini"
                                 clearable
                             />
@@ -217,8 +217,8 @@
 
         <!-- 操作 -->
         <u-table-column
-            :key="'operation' + random"
             v-if="customTablePostfixOptions"
+            :key="'operation' + random"
             label="操作"
             fixed="right"
             align="center"
@@ -226,11 +226,11 @@
             :width="customTablePostfixOptions.length * 31 + 22"
         >
             <div
-                slot-scope="scope"
-                class="calm-BiuTable-tableOperate"
                 v-if="
                     !customShowSummary || scope.$index !== tableData.length - 1
                 "
+                slot-scope="scope"
+                class="calm-BiuTable-tableOperate"
             >
                 <el-tooltip
                     v-for="(item, index) in customTablePostfixOptions"
@@ -258,9 +258,9 @@
         </u-table-column>
         <!-- 空提示 -->
         <el-card
+            slot="empty"
             shadow="never"
             class="calm-notdatacss"
-            slot="empty"
             style="
                 color: rgb(0 0 0 / 25%);
                 line-height: 1em;

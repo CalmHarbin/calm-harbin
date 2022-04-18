@@ -17,6 +17,7 @@ import BiuSelectTable from '@packages/biu-select-table/index'
 import BiuPage from '@packages/biu-page/index'
 import BiuForm from '@packages/biu-form/index'
 import BiuFormItem from '@packages/biu-form-item/index'
+import BiuTree from '@packages/biu-tree/index'
 
 // 引入指令
 import waves from './directive/waves/index'
@@ -49,6 +50,7 @@ const components = {
     BiuPage,
     BiuForm,
     BiuFormItem,
+    BiuTree,
     BiuSelectTable
 }
 
@@ -97,7 +99,7 @@ export {
 }
 
 export default {
-    version: '1.0.7',
+    version: '1.0.9',
     install,
     BiuDialog,
     BiuDrawer,
@@ -109,6 +111,7 @@ export default {
     BiuSelectTable,
     BiuForm,
     BiuFormItem,
+    BiuTree,
     debounce,
     exportExcel,
     exportExcelTemp,

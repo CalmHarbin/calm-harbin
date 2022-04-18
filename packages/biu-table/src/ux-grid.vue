@@ -10,15 +10,12 @@
         :border="defaultAttr('border', true)"
         :fit="defaultAttr('fit', true)"
         :highlight-current-row="defaultAttr('highlight-current-row', true)"
-        widthResize
-        :rowKey="false"
-        :rowId="rowId"
-        :scrollX="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
-        :scrollY="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
+        width-resize
+        :row-key="false"
+        :row-id="rowId"
+        :scroll-x="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
+        :scroll-y="{ gt: expandRender ? 9999 : 50, oSize: 0 }"
         :show-overflow="defaultAttr('show-overflow', 'tooltip')"
-        @header-dragend="headerDragend"
-        @edit-actived="editActived"
-        @edit-closed="editClosed"
         :tree-config="treeConfig"
         :edit-config="
             editable
@@ -26,15 +23,18 @@
                 : undefined
         "
         v-bind="attrs"
+        @header-dragend="headerDragend"
+        @edit-actived="editActived"
+        @edit-closed="editClosed"
         v-on="listeners"
     >
         <!-- 可选择 -->
         <ux-table-column
             v-if="selection"
+            :key="'selection' + random"
             width="50"
             fixed="left"
             :resizable="false"
-            :key="'selection' + random"
             align="center"
         >
             <template #header="">
@@ -46,11 +46,11 @@
             </template>
             <template #default="{ row, $rowIndex }">
                 <el-checkbox
-                    :value="isChecked(row)"
                     v-if="
                         !customShowSummary ||
                         $rowIndex !== customTableData.length - 1
                     "
+                    :value="isChecked(row)"
                     @click.native.stop
                     @change="() => checked(row)"
                 ></el-checkbox>
@@ -59,10 +59,10 @@
         <!-- 索引 -->
         <ux-table-column
             v-if="showIndex"
+            :key="'index' + random"
             title="#"
             fixed="left"
             type="index"
-            :key="'index' + random"
             width="56"
             :resizable="false"
             align="center"
@@ -118,6 +118,7 @@
                         <template v-else>
                             <i
                                 v-if="col.editable"
+                                style="display: inline-block"
                                 class="elx-cell--edit-icon el-icon-edit-outline"
                             ></i>
                             <!-- <i v-if="col.required" class="elx-cell--required-icon"></i> -->
@@ -153,11 +154,11 @@
                                 ></Render>
                                 <BiuFormItem
                                     v-else
-                                    :formType="col.formType"
+                                    v-model="customValue[col.formId || col.id]"
+                                    :form-type="col.formType"
                                     :size="
                                         col.formAttr.otherAttr.size || 'mini'
                                     "
-                                    v-model="customValue[col.formId || col.id]"
                                     v-bind="col.formAttr.otherAttr"
                                     v-on="col.formAttr.otherEvent"
                                 />
@@ -183,9 +184,9 @@
                             ></Render>
                             <el-input
                                 v-else
+                                v-model="row[col.id]"
                                 class="calm-editableInput"
                                 type="text"
-                                v-model="row[col.id]"
                                 size="mini"
                                 clearable
                                 @blur="
@@ -272,9 +273,9 @@
                         ></Render>
                         <el-input
                             v-else
+                            v-model="row[col.id]"
                             class="calm-editableInput"
                             type="text"
-                            v-model="row[col.id]"
                             size="mini"
                             clearable
                             @blur="
@@ -313,8 +314,8 @@
 
         <!-- 操作 -->
         <ux-table-column
-            :key="'operation' + random"
             v-if="customTablePostfixOptions"
+            :key="'operation' + random"
             title="操作"
             fixed="right"
             align="center"
@@ -323,11 +324,11 @@
         >
             <template #default="{ row, seq, rowIndex: $index }">
                 <div
-                    class="calm-BiuTable-tableOperate"
                     v-if="
                         !customShowSummary ||
                         seq - 1 !== customTableData.length - 1
                     "
+                    class="calm-BiuTable-tableOperate"
                 >
                     <el-tooltip
                         v-for="(item, index) in customTablePostfixOptions"
@@ -368,9 +369,9 @@
         </ux-table-column>
         <!-- 空提示 -->
         <el-card
+            slot="empty"
             shadow="never"
             class="calm-notdatacss"
-            slot="empty"
             style="
                 color: rgb(0 0 0 / 25%);
                 line-height: 1em;

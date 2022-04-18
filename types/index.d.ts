@@ -6,6 +6,7 @@ export { BiuPage } from './biu-page'
 export { BiuTable } from './biu-table'
 export { BiuForm } from './biu-form'
 export { BiuFormItem } from './biu-form-item'
+export { BiuTree } from './biu-tree'
 
 import { PluginFunction } from 'vue'
 

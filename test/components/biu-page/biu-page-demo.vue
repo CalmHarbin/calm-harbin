@@ -4,7 +4,7 @@
             v-model="form"
             :loading="loading"
             :columns="columns"
-            :tableData="tableData"
+            :table-data="tableData"
             @search="search"
             @reset="reset"
         ></biu-page>

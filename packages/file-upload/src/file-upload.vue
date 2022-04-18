@@ -10,8 +10,8 @@
             :style="{
                 display: 'none'
             }"
-            @change="change"
             v-bind="attrs"
+            @change="change"
         />
     </div>
 </template>

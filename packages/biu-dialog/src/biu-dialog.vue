@@ -1,7 +1,7 @@
 <template>
     <el-dialog
-        v-dialogDrag="attrs.dialogDrag"
-        v-dialogDragWidth="attrs.dialogDragWidth"
+        v-dialogDrag="attrs['dialog-drag']"
+        v-dialogDragWidth="attrs['dialog-drag-width']"
         :visible.sync="visibleSync"
         append-to-body
         modal-append-to-body
@@ -13,11 +13,11 @@
     >
         <slot></slot>
 
-        <slot name="footer" slot="footer">
-            <div class="calm-BiuDialog-footer" v-if="footer">
+        <slot slot="footer" name="footer">
+            <div v-if="footer" class="calm-BiuDialog-footer">
                 <Operation
                     v-if="operationShow"
-                    :operationOptions="footer"
+                    :operation-options="footer"
                     :loading="btnLoading"
                 />
                 <el-button

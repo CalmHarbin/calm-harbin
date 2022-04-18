@@ -1,6 +1,6 @@
 <template>
     <biu-table
-        tbHeight="350"
+        tb-height="350"
         :columns="columns"
         :table-data="tableData"
         custom-show-summary

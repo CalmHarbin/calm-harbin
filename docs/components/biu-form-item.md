@@ -6,14 +6,14 @@
 
 <demo-block>
 ::: slot source
-<BiuFormItemInput></BiuFormItemInput>
+<BiuFormItemDemo></BiuFormItemDemo>
 :::
 
 使用 title 属性来定义 自定义标题。
 
 ::: slot highlight
 
-<<< @/test/components/biu-form-item/biu-form-item-input.vue
+<<< @/test/components/biu-form-item/biu-form-item-demo.vue
 
 :::
 </demo-block>

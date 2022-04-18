@@ -13,7 +13,9 @@
 
         <!-- <BiuSelectTest></BiuSelectTest> -->
         <!-- <Sheet></Sheet> -->
-        <BiuTableRender></BiuTableRender>
+        <!-- <BiuTableRender></BiuTableRender> -->
+        <BiuTreeDemo></BiuTreeDemo>
+        <BiuFormItemDemo></BiuFormItemDemo>
 
         <img alt="Vue logo" src="./assets/logo.png" />
         <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
@@ -41,6 +43,8 @@ import BiuPageTest from './components/BiuPageTest.vue'
 // import Sheet from './components/Sheet.vue'
 // import { summary } from '@src/index'
 import BiuTableRender from './components/biu-table/biu-table-render.vue'
+import BiuTreeDemo from './components/biu-tree/biu-tree-demo.vue'
+import BiuFormItemDemo from './components/biu-form-item/biu-form-item-demo.vue'
 
 @Component({
     components: {
@@ -52,7 +56,9 @@ import BiuTableRender from './components/biu-table/biu-table-render.vue'
         // BiuTableTest
         // BiuSelectTest,
         // Sheet,
-        BiuTableRender
+        BiuTableRender,
+        BiuTreeDemo,
+        BiuFormItemDemo
     }
 })
 export default class App extends Vue {

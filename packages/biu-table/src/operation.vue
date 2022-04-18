@@ -3,8 +3,8 @@
         <template v-for="(btn, index) in customOperationOptions">
             <template v-if="!btn.hidden">
                 <Render
-                    :key="index"
                     v-if="btn.render"
+                    :key="index"
                     :render-func="btn.render"
                 ></Render>
                 <el-tooltip

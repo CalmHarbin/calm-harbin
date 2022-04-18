@@ -1,6 +1,6 @@
 <template>
     <div>
-        <FileUpload accept=".xls,.xlsx" :importFile="importFile">
+        <FileUpload accept=".xls,.xlsx" :import-file="importFile">
             <el-button>导入</el-button>
         </FileUpload>
 

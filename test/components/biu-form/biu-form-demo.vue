@@ -8,7 +8,7 @@
             label-width="92px"
             label-position="right"
         ></biu-form>
-        <operation :operationOptions="operationOptions"></operation>
+        <operation :operation-options="operationOptions"></operation>
     </div>
 </template>
 

@@ -1,6 +1,71 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.9</h3>
+            <el-tag type="info">2022-03-02</el-tag>
+
+            <p>style</p>
+            <ul>
+                <li>
+                    BiuTable: 可编辑表格表头筛选时去掉icon
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/3e0dfa0bbf994c35207dba4bbbe8e91efc9a7639"
+                        target="_blank"
+                        >#3e0dfa0</el-link
+                    >
+                </li>
+            </ul>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    增加BiuTree组件
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/66b25cb50ce8373fd67fee5730cf6b19303a9d1e"
+                        target="_blank"
+                        >#66b25cb</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
+            <h3>v1.0.8</h3>
+            <el-tag type="info">2022-03-02</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuDialog：修复dialogDrag配置无效
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/789ebc7ce3cc09079684ef17e0fb58d4c5cc9414"
+                        target="_blank"
+                        >#789ebc7</el-link
+                    >
+                </li>
+                <li>
+                    BiuDialog：修复有选中值没有数据源时会报错
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/f0f8e060c962619984d974aa18196fbd251cc8ff"
+                        target="_blank"
+                        >#f0f8e06</el-link
+                    >
+                </li>
+                <li>
+                    v-dialogDrag：去掉absolute定位导致有些情况位置不对
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/a2f4dc0ca85e17347fb4fcd4b292b5c29cbe2ba0"
+                        target="_blank"
+                        >#a2f4dc0</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.7</h3>
             <el-tag type="info">2022-03-20</el-tag>
 
@@ -385,5 +450,13 @@ export default {
 }
 .version ::v-deep a:hover {
     text-decoration: none;
+}
+h3 {
+    margin: 20px 0;
+}
+p,
+li,
+ul {
+    margin: 20px 0;
 }
 </style>

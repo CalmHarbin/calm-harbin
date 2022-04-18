@@ -71,7 +71,6 @@ export default class BiuTableBase extends Vue {
                 ),
                 formAttr: {
                     render: (h, col) => {
-                        console.log(col)
                         return (
                             <biu-form-item
                                 formType="select"

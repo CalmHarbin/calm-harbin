@@ -48,6 +48,7 @@ module.exports = {
                     '/components/biu-select-table',
                     '/components/biu-form',
                     '/components/biu-form-item',
+                    '/components/biu-tree',
                     '/components/biu-card',
                     '/components/biu-card-form',
                     '/components/biu-dialog',

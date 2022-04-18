@@ -1,7 +1,7 @@
 <template>
     <el-select
-        class="calm-BiuSelectTable"
         ref="select"
+        class="calm-BiuSelectTable"
         :value="multiple ? checkListValue : checkListValue[0]"
         size="mini"
         clearable
@@ -20,13 +20,13 @@
         <el-option value="1111111111">
             <BiuTable
                 ref="BiuTable"
-                :tbHeight="paginationSync ? 256 : 300"
-                :tableData="customTableData"
+                :tb-height="paginationSync ? 256 : 300"
+                :table-data="customTableData"
                 :selection="multiple"
-                :rowId="prop.id"
-                :multipleSelection.sync="multipleSelection"
-                @selection-change="handleSelectionChange"
+                :row-id="prop.id"
+                :multiple-selection.sync="multipleSelection"
                 v-bind="attrs"
+                @selection-change="handleSelectionChange"
                 @row-click="rowClick"
                 @table-body-scroll="tableBodyScroll"
             />
@@ -148,11 +148,13 @@ export default class BiuSelectTable extends Vue {
 
     // 将选中的数据转为复选框格式 row[]
     get multipleSelection() {
-        return this.checkList.map((item) =>
-            this.customTableData.find(
-                (row) => String(row[this.prop.id]) === String(item)
+        return this.checkList
+            .map((item) =>
+                this.customTableData.find(
+                    (row) => String(row[this.prop.id]) === String(item)
+                )
             )
-        )
+            .filter((i) => i)
     }
     set multipleSelection(val) {
         this.checkList = val.map((item) => String(item[this.prop.id]))
