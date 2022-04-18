@@ -16,6 +16,19 @@
                     >
                 </li>
             </ul>
+
+            <p>新功能</p>
+            <ul>
+                <li>
+                    增加BiuTree组件
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/66b25cb50ce8373fd67fee5730cf6b19303a9d1e"
+                        target="_blank"
+                        >#66b25cb</el-link
+                    >
+                </li>
+            </ul>
         </section>
         <section class="version">
             <h3>v1.0.8</h3>
