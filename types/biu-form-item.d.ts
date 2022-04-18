@@ -17,14 +17,6 @@ export type formTypeType =
 /* 省市区组件可选类型 */
 export type areaType = 'province' | 'city' | 'area'
 
-/** 树组件数据源 */
-export type treeNodeType = {
-    label: string
-    id: string
-    pid?: string
-    children?: treeNodeType[]
-}
-
 /** BiuFormItem组件 */
 export declare class BiuFormItem extends CalmComponent {
     /** 表单类型 */
