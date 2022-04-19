@@ -1,8 +1,25 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.10</h3>
+            <el-tag type="info">2022-04-19</el-tag>
+
+            <p>调整</p>
+            <ul>
+                <li>
+                    BiuSelectTable: 增加size属性配置
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/290f27cccff74cd225c10a62b1a039c81a859134"
+                        target="_blank"
+                        >#290f27c</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.9</h3>
-            <el-tag type="info">2022-03-02</el-tag>
+            <el-tag type="info">2022-04-18</el-tag>
 
             <p>style</p>
             <ul>
@@ -32,7 +49,7 @@
         </section>
         <section class="version">
             <h3>v1.0.8</h3>
-            <el-tag type="info">2022-03-02</el-tag>
+            <el-tag type="info">2022-04-02</el-tag>
 
             <p>Bug 修复</p>
             <ul>
