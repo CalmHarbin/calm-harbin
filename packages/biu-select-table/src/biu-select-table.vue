@@ -3,7 +3,7 @@
         ref="select"
         class="calm-BiuSelectTable"
         :value="multiple ? checkListValue : checkListValue[0]"
-        size="mini"
+        :size="size"
         clearable
         filterable
         :multiple="multiple"
@@ -118,6 +118,7 @@ export default class BiuSelectTable extends Vue {
     // id为双向绑定的值，label为输入框中显示的值，会自动从数据源中取
     @Prop(Object) prop!: { id: string; label: string }
     @Prop({ type: Array }) pageSizes?: number[]
+    @Prop({ type: String, default: 'mini' }) size?: string
     @Model('setValue') value!: string | string[]
 
     // dom是否已经加载,加载后在渲染表格,不然表格没法自动填充满
