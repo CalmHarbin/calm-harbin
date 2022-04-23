@@ -21,7 +21,7 @@
                     ref="biuTree"
                     v-model="checkList"
                     :data="customData"
-                    multiple
+                    :multiple="multiple"
                     :sub-with="subWithValue"
                 ></biu-tree>
             </el-option>

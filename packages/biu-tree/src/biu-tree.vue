@@ -6,7 +6,7 @@
         :props="defaultProps"
         node-key="id"
         :expand-on-click-node="expandOnClickNode"
-        :show-checkbox="customMultiple ? true : false"
+        :show-checkbox="customMultiple"
         :default-checked-keys="defaultCheckedKeys"
         :default-expanded-keys="defaultExpandedKeysArr"
         :highlight-current="!customMultiple"
