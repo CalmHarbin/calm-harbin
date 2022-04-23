@@ -16,6 +16,19 @@
                     >
                 </li>
             </ul>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuFormItem: 修改下拉树选择组件写死多选了
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/a5e12b2632bb2f756fff0ccb8a5b565d7d08f2c7"
+                        target="_blank"
+                        >#a5e12b2</el-link
+                    >
+                </li>
+            </ul>
         </section>
         <section class="version">
             <h3>v1.0.9</h3>
