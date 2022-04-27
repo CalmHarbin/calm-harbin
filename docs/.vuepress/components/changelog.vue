@@ -2,7 +2,7 @@
     <div>
         <section class="version">
             <h3>v1.0.10</h3>
-            <el-tag type="info">2022-04-19</el-tag>
+            <el-tag type="info">2022-04-27</el-tag>
 
             <p>调整</p>
             <ul>
