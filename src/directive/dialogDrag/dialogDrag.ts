@@ -16,8 +16,7 @@ export default {
             // 获取原有属性 ie dom元素.currentStyle 火狐谷歌 window.getComputedStyle(dom元素, null);
             const sty =
                 dragDom.currentStyle || window.getComputedStyle(dragDom, null)
-            // dragDom.style.position = 'absolute'
-            // dragDom.style.marginTop = 0
+
             let width = dragDom.style.width
             if (width.includes('%')) {
                 width =
