@@ -36,7 +36,7 @@
                 ref="Pagination"
                 :total="paginationSync.total"
                 :page.sync="page"
-                :limit.sync="size"
+                :limit.sync="limit"
                 :page-sizes="pageSizes"
                 @pagination="paginationCallback"
                 @click.native="focus"
@@ -88,7 +88,7 @@ import cloneDeep from 'lodash/cloneDeep'
                 }
             }
         },
-        size: {
+        limit: {
             get() {
                 const globalThis: any = this
                 return globalThis.paginationSync.size
