@@ -1,6 +1,23 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.12</h3>
+            <el-tag type="info">2022-04-28</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuFormItem: 修复下拉树选择bug
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/486c142c8926cbad914367ac6056d0c9ed05e777"
+                        target="_blank"
+                        >#486c142</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.11</h3>
             <el-tag type="info">2022-04-28</el-tag>
 
