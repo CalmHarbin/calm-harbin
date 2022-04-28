@@ -172,6 +172,9 @@ export default class TreeSelect extends Vue {
      */
     updateCheckListValue(checkList: string | string[]) {
         this.checkListValue = []
+
+        if (!checkList || checkList.length === 0) return
+
         if (this.customMultiple) {
             ;(checkList as string[]).forEach((item: string) => {
                 const node: treeNodeType = (this.$refs.biuTree as any).findNode(
