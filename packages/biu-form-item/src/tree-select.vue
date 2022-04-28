@@ -23,6 +23,7 @@
                     :data="customData"
                     :multiple="multiple"
                     :sub-with="subWithValue"
+                    @node-click="nodeClick"
                 ></biu-tree>
             </el-option>
             <div slot="empty"></div>
@@ -79,7 +80,7 @@ export default class TreeSelect extends Vue {
     /**
      * 记录当前选中的节点
      */
-    checkList: string[] = []
+    checkList: string | string[] = []
     /**
      * 记录当前选中的节点名,用来显示
      */
@@ -124,13 +125,8 @@ export default class TreeSelect extends Vue {
     }
 
     @Watch('checkList', { deep: true })
-    checkListChange(newVal: string[]) {
-        if (this.customMultiple) {
-            this.setValue(newVal)
-        } else {
-            // 单选时直接同步的是id
-            this.setValue(newVal[0])
-        }
+    checkListChange(newVal: string | string[]) {
+        this.setValue(newVal)
         // 同步显示值
         this.updateCheckListValue(newVal)
     }
@@ -151,21 +147,7 @@ export default class TreeSelect extends Vue {
      * 改变checkList
      */
     changeCheckList(newVal: string | string[]) {
-        if (newVal === undefined) {
-            this.checkList = []
-        } else if (
-            this.customMultiple &&
-            this.checkList.toString() !== newVal.toString()
-        ) {
-            this.checkList = [...newVal].map((item) =>
-                typeof item === 'number' ? String(item) : item
-            )
-        } else if (!this.customMultiple) {
-            this.checkList =
-                typeof newVal === 'number'
-                    ? [String(newVal)]
-                    : [newVal as string]
-        }
+        this.checkList = newVal
     }
     /**
      * 搜索
@@ -188,21 +170,24 @@ export default class TreeSelect extends Vue {
     /**
      * 更新显示的值
      */
-    updateCheckListValue(checkList: string[]) {
+    updateCheckListValue(checkList: string | string[]) {
         this.checkListValue = []
-        checkList.forEach((item: string) => {
-            const node: treeNodeType = (this.$refs.biuTree as any).findNode(
-                this.data,
-                item
-            ) as treeNodeType
-            this.checkListValue.push(node.label)
-        })
-
-        // 触发回调
         if (this.customMultiple) {
+            ;(checkList as string[]).forEach((item: string) => {
+                const node: treeNodeType = (this.$refs.biuTree as any).findNode(
+                    this.data,
+                    item
+                ) as treeNodeType
+                this.checkListValue.push(node.label)
+            })
             this.$emit('change', this.checkListValue, checkList)
         } else {
-            this.$emit('change', this.checkListValue[0], checkList[0])
+            const node: treeNodeType = (this.$refs.biuTree as any).findNode(
+                this.data,
+                checkList as string
+            ) as treeNodeType
+            this.checkListValue.push(node.label)
+            this.$emit('change', this.checkListValue[0], checkList)
         }
     }
     /**
@@ -210,6 +195,15 @@ export default class TreeSelect extends Vue {
      */
     chengeSubWithValue() {
         ;(this.$refs.select as any).focus()
+    }
+    /**
+     * 点击节点时,单选时用来选中
+     */
+    nodeClick(col: treeNodeType) {
+        // 多选不做任何处理
+        if (this.customMultiple) return // 当单选时选中
+        ;(this.$refs.select as any).blur()
+        this.$emit('node-click', col)
     }
 }
 </script>

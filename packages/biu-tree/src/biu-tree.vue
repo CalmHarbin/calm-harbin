@@ -225,8 +225,8 @@ export default class BiuTree extends Vue {
         if (!this.expandOnClickNode || !col.children || !col.children.length) {
             // 点击表示选中
             this.checkList = [col.id]
-            ;(this.$refs.select as any).blur()
         }
+        this.$emit('node-click', col)
     }
     /**
      * 多选时选中值变化
