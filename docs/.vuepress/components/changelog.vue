@@ -1,6 +1,23 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.11</h3>
+            <el-tag type="info">2022-04-28</el-tag>
+
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuSelectTable: 修复字段冲突导致size失效
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/2293563c4fc167c2d7e7c6d101f20432e1b1abce"
+                        target="_blank"
+                        >#2293563</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.10</h3>
             <el-tag type="info">2022-04-27</el-tag>
 
