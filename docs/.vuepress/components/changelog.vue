@@ -24,6 +24,15 @@
                         >#278639f</el-link
                     >
                 </li>
+                <li>
+                    BiuTree: 修复树组件没有设置初始值
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/fd9e219be75d63872cde3e4d30fb015f565a2f0d"
+                        target="_blank"
+                        >#fd9e219</el-link
+                    >
+                </li>
             </ul>
         </section>
         <section class="version">
