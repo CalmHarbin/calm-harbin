@@ -141,7 +141,7 @@ export default class BiuTree extends Vue {
         }
     }
 
-    @Watch('value', { deep: true })
+    @Watch('value', { deep: true, immediate: true })
     valueChange(newVal: string | string[]) {
         this.changeCheckList(newVal)
     }
