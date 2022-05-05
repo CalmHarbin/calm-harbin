@@ -2,7 +2,7 @@
     <div>
         <section class="version">
             <h3>v1.0.13</h3>
-            <el-tag type="info">2022-04-28</el-tag>
+            <el-tag type="info">2022-05-05</el-tag>
 
             <p>Bug 修复</p>
             <ul>
@@ -13,6 +13,15 @@
                         href="https://github.com/CalmHarbin/calm-harbin/commit/7bd5b4aae8490bbba599c76f2a22aa881d360fab"
                         target="_blank"
                         >#7bd5b4a</el-link
+                    >
+                </li>
+                <li>
+                    BiuTree: 修复树组件搜索时勾选的bug
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/278639f9f4538ced206fc9ccbdae3b847307bb34"
+                        target="_blank"
+                        >#278639f</el-link
                     >
                 </li>
             </ul>
