@@ -254,6 +254,8 @@ export default class BiuTree extends Vue {
                 this.uniteChildSame(col, checked)
             }
         }
+        // 选中后清除搜索
+        ;(this.$refs.tree as any).filter('')
     }
     // 递归选中父节点
     selectedParent(col: treeNodeType) {

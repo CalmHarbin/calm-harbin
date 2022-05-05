@@ -12,7 +12,7 @@
             :disabled="disabled"
             :filter-method="search"
             popper-class="calm-treeSelectContainer"
-            @blur="close"
+            @focus="focus"
             @clear="clear"
             v-on="listeners"
         >
@@ -156,9 +156,9 @@ export default class TreeSelect extends Vue {
         ;(this.$refs.biuTree as any).$refs.tree.filter(value)
     }
     /**
-     * 关闭下拉菜单时
+     * 显示下拉菜单时
      */
-    close() {
+    focus() {
         ;(this.$refs.biuTree as any).$refs.tree.filter('')
     }
     /**
