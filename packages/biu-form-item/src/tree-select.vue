@@ -177,7 +177,7 @@ export default class TreeSelect extends Vue {
 
         if (this.customMultiple) {
             ;(checkList as string[]).forEach((item: string) => {
-                const node: treeNodeType = (this.$refs.biuTree as any).findNode(
+                const node: treeNodeType = this.findNode(
                     this.data,
                     item
                 ) as treeNodeType
@@ -185,7 +185,7 @@ export default class TreeSelect extends Vue {
             })
             this.$emit('change', this.checkListValue, checkList)
         } else {
-            const node: treeNodeType = (this.$refs.biuTree as any).findNode(
+            const node: treeNodeType = this.findNode(
                 this.data,
                 checkList as string
             ) as treeNodeType
@@ -207,6 +207,24 @@ export default class TreeSelect extends Vue {
         if (this.customMultiple) return // 当单选时选中
         ;(this.$refs.select as any).blur()
         this.$emit('node-click', col)
+    }
+    /**
+     * 递归找到当前节点
+     */
+    findNode(nodeList: treeNodeType[], id: string): boolean | treeNodeType {
+        let node: treeNodeType | boolean = false
+        for (const item of nodeList) {
+            if (item.id === id) {
+                return item
+            } else if (item.children && item.children.length) {
+                const subResult = this.findNode(item.children, id)
+                if (subResult) {
+                    node = subResult
+                }
+            }
+        }
+
+        return node
     }
 }
 </script>
