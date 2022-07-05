@@ -338,6 +338,7 @@ export default class BiuTree extends Vue {
             if (idx !== -1) {
                 // 改变自己的勾选状态
                 ;(this.$refs.tree as any).setChecked(item.id, false)
+                this.checkList.splice(idx, 1)
             }
             // 改变子集
             this.uniteChildSame(item, false)
