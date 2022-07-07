@@ -48,6 +48,7 @@ import {
     Prop
 } from 'vue-property-decorator'
 import { Select, Option, Tree, Checkbox } from 'element-ui'
+import cloneDeep from 'lodash/cloneDeep'
 import { isEqualWith } from '@src/utils/util'
 import { treeNodeType } from 'calm-harbin/types/biu-tree'
 
@@ -107,8 +108,8 @@ export default class TreeSelect extends Vue {
     created() {
         // 如果含下级则,默认勾上
         if (this.subWith) this.subWithValue = true
-
         this.changeCheckList(this.value)
+        this.updateCheckListValue(this.checkList, false)
     }
 
     /**
@@ -116,9 +117,9 @@ export default class TreeSelect extends Vue {
      */
     @Watch('data', { deep: true, immediate: true })
     dataChange(newVal: treeNodeType[]) {
-        this.customData = [...newVal]
+        this.customData = cloneDeep(newVal)
         // 同步显示值,会有初始命中项,但是数据接口是异步查询,所以需要同步一遍
-        this.updateCheckListValue(this.checkList)
+        this.updateCheckListValue(this.checkList, false)
     }
 
     @Watch('value', { deep: true })
@@ -128,9 +129,11 @@ export default class TreeSelect extends Vue {
 
     @Watch('checkList', { deep: true })
     checkListChange(newVal: string | string[]) {
-        this.setValue(newVal)
-        // 同步显示值
-        this.updateCheckListValue(newVal)
+        if (!isEqualWith(this.value, newVal)) {
+            this.setValue(newVal)
+            // 同步显示值
+            this.updateCheckListValue(newVal, true)
+        }
     }
 
     /**
@@ -143,13 +146,13 @@ export default class TreeSelect extends Vue {
 
     @Emit('setValue')
     setValue(val: string | string[]) {
-        return val
+        return cloneDeep(val)
     }
     /**
      * 改变checkList
      */
     changeCheckList(newVal: string | string[]) {
-        this.checkList = newVal
+        this.checkList = cloneDeep(newVal)
     }
     /**
      * 搜索
@@ -172,10 +175,13 @@ export default class TreeSelect extends Vue {
     /**
      * 更新显示的值
      */
-    updateCheckListValue(checkList: string | string[]) {
+    updateCheckListValue(checkList: string | string[], isChange: boolean) {
         this.checkListValue = []
 
-        if (!checkList || checkList.length === 0) return
+        if (!checkList || checkList.length === 0) {
+            isChange && this.$emit('change', this.checkListValue, checkList)
+            return
+        }
 
         if (this.customMultiple) {
             ;(checkList as string[]).forEach((item: string) => {
@@ -185,14 +191,14 @@ export default class TreeSelect extends Vue {
                 ) as treeNodeType
                 this.checkListValue.push(node.label)
             })
-            this.$emit('change', this.checkListValue, checkList)
+            isChange && this.$emit('change', this.checkListValue, checkList)
         } else {
             const node: treeNodeType = this.findNode(
                 this.data,
                 checkList as string
             ) as treeNodeType
             this.checkListValue.push(node.label)
-            this.$emit('change', this.checkListValue[0], checkList)
+            isChange && this.$emit('change', this.checkListValue[0], checkList)
         }
     }
     /**
