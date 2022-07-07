@@ -28,6 +28,7 @@ import {
     Emit,
     Prop
 } from 'vue-property-decorator'
+import cloneDeep from 'lodash/cloneDeep'
 import { treeNodeType } from 'calm-harbin/types/biu-tree'
 import { isEqualWith } from '@src/utils/util'
 
@@ -184,7 +185,7 @@ export default class BiuTree extends Vue {
 
     @Emit('setValue')
     setValue(val: string | string[]) {
-        return val
+        return cloneDeep(val)
     }
 
     /**
