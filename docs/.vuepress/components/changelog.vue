@@ -1,6 +1,68 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.15</h3>
+            <el-tag type="info">2022-07-07</el-tag>
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuFormItem: treeselect时深拷贝赋值，修复change事件初始也触发
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/8b3281def90af76ee74fb75b7abafea25fdd931c"
+                        target="_blank"
+                        >#8b3281d</el-link
+                    >
+                </li>
+                <li>
+                    BiuTree: 更新value时深拷贝下
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/8c6699cbcffd1ac0a6fea91ec064c2ff51829639"
+                        target="_blank"
+                        >#8c6699c</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
+            <h3>v1.0.14</h3>
+            <el-tag type="info">2022-07-06</el-tag>
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuTree: 修复清空树的时候一开始没有删除顶级的值
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/83b7dbeeadb0db772f457b2c0801048382764505"
+                        target="_blank"
+                        >#83b7dbe</el-link
+                    >
+                </li>
+                <li>
+                    UxGrid: 修复类型声明错误
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/1bdd8748120bff12b20fb294ce9a58df78f44947"
+                        target="_blank"
+                        >#1bdd874</el-link
+                    >
+                </li>
+            </ul>
+            <p>调整</p>
+            <ul>
+                <li>
+                    BiuFormItem: treeselect时增加size属性配置
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/96302def903fc2b5834314d129dc53f30f13ecf4"
+                        target="_blank"
+                        >#96302de</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.13</h3>
             <el-tag type="info">2022-05-05</el-tag>
 
