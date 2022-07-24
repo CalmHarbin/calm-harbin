@@ -7,3 +7,5 @@ dist/*
 lib/*
 
 docs/dist/*
+
+test/**/*.html

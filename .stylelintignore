@@ -19,3 +19,5 @@ lib/*
 public/*
 
 .eslintrc.js
+
+test/**/*.html

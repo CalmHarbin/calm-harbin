@@ -68,7 +68,23 @@ module.exports = {
                 title: '指令',
                 collapsable: false,
                 children: ['/components/directive']
-            }
+            },
+            {
+                title: '地图相关',
+                collapsable: false,
+                children: [
+                    {
+                        title: "百度地图",
+                        collapsable: true,
+                        children: [
+                            {
+                                title: "轨迹回放",
+                                path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/views/baidu/路书.html'
+                            }
+                        ]
+                    }
+                ]
+            },
         ],
         smoothScroll: true // 页面滚动
     },
