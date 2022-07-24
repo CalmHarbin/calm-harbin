@@ -77,15 +77,19 @@
                                 lat: 39.8386141204
                             }
                         ]
-                        var startPoint = new BMapGL.Point(
-                            points[0].lng,
-                            points[0].lat
-                        ) //起点
-                        var endPoint = new BMapGL.Point(
-                            points[points.length - 1].lng,
-                            points[points.length - 1].lat
-                        ) //终点
-
+                        var minLat = 999,
+                            minLng = 999,
+                            maxLat = -999,
+                            maxLng = -999
+                        points.forEach(function(item) {
+                            minLat = Math.min(item.lat, minLat)
+                            minLng = Math.min(item.lng, minLng)
+                            maxLat = Math.max(item.lat, maxLat)
+                            maxLng = Math.max(item.lng, maxLng)
+                        })
+                        var startPoint = new BMapGL.Point(minLng, minLat) // 左下角
+                        var endPoint = new BMapGL.Point(maxLng, maxLat) // 右上角
+                        console.log(startPoint, endPoint)
                         // 获取两点间距离
                         var distance = this.map.getDistance(startPoint, endPoint)
                         console.log(`两点之间的距离：${distance}米`)
@@ -97,7 +101,7 @@
                                 './car.png',
                                 new BMapGL.Size(42, 21)
                             ),
-                            speed: Math.max(distance, 3000), // 速度跟距离挂钩
+                            speed: distance, // 速度跟距离挂钩
                             enableRotation: true // 是否设置marker随着道路的走向进行旋转
                         })
 
