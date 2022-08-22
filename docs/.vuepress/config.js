@@ -74,17 +74,17 @@ module.exports = {
                 collapsable: false,
                 children: [
                     {
-                        title: "百度地图",
+                        title: '百度地图',
                         collapsable: true,
                         children: [
                             {
-                                title: "轨迹回放",
+                                title: '轨迹回放',
                                 path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/views/baidu/路书.html'
                             }
                         ]
                     }
                 ]
-            },
+            }
         ],
         smoothScroll: true // 页面滚动
     },
@@ -169,5 +169,15 @@ module.exports = {
         config.module
             .rule('js')
             .exclude.add(path.resolve(__dirname, '../../lib'))
+
+        // 文件copy
+        config.plugin('copy').use(require('copy-webpack-plugin'), [
+            [
+                {
+                    from: path.resolve(__dirname, '../../test/views'),
+                    to: path.resolve(__dirname, '../dist/components/')
+                }
+            ]
+        ])
     }
 }
