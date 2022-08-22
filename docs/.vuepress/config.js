@@ -79,7 +79,7 @@ module.exports = {
                         children: [
                             {
                                 title: '轨迹回放',
-                                path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/views/baidu/路书.html'
+                                path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/baidu/路书.html'
                             }
                         ]
                     }
