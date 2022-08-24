@@ -80,6 +80,10 @@ module.exports = {
                             {
                                 title: '轨迹回放',
                                 path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/baidu/路书.html'
+                            },
+                            {
+                                title: '地址搜索',
+                                path: 'https://69kg14.csb.app/'
                             }
                         ]
                     }
