@@ -178,9 +178,13 @@ module.exports = {
         config.plugin('copy').use(require('copy-webpack-plugin'), [
             [
                 {
+                    from: path.resolve(__dirname, './public/'),
+                    to: path.resolve(__dirname, '../dist/')
+                },
+                {
                     from: path.resolve(__dirname, '../../test/views'),
                     to: path.resolve(__dirname, '../dist/components/')
-                }
+                },
             ]
         ])
     }
