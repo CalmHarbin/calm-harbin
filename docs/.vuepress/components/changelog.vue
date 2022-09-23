@@ -1,6 +1,21 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.16</h3>
+            <p>新功能</p>
+            <ul>
+                <li>
+                    增加v-fontSize指令
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/a5ff755e9065b1d13263e9dc13260486f1521664"
+                        target="_blank"
+                        >#a5ff755</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.15</h3>
             <el-tag type="info">2022-07-07</el-tag>
             <p>Bug 修复</p>
