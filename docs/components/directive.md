@@ -75,3 +75,20 @@
 
 :::
 </demo-block>
+
+
+#### v-fontSize 指令
+
+<demo-block>
+::: slot source
+<FontSizeDemo></FontSizeDemo>
+:::
+
+使页面可以显示小于12px的字体。
+
+::: slot highlight
+
+<<< @/test/components/directive/fontSize.vue
+
+:::
+</demo-block>

@@ -24,6 +24,7 @@ import waves from './directive/waves/index'
 import loadMore from './directive/loadMore/index'
 import dialogDrag from './directive/dialogDrag/index'
 import dialogDragWidth from './directive/dialogDragWidth/index'
+import fontSize from './directive/fontSize/index'
 
 // 引入工具方法
 import {
@@ -54,10 +55,11 @@ const components = {
     BiuSelectTable
 }
 
-const directives = [waves, loadMore, dialogDrag, dialogDragWidth]
+const directives = [waves, loadMore, dialogDrag, dialogDragWidth, fontSize]
 
 const install = function (Vue: any): void {
     directives.forEach((directive) => {
+        console.log(62, directive)
         Vue.use(directive)
     })
 

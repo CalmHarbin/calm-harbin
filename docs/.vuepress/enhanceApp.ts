@@ -165,6 +165,10 @@ const components: componentsType[] = [
         template: () => import('@test/components/directive/dialogDragWidth.vue')
     },
     {
+        name: 'FontSizeDemo',
+        template: () => import('@test/components/directive/fontSize.vue')
+    },
+    {
         name: 'BiuTreeDemo',
         template: () => import('@test/components/biu-tree/biu-tree-demo.vue')
     }
