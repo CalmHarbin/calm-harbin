@@ -1,5 +1,6 @@
 <template>
     <div>
+        <p>使弹框可以拖拽宽度</p>
         <el-button @click="dialogVisible = true">点我</el-button>
 
         <el-dialog
