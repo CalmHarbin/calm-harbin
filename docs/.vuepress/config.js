@@ -78,12 +78,26 @@ module.exports = {
                         collapsable: true,
                         children: [
                             {
+                                title: '资料汇总',
+                                path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/baidu/汇总.html'
+                            },
+                            {
                                 title: '轨迹回放',
                                 path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/baidu/路书.html'
                             },
                             {
                                 title: '地址搜索',
                                 path: 'https://69kg14.csb.app/'
+                            }
+                        ]
+                    },
+                    {
+                        title: 'echarts',
+                        collapsable: true,
+                        children: [
+                            {
+                                title: '常见图表',
+                                path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/echarts/index.html'
                             }
                         ]
                     }
