@@ -1,29 +1,21 @@
-/**
- * 使页面显示小于12px的字体
- * v-fontSize="10" 10px大小，
- */
-
 export default {
     inserted(el: any, binding: any) {
         binding.def.update(el, binding)
     },
     update(el: any, binding: any) {
         if (!el) return
-        // 第一次记录dom的一些初始值
-        if (!el.width) {
+        // 变化的时候记录变化后dom的初始值
+        if (binding.oldValue !== binding.value) {
             const { width, height } = el.getBoundingClientRect()
-
             const computedStyle = getComputedStyle(el, null)
             el.width = width
             el.height = height
-            el.marginRight = computedStyle.marginRight.replace('px', '') || 0
-            el.marginTop = computedStyle.marginTop.replace('px', '') || 0
-            el.marginBottom = computedStyle.marginBottom.replace('px', '') || 0
-        }
-
-        // 如果缩放比例没有变化则不计算
-        if (binding.oldValue === binding.value) {
-            return
+            el.marginRight = computedStyle.marginRight.replace('px', '')
+            el.marginTop = computedStyle.marginTop.replace('px', '')
+            el.marginBottom = computedStyle.marginBottom.replace('px', '')
+            if (binding.oldValue !== undefined) {
+                return
+            }
         }
 
         // 小于12px时缩放，大于时还原
@@ -39,9 +31,8 @@ export default {
                 el.marginTop - (el.height * (1 - scale)) / 2
             }px`
             el.style.marginBottom = `${
-                el.marginRight - (el.height * (1 - scale)) / 2
+                el.marginBottom - (el.height * (1 - scale)) / 2
             }px`
-
             el.style.display = 'inline-block'
         } else {
             el.style.transform = 'none'
