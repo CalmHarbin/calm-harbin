@@ -17,7 +17,7 @@
             .container {
                 width: 450px;
                 height: 300px;
-                background-color: #0F0C46;
+                background-color: #0f0c46;
             }
         </style>
     </head>
@@ -65,7 +65,7 @@
                             List.push({
                                 DateOrMouth: dayjs(
                                     Date.now() - (29 - index) * oneDay
-                                ).format('MM月DD日'),
+                                ).format('DD日'),
                                 BoxNum: Math.ceil(Math.random() * 9999),
                                 SignNum: Math.ceil(Math.random() * 5555)
                             })
@@ -81,7 +81,6 @@
                             (this.$refs.line.offsetWidth /
                                 (this.data.length * 80)) *
                             100
-                        
 
                         this.maxStart = Math.ceil(100 / length) // 分多少次显示,用于自动滚动判断最大值
 
@@ -112,9 +111,6 @@
                                     width: 80,
                                     overflow: 'breakAll' // 文字强制换行
                                 },
-                                data: this.data.map((item) => {
-                                    return item.DateOrMouth
-                                }),
                                 // 坐标轴在 grid 区域中的分隔线
                                 splitLine: {
                                     show: true,
@@ -122,47 +118,76 @@
                                     lineStyle: {
                                         color: '#0e1c5b'
                                     }
-                                }
+                                },
+                                data: this.data.map((item) => {
+                                    return item.DateOrMouth
+                                }),
                                 // splitNumber: 20,
                             },
-                            yAxis: {
-                                name: '单位: MW',
-                                type: 'value',
-                                // 坐标轴的name
-                                nameTextStyle: {
-                                    fontSize: 13,
-                                    color: '#fff'
-                                },
-                                // 坐标轴上的文本
-                                axisLabel: {
-                                    color: '#fff',
-                                    fontSize: 13
-                                },
-                                // 次坐标轴
-                                minorTick: {
-                                    splitNumber: 3 // 次刻度线
-                                },
-                                // 次坐标轴在 grid 区域中的分隔线
-                                minorSplitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: '#0e1c5b'
+                            yAxis: [
+                                {
+                                    name: '单位: MW',
+                                    type: 'value',
+                                    position: 'left', // 左边
+                                    // 坐标轴的name
+                                    nameTextStyle: {
+                                        fontSize: 13,
+                                        color: '#fff'
+                                    },
+                                    // 坐标轴上的文本
+                                    axisLabel: {
+                                        color: '#fff',
+                                        fontSize: 13
+                                    },
+                                    // 次坐标轴
+                                    minorTick: {
+                                        splitNumber: 3 // 次刻度线
+                                    },
+                                    // 次坐标轴在 grid 区域中的分隔线
+                                    minorSplitLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: '#0e1c5b'
+                                        }
+                                    },
+                                    // 坐标轴在 grid 区域中的分隔线
+                                    splitLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: '#0e1c5b'
+                                        }
                                     }
                                 },
-                                // 坐标轴在 grid 区域中的分隔线
-                                splitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: '#0e1c5b'
+                                {
+                                    name: '单位: KG',
+                                    type: 'value',
+                                    position: 'right', // 右边
+                                    // 坐标轴的name
+                                    nameTextStyle: {
+                                        fontSize: 13,
+                                        color: '#fff'
+                                    },
+                                    // 坐标轴上的文本
+                                    axisLabel: {
+                                        color: '#fff',
+                                        fontSize: 13
+                                    },
+                                    // 坐标轴在 grid 区域中的分隔线
+                                    splitLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: '#0e1c5b'
+                                        }
                                     }
                                 }
-                            },
+                            ],
                             // 上下左右的间距，类似padding
                             grid: {
-                                left: '60',
+                                left: 10,
                                 top: 40,
-                                right: 0,
-                                bottom: length >= 100 ? 20 : 50
+                                right: 10,
+                                bottom: length >= 100 ? 10 : 30,
+                                containLabel: true /// grid区域是否包含坐标轴
                             },
                             dataZoom: [
                                 {
@@ -183,21 +208,35 @@
                             series: [
                                 {
                                     name: '发车箱数',
+                                    yAxisIndex: 0, // 第一个纵坐标轴
                                     data: this.data.map((item) => {
                                         return item.BoxNum
                                     }),
                                     type: 'line',
                                     smooth: true, // 是否平滑曲线显示
-                                    color: '#1eabdd'
+                                    color: '#1eabdd' // 线条样式
                                 },
                                 {
                                     name: '签收箱数',
+                                    yAxisIndex: 1, // 第二个纵坐标轴
                                     data: this.data.map((item) => {
                                         return item.SignNum
                                     }),
                                     type: 'line',
                                     smooth: true, // 是否平滑曲线显示
-                                    color: '#3cfbaa'
+                                    // 线条样式
+                                    lineStyle: {
+                                        color: '#3cfbaa'
+                                    },
+                                    // 折线拐点标志
+                                    itemStyle: {
+                                        opacity: 0
+                                    },
+                                    // 区域填充
+                                    areaStyle: {
+                                        color: '#3cfbaa',
+                                        opacity: 0.2
+                                    }
                                 }
                             ]
                         })
