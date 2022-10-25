@@ -14,6 +14,27 @@
                     >
                 </li>
             </ul>
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    BiuFormItem: 修复表单树组件外部改变了值文字显示没变的问题
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/6a57d0b89464fc040571cb8aae2e40a41fe82ffd"
+                        target="_blank"
+                        >#6a57d0b</el-link
+                    >
+                </li>
+                <li>
+                    biuTree: 修复树data数据为空时，会导致setCheckedKeys方法报错
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/cbef04b19dc18ac2a44b208a3012c1e43e899e52"
+                        target="_blank"
+                        >#cbef04b</el-link
+                    >
+                </li>
+            </ul>
         </section>
         <section class="version">
             <h3>v1.0.15</h3>
