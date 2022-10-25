@@ -125,6 +125,8 @@ export default class TreeSelect extends Vue {
     @Watch('value', { deep: true })
     valueChange(newVal: string | string[]) {
         this.changeCheckList(newVal)
+        // 同步显示值，外部修改了值同步更新显示
+        this.updateCheckListValue(newVal, false)
     }
 
     @Watch('checkList', { deep: true })
