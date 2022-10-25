@@ -42,13 +42,18 @@ import {
     Emit,
     Watch
 } from 'vue-property-decorator'
+import { Drawer, Button } from 'element-ui'
 import { OperationOptionType } from 'calm-harbin/types/operation'
 import Operation from '@packages/biu-table/src/operation.vue'
 import waves from '@src/directive/waves/index'
 import { isEqualWith } from '@src/utils/util'
 
 @Component({
-    components: { Operation },
+    components: {
+        Operation,
+        [Drawer.name]: Drawer,
+        [Button.name]: Button
+    },
     directives: { waves }
 })
 export default class BiuDrawer extends Vue {

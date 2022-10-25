@@ -88,6 +88,7 @@ import {
     Emit,
     Watch
 } from 'vue-property-decorator'
+import { Upload as ElUpload } from 'element-ui'
 import { isEqualWith } from '@src/utils/util'
 
 type fileType = {
@@ -95,7 +96,11 @@ type fileType = {
     url: string
     uid: number
 }
-@Component
+@Component({
+    components: {
+        [ElUpload.name]: ElUpload
+    }
+})
 export default class Upload extends Vue {
     @Prop(String) uploadUrl!: string
     @Prop({ type: Boolean, default: false }) disabled?: boolean

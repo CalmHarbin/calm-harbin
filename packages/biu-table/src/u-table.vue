@@ -290,7 +290,7 @@ import {
     scopeType,
     tablePostfixOptionsType
 } from 'calm-harbin/types/biu-table'
-import { Card, Tooltip, Input, Loading } from 'element-ui'
+import { Card, Tooltip, Input, Loading, Checkbox } from 'element-ui'
 import { UTable, UTableColumn } from 'umy-ui'
 import { isEqualWith, otherAttr, otherEvent } from '@src/utils/util'
 import cloneDeep from 'lodash/cloneDeep'
@@ -318,6 +318,7 @@ Vue.use(Loading.directive)
         [Card.name]: Card,
         [Tooltip.name]: Tooltip,
         [Input.name]: Input,
+        [Checkbox.name]: Checkbox,
         [UTable.name]: UTable,
         [UTableColumn.name]: UTableColumn
     }

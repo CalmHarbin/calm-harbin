@@ -42,6 +42,7 @@ import {
     Prop,
     Watch
 } from 'vue-property-decorator'
+import { Dialog, Button } from 'element-ui'
 import waves from '@src/directive/waves/index'
 import { OperationOptionType } from 'calm-harbin/types/operation'
 import Operation from '@packages/biu-table/src/operation.vue'
@@ -49,7 +50,11 @@ import { isEqualWith } from '@src/utils/util'
 
 @Component({
     directives: { waves },
-    components: { Operation }
+    components: {
+        Operation,
+        [Dialog.name]: Dialog,
+        [Button.name]: Button
+    }
 })
 export default class BiuDialog extends Vue {
     @PropSync('visible') visibleSync!: boolean
