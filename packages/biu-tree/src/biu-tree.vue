@@ -155,7 +155,7 @@ export default class BiuTree extends Vue {
             // 单选时直接同步的是id
             this.setValue(newVal[0])
         }
-        if (this.customMultiple) {
+        if (this.customMultiple && this.customData.length) {
             if (this.$refs.tree) {
                 // 同步勾选状态
                 ;(this.$refs.tree as any).setCheckedKeys(newVal)
