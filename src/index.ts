@@ -59,7 +59,6 @@ const directives = [waves, loadMore, dialogDrag, dialogDragWidth, fontSize]
 
 const install = function (Vue: any): void {
     directives.forEach((directive) => {
-        console.log(62, directive)
         Vue.use(directive)
     })
 
