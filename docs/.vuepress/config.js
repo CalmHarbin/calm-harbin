@@ -88,6 +88,14 @@ module.exports = {
                             {
                                 title: '地址搜索',
                                 path: 'https://69kg14.csb.app/'
+                            },
+                            {
+                                title: '围栏绘制',
+                                path: 'https://oogwx8.csb.app/'
+                            },
+                            {
+                                title: '围栏展示',
+                                path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/baidu/围栏展示.html'
                             }
                         ]
                     },
@@ -98,6 +106,20 @@ module.exports = {
                             {
                                 title: '常见图表',
                                 path: 'http://docs.calmharbin.icu/calm-harbin/docs/dist/components/echarts/index.html'
+                            }
+                        ]
+                    },
+                    {
+                        title: '大屏',
+                        collapsable: true,
+                        children: [
+                            {
+                                title: '滚动表格1',
+                                path: 'https://pb08u5.csb.app/'
+                            },
+                            {
+                                title: '滚动表格2',
+                                path: 'https://zxvqbh.csb.app/'
                             }
                         ]
                     }
