@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>仪表盘</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            [v-cloak] {
+                display: none !important;
+            }
+            .container {
+                width: 450px;
+                height: 300px;
+                background-color: #0f0c46;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+            <div class="container" ref="gauge"></div>
+        </div>
+        <!-- echarts@5 -->
+        <script src="https://unpkg.com/echarts@5/dist/echarts.min.js"></script>
+        <!-- vue -->
+        <script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+        <!-- dayjs -->
+        <script src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+        <!-- lodash -->
+        <script src="https://unpkg.com/lodash@1.0.0/dist/lodash.min.js"></script>
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data() {
+                    return {
+                        data: 0 // 数据
+                    }
+                },
+                mounted() {
+                    this.mockData()
+                },
+                methods: {
+                    mockData() {
+                        this.data = Math.floor(Math.random() * 1000)
+                        this.draw()
+                    },
+                    // 绘制折线图
+                    draw() {
+                        this.chart = echarts.init(this.$refs.gauge)
+                        this.chart.setOption({
+                            series: [
+                                {
+                                    type: 'gauge',
+                                    max: 1000,
+                                    center: ['50%', '58%'],
+                                    radius: '85%',
+                                    // 底层的圆弧
+                                    axisLine: {
+                                        show: true,
+                                        lineStyle: {
+                                            color: [[1, '#2E2B94']],
+                                            width: 10
+                                        }
+                                    },
+                                    // 进度的圆弧
+                                    progress: {
+                                        show: true,
+                                        width: 10,
+                                        itemStyle: {
+                                            color: '#0196FF'
+                                        }
+                                    },
+                                    // 分割线
+                                    splitLine: {
+                                        show: false
+                                    },
+                                    // 指针
+                                    pointer: {
+                                        show: false
+                                    },
+                                    // 刻度线
+                                    axisTick: {
+                                        show: false
+                                    },
+                                    // 刻度label
+                                    axisLabel: {
+                                        show: false
+                                    },
+                                    title: {
+                                        offsetCenter: [0, '70%'], // 相对中心的偏移
+                                        color: '#06d5f7',
+                                        fontSize: 17
+                                    },
+                                    detail: {
+                                        formatter: '{value}',
+                                        color: '#06d5f7',
+                                        fontSize: 44,
+                                        offsetCenter: [0, 0] // 相对中心的偏移
+                                    },
+                                    data: [
+                                        {
+                                            value: this.data,
+                                            name: '车数'
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

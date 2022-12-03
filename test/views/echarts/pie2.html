@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>饼图</title>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			[v-cloak] {
+				display: none !important;
+			}
+
+			.container {
+				width: 450px;
+				height: 300px;
+				background-color: #0f0c46;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<div class="container" ref="line" @mouseenter="mouseenter" @mouseleave="mouseleave"></div>
+		</div>
+		<!-- echarts@5 -->
+		<script src="https://unpkg.com/echarts@5/dist/echarts.min.js"></script>
+		<!-- vue -->
+		<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+		<!-- dayjs -->
+		<script src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+		<!-- lodash -->
+		<script src="https://unpkg.com/lodash@1.0.0/dist/lodash.min.js"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						timer: null, // 定时器
+						start: 0, // 横轴滚动开始位置
+						delay: 3 * 1000 // 3秒滚动一次
+					}
+				},
+				created() {
+					this.mouseenter = _.debounce(this.mouseoverBack, 300)
+					this.mouseleave = _.debounce(this.autoMove, 300)
+				},
+				mounted() {
+					this.draw()
+				},
+				methods: {
+					// 绘制仪表盘
+					draw() {
+						// 虚拟数据
+						var datas = [{
+							"month": null,
+							"city": "北京市 18",
+							"ratio":  Math.ceil(Math.random() * 100)
+						}, {
+							"month": null,
+							"city": "武汉市 3",
+							"ratio":  Math.ceil(Math.random() * 100)
+						}, {
+							"month": null,
+							"city": "上海市 3",
+							"ratio":  Math.ceil(Math.random() * 100)
+						}]
+						let data = {
+							label: '',
+							value: ''
+						}
+						data.value = datas.map((item) => ({
+							label: item.city,
+							value: item.ratio
+						}))
+						const d = data.value.map((item) => {
+							return {
+								name: item.label,
+								value: Number(item.value)
+								// itemStyle: {
+								//     color: createColor()
+								// }
+							}
+						})
+						this.chart = echarts.init(this.$refs.line)
+						this.chart.setOption({
+							animation: true,
+							tooltip: {
+								trigger: 'item',
+								formatter: '{b} <br/> {d}%'
+							},
+							legend: {
+								type: 'scroll',
+								orient: 'vertical',
+								left: '70%',
+								top: '6%',
+								bottom: '6%',
+								icon: 'circle',
+								itemWidth: 11,
+								itemHeight: 11,
+								formatter: (name) => {
+									const item = d.find((i) => i.name === name)
+									return `{a|${name}}   {b|${item?.value}%}`
+								},
+								textStyle: {
+									color: '#d2e7ff',
+									fontSize: 18,
+									rich: {
+										a: {
+											color: '#d2e7ff'
+										},
+										b: {
+											color: '#00fcf9'
+										}
+									}
+								},
+								pageIconInactiveColor: '#2f4554',
+								pageIconColor: '#aaa',
+								pageIconSize: 15,
+								pageTextStyle: {
+									color: '#d2e7ff',
+									fontSize: 20
+								}
+							},
+							grid: {
+								top: 40,
+								right: 44,
+								bottom: 48,
+								left: 70
+							},
+							series: [{
+									type: 'pie',
+									radius: '88%',
+									center: ['35%', '50%'],
+									emptyCircleStyle: {
+										color: '#091259',
+										borderColor: '#0252d5',
+										borderType: 'dashed'
+									},
+									cursor: 'default',
+									labelLine: {
+										show: false
+									},
+									label: {
+										show: false
+									}
+								},
+								{
+									type: 'pie',
+									radius: ['50%', '76%'],
+									center: ['35%', '50%'],
+									data: d,
+									labelLine: {
+										show: false
+									},
+									label: {
+										show: false,
+										position: 'center'
+									},
+									emphasis: {
+										label: {
+											show: true,
+											formatter: '{c}',
+											color: '#d2e7ff',
+											fontSize: 26
+										}
+									}
+								},
+								{
+									type: 'pie',
+									radius: '40%',
+									center: ['35%', '50%'],
+									emptyCircleStyle: {
+										color: '#3a77e9'
+									},
+									cursor: 'default',
+									labelLine: {
+										show: false
+									},
+									label: {
+										show: false
+									}
+								}
+							]
+						})
+						console.log(this.chart)
+						clearTimeout(this.timer)
+
+						if (length < 100) {
+							/**
+							 *  设置定期器自动滚动
+							 */
+							this.autoMove()
+						}
+					},
+					/**
+					 *  设置定期器自动滚动
+					 */
+					autoMove() {
+						this.timer = setTimeout(() => {
+							if (this.start < this.maxStart - 1) {
+								this.start++
+							} else {
+								this.start = 0
+							}
+							this.chart.dispose()
+							this.draw()
+						}, this.delay)
+					},
+					mouseoverBack() {
+						clearTimeout(this.timer)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

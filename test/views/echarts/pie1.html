@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>饼图</title>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			[v-cloak] {
+				display: none !important;
+			}
+
+			.container {
+				width: 450px;
+				height: 300px;
+				background-color: #0f0c46;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<div class="container" ref="pie"></div>
+		</div>
+		<!-- echarts@5 -->
+		<script src="https://unpkg.com/echarts@5/dist/echarts.min.js"></script>
+		<!-- vue -->
+		<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+		<!-- dayjs -->
+		<script src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+		<!-- lodash -->
+		<script src="https://unpkg.com/lodash@1.0.0/dist/lodash.min.js"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						data: [], // 数据
+					}
+				},
+				mounted() {
+					this.draw()
+				},
+				methods: {
+					// 绘制饼图
+					draw() {
+						// 虚拟数据
+						let data = {
+							loadingNum: 20,
+							loadingPer: '10%',
+							subscribeNum: 20,
+							subscribePer: '10%',
+							reviewNum: 20,
+							reviewPer: '10%',
+							unGateEnterNum: 20,
+							unGateEnterPer: '10%',
+							gateEnterNum: 20,
+							gateEnterPer: '10%'
+						}
+						this.chart = echarts.init(this.$refs.pie)
+						this.chart.setOption({
+							tooltip: {
+								trigger: 'item',
+								appendToBody: true,
+								formatter: '{b}'
+							},
+							legend: {
+								orient: 'vertical',
+								textStyle: {
+									fontSize: 14,
+									fontWeight: 'bold',
+									color: 'white'
+								},
+								itemWidth: 9,
+								itemHeight: 9,
+								left: '60%',
+								top: '20%',
+								data: [{
+										name: `待签到 ${data.loadingNum} ${data.loadingPer}`,
+										itemStyle: {
+											color: '#1999d5'
+										},
+										textStyle: {
+											color: '#1999d5'
+										}
+									},
+									{
+										name: `待预约 ${data.subscribeNum} ${data.subscribePer}`,
+										itemStyle: {
+											color: '#ffc000'
+										},
+										textStyle: {
+											color: '#ffc000'
+										}
+									},
+									{
+										name: `待审核 ${data.reviewNum} ${data.reviewPer}`,
+										itemStyle: {
+											color: '#e47979'
+										},
+										textStyle: {
+											color: '#e47979'
+										}
+									},
+									{
+										name: `待进场 ${data.unGateEnterNum} ${data.unGateEnterPer}`,
+										itemStyle: {
+											color: '#ac6ce1'
+										},
+										textStyle: {
+											color: '#ac6ce1'
+										}
+									},
+									{
+										name: `已进场 ${data.gateEnterNum} ${data.gateEnterPer}`,
+										itemStyle: {
+											color: '#4dbdce'
+										},
+										textStyle: {
+											color: '#4dbdce'
+										}
+									}
+								]
+							},
+							series: [{
+								left: 0,
+								type: 'pie',
+								radius: ['40%', '75%'],
+								center: ['30%', '50%'],
+								avoidLabelOverlap: false,
+								label: {
+									show: false,
+									position: 'center'
+								},
+								data: [{
+										value: data.loadingNum,
+										name: `待签到 ${data.loadingNum} ${data.loadingPer}`
+									},
+									{
+										value: data.subscribeNum,
+										name: `待预约 ${data.subscribeNum} ${data.subscribePer}`
+									},
+									{
+										value: data.reviewNum,
+										name: `待审核 ${data.reviewNum} ${data.reviewPer}`
+									},
+									{
+										value: data.unGateEnterNum,
+										name: `待进场 ${data.unGateEnterNum} ${data.unGateEnterPer}`
+									},
+									{
+										value: data.gateEnterNum,
+										name: `已进场 ${data.gateEnterNum} ${data.gateEnterPer}`
+									}
+								]
+							}]
+						})
+					},
+				}
+			})
+		</script>
+	</body>
+</html>

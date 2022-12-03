@@ -62,12 +62,13 @@
                         let oneDay = 1000 * 60 * 60 * 24
                         let arr = new Array(32).fill('')
                         arr.forEach((item, index) => {
+                            const num = Math.max(Math.ceil(Math.random() * 9999), 6000)
                             List.push({
                                 DateOrMouth: dayjs(
                                     Date.now() - (29 - index) * oneDay
                                 ).format('MM月DD日'),
-                                BoxNum: Math.ceil(Math.random() * 9999),
-                                SignNum: Math.ceil(Math.random() * 5555)
+                                BoxNum: Math.random() > 0.5 ? num + Math.floor(Math.random() * 5000) : num - Math.floor(Math.random() * 5000),
+                                SignNum: num
                             })
                         })
                         this.data = List
@@ -97,7 +98,7 @@
                             xAxis: {
                                 type: 'category',
                                 axisTick: {
-                                    show: true,
+                                    show: false,
                                     alignWithLabel: true, // 文字与刻度线对齐
                                     interval: 0 // 强制显示所有标签
                                 },
@@ -110,7 +111,7 @@
                                 },
                                 // 坐标轴在grid中的分割线
                                 splitLine: {
-                                    show: true,
+                                    show: false,
                                     interval: 0,
                                     lineStyle: {
                                         color: '#0e1c5b'
@@ -132,24 +133,13 @@
                                     color: '#fff',
                                     fontSize: 13
                                 },
-                                /** 次刻度线，使背景看起来有网格start */
-                                minorTick: {
-                                    splitNumber: 3 // 次刻度线
-                                },
-                                minorSplitLine: {
-                                    show: true,
-                                    lineStyle: {
-                                        color: '#0e1c5b'
-                                    }
-                                },
-                                /** 次刻度线，使背景看起来有网格end */
                                 // 坐标轴轴线
                                 axisLine: {
-                                    show: true
+                                    show: false
                                 },
                                 // 坐标轴在grid中的分割线
                                 splitLine: {
-                                    show: true,
+                                    show: false,
                                     lineStyle: {
                                         color: '#0e1c5b'
                                     }
@@ -188,29 +178,21 @@
                                     barWidth: 12,
                                     barCategoryGap: 12,
                                     itemStyle: {
-                                        borderRadius: [100, 100, 0, 0],
-                                        color: {
-                                            type: 'linear',
-                                            x: 0,
-                                            y: 1,
-                                            x2: 0,
-                                            y2: 0,
-                                            colorStops: [
-                                                {
-                                                    offset: 0,
-                                                    color: '#2e77bb' // 0% 处的颜色
-                                                },
-                                                {
-                                                    offset: 0.2,
-                                                    color: '#318fbc' // 0% 处的颜色
-                                                },
-                                                {
-                                                    offset: 1,
-                                                    color: '#39d6c4' // 100% 处的颜色
-                                                }
-                                            ],
-                                            global: false // 缺省为 false
-                                        }
+                                        color: '#5BD4C4'
+                                    }
+                                },
+                                {
+                                    type: 'bar',
+                                    animation: true,
+                                    data: this.data.map((item) => {
+                                        return item.SignNum
+                                    }),
+                                    barWidth: 16,
+                                    barCategoryGap: 12, // 同系列的柱子之前的间距离
+                                    barGap: '-113%', // 不同系列的柱子之前的间距离
+                                    itemStyle: {
+                                        color: 'transparent',
+                                        borderColor: '#F0F900'
                                     }
                                 }
                             ]

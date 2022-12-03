@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>仪表盘</title>
+		<style>
+			* {
+				box-sizing: border-box;
+				margin: 0;
+				padding: 0;
+			}
+
+			[v-cloak] {
+				display: none !important;
+			}
+
+			.container {
+				width: 450px;
+				height: 300px;
+				background-color: #0f0c46;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<div class="container" ref="line" @mouseenter="mouseenter" @mouseleave="mouseleave"></div>
+		</div>
+		<!-- echarts@5 -->
+		<script src="https://unpkg.com/echarts@5/dist/echarts.min.js"></script>
+		<!-- vue -->
+		<script src="https://unpkg.com/vue@2.6.14/dist/vue.min.js"></script>
+		<!-- dayjs -->
+		<script src="https://unpkg.com/dayjs@1.11.5/dayjs.min.js"></script>
+		<!-- lodash -->
+		<script src="https://unpkg.com/lodash@1.0.0/dist/lodash.min.js"></script>
+		<script>
+			var vm = new Vue({
+				el: '#app',
+				data() {
+					return {
+						data: [], // 数据
+						timer: null, // 定时器
+						start: 0, // 横轴滚动开始位置
+						delay: 3 * 1000 // 3秒滚动一次
+					}
+				},
+				created() {
+					this.mouseenter = _.debounce(this.mouseoverBack, 300)
+					this.mouseleave = _.debounce(this.autoMove, 300)
+				},
+				mounted() {
+					this.draw()
+				},
+				methods: {
+					// 绘制饼图
+					draw() {
+						// 虚拟数据
+						let dom = this.$refs.line
+						const r = Math.min(dom.offsetHeight, dom.offsetWidth) * 0.6 // 根据容器的大小计算
+						const value = { // 数据
+							value: Math.ceil(Math.random() * 100)
+						}
+						const defaultOption = {
+							type: 'gauge',
+							startAngle: 180,
+							endAngle: 0,
+							splitLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+							axisLabel: {
+								show: false
+							},
+							pointer: {
+								show: false
+							},
+							title: {
+								show: false
+							},
+							detail: {
+								show: false
+							},
+							emphasis: {
+								disabled: true
+							},
+							data: [100]
+						}
+						this.chart = echarts.init(this.$refs.line)
+						this.chart.setOption({
+							series: [{
+									...defaultOption,
+									z: 1,
+									radius: r * 1.08,
+									center: ['50%', '85%'],
+									axisLine: {
+										lineStyle: {
+											color: [
+												[1, 'rgba(255,255,255,0.3)']
+											],
+											width: 4
+										}
+									}
+								},
+								{
+									type: 'gauge',
+									z: 3,
+									startAngle: 180,
+									endAngle: 0,
+									radius: r,
+									center: ['50%', '85%'],
+									axisLine: {
+										lineStyle: {
+											color: [
+												[1, '#308cef']
+											],
+											width: 15
+										}
+									},
+									progress: {
+										show: true,
+										width: 15,
+										itemStyle: {
+											color: '#00d4f1'
+										}
+									},
+									splitLine: {
+										length: 15,
+										distance: 0,
+										lineStyle: {
+											color: '#fff',
+											width: 4
+										}
+									},
+									axisTick: {
+										length: 10,
+										distance: 0,
+										lineStyle: {
+											color: '#fff',
+											width: 2,
+											opacity: 0.7
+										}
+									},
+									axisLabel: {
+										show: false
+									},
+									pointer: {
+										icon: ``,
+										length: '90%',
+										width: 12,
+										keepAspect: true,
+										itemStyle: {
+											color: 'red'
+										}
+									},
+									title: {
+										show: false
+									},
+									detail: {
+										formatter: '{value}%',
+										color: '#fff',
+										fontSize: 14,
+										/**
+										 * 计算百分比的位置。乘以115是为了向外移动一点。
+										 */
+										offsetCenter: [
+											`${
+                                -Math.cos((value.value / 100) * Math.PI) * 118
+                            }%`,
+											`${-Math.sin((value.value / 100) * Math.PI) * 118}%`
+										]
+									},
+									data: [value.value]
+								},
+								{
+									...defaultOption,
+									z: 2,
+									radius: r - 15,
+									center: ['50%', '85%'],
+									axisLine: {
+										lineStyle: {
+											color: [
+												[1, 'rgb(48 140 239 / 20%)']
+											],
+											width: r * 0.4
+										}
+									},
+									progress: {
+										show: true,
+										width: r * 0.4,
+										itemStyle: {
+											color: 'rgb(0 212 241 / 20%)'
+										}
+									},
+									data: [value.value]
+								},
+								{
+									...defaultOption,
+									z: 2,
+									radius: (r - 15) * 0.6 - 20,
+									center: ['50%', '85%'],
+									axisLine: {
+										lineStyle: {
+											color: [
+												[
+													1,
+													{
+														type: 'radial',
+														x: 0.5, // ←
+														y: 1, // ↑
+														r: 1,
+														colorStops: [{
+																offset: 0.8,
+																color: 'rgba(255,255,255,0.1)' // 0% 处的颜色
+															},
+															// {
+															//     offset: 0.2,
+															//     color: '#318fbc' // 0% 处的颜色
+															// },
+															{
+																offset: 1,
+																color: 'rgba(255,255,255,0.2)' // 100% 处的颜色
+															}
+														],
+														global: false // 缺省为 false
+													}
+												]
+											],
+											width: (r - 15) * 0.6 - 20
+										}
+									}
+								},
+								{
+									...defaultOption,
+									z: 2,
+									radius: ((r - 15) * 0.6 - 20) * 0.7,
+									center: ['50%', '85%'],
+									axisLine: {
+										lineStyle: {
+											color: [
+												[
+													1,
+													{
+														type: 'radial',
+														x: 0.5, // ←
+														y: 1, // ↑
+														r: 1,
+														colorStops: [{
+																offset: 0.8,
+																color: 'rgba(255,255,255,0.1)' // 0% 处的颜色
+															},
+															// {
+															//     offset: 0.2,
+															//     color: '#318fbc' // 0% 处的颜色
+															// },
+															{
+																offset: 1,
+																color: 'rgba(255,255,255,0.2)' // 100% 处的颜色
+															}
+														],
+														global: false // 缺省为 false
+													}
+												]
+											],
+											width: ((r - 15) * 0.6 -
+													15) *
+												0.7
+										}
+									}
+								},
+								{
+									...defaultOption,
+									z: 2,
+									radius: ((r - 15) * 0.6 - 20) * 0.4,
+									center: ['50%', '85%'],
+									axisLine: {
+										lineStyle: {
+											color: [
+												[1, '#bdc2ca']
+											],
+											width: ((r - 15) * 0.6 -
+													15) *
+												0.4
+										}
+									}
+								}
+							]
+						})
+
+						console.log(this.chart)
+						clearTimeout(this.timer)
+
+						if (length < 100) {
+							/**
+							 *  设置定期器自动滚动
+							 */
+							this.autoMove()
+						}
+					},
+					/**
+					 *  设置定期器自动滚动
+					 */
+					autoMove() {
+						this.timer = setTimeout(() => {
+							if (this.start < this.maxStart - 1) {
+								this.start++
+							} else {
+								this.start = 0
+							}
+							this.chart.dispose()
+							this.draw()
+						}, this.delay)
+					},
+					mouseoverBack() {
+						clearTimeout(this.timer)
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

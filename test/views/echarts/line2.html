@@ -94,6 +94,17 @@
                                     type: 'line' // 默认为直线，可选为：'line' | 'shadow'
                                 }
                             },
+                            legend: {
+                                data: ['发车箱数', '签收箱数'],
+                                top: 10,
+                                itemWidth: 24,
+                                itemHeight: 13,
+                                textStyle: {
+                                    fontSize: 12,
+                                    fontWeight: 'bold',
+                                    color: '#fff'
+                                }
+                            },
                             xAxis: {
                                 type: 'category',
                                 //坐标轴刻度
@@ -121,7 +132,7 @@
                                 },
                                 data: this.data.map((item) => {
                                     return item.DateOrMouth
-                                }),
+                                })
                                 // splitNumber: 20,
                             },
                             yAxis: [
