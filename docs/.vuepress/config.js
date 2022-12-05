@@ -100,6 +100,20 @@ module.exports = {
                         ]
                     },
                     {
+                        title: '高德地图',
+                        collapsable: true,
+                        children: [
+                            {
+                                title: '轨迹回放',
+                                path: 'https://lbs.amap.com/demo/jsapi-v2/example/marker/replaying-historical-running-data'
+                            },
+                            {
+                                title: '地址搜索',
+                                path: 'https://927det.csb.app/'
+                            }
+                        ]
+                    },
+                    {
                         title: 'echarts',
                         collapsable: true,
                         children: [
