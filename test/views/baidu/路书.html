@@ -117,8 +117,13 @@
                             points.map((n) => new BMapGL.Point(n.lng, n.lat)),
                             {
                                 strokeColor: '#90B44B',
-                                strokeWeight: 5,
-                                strokeStyle: 'solid'
+                                strokeWeight: 10,
+                                strokeStyle: 'solid',
+                                strokeTexture: {
+                                    url: './locus.png',
+                                    width: 16,
+                                    height: 64
+                                }
                             }
                         )
                         // 绘制轨迹
