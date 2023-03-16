@@ -53,8 +53,12 @@ export function otherEvent(data: objType) {
         (item) => item.substr(0, 2) === 'on'
     )
     attr.forEach((item) => {
-        // 去掉on
-        otherEvent[item.substr(2)] = otherAttr[item]
+        if (item.length>2) {
+            // 去掉on
+            let key = item.substr(2)
+            // 首字母转小写
+            otherEvent[key.replace(key[0], key[0].toLowerCase())] = otherAttr[item]
+        }
     })
     return otherEvent
 }
