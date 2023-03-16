@@ -1,6 +1,28 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.17</h3>
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    enter事件增加参数
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/9a4f422cc78a98428f578eb29ac125542c5c32b0"
+                        target="_blank"
+                        >#9a4f422</el-link
+                    >
+                </li>
+                <li>
+                    表单项事件支持首字母大写用法
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/93c774f682fff84c8f8e19117925c93acdfdce14"
+                        target="_blank"
+                        >#93c774f</el-link
+                    >
+                </li>
+            </ul>
             <h3>v1.0.16</h3>
             <p>新功能</p>
             <ul>
