@@ -63,6 +63,8 @@
             <el-time-picker
                 v-model="formValue"
                 :placeholder="attrs.placeholder || '选择时间'"
+                v-bind="attrs"
+                v-on="listeners"
             >
             </el-time-picker>
         </template>
@@ -79,6 +81,8 @@
                 start-placeholder="开始时间"
                 end-placeholder="结束时间"
                 placeholder="选择时间范围"
+                v-bind="attrs"
+                v-on="listeners"
             >
             </el-time-picker>
         </div>
