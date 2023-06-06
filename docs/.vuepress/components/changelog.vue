@@ -1,6 +1,19 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.18</h3>
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    修复时间遗漏了绑定attr和listeners
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/e93ac4fc749ae029da08b389df7b6ea4f5e73c0c"
+                        target="_blank"
+                        >#e93ac4f</el-link
+                    >
+                </li>
+            </ul>
             <h3>v1.0.17</h3>
             <p>Bug 修复</p>
             <ul>
