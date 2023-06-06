@@ -15,7 +15,7 @@
                             attrs.type === 'password' ? 'new-password' : 'off'
                         "
                         v-on="listeners"
-                        @keypress.native.enter="(e: any) => $emit('enter', e)"
+                        @keypress.native.enter="(e) => $emit('enter', e)"
                     ></el-input>
                     <span style="margin-left: 5px; white-space: nowrap">{{
                         attrs.unit
@@ -32,7 +32,7 @@
                     attrs.type === 'password' ? 'new-password' : 'off'
                 "
                 v-on="listeners"
-                @keypress.native.enter="(e: any) => $emit('enter', e)"
+                @keypress.native.enter="(e) => $emit('enter', e)"
             ></el-input>
         </template>
         <template v-else-if="formType === 'select' || formType === 'dicSelect'">
