@@ -1,6 +1,19 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.19</h3>
+            <p>新功能</p>
+            <ul>
+                <li>
+                    BiuTable组件新增removeRow事件
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/c37c3a8012165406bb046591a783057edbf28aa8"
+                        target="_blank"
+                        >#c37c3a8</el-link
+                    >
+                </li>
+            </ul>
             <h3>v1.0.18</h3>
             <p>Bug 修复</p>
             <ul>
