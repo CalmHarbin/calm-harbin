@@ -842,6 +842,7 @@ export default class CoutomUxGrid extends Vue {
         // 删除改行
         await table.remove(row)
         const fullData = table.getTableData().fullData
+        this.$emit('removeRow', row, fullData)
         if (fullData.length === 0) {
             // 添加一行默认值
             this.customPlus(0)
