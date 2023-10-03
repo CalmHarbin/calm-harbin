@@ -4,6 +4,7 @@
         class="calm-BiuSelectTable"
         :value="multiple ? checkListValue : checkListValue[0]"
         :size="size"
+        :collapse-tags="collapseTags"
         clearable
         filterable
         :multiple="multiple"
@@ -107,6 +108,7 @@ export default class BiuSelectTable extends Vue {
     @Prop({ type: String, default: '请选择' }) placeholder?: boolean
     @Prop({ type: Boolean, default: false }) multiple?: boolean
     @Prop({ type: Boolean, default: false }) disabled?: boolean
+    @Prop({ type: Boolean, default: false }) collapseTags?: boolean
     // 是不是可输入的，true表示输入框中可任意输入值，匹配不到时也不会清空,仅当multiple=false时生效
     @Prop({ type: Boolean, default: false }) inputable?: boolean
     @Prop(Array) tableData!: any[]
