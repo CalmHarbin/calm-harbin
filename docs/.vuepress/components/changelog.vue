@@ -1,6 +1,19 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.20</h3>
+            <p>新功能</p>
+            <ul>
+                <li>
+                    BiuSelectTable组件增加collapse-tags属性
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/58f8bc48cd33345bc6f333cde4bcc5d5760c39f0"
+                        target="_blank"
+                        >#58f8bc4</el-link
+                    >
+                </li>
+            </ul>
             <h3>v1.0.19</h3>
             <p>新功能</p>
             <ul>
