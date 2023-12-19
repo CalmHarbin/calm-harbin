@@ -1,8 +1,23 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.21</h3>
+            <p>更新</p>
+            <ul>
+                <li>
+                    treeSelect组件增加clearable属性
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/4609c500f0a9ea87f4cf7a9af0e4b84736329827"
+                        target="_blank"
+                        >#4609c50</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.20</h3>
-            <p>新功能</p>
+            <p>更新</p>
             <ul>
                 <li>
                     BiuSelectTable组件增加collapse-tags属性
@@ -14,8 +29,10 @@
                     >
                 </li>
             </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.19</h3>
-            <p>新功能</p>
+            <p>更新</p>
             <ul>
                 <li>
                     BiuTable组件新增removeRow事件
@@ -27,6 +44,8 @@
                     >
                 </li>
             </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.18</h3>
             <p>Bug 修复</p>
             <ul>
@@ -40,6 +59,8 @@
                     >
                 </li>
             </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.17</h3>
             <p>Bug 修复</p>
             <ul>
@@ -62,6 +83,8 @@
                     >
                 </li>
             </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.16</h3>
             <p>新功能</p>
             <ul>
@@ -146,7 +169,7 @@
                     >
                 </li>
             </ul>
-            <p>调整</p>
+            <p>更新</p>
             <ul>
                 <li>
                     BiuFormItem: treeselect时增加size属性配置
@@ -232,7 +255,7 @@
             <h3>v1.0.10</h3>
             <el-tag type="info">2022-04-27</el-tag>
 
-            <p>调整</p>
+            <p>更新</p>
             <ul>
                 <li>
                     BiuSelectTable: 增加size属性配置
