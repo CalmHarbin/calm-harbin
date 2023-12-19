@@ -6,7 +6,7 @@
             :value="
                 customMultiple ? checkListValue.join(',') : checkListValue[0]
             "
-            clearable
+            :clearable="clearable"
             filterable
             :multiple="false"
             :disabled="disabled"
@@ -65,6 +65,7 @@ export default class TreeSelect extends Vue {
     @Prop({ type: Boolean, default: false }) disabled?: boolean
     @Prop({ type: Boolean, default: false }) subWith?: boolean
     @Prop({ type: Boolean, default: false }) multiple?: boolean
+    @Prop({ type: Boolean, default: true }) clearable?: boolean
     @Prop({ type: String, default: 'mini' }) size?: string
     /**
      * 是否只能选中最底层,配置该项时,选中项只能是最里层的(即没有子集的项)。
