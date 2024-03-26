@@ -26,7 +26,7 @@
             v-if="selection"
             :key="'selection' + random"
             width="50"
-            fixed="left"
+            :fixed="selectionFixed"
             :resizable="true"
             align="center"
         >
@@ -53,7 +53,7 @@
             v-if="showIndex"
             :key="'index' + random"
             label="#"
-            fixed="left"
+            :fixed="indexFixed"
             type="index"
             :index="indexValue"
             width="56"
@@ -330,6 +330,7 @@ export default class CustomUTable extends Vue {
     @Prop(Array) private tableData!: any[]
     @Prop(Array) private columns!: tableColumnType[]
     @Prop(Boolean) private selection?: boolean // 是否可选择
+    @Prop({ type: String, default: 'left' }) private selectionFixed?: string // 可选择是否固定
     @Prop(Boolean) private customShowSummary!: boolean // 是否显示汇总,目前先自定义,汇总数据自己追加一条
 
     // 右侧操作列
@@ -338,6 +339,7 @@ export default class CustomUTable extends Vue {
 
     @Prop(Boolean) showHeaderFilter?: boolean // 是否显示表头的筛选功能
     @Prop({ type: Boolean, default: true }) showIndex?: boolean = true // 是否显示索引列
+    @Prop({ type: String, default: 'left' }) indexFixed?: string // 索引列是否固定
 
     // 这里利用引用类型直接改值
     @Model('setValue') value: any
