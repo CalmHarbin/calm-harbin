@@ -15,7 +15,7 @@ npm i calm-harbin@latest -S
 
 可以使用网上免费 CDN 来获取到最新版本资源，在页面上引入 js 和 css 文件即可开始使用。
 
-[![](https://data.jsdelivr.com/v1/package/npm/calm-harbin/badge)](https://www.jsdelivr.com/package/npm/calm-harbin)
+[![](https://data.jsdelivr.com/v1/package/npm/calm-harbin/badge)](https://cdn.jsdelivr.net/npm/calm-harbin)
 [![](https://img.shields.io/badge/unpkg-%40latest-green)](https://unpkg.com/calm-harbin/lib/calmHarbin.umd.min.js)
 
 ```html

@@ -1,6 +1,21 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.22</h3>
+            <p>更新</p>
+            <ul>
+                <li>
+                    BiuTable组件增加selectionFixed和indexFixed配置
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/2160ec4762a607bc3a7420cb083fd415b198307f"
+                        target="_blank"
+                        >#2160ec4</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.21</h3>
             <p>更新</p>
             <ul>
@@ -126,7 +141,8 @@
             <p>Bug 修复</p>
             <ul>
                 <li>
-                    BiuFormItem: treeselect时深拷贝赋值，修复change事件初始也触发
+                    BiuFormItem:
+                    treeselect时深拷贝赋值，修复change事件初始也触发
                     <el-link
                         type="primary"
                         href="https://github.com/CalmHarbin/calm-harbin/commit/8b3281def90af76ee74fb75b7abafea25fdd931c"

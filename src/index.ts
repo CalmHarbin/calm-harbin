@@ -100,7 +100,7 @@ export {
 }
 
 export default {
-    version: '1.0.21',
+    version: '1.0.22',
     install,
     BiuDialog,
     BiuDrawer,
