@@ -1,6 +1,6 @@
 {
     "name": "calm-harbin",
-    "version": "1.0.22",
+    "version": "1.0.23",
     "description": "常用组件及方法",
     "main": "lib/calmHarbin.umd.min.js",
     "typings": "types/index.d.ts",

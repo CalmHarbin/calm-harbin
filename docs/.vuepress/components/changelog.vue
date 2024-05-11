@@ -1,6 +1,21 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.23</h3>
+            <p>更新</p>
+            <ul>
+                <li>
+                    tree-select组件支持传入属性、方法给tree
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/d525319cf484e83f829ed73b20201de8f3230729"
+                        target="_blank"
+                        >#d525319</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.22</h3>
             <p>更新</p>
             <ul>
