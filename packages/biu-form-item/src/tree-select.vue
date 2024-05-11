@@ -25,6 +25,8 @@
                     :multiple="multiple"
                     :sub-with="subWithValue"
                     @node-click="nodeClick"
+                    v-bind="treeAttrs"
+                    v-on="treeListeners"
                 ></biu-tree>
             </el-option>
             <div slot="empty"></div>
@@ -73,6 +75,8 @@ export default class TreeSelect extends Vue {
      */
     @Prop({ type: Boolean, default: false }) substrate?: boolean
     @Prop({ type: Array, default: () => [] }) data!: treeNodeType[]
+    @Prop({ type: Object }) treeAttrs?: any[]
+    @Prop({ type: Object }) treeListeners?: any[]
     @Model('setValue') value!: string | string[]
 
     customData: treeNodeType[] = []
