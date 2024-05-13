@@ -2,7 +2,7 @@
     <el-tree
         v-if="customData.length"
         ref="tree"
-        :data="customData"
+        :data="attrs.lazy ? undefined : customData"
         :props="defaultProps"
         node-key="id"
         :expand-on-click-node="expandOnClickNode"
@@ -43,6 +43,9 @@ export default class BiuTree extends Vue {
      */
     @Prop({ type: Boolean, default: false }) substrate?: boolean
     @Prop({ type: Array, default: () => [] }) data!: treeNodeType[]
+    /** 当树折叠时，勾选是否子集联动 */
+    @Prop({ type: Boolean, default: true }) foldSelection?: boolean
+    @Prop({ type: Array }) defaultExpandedKeys?: string[]
     @Model('setValue') value!: string | string[]
 
     customData: treeNodeType[] = []
@@ -55,7 +58,7 @@ export default class BiuTree extends Vue {
     // 默认勾选的
     defaultCheckedKeys: string[] = []
     // 默认展开的
-    defaultExpandedKeys = new Set()
+    customDefaultExpandedKeys = new Set()
     /**
      * 记录当前选中的节点
      */
@@ -67,8 +70,8 @@ export default class BiuTree extends Vue {
      * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
-    private attrs = {}
-    private listeners = {}
+    attrs: Record<string, any> = {}
+    listeners = {}
 
     /**
      * 配置是否可以通过点击文字展开节点
@@ -84,7 +87,10 @@ export default class BiuTree extends Vue {
      * 默认展开数据
      */
     get defaultExpandedKeysArr() {
-        return Array.from(this.defaultExpandedKeys)
+        if (this.defaultExpandedKeys !== undefined) {
+            return this.defaultExpandedKeys
+        }
+        return Array.from(this.customDefaultExpandedKeys)
     }
     get customMultiple() {
         return this.multiple || this.subWith
@@ -115,7 +121,7 @@ export default class BiuTree extends Vue {
          * Todo同步一遍数据的pid
          */
         // 改变默认命中状态和默认展开项
-        this.defaultExpandedKeys = new Set()
+        this.customDefaultExpandedKeys = new Set()
         if (this.value && this.value.length) {
             // 来同步默认数据
             if (this.customMultiple) {
@@ -137,7 +143,7 @@ export default class BiuTree extends Vue {
         } else {
             // 没有默认选中时默认展开顶级
             this.data.forEach((item) => {
-                this.defaultExpandedKeys.add(item.id)
+                this.customDefaultExpandedKeys.add(item.id)
             })
         }
     }
@@ -240,7 +246,7 @@ export default class BiuTree extends Vue {
         if (checked) {
             this.checkList.push(col.id)
             // 含下级,折叠的,则递归选中子节点
-            if (this.subWith || !expanded) {
+            if (this.subWith || (!expanded && this.foldSelection)) {
                 // 递归选中子节点
                 this.uniteChildSame(col, checked)
             }
@@ -251,7 +257,7 @@ export default class BiuTree extends Vue {
             const idx = this.checkList.indexOf(col.id)
             this.checkList.splice(idx, 1)
             // 含下级, 折叠的,则同步子集为相同状态
-            if (this.subWith || !expanded) {
+            if (this.subWith || (!expanded && this.foldSelection)) {
                 this.uniteChildSame(col, checked)
             }
         }
@@ -301,7 +307,7 @@ export default class BiuTree extends Vue {
             // 找到了节点
             if (item.id === id) {
                 // 添加id
-                this.defaultExpandedKeys.add(item.id)
+                this.customDefaultExpandedKeys.add(item.id)
                 // 再递归查找该节点的父节点
                 if (item.pid) this.findParentId(nodeList, item.pid)
                 break
@@ -338,7 +344,7 @@ export default class BiuTree extends Vue {
             const idx = this.checkList.indexOf(item.id)
             if (idx !== -1) {
                 // 改变自己的勾选状态
-                ;(this.$refs.tree as any).setChecked(item.id, false)
+                ;(this.$refs.tree as any)?.setChecked(item.id, false)
                 this.checkList.splice(idx, 1)
             }
             // 改变子集
@@ -348,7 +354,7 @@ export default class BiuTree extends Vue {
             // 清空值
             this.checkList = []
             this.defaultCheckedKeys = []
-            this.defaultExpandedKeys = new Set()
+            this.customDefaultExpandedKeys = new Set()
         })
     }
 }

@@ -104,7 +104,7 @@ export default class TreeSelect extends Vue {
      * 在任何使用该组件的地方，只要data发生了改变，这个组件都会重新渲染
      * 故判断当$attrs变化时把值赋值给attrs,然后用v-bind="attrs"，这样就具有缓存功能了
      */
-    private listeners = {}
+    listeners = {}
 
     get customMultiple() {
         return this.multiple || this.subWith
@@ -165,13 +165,13 @@ export default class TreeSelect extends Vue {
      * 搜索
      */
     search(value: string) {
-        ;(this.$refs.biuTree as any).$refs.tree.filter(value)
+        ;(this.$refs.biuTree as any).$refs.tree?.filter(value)
     }
     /**
      * 显示下拉菜单时
      */
     focus() {
-        ;(this.$refs.biuTree as any).$refs.tree.filter('')
+        ;(this.$refs.biuTree as any).$refs.tree?.filter('')
     }
     /**
      * 点击清空按钮时
