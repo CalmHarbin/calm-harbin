@@ -7,6 +7,7 @@
             <template v-if="attrs.unit">
                 <div style="display: flex">
                     <el-input
+                        ref="input"
                         v-model="formValue"
                         :clearable="true"
                         v-bind="attrs"
@@ -24,6 +25,7 @@
             </template>
             <el-input
                 v-else
+                ref="input"
                 v-model="formValue"
                 :clearable="true"
                 v-bind="attrs"
@@ -37,6 +39,7 @@
         </template>
         <template v-else-if="formType === 'select' || formType === 'dicSelect'">
             <biu-select
+                ref="select"
                 v-model="formValue"
                 v-bind="attrs"
                 v-on="listeners"
@@ -45,6 +48,7 @@
 
         <template v-else-if="formType === 'date'">
             <el-date-picker
+                ref="date"
                 v-model="formValue"
                 :type="attrs.dateType || 'date'"
                 :placeholder="attrs.placeholder || '选择日期'"
@@ -61,6 +65,7 @@
         <!-- 时间选择 -->
         <template v-else-if="formType === 'timeSelect'">
             <el-time-picker
+                ref="timeSelect"
                 v-model="formValue"
                 :placeholder="attrs.placeholder || '选择时间'"
                 v-bind="attrs"
@@ -75,6 +80,7 @@
             style="display: flex"
         >
             <el-time-picker
+                ref="timerange"
                 v-model="formValue"
                 is-range
                 range-separator="至"
@@ -88,6 +94,7 @@
         </div>
         <template v-else-if="formType === 'area'">
             <Area
+                ref="area"
                 v-model="formValue"
                 :type="attrs.areaType"
                 v-bind="attrs"
@@ -96,6 +103,7 @@
         </template>
         <template v-else-if="formType === 'treeSelect'">
             <tree-select
+                ref="treeSelect"
                 v-model="formValue"
                 v-bind="attrs"
                 v-on="listeners"
