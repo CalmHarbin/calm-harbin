@@ -1,6 +1,30 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.24</h3>
+            <p>更新</p>
+            <ul>
+                <li>
+                    biu-form-item组件内增加ref可获取每个子组件
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/fb0e112f3928ad10aaee3d4ddc038834863f08f3"
+                        target="_blank"
+                        >#fb0e112</el-link
+                    >
+                </li>
+                <li>
+                    tree组件增加lazy模式支持
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/e0094072fde858fa6890105cc983f2b97e962df3"
+                        target="_blank"
+                        >#e009407</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.23</h3>
             <p>更新</p>
             <ul>
