@@ -1,6 +1,21 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.25</h3>
+            <p>更新</p>
+            <ul>
+                <li>
+                    biu-form组件可配置按钮的文案
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/fb0e112f3928ad10aaee3d4ddc038834863f08f3"
+                        target="_blank"
+                        >#bf6e909</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.24</h3>
             <p>更新</p>
             <ul>
