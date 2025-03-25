@@ -78,14 +78,14 @@
                                 icon="el-icon-search"
                                 size="mini"
                                 @click="() => $emit('search')"
-                                >搜索</el-button
+                                >{{ btnText }}</el-button
                             >
                             <el-button
                                 v-waves
                                 icon="el-icon-refresh"
                                 size="mini"
                                 @click="() => $emit('reset')"
-                                >重置</el-button
+                                >{{ resetText }}</el-button
                             >
                             <div v-if="isOpentext" @click="change">
                                 <span>展开</span>
@@ -107,14 +107,14 @@
                                 icon="el-icon-search"
                                 size="mini"
                                 @click="() => $emit('search')"
-                                >搜索</el-button
+                                >{{ btnText }}</el-button
                             >
                             <el-button
                                 v-waves
                                 icon="el-icon-refresh"
                                 size="mini"
                                 @click="() => $emit('reset')"
-                                >重置</el-button
+                                >{{ resetText }}</el-button
                             >
                             <div @click="change">
                                 <span>收起</span>
@@ -181,6 +181,12 @@ export default class BiuForm extends Vue {
 
     // 是否显示搜索栏
     @Prop(Boolean) private showBtn?: boolean
+
+    // 搜索按钮文案
+    @Prop({ type: String, default: '搜索' }) private btnText?: string
+
+    // 重置按钮文案
+    @Prop({ type: String, default: '重置' }) private resetText?: string
 
     // 方向 vertical垂直的 horizontal水平的
     @Prop({ type: String, default: 'horizontal' })
