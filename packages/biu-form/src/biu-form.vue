@@ -439,7 +439,7 @@ export default class BiuForm extends Vue {
      */
     change() {
         this.isOpen = !this.isOpen
-        // this.$emit('openChange')
+        this.$emit('openChange')
     }
 
     created() {
