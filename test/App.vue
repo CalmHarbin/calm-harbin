@@ -2,7 +2,7 @@
     <div id="app">
         <!-- <Order></Order> -->
 
-        <!-- <BiuPageTest></BiuPageTest> -->
+        <BiuPageTest></BiuPageTest>
 
         <!-- <BiuTableTest></BiuTableTest> -->
 
@@ -14,11 +14,13 @@
         <!-- <BiuSelectTest></BiuSelectTest> -->
         <!-- <Sheet></Sheet> -->
         <!-- <BiuTableRender></BiuTableRender> -->
-        <BiuTreeDemo></BiuTreeDemo>
-        <BiuFormItemDemo></BiuFormItemDemo>
+        <!-- <BiuTreeDemo></BiuTreeDemo>
+        <BiuFormItemDemo></BiuFormItemDemo> -->
 
-        <img alt="Vue logo" src="./assets/logo.png" />
-        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+        <!-- <BiuPageGroupDemo></BiuPageGroupDemo> -->
+
+        <!-- <img alt="Vue logo" src="./assets/logo.png" />
+        <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" /> -->
 
         <!-- <file-upload
             :divStyle="{
@@ -45,6 +47,7 @@ import BiuPageTest from './components/BiuPageTest.vue'
 import BiuTableRender from './components/biu-table/biu-table-render.vue'
 import BiuTreeDemo from './components/biu-tree/biu-tree-demo.vue'
 import BiuFormItemDemo from './components/biu-form-item/biu-form-item-demo.vue'
+import BiuPageGroupDemo from './components/biu-page/biu-page-group-demo.vue'
 
 @Component({
     components: {
@@ -58,7 +61,8 @@ import BiuFormItemDemo from './components/biu-form-item/biu-form-item-demo.vue'
         // Sheet,
         BiuTableRender,
         BiuTreeDemo,
-        BiuFormItemDemo
+        BiuFormItemDemo,
+        BiuPageGroupDemo
     }
 })
 export default class App extends Vue {
