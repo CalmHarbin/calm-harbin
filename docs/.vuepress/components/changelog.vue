@@ -1,6 +1,36 @@
 <template>
     <div>
         <section class="version">
+            <h3>v1.0.27</h3>
+            <p>更新</p>
+            <ul>
+                <li>
+                    表格组件增加多级表头
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/a3a98f6cd201375576cdb9c55dbb889de519bb51"
+                        target="_blank"
+                        >#a3a98f6</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
+            <h3>v1.0.26</h3>
+            <p>Bug 修复</p>
+            <ul>
+                <li>
+                    修复展开折叠未触发重新计算高度事件
+                    <el-link
+                        type="primary"
+                        href="https://github.com/CalmHarbin/calm-harbin/commit/e177089dfebb6e73fc2d337594b4981982d5a6a9"
+                        target="_blank"
+                        >#e177089</el-link
+                    >
+                </li>
+            </ul>
+        </section>
+        <section class="version">
             <h3>v1.0.25</h3>
             <p>更新</p>
             <ul>
