@@ -65,6 +65,9 @@ export type tableColumnType = {
     /** 表头的表单项配置 */
     formAttr?: formAttrType
 
+    /** 合并列表-分组别名 */
+    groupAnotherName?: string
+
     [x: string]: any
 }
 

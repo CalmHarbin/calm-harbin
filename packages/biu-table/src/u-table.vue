@@ -62,62 +62,317 @@
         ></u-table-column>
 
         <template v-if="showHeaderFilter">
-            <u-table-column
-                v-for="col in tableColumns"
-                :key="col.id + refreshId"
-                :title="col.label"
-                :resizable="true"
-                :align="col.align || 'center'"
-            >
-                <template v-slot:header>
-                    <slot :name="'header-' + col.id" :col="col">
-                        <Render
-                            v-if="col.headRender"
-                            :render-func="col.headRender"
-                            :scope="col"
-                        ></Render>
-                        <template v-else>
-                            <i
-                                v-if="col.editable"
-                                class="elx-cell--edit-icon el-icon-edit-outline"
-                            ></i>
-                            <span
-                                :class="
-                                    col.required ? 'calm-BiuTable-required' : ''
-                                "
-                                :title="col.label"
-                                >{{ col.label }}</span
-                            >
-                        </template>
-                    </slot>
-                </template>
+            <template v-for="col in tableColumns">
                 <u-table-column
+                    v-if="col.children && col.children.length"
+                    :key="col.id + refreshId"
+                    :label="col.label"
+                    :align="col.align || 'center'"
+                >
+                    <u-table-column
+                        v-for="child in col.children"
+                        :key="child.id + refreshId"
+                        :title="child.label"
+                        :resizable="true"
+                        :align="child.align || 'center'"
+                    >
+                        <template v-slot:header>
+                            <slot :name="'header-' + child.id" :col="child">
+                                <Render
+                                    v-if="child.headRender"
+                                    :render-func="child.headRender"
+                                    :scope="child"
+                                ></Render>
+                                <template v-else>
+                                    <i
+                                        v-if="child.editable"
+                                        class="
+                                            elx-cell--edit-icon
+                                            el-icon-edit-outline
+                                        "
+                                    ></i>
+                                    <span
+                                        :class="
+                                            child.required
+                                                ? 'calm-BiuTable-required'
+                                                : ''
+                                        "
+                                        :title="child.label"
+                                        >{{ child.label }}</span
+                                    >
+                                </template>
+                            </slot>
+                        </template>
+                        <u-table-column
+                            v-bind="child"
+                            :resizable="true"
+                            :width="child.width"
+                            :min-width="child.minWidth || child.width || 120"
+                            :prop="child.id"
+                        >
+                            <!-- 表头 -->
+                            <template v-slot:header>
+                                <slot :name="child.id + '-header'" :col="child">
+                                    <template v-if="child.formType">
+                                        <Render
+                                            v-if="child.formType === 'slot'"
+                                            :render-func="child.formAttr.render"
+                                            :scope="child"
+                                        ></Render>
+                                        <BiuFormItem
+                                            v-else
+                                            v-model="
+                                                customValue[
+                                                    child.formId || child.id
+                                                ]
+                                            "
+                                            :form-type="child.formType"
+                                            :size="
+                                                child.formAttr.otherAttr.size ||
+                                                'mini'
+                                            "
+                                            v-bind="child.formAttr.otherAttr"
+                                            v-on="child.formAttr.otherEvent"
+                                        />
+                                    </template>
+                                </slot>
+                            </template>
+                            <template slot-scope="scope">
+                                <!-- 数据传递出去 -->
+                                <slot
+                                    :name="child.id"
+                                    :col="child"
+                                    :row="scope.row"
+                                    :$index="scope.$index"
+                                >
+                                    <Render
+                                        v-if="child.render"
+                                        :render-func="child.render"
+                                        :scope="{
+                                            col: child,
+                                            row: scope.row,
+                                            $index: scope.$index
+                                        }"
+                                    ></Render>
+                                    <!-- 可编辑的单元格 -->
+                                    <template v-else-if="child.editable">
+                                        <el-input
+                                            v-model="scope.row[child.id]"
+                                            class="calm-editableInput"
+                                            type="text"
+                                            size="mini"
+                                            clearable
+                                        />
+                                    </template>
+                                    <template v-else>{{
+                                        scope.row[child.id]
+                                    }}</template>
+                                </slot>
+                            </template>
+                        </u-table-column>
+                    </u-table-column>
+                </u-table-column>
+                <u-table-column
+                    v-else
+                    :key="col.id + refreshId + '-leaf'"
+                    :title="col.label"
+                    :resizable="true"
+                    :align="col.align || 'center'"
+                    v-bind="col"
+                    :width="col.width"
+                    :min-width="col.minWidth || col.width || 120"
+                    :prop="col.id"
+                >
+                    <template v-slot:header>
+                        <div
+                            :class="
+                                hasGroupColumns
+                                    ? 'calm-BiuTable-headerTitle'
+                                    : ''
+                            "
+                        >
+                            <slot :name="'header-' + col.id" :col="col">
+                                <Render
+                                    v-if="col.headRender"
+                                    :render-func="col.headRender"
+                                    :scope="col"
+                                ></Render>
+                                <template v-else>
+                                    <i
+                                        v-if="col.editable"
+                                        class="
+                                            elx-cell--edit-icon
+                                            el-icon-edit-outline
+                                        "
+                                    ></i>
+                                    <span
+                                        :class="
+                                            col.required
+                                                ? 'calm-BiuTable-required'
+                                                : ''
+                                        "
+                                        :title="col.label"
+                                        >{{ col.label }}</span
+                                    >
+                                </template>
+                            </slot>
+                        </div>
+                        <div class="calm-BiuTable-headerFilter">
+                            <slot :name="col.id + '-header'" :col="col">
+                                <template v-if="col.formType">
+                                    <Render
+                                        v-if="col.formType === 'slot'"
+                                        :render-func="col.formAttr.render"
+                                        :scope="{ col }"
+                                    ></Render>
+                                    <BiuFormItem
+                                        v-else
+                                        v-model="
+                                            customValue[col.formId || col.id]
+                                        "
+                                        :form-type="col.formType"
+                                        :size="
+                                            col.formAttr.otherAttr.size ||
+                                            'mini'
+                                        "
+                                        v-bind="col.formAttr.otherAttr"
+                                        v-on="col.formAttr.otherEvent"
+                                    />
+                                </template>
+                            </slot>
+                        </div>
+                    </template>
+                    <template slot-scope="scope">
+                        <!-- 数据传递出去 -->
+                        <slot
+                            :name="col.id"
+                            :col="col"
+                            :row="scope.row"
+                            :$index="scope.$index"
+                        >
+                            <Render
+                                v-if="col.render"
+                                :render-func="col.render"
+                                :scope="{
+                                    col: col,
+                                    row: scope.row,
+                                    $index: scope.$index
+                                }"
+                            ></Render>
+                            <!-- 可编辑的单元格 -->
+                            <template v-else-if="col.editable">
+                                <el-input
+                                    v-model="scope.row[col.id]"
+                                    class="calm-editableInput"
+                                    type="text"
+                                    size="mini"
+                                    clearable
+                                />
+                            </template>
+                            <template v-else>{{ scope.row[col.id] }}</template>
+                        </slot>
+                    </template>
+                </u-table-column>
+            </template>
+        </template>
+        <template v-else>
+            <template v-for="col in tableColumns">
+                <u-table-column
+                    v-if="col.children && col.children.length"
+                    :key="col.id + refreshId"
+                    :label="col.label"
+                    :align="col.align || 'center'"
+                >
+                    <u-table-column
+                        v-for="child in col.children"
+                        :key="child.id + refreshId"
+                        v-bind="child"
+                        :resizable="true"
+                        :align="child.align || 'center'"
+                        :width="child.width"
+                        :min-width="child.minWidth || child.width || 120"
+                        :prop="child.id"
+                    >
+                        <!-- 表头 -->
+                        <template v-slot:header>
+                            <slot :name="'header-' + child.id" :col="child">
+                                <Render
+                                    v-if="child.headRender"
+                                    :render-func="child.headRender"
+                                    :scope="child"
+                                ></Render>
+                                <span
+                                    v-else
+                                    :class="
+                                        child.required
+                                            ? 'calm-BiuTable-required'
+                                            : ''
+                                    "
+                                    :title="child.label"
+                                    >{{ child.label }}</span
+                                >
+                            </slot>
+                        </template>
+                        <template slot-scope="scope">
+                            <!-- 数据传递出去 -->
+                            <slot
+                                :name="child.id"
+                                :col="child"
+                                :row="scope.row"
+                                :$index="scope.$index"
+                            >
+                                <Render
+                                    v-if="child.render"
+                                    :render-func="child.render"
+                                    :scope="{
+                                        col: child,
+                                        row: scope.row,
+                                        $index: scope.$index
+                                    }"
+                                ></Render>
+                                <!-- 可编辑的单元格 -->
+                                <template v-else-if="child.editable">
+                                    <el-input
+                                        v-model="scope.row[child.id]"
+                                        class="calm-editableInput"
+                                        type="text"
+                                        size="mini"
+                                        clearable
+                                    />
+                                </template>
+                                <template v-else>{{
+                                    scope.row[child.id]
+                                }}</template>
+                            </slot>
+                        </template>
+                    </u-table-column>
+                </u-table-column>
+                <u-table-column
+                    v-else
+                    :key="col.id + refreshId"
                     v-bind="col"
                     :resizable="true"
+                    :align="col.align || 'center'"
                     :width="col.width"
                     :min-width="col.minWidth || col.width || 120"
                     :prop="col.id"
                 >
                     <!-- 表头 -->
                     <template v-slot:header>
-                        <slot :name="col.id + '-header'" :col="col">
-                            <template v-if="col.formType">
-                                <Render
-                                    v-if="col.formType === 'slot'"
-                                    :render-func="col.formAttr.render"
-                                    :scope="col"
-                                ></Render>
-                                <BiuFormItem
-                                    v-else
-                                    v-model="customValue[col.formId || col.id]"
-                                    :form-type="col.formType"
-                                    :size="
-                                        col.formAttr.otherAttr.size || 'mini'
-                                    "
-                                    v-bind="col.formAttr.otherAttr"
-                                    v-on="col.formAttr.otherEvent"
-                                />
-                            </template>
+                        <slot :name="'header-' + col.id" :col="col">
+                            <Render
+                                v-if="col.headRender"
+                                :render-func="col.headRender"
+                                :scope="col"
+                            ></Render>
+                            <span
+                                v-else
+                                :class="
+                                    col.required ? 'calm-BiuTable-required' : ''
+                                "
+                                :title="col.label"
+                                >{{ col.label }}</span
+                            >
                         </slot>
                     </template>
                     <template slot-scope="scope">
@@ -151,68 +406,7 @@
                         </slot>
                     </template>
                 </u-table-column>
-            </u-table-column>
-        </template>
-        <template v-else>
-            <u-table-column
-                v-for="col in tableColumns"
-                :key="col.id + refreshId"
-                v-bind="col"
-                :resizable="true"
-                :align="col.align || 'center'"
-                :width="col.width"
-                :min-width="col.minWidth || col.width || 120"
-                :prop="col.id"
-            >
-                <!-- 表头 -->
-                <template v-slot:header>
-                    <slot :name="'header-' + col.id" :col="col">
-                        <Render
-                            v-if="col.headRender"
-                            :render-func="col.headRender"
-                            :scope="col"
-                        ></Render>
-                        <span
-                            v-else
-                            :class="
-                                col.required ? 'calm-BiuTable-required' : ''
-                            "
-                            :title="col.label"
-                            >{{ col.label }}</span
-                        >
-                    </slot>
-                </template>
-                <template slot-scope="scope">
-                    <!-- 数据传递出去 -->
-                    <slot
-                        :name="col.id"
-                        :col="col"
-                        :row="scope.row"
-                        :$index="scope.$index"
-                    >
-                        <Render
-                            v-if="col.render"
-                            :render-func="col.render"
-                            :scope="{
-                                col: col,
-                                row: scope.row,
-                                $index: scope.$index
-                            }"
-                        ></Render>
-                        <!-- 可编辑的单元格 -->
-                        <template v-else-if="col.editable">
-                            <el-input
-                                v-model="scope.row[col.id]"
-                                class="calm-editableInput"
-                                type="text"
-                                size="mini"
-                                clearable
-                            />
-                        </template>
-                        <template v-else>{{ scope.row[col.id] }}</template>
-                    </slot>
-                </template>
-            </u-table-column>
+            </template>
         </template>
 
         <!-- 操作 -->
@@ -369,7 +563,7 @@ export default class CustomUTable extends Vue {
     get tableColumns() {
         this.refreshId++
         if (this.isMounted) {
-            const columns = this.columns.map((item) => {
+            const processColumn = (item: any) => {
                 const cur = {
                     ...item,
                     // 处理表单的其余属性和事件
@@ -447,8 +641,18 @@ export default class CustomUTable extends Vue {
                         )
                     }
                 }
+
+                // 递归处理子列
+                if (cur.children && cur.children.length > 0) {
+                    cur.children = cur.children.map(processColumn)
+                } else if ('children' in cur) {
+                    cur.children = []
+                }
                 return cur
-            })
+            }
+
+            const columns = this.columns.map((item) => processColumn(item))
+            console.log('tableColumns', columns)
 
             // 如果有至少一个没有设置宽度,返回原数据,可以自适应宽度
             if (columns.some((item) => item.width === undefined)) return columns
@@ -492,6 +696,12 @@ export default class CustomUTable extends Vue {
             )
         }
         return this.multipleSelectionSync.length !== this.customTableData.length
+    }
+    get hasGroupColumns() {
+        return this.columns?.some(
+            (item: any) =>
+                typeof item?.id === 'string' && item.id.startsWith('group-')
+        )
     }
     // 全选是否选中
     get isCheckedAll() {

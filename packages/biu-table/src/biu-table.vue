@@ -35,7 +35,8 @@ export default class BiuTable extends Vue {
     private listeners = {}
 
     get customColumns(): tableColumnType[] {
-        return this.columns.map((item) => {
+        console.log(this.columns, 'this.columns')
+        const processedColumns = this.columns.map((item): tableColumnType => {
             // 这里处理外部使用的slot功能，传给BiuTable组件用render方式
             // eslint-disable-next-line no-undef
             let render = item.render
@@ -103,8 +104,45 @@ export default class BiuTable extends Vue {
                     ...item.formAttr,
                     render: formRender
                 }
-            }
+            } as tableColumnType
         })
+        const result: tableColumnType[] = []
+        const groupMap = new Map<string, tableColumnType>()
+        console.log(123, processedColumns, 'processedColumns')
+        for (const col of processedColumns) {
+            const groupName = col.groupAnotherName
+
+            if (groupName) {
+                // 尝试从 Map 中获取已存在的组
+                let groupCol = groupMap.get(groupName)
+                if (!groupCol) {
+                    groupCol = {
+                        id: `group-${groupName}`,
+                        label: groupName,
+                        align: 'center',
+                        children: [] // 确保初始化 children 数组
+                    }
+                    groupMap.set(groupName, groupCol)
+                    result.push(groupCol)
+                }
+
+                if (!groupCol.children) groupCol.children = []
+                groupCol.children.push(col)
+            } else {
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        col,
+                        'groupAnotherName'
+                    ) &&
+                    col.groupAnotherName === null
+                ) {
+                    col.children = []
+                }
+                result.push(col)
+            }
+        }
+
+        return result
     }
     /**
      * 动态组件

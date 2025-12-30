@@ -165,71 +165,104 @@ export default class BiuPage extends Vue {
             })
     }
     /**
+     * 处理单个表格列，包括递归处理子列
+     */
+    processTableColumn(item: any) {
+        // 这里处理外部使用的slot功能，传给BiuTable组件用render方式
+        let render = item.render
+        if (this.$slots[`table-${item.id}`]) {
+            render = () => <div>{this.$slots[`table-${item.id}`]}</div>
+        } else if (this.$scopedSlots[`table-${item.id}`]) {
+            render = (h: any, scope: any) => (
+                <div>
+                    {(this.$scopedSlots[`table-${item.id}`] as any)(scope)}
+                </div>
+            )
+        }
+
+        let headRender = item.headRender
+        if (this.$slots[`table-header-${item.id}`]) {
+            headRender = () => (
+                <div>{this.$slots[`table-header-${item.id}`]}</div>
+            )
+        } else if (this.$scopedSlots[`table-header-${item.id}`]) {
+            headRender = (h: any, col: any) => (
+                <div>
+                    {(this.$scopedSlots[`table-header-${item.id}`] as any)({
+                        col
+                    })}
+                </div>
+            )
+        }
+
+        let id = item.formId || item.id
+        // 这里处理外部使用的slot功能，传给BiuForm组件用render方式
+        let formRender = item.formAttr?.render
+        if (this.$slots[`table-form-${id}`]) {
+            formRender = () => <div>{this.$slots[`table-form-${id}`]}</div>
+        } else if (this.$scopedSlots[`table-form-${id}`]) {
+            formRender = (h: any, col: any) => (
+                <div>
+                    {(this.$scopedSlots[`table-form-${id}`] as any)({
+                        col
+                    })}
+                </div>
+            )
+        }
+
+        // 递归处理子列
+        let children = item.children
+        if (children && children.length) {
+            children = children.map((child: any) =>
+                this.processTableColumn(child)
+            )
+        }
+
+        return {
+            ...item,
+            render,
+            headRender,
+            children,
+            formAttr: {
+                ...item.formAttr,
+                render: formRender
+            }
+        }
+    }
+
+    /**
      * 表格列
      */
     get tableColumns() {
-        // 过滤掉不需要显示的列
-        return this.columns
-            .filter((item) => !item.noShow)
-            .map((item) => {
-                // 这里处理外部使用的slot功能，传给BiuTable组件用render方式
-                let render = item.render
-                if (this.$slots[`table-${item.id}`]) {
-                    render = () => <div>{this.$slots[`table-${item.id}`]}</div>
-                } else if (this.$scopedSlots[`table-${item.id}`]) {
-                    render = (h, scope) => (
-                        <div>
-                            {(this.$scopedSlots[`table-${item.id}`] as any)(
-                                scope
-                            )}
-                        </div>
-                    )
-                }
+        // 1. 预处理：分组
+        const rawColumns = this.columns.filter((item) => !item.noShow)
+        const processedColumns: any[] = []
+        const groupMap = new Map<string, any>()
 
-                let headRender = item.headRender
-                if (this.$slots[`table-header-${item.id}`]) {
-                    headRender = () => (
-                        <div>{this.$slots[`table-header-${item.id}`]}</div>
-                    )
-                } else if (this.$scopedSlots[`table-header-${item.id}`]) {
-                    headRender = (h, col) => (
-                        <div>
-                            {(
-                                this.$scopedSlots[
-                                    `table-header-${item.id}`
-                                ] as any
-                            )({ col })}
-                        </div>
-                    )
-                }
+        rawColumns.forEach((item: any) => {
+            // 兼容用户的 groupAnotherName
+            const groupName = item.groupAnotherName
 
-                let id = item.formId || item.id
-                // 这里处理外部使用的slot功能，传给BiuForm组件用render方式
-                let formRender = item.formAttr?.render
-                if (this.$slots[`table-form-${id}`]) {
-                    formRender = () => (
-                        <div>{this.$slots[`table-form-${id}`]}</div>
-                    )
-                } else if (this.$scopedSlots[`table-form-${id}`]) {
-                    formRender = (h, col) => (
-                        <div>
-                            {(this.$scopedSlots[`table-form-${id}`] as any)({
-                                col
-                            })}
-                        </div>
-                    )
-                }
-
-                return {
-                    ...item,
-                    render,
-                    headRender,
-                    formAttr: {
-                        ...item.formAttr,
-                        render: formRender
+            if (groupName) {
+                let group = groupMap.get(groupName)
+                if (!group) {
+                    group = {
+                        label: groupName,
+                        id: `group_${groupName}`,
+                        align: 'center',
+                        children: []
                     }
+                    groupMap.set(groupName, group)
+                    processedColumns.push(group)
                 }
-            })
+                group.children.push(item)
+            } else {
+                processedColumns.push(item)
+            }
+        })
+
+        // 2. 递归处理 processTableColumn
+        return processedColumns.map((item) => this.processTableColumn(item))
     }
 
     /**
